@@ -5,13 +5,21 @@ import globals from "globals";
 
 export default [
   {
-    ignores: ["**/node_modules/**", "build/**", "coverage/**", "src/lib/dist/**", "src/demo/**"]
+    ignores: [
+      "**/node_modules/**",
+      "build/**",
+      "coverage/**",
+      "src/lib/dist/**",
+      "examples/test-app/dist/**",
+      "src/demo/**"
+    ]
   },
   js.configs.recommended,
   {
     files: [
       "src/lib/src/**/*.{js,jsx}",
       "apps/docs/**/*.{js,jsx}",
+      "examples/test-app/**/*.{js,jsx}",
       "tests/**/*.{js,jsx}",
       "src/lib/vite.config.js",
       "src/lib/scripts/**/*.mjs",

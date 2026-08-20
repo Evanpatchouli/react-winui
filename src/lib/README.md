@@ -40,7 +40,7 @@ npm install react-windows-ui
 ```js
 // Be sure to include styles at some point, probably during your bootstraping
 import "react-windows-ui/config/app-config.css";
-import "react-windows-ui/dist/react-windows-ui.min.css";
+import "react-windows-ui/styles.css";
 import "react-windows-ui/icons/winui-icons.min.css";
 ```
 ## 🚀 [See `App.js` code & more »](https://virtualvivek.github.io/react-windows-ui/#/v4.2.2/getting_started)
@@ -57,6 +57,8 @@ const App = () => (
   </>
 );
 ```
+
+`react-windows-ui/button` is available as a direct ESM entry when a consumer wants to import `Button` without the package barrel. The legacy `react-windows-ui/dist/react-windows-ui.min.css` path remains supported.
 
 # Run Locally
 ```html

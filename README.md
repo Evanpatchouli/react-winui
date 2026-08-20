@@ -41,7 +41,7 @@ pnpm add react-windows-ui
 ```js
 // Be sure to include styles at some point, probably during your bootstraping
 import "react-windows-ui/config/app-config.css";
-import "react-windows-ui/dist/react-windows-ui.min.css";
+import "react-windows-ui/styles.css";
 import "react-windows-ui/icons/winui-icons.min.css";
 ```
 ## 🚀 [See `App.js` code & more »](https://virtualvivek.github.io/react-windows-ui/#/v4.2.2/getting_started)
@@ -49,10 +49,13 @@ import "react-windows-ui/icons/winui-icons.min.css";
 # Usage
 ```js
 import { Button, InputText } from "react-windows-ui";
+// Optional direct entry for smaller consumer graphs:
+import ButtonDirect from "react-windows-ui/button";
 
 const App = () => (
   <>
     <Button type="primary" value="Press Me" />
+    <ButtonDirect type="subtle" value="Direct entry" />
     <InputText placeholder="Enter a text" />
   </>
 );
@@ -74,6 +77,8 @@ pnpm test
 pnpm lint
 pnpm typecheck
 ```
+
+The package also keeps the legacy `react-windows-ui/dist/react-windows-ui.min.css` CSS path for existing applications. React, React DOM, and React Router DOM are peer dependencies and must be installed by the consuming app.
 
 # Find this project useful? :heart:
 Support it by joining [**stargazers**](https://github.com/virtualvivek/react-windows-ui/stargazers) for this repository. :star:

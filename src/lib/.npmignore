@@ -1,4 +1,6 @@
-#src folder
-src
-#scss folder
-scss
+# Development-only source and build configuration.
+/src
+/scss
+/scripts
+/vite.config.js
+/tsconfig.json
