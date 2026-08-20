@@ -1,6 +1,30 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;function getScrollbarWidth(){if(0<navigator.maxTouchPoints)// Touch device detected, scrollbar width is effectively 0
-return 0;// Create a temporary div container
-const a=document.createElement("div");// Apply styles to the div to make it scrollable
-a.style.position="absolute",a.style.top="-9999px",a.style.width="50px",a.style.height="50px",a.style.overflowY="scroll",a.style.visibility="hidden",document.body.appendChild(a);// Calculate the scrollbar width
-const b=a.offsetWidth-a.clientWidth;// Remove the div from the body
-return document.body.removeChild(a),b}function hasVerticalScrollbar(a){return a.scrollHeight>a.clientHeight}function setHeaderMobilePadding(a){let b=document.getElementsByClassName("ui-navbar-header-mobile")[0];b&&(b.style.paddingRight="".concat(a,"px"))}const disableScroll=()=>{const a=document.body;if(hasVerticalScrollbar(a)){const a=getScrollbarWidth();document.body.style.paddingRight="".concat(a,"px"),setHeaderMobilePadding(a)}document.body.classList.add("modal-open")},enableScroll=()=>{document.body.style.paddingRight="",setHeaderMobilePadding(0),document.body.classList.remove("modal-open")},ScrollView={disableScroll,enableScroll};var _default=ScrollView;exports.default=_default;
+//#region src/api/ScrollView.jsx
+function e() {
+	if (navigator.maxTouchPoints > 0) return 0;
+	let e = document.createElement("div");
+	e.style.position = "absolute", e.style.top = "-9999px", e.style.width = "50px", e.style.height = "50px", e.style.overflowY = "scroll", e.style.visibility = "hidden", document.body.appendChild(e);
+	let t = e.offsetWidth - e.clientWidth;
+	return document.body.removeChild(e), t;
+}
+function t(e) {
+	return e.scrollHeight > e.clientHeight;
+}
+function n(e) {
+	let t = document.getElementsByClassName("ui-navbar-header-mobile")[0];
+	t && (t.style.paddingRight = `${e}px`);
+}
+var r = {
+	disableScroll: () => {
+		let r = document.body;
+		if (t(r)) {
+			let t = e();
+			document.body.style.paddingRight = `${t}px`, n(t);
+		}
+		document.body.classList.add("modal-open");
+	},
+	enableScroll: () => {
+		document.body.style.paddingRight = "", n(0), document.body.classList.remove("modal-open");
+	}
+};
+//#endregion
+export { r as default };

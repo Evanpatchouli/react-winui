@@ -1,1 +1,66 @@
-"use strict";const _excluded=["onClearButtonClick","clearButton","setStatus","onChange","tooltip","label","type","width"];require("core-js/modules/es.object.assign.js"),require("core-js/modules/es.weak-map.js"),require("core-js/modules/web.dom-collections.iterator.js"),Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var _react=_interopRequireWildcard(require("react")),_LoaderBusyWrapper=_interopRequireDefault(require("../_common/LoaderBusyWrapper"));function _interopRequireDefault(a){return a&&a.__esModule?a:{default:a}}function _getRequireWildcardCache(a){if("function"!=typeof WeakMap)return null;var b=new WeakMap,c=new WeakMap;return(_getRequireWildcardCache=function(a){return a?c:b})(a)}function _interopRequireWildcard(a,b){if(!b&&a&&a.__esModule)return a;if(null===a||"object"!=typeof a&&"function"!=typeof a)return{default:a};var c=_getRequireWildcardCache(b);if(c&&c.has(a))return c.get(a);var d={},e=Object.defineProperty&&Object.getOwnPropertyDescriptor;for(var f in a)if("default"!=f&&Object.prototype.hasOwnProperty.call(a,f)){var g=e?Object.getOwnPropertyDescriptor(a,f):null;g&&(g.get||g.set)?Object.defineProperty(d,f,g):d[f]=a[f]}return d.default=a,c&&c.set(a,d),d}function _extends(){return _extends=Object.assign?Object.assign.bind():function(a){for(var b,c=1;c<arguments.length;c++)for(var d in b=arguments[c],b)Object.prototype.hasOwnProperty.call(b,d)&&(a[d]=b[d]);return a},_extends.apply(this,arguments)}function _objectWithoutProperties(a,b){if(null==a)return{};var c,d,e=_objectWithoutPropertiesLoose(a,b);if(Object.getOwnPropertySymbols){var f=Object.getOwnPropertySymbols(a);for(d=0;d<f.length;d++)c=f[d],0<=b.indexOf(c)||Object.prototype.propertyIsEnumerable.call(a,c)&&(e[c]=a[c])}return e}function _objectWithoutPropertiesLoose(a,b){if(null==a)return{};var c,d,e={},f=Object.keys(a);for(d=0;d<f.length;d++)c=f[d],0<=b.indexOf(c)||(e[c]=a[c]);return e}const InputText=/*#__PURE__*/(0,_react.forwardRef)((a,b)=>{const c=(0,_react.useRef)(null),d=null!==b&&void 0!==b?b:c,f=(0,_react.useRef)(),{onClearButtonClick:g,clearButton:h,setStatus:i,onChange:j,tooltip:k,label:l,type:m,width:n}=a,o=_objectWithoutProperties(a,_excluded),p=()=>{let a=d.current;a.type="text"===a.type?"password":"text"},q=(0,_react.useMemo)(()=>{if("success"===i||"danger"===i)return/*#__PURE__*/_react.default.createElement("i",{className:"icons10-status"});return"loading"===i?/*#__PURE__*/_react.default.createElement("div",{className:"ui-loader-busy loader-sm animate"},/*#__PURE__*/_react.default.createElement(_LoaderBusyWrapper.default,null)):/*#__PURE__*/_react.default.createElement(_react.default.Fragment,null)},[i]),r=(0,_react.useCallback)(()=>{d.current.value="",f.current.classList.remove("show");j({target:{value:""}}),g()},[g,d,j]),s=(0,_react.useMemo)(()=>h?/*#__PURE__*/_react.default.createElement("button",{ref:f,type:"button",onClick:r,"data-win-clear":"text"}):/*#__PURE__*/_react.default.createElement(_react.default.Fragment,null),[h,r]),t=a=>{j(a),h&&(""===d.current.value?f.current.classList.remove("show"):f.current.classList.add("show"))};return/*#__PURE__*/_react.default.createElement("div",{className:"ui-input-container ".concat("default"===i?"":"input-"+i),title:k},l&&(()=>/*#__PURE__*/_react.default.createElement("span",{className:"ui-input-label"},l))(),/*#__PURE__*/_react.default.createElement("input",_extends({className:"ui-input-text"},o,{ref:d,type:a.type,name:a.name,value:a.value,onChange:a=>t(a),style:{width:n}})),/*#__PURE__*/_react.default.createElement("div",{className:"ui-input-end-content"},s,q,/*#__PURE__*/_react.default.createElement(()=>"password"===m?/*#__PURE__*/_react.default.createElement("button",{"data-win-toggle":"password",onClick:p}):/*#__PURE__*/_react.default.createElement(_react.default.Fragment,null),null)))});InputText.defaultProps={type:"text",setStatus:"default",placeholder:"Input Text",onChange:()=>{},onClearButtonClick:()=>{}};var _default=InputText;exports.default=_default;
+import e from "../_common/LoaderBusyWrapper.js";
+import { forwardRef as t, useCallback as n, useMemo as r, useRef as i } from "react";
+import { Fragment as a, jsx as o, jsxs as s } from "react/jsx-runtime";
+//#region src/components/InputText/index.jsx
+var c = t((t, c) => {
+	let l = i(null), u = c ?? l, d = i(), { onClearButtonClick: f, clearButton: p, setStatus: m, onChange: h, tooltip: g, label: _, type: v, width: y, ...b } = t, x = () => /* @__PURE__ */ o("span", {
+		className: "ui-input-label",
+		children: _
+	}), S = () => {
+		let e = u.current;
+		e.type = e.type === "text" ? "password" : "text";
+	}, C = () => v === "password" ? /* @__PURE__ */ o("button", {
+		"data-win-toggle": "password",
+		onClick: S
+	}) : /* @__PURE__ */ o(a, {}), w = r(() => m === "success" || m === "danger" ? /* @__PURE__ */ o("i", { className: "icons10-status" }) : m === "loading" ? /* @__PURE__ */ o("div", {
+		className: "ui-loader-busy loader-sm animate",
+		children: /* @__PURE__ */ o(e, {})
+	}) : /* @__PURE__ */ o(a, {}), [m]), T = n(() => {
+		u.current.value = "", d.current.classList.remove("show"), h({ target: { value: "" } }), f();
+	}, [
+		f,
+		u,
+		h
+	]), E = r(() => p ? /* @__PURE__ */ o("button", {
+		ref: d,
+		type: "button",
+		onClick: T,
+		"data-win-clear": "text"
+	}) : /* @__PURE__ */ o(a, {}), [p, T]), D = (e) => {
+		h(e), p && (u.current.value === "" ? d.current.classList.remove("show") : d.current.classList.add("show"));
+	};
+	return /* @__PURE__ */ s("div", {
+		className: `ui-input-container ${m === "default" ? "" : "input-" + m}`,
+		title: g,
+		children: [
+			_ && x(),
+			/* @__PURE__ */ o("input", {
+				className: "ui-input-text",
+				...b,
+				ref: u,
+				type: t.type,
+				name: t.name,
+				value: t.value,
+				onChange: (e) => D(e),
+				style: { width: y }
+			}),
+			/* @__PURE__ */ s("div", {
+				className: "ui-input-end-content",
+				children: [
+					E,
+					w,
+					/* @__PURE__ */ o(C, {})
+				]
+			})
+		]
+	});
+});
+c.defaultProps = {
+	type: "text",
+	setStatus: "default",
+	placeholder: "Input Text",
+	onChange: () => {},
+	onClearButtonClick: () => {}
+};
+//#endregion
+export { c as default };

@@ -1,1 +1,26 @@
-"use strict";require("core-js/modules/es.weak-map.js"),require("core-js/modules/web.dom-collections.iterator.js"),Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var _react=_interopRequireWildcard(require("react")),_api=require("../../api");function _getRequireWildcardCache(a){if("function"!=typeof WeakMap)return null;var b=new WeakMap,c=new WeakMap;return(_getRequireWildcardCache=function(a){return a?c:b})(a)}function _interopRequireWildcard(a,b){if(!b&&a&&a.__esModule)return a;if(null===a||"object"!=typeof a&&"function"!=typeof a)return{default:a};var c=_getRequireWildcardCache(b);if(c&&c.has(a))return c.get(a);var d={},e=Object.defineProperty&&Object.getOwnPropertyDescriptor;for(var f in a)if("default"!=f&&Object.prototype.hasOwnProperty.call(a,f)){var g=e?Object.getOwnPropertyDescriptor(a,f):null;g&&(g.get||g.set)?Object.defineProperty(d,f,g):d[f]=a[f]}return d.default=a,c&&c.set(a,d),d}const AppContainer=a=>{const b=a=>{const b=a.matches?"dark":"light";"dark"==b?_api.Appearance.setDarkScheme(!1):_api.Appearance.setLightScheme(!1)};return(0,_react.useEffect)(()=>{let a=_api.Appearance.getColorScheme();switch(a){case"dark":_api.Appearance.setDarkScheme(!1);break;case"light":_api.Appearance.setLightScheme(!1);break;default:return window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",a=>b(a)),()=>window.matchMedia("(prefers-color-scheme: dark)").removeEventListener("change",a=>b(a))}},[]),/*#__PURE__*/_react.default.createElement("div",{className:"ui-container-flex-row",style:a.style},a.children)};var _default=AppContainer;exports.default=_default;
+import e from "../../api/Appearance.js";
+import { useEffect as t } from "react";
+import { jsx as n } from "react/jsx-runtime";
+//#region src/components/AppContainer/index.jsx
+var r = (r) => {
+	let i = (t) => {
+		(t.matches ? "dark" : "light") == "dark" ? e.setDarkScheme(!1) : e.setLightScheme(!1);
+	};
+	return t(() => {
+		switch (e.getColorScheme()) {
+			case "dark":
+				e.setDarkScheme(!1);
+				break;
+			case "light":
+				e.setLightScheme(!1);
+				break;
+			default: return window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => i(e)), () => window.matchMedia("(prefers-color-scheme: dark)").removeEventListener("change", (e) => i(e));
+		}
+	}, []), /* @__PURE__ */ n("div", {
+		className: "ui-container-flex-row",
+		style: r.style,
+		children: r.children
+	});
+};
+//#endregion
+export { r as default };

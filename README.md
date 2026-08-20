@@ -32,11 +32,11 @@
  - Works with any <b>Routing Library</b>.
 
 # Works with
-<img src="https://github.com/virtualvivek/react-windows-ui/blob/main/markdown/support_vitejs.svg" width="90" title="ViteJS"/> &nbsp;&nbsp;&nbsp;&nbsp; <img src="https://github.com/virtualvivek/react-windows-ui/blob/main/markdown/support_nextjs.svg" width="90" title="NextJS"/> &nbsp;&nbsp;&nbsp;&nbsp; <img src="https://github.com/virtualvivek/react-windows-ui/blob/main/markdown/support_cra.svg" width="90" title="CRA"/>
+<img src="https://github.com/virtualvivek/react-windows-ui/blob/main/markdown/support_vitejs.svg" width="90" title="ViteJS"/> &nbsp;&nbsp;&nbsp;&nbsp; <img src="https://github.com/virtualvivek/react-windows-ui/blob/main/markdown/support_nextjs.svg" width="90" title="NextJS"/>
 
 # Getting Started
 ```ruby
-npm install react-windows-ui
+pnpm add react-windows-ui
 ```
 ```js
 // Be sure to include styles at some point, probably during your bootstraping
@@ -62,8 +62,17 @@ const App = () => (
 ```html
 git clone https://github.com/virtualvivek/react-windows-ui.git
 cd react-windows-ui
-npm install
-npm start
+pnpm install
+pnpm dev
+```
+
+The repository uses a pnpm workspace, Vite 8, Sass, TypeScript, Vitest and React Testing Library. The documentation app is under `apps/docs`; the component package remains under `src/lib` during this incremental migration.
+
+```bash
+pnpm build
+pnpm test
+pnpm lint
+pnpm typecheck
 ```
 
 # Find this project useful? :heart:

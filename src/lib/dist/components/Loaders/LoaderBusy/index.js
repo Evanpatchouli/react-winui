@@ -1,1 +1,11 @@
-"use strict";const _excluded=["size","setTheme","isLoading"];require("core-js/modules/es.object.assign.js"),Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var _react=_interopRequireDefault(require("react")),_LoaderBusyWrapper=_interopRequireDefault(require("../../_common/LoaderBusyWrapper"));function _interopRequireDefault(a){return a&&a.__esModule?a:{default:a}}function _extends(){return _extends=Object.assign?Object.assign.bind():function(a){for(var b,c=1;c<arguments.length;c++)for(var d in b=arguments[c],b)Object.prototype.hasOwnProperty.call(b,d)&&(a[d]=b[d]);return a},_extends.apply(this,arguments)}function _objectWithoutProperties(a,b){if(null==a)return{};var c,d,e=_objectWithoutPropertiesLoose(a,b);if(Object.getOwnPropertySymbols){var f=Object.getOwnPropertySymbols(a);for(d=0;d<f.length;d++)c=f[d],0<=b.indexOf(c)||Object.prototype.propertyIsEnumerable.call(a,c)&&(e[c]=a[c])}return e}function _objectWithoutPropertiesLoose(a,b){if(null==a)return{};var c,d,e={},f=Object.keys(a);for(d=0;d<f.length;d++)c=f[d],0<=b.indexOf(c)||(e[c]=a[c]);return e}const LoaderBusy=a=>{let{size:b,setTheme:c,isLoading:d=!0}=a,e=_objectWithoutProperties(a,_excluded);const f=()=>d?" animate":"",g=()=>"large"===b?" loader-lg":"small"===b?" loader-sm":"";return/*#__PURE__*/_react.default.createElement(_react.default.Fragment,null,(()=>/*#__PURE__*/_react.default.createElement("div",_extends({className:"ui-loader-busy ".concat("light"===c?"light":"").concat(g()).concat(f())},e),/*#__PURE__*/_react.default.createElement(_LoaderBusyWrapper.default,null)))())};var _default=LoaderBusy;exports.default=_default;
+import e from "../../_common/LoaderBusyWrapper.js";
+import "react";
+import { Fragment as t, jsx as n } from "react/jsx-runtime";
+//#region src/components/Loaders/LoaderBusy/index.jsx
+var r = ({ size: r, setTheme: i, isLoading: a = !0, ...o }) => /* @__PURE__ */ n(t, { children: /* @__PURE__ */ n("div", {
+	className: `ui-loader-busy ${i === "light" ? "light" : ""}${r === "large" ? " loader-lg" : r === "small" ? " loader-sm" : ""}${a ? " animate" : ""}`,
+	...o,
+	children: /* @__PURE__ */ n(e, {})
+}) });
+//#endregion
+export { r as default };

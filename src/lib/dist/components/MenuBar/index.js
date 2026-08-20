@@ -1,2 +1,68 @@
-"use strict";require("core-js/modules/es.weak-map.js"),Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0,require("core-js/modules/web.dom-collections.iterator.js");var _react=_interopRequireWildcard(require("react")),_hooks=require("../../hooks"),_api=require("../../api"),_MenuList=_interopRequireDefault(require("./Menu/MenuList")),_MenuItem=_interopRequireDefault(require("./Menu/MenuItem"));function _interopRequireDefault(a){return a&&a.__esModule?a:{default:a}}function _getRequireWildcardCache(a){if("function"!=typeof WeakMap)return null;var b=new WeakMap,c=new WeakMap;return(_getRequireWildcardCache=function(a){return a?c:b})(a)}function _interopRequireWildcard(a,b){if(!b&&a&&a.__esModule)return a;if(null===a||"object"!=typeof a&&"function"!=typeof a)return{default:a};var c=_getRequireWildcardCache(b);if(c&&c.has(a))return c.get(a);var d={},e=Object.defineProperty&&Object.getOwnPropertyDescriptor;for(var f in a)if("default"!=f&&Object.prototype.hasOwnProperty.call(a,f)){var g=e?Object.getOwnPropertyDescriptor(a,f):null;g&&(g.get||g.set)?Object.defineProperty(d,f,g):d[f]=a[f]}return d.default=a,c&&c.set(a,d),d}const MenuBar=/*#__PURE__*/(0,_react.forwardRef)((a,b)=>{const{children:c,anchorRef:d,menuDirection:e,backdropBlur:f=!1}=a,g=(0,_react.useRef)([]),h=(0,_react.useRef)(null),[i,j]=(0,_react.useState)(""),[k,l]=(0,_react.useState)(""),[m,n]=(0,_react.useState)(""),[o,p]=(0,_react.useState)(null);(0,_react.useImperativeHandle)(b,()=>({openDialog:()=>{d.current&&h.current?j(" show"):console.error("anchorRef or ref should not be empty for MenuBar Dialog")},closeDialog:()=>{j("")}})),(0,_react.useEffect)(()=>{if(" show"===i&&h.current){// Measure dialog height synchronously after render
-const a=h.current.getBoundingClientRect().height,b=d.current.getBoundingClientRect(),c=document.documentElement.scrollLeft,e=document.documentElement.scrollTop;(0,_api.getScreenOffset)(d)?(l(" reverse"),h.current.style.top="".concat(b.top+e-(a+10),"px")):(l(""),h.current.style.top="".concat(b.bottom+e,"px")),h.current.style.left="".concat(b.left+c,"px")}},[i,d,h]);const q=()=>{o&&(g.current[o].toggleShow(),p(null))},r=()=>{j(""),q()};(0,_hooks.useOutSideClick)(h,()=>r());const s=a=>{o&&g.current[o].toggleShow(),p(a),g.current[a].toggleShow()},t=a=>{j(""),a.onClick(),q()};(0,_react.useMemo)(()=>{"leftJustify"===e?n(" leftJustify"):n("")},[e]);const u=c.map((a,b)=>[a.type===UiMenuItem&&/*#__PURE__*/_react.default.createElement(_MenuItem.default,{key:b,icon:a.props.icon,label:a.props.label,onClick:()=>t(a.props)}),a.type===UiSubMenu&&/*#__PURE__*/_react.default.createElement(_MenuItem.default,{key:b,icon:a.props.icon,label:a.props.label,onClick:()=>s(b)},/*#__PURE__*/_react.default.createElement(_MenuList.default,{listIndex:b-1,listData:a.props,onItemClick:()=>r(),ref:a=>g.current[b]=a})),a.type===UiItemDivider&&/*#__PURE__*/_react.default.createElement(UiItemDivider,{key:b})]);return/*#__PURE__*/_react.default.createElement("ul",{ref:h,className:"ui-menu-list-dialog".concat(i).concat(k).concat(m).concat(f?" ui-backdrop-blur":"")},u)}),UiMenuItem=a=>{let{children:b}=a;return/*#__PURE__*/_react.default.createElement(_react.default.Fragment,null,b)},UiSubMenu=a=>{let{children:b}=a;return/*#__PURE__*/_react.default.createElement(_react.default.Fragment,null,b)},UiItemDivider=()=>/*#__PURE__*/_react.default.createElement("hr",{className:"ui-menu-list-item-hr"});UiMenuItem.defaultProps={onClick:()=>{}},MenuBar.Item=UiMenuItem,MenuBar.Item.Divider=UiItemDivider,MenuBar.Item.SubMenu=UiSubMenu;var _default=MenuBar;exports.default=_default;
+import e from "../../api/getScreenOffset.js";
+import t from "../../hooks/useOutSideClick.js";
+import n from "./Menu/MenuItem.js";
+import r from "./Menu/MenuList.js";
+import { forwardRef as i, useEffect as a, useImperativeHandle as o, useMemo as s, useRef as c, useState as l } from "react";
+import { Fragment as u, jsx as d } from "react/jsx-runtime";
+//#region src/components/MenuBar/index.jsx
+var f = i((i, u) => {
+	let { children: f, anchorRef: g, menuDirection: _, backdropBlur: v = !1 } = i, y = c([]), b = c(null), [x, S] = l(""), [C, w] = l(""), [T, E] = l(""), [D, O] = l(null);
+	o(u, () => ({
+		openDialog: () => {
+			g.current && b.current ? S(" show") : console.error("anchorRef or ref should not be empty for MenuBar Dialog");
+		},
+		closeDialog: () => {
+			S("");
+		}
+	})), a(() => {
+		if (x === " show" && b.current) {
+			let t = b.current.getBoundingClientRect().height, n = g.current.getBoundingClientRect(), r = document.documentElement.scrollLeft, i = document.documentElement.scrollTop;
+			e(g) ? (w(" reverse"), b.current.style.top = `${n.top + i - (t + 10)}px`) : (w(""), b.current.style.top = `${n.bottom + i}px`), b.current.style.left = `${n.left + r}px`;
+		}
+	}, [
+		x,
+		g,
+		b
+	]);
+	let k = () => {
+		D && (y.current[D].toggleShow(), O(null));
+	}, A = () => {
+		S(""), k();
+	};
+	t(b, () => A());
+	let j = (e) => {
+		D && y.current[D].toggleShow(), O(e), y.current[e].toggleShow();
+	}, M = (e) => {
+		S(""), e.onClick(), k();
+	};
+	s(() => {
+		E(_ === "leftJustify" ? " leftJustify" : "");
+	}, [_]);
+	let N = f.map((e, t) => [
+		e.type === p && /* @__PURE__ */ d(n, {
+			icon: e.props.icon,
+			label: e.props.label,
+			onClick: () => M(e.props)
+		}, t),
+		e.type === m && /* @__PURE__ */ d(n, {
+			icon: e.props.icon,
+			label: e.props.label,
+			onClick: () => j(t),
+			children: /* @__PURE__ */ d(r, {
+				listIndex: t - 1,
+				listData: e.props,
+				onItemClick: () => A(),
+				ref: (e) => y.current[t] = e
+			})
+		}, t),
+		e.type === h && /* @__PURE__ */ d(h, {}, t)
+	]);
+	return /* @__PURE__ */ d("ul", {
+		ref: b,
+		className: `ui-menu-list-dialog${x}${C}${T}${v ? " ui-backdrop-blur" : ""}`,
+		children: N
+	});
+}), p = ({ children: e }) => /* @__PURE__ */ d(u, { children: e }), m = ({ children: e }) => /* @__PURE__ */ d(u, { children: e }), h = () => /* @__PURE__ */ d("hr", { className: "ui-menu-list-item-hr" });
+p.defaultProps = { onClick: () => {} }, f.Item = p, f.Item.Divider = h, f.Item.SubMenu = m;
+//#endregion
+export { f as default };

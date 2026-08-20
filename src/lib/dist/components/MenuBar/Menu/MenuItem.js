@@ -1,1 +1,14 @@
-"use strict";var _react=_interopRequireDefault(require("react"));Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0,require("core-js/modules/es.object.assign.js");function _interopRequireDefault(a){return a&&a.__esModule?a:{default:a}}function _extends(){return _extends=Object.assign?Object.assign.bind():function(a){for(var b,c=1;c<arguments.length;c++)for(var d in b=arguments[c],b)Object.prototype.hasOwnProperty.call(b,d)&&(a[d]=b[d]);return a},_extends.apply(this,arguments)}const MenuItem=a=>/*#__PURE__*/_react.default.createElement("li",{key:a.label,className:"ui-menu-list-item"},/*#__PURE__*/_react.default.createElement("span",_extends({onClick:a.onClick},a.children&&{"data-win-toggle":"dropdown"}),a.icon,a.label),a.children);MenuItem.defaultProps={onClick:()=>{}};var _default=MenuItem;exports.default=_default;
+import "react";
+import { jsxs as e } from "react/jsx-runtime";
+//#region src/components/MenuBar/Menu/MenuItem.jsx
+var t = (t) => /* @__PURE__ */ e("li", {
+	className: "ui-menu-list-item",
+	children: [/* @__PURE__ */ e("span", {
+		onClick: t.onClick,
+		...t.children && { "data-win-toggle": "dropdown" },
+		children: [t.icon, t.label]
+	}), t.children]
+}, t.label);
+t.defaultProps = { onClick: () => {} };
+//#endregion
+export { t as default };

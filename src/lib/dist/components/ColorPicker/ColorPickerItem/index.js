@@ -1,1 +1,22 @@
-"use strict";var _react=_interopRequireDefault(require("react"));Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;function _interopRequireDefault(a){return a&&a.__esModule?a:{default:a}}const ColorPickerItem=a=>/*#__PURE__*/_react.default.createElement("label",{className:"ui-color-picker-item"},/*#__PURE__*/_react.default.createElement("input",{type:"radio",className:"item",name:a.name,value:a.color,disabled:a.disabled,onChange:a.onChange,defaultChecked:a.defaultChecked}),/*#__PURE__*/_react.default.createElement("div",{style:{width:a.width,height:a.height,backgroundColor:a.color}}));ColorPickerItem.defaultProps={color:"#eee"};var _default=ColorPickerItem;exports.default=_default;
+import "react";
+import { jsx as e, jsxs as t } from "react/jsx-runtime";
+//#region src/components/ColorPicker/ColorPickerItem/index.jsx
+var n = (n) => /* @__PURE__ */ t("label", {
+	className: "ui-color-picker-item",
+	children: [/* @__PURE__ */ e("input", {
+		type: "radio",
+		className: "item",
+		name: n.name,
+		value: n.color,
+		disabled: n.disabled,
+		onChange: n.onChange,
+		defaultChecked: n.defaultChecked
+	}), /* @__PURE__ */ e("div", { style: {
+		width: n.width,
+		height: n.height,
+		backgroundColor: n.color
+	} })]
+});
+n.defaultProps = { color: "#eee" };
+//#endregion
+export { n as default };

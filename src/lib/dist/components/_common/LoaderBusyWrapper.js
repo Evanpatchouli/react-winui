@@ -1,1 +1,14 @@
-"use strict";var _react=_interopRequireDefault(require("react"));Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;function _interopRequireDefault(a){return a&&a.__esModule?a:{default:a}}const LoaderBusyWrapper=()=>/*#__PURE__*/_react.default.createElement("svg",{viewBox:"0 0 16 16"},/*#__PURE__*/_react.default.createElement("circle",{className:"ui-ldr-busy",cx:"8px",cy:"8px",r:"7px"}));var _default=LoaderBusyWrapper;exports.default=_default;
+import "react";
+import { jsx as e } from "react/jsx-runtime";
+//#region src/components/_common/LoaderBusyWrapper.jsx
+var t = () => /* @__PURE__ */ e("svg", {
+	viewBox: "0 0 16 16",
+	children: /* @__PURE__ */ e("circle", {
+		className: "ui-ldr-busy",
+		cx: "8px",
+		cy: "8px",
+		r: "7px"
+	})
+});
+//#endregion
+export { t as default };

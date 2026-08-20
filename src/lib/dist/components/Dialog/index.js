@@ -1,1 +1,40 @@
-"use strict";require("core-js/modules/es.weak-map.js"),Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0,require("core-js/modules/web.dom-collections.iterator.js");var _react=_interopRequireWildcard(require("react")),_api=require("../../api");function _getRequireWildcardCache(a){if("function"!=typeof WeakMap)return null;var b=new WeakMap,c=new WeakMap;return(_getRequireWildcardCache=function(a){return a?c:b})(a)}function _interopRequireWildcard(a,b){if(!b&&a&&a.__esModule)return a;if(null===a||"object"!=typeof a&&"function"!=typeof a)return{default:a};var c=_getRequireWildcardCache(b);if(c&&c.has(a))return c.get(a);var d={},e=Object.defineProperty&&Object.getOwnPropertyDescriptor;for(var f in a)if("default"!=f&&Object.prototype.hasOwnProperty.call(a,f)){var g=e?Object.getOwnPropertyDescriptor(a,f):null;g&&(g.get||g.set)?Object.defineProperty(d,f,g):d[f]=a[f]}return d.default=a,c&&c.set(a,d),d}const Dialog=/*#__PURE__*/(0,_react.forwardRef)((a,b)=>{let{style:c,children:d,isVisible:e=!1,backdropBlur:f=!1,onBackdropPress:g=()=>{}}=a;const[h,i]=(0,_react.useState)(!1),j=()=>{i(!0)},k=()=>{i(!1)},l=a=>{a.preventDefault(),a.target===a.currentTarget&&g()};return(0,_react.useImperativeHandle)(b,()=>({open:j,close:k})),(0,_react.useMemo)(()=>{e||h?_api.ScrollView.disableScroll():_api.ScrollView.enableScroll()},[e,h]),/*#__PURE__*/_react.default.createElement("div",{className:e||h?"ui-dialog show":"ui-dialog",onClick:a=>l(a),tabIndex:"-1",ref:b},/*#__PURE__*/_react.default.createElement("div",{className:"ui-dialog-modal".concat(f?" ui-backdrop-blur":""),style:c},d))}),DialogBody=a=>/*#__PURE__*/_react.default.createElement("div",{className:"ui-dialog-body",style:a.style},a.children),DialogFooter=a=>/*#__PURE__*/_react.default.createElement("div",{className:"ui-dialog-footer",style:a.style},a.children);Dialog.Body=DialogBody,Dialog.Footer=DialogFooter;var _default=Dialog;exports.default=_default;
+import e from "../../api/ScrollView.js";
+import { forwardRef as t, useImperativeHandle as n, useMemo as r, useState as i } from "react";
+import { jsx as a } from "react/jsx-runtime";
+//#region src/components/Dialog/index.jsx
+var o = t(({ style: t, children: o, isVisible: s = !1, backdropBlur: c = !1, onBackdropPress: l = () => {} }, u) => {
+	let [d, f] = i(!1), p = () => {
+		f(!0);
+	}, m = () => {
+		f(!1);
+	}, h = (e) => {
+		e.preventDefault(), e.target === e.currentTarget && l();
+	};
+	return n(u, () => ({
+		open: p,
+		close: m
+	})), r(() => {
+		s || d ? e.disableScroll() : e.enableScroll();
+	}, [s, d]), /* @__PURE__ */ a("div", {
+		className: s || d ? "ui-dialog show" : "ui-dialog",
+		onClick: (e) => h(e),
+		tabIndex: "-1",
+		ref: u,
+		children: /* @__PURE__ */ a("div", {
+			className: `ui-dialog-modal${c ? " ui-backdrop-blur" : ""}`,
+			style: t,
+			children: o
+		})
+	});
+});
+o.Body = (e) => /* @__PURE__ */ a("div", {
+	className: "ui-dialog-body",
+	style: e.style,
+	children: e.children
+}), o.Footer = (e) => /* @__PURE__ */ a("div", {
+	className: "ui-dialog-footer",
+	style: e.style,
+	children: e.children
+});
+//#endregion
+export { o as default };

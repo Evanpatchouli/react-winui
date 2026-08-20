@@ -1,76 +1,54 @@
 {
-  "name": "react-windows-ui-app",
+  "name": "react-windows-ui-workspace",
   "version": "4.2.4",
-  "private": false,
-  "description": "Build full featured Windows Fluent UI apps using ReactJS.",
-  "keywords": [
-    "react",
-    "fluentui",
-    "windows11",
-    "user-interface",
-    "react-component",
-    "responsive",
-    "uwp",
-    "electronJS",
-    "mobile"
-  ],
-  "homepage": "https://virtualvivek.github.io/react-windows-ui",
-  "bugs": {
-    "url": "https://github.com/virtualvivek/react-windows-ui/issues"
-  },
+  "private": true,
+  "type": "module",
+  "description": "Workspace for react-windows-ui and its Vite documentation app.",
   "license": "MIT",
-  "author": {
-    "name": "Vivek Verma",
-    "email": "virtualvivek7@gmail.com"
-  },
-  "dependencies": {
-    "node-sass": "^9.0.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.3.0",
-    "react-scripts": "^5.0.1",
-    "react-syntax-highlighter": "^15.4.3",
-    "web-vitals": "^2.1.4"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/virtualvivek/react-windows-ui.git"
+  "packageManager": "pnpm@10.33.4",
+  "engines": {
+    "node": ">=22.12"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build:production": "rm -rf dist && SET NODE_ENV=production && babel src/lib/src --out-dir src/lib/dist --copy-files",
-    "build": "react-scripts build",
-    "compile:sass": "node-sass src/lib/scss/main.scss src/lib/dist/react-windows-ui.min.css --output-style compressed",
-    "compile:sass-rtl": "node-sass src/lib/scss/stylesheet-rtl/main.scss src/lib/dist/react-windows-ui-rtl.min.css --output-style compressed",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build -r https://github.com/virtualvivek/react-windows-ui",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ]
+    "dev": "pnpm --filter @react-windows-ui/docs dev",
+    "start": "pnpm dev",
+    "build": "pnpm run build:library && pnpm run build:docs",
+    "build:library": "pnpm --filter react-windows-ui build",
+    "build:docs": "pnpm --filter @react-windows-ui/docs build",
+    "build:production": "pnpm run build:library",
+    "compile:sass": "pnpm --filter react-windows-ui build:styles",
+    "preview": "pnpm --filter @react-windows-ui/docs preview",
+    "lint": "eslint src/lib/src apps/docs scripts src/lib/vite.config.js src/lib/scripts tests vitest.config.js eslint.config.mjs",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "format": "prettier --write package.json pnpm-workspace.yaml tsconfig.json vitest.config.js eslint.config.mjs .prettierrc.json apps/docs src/lib/package.json src/lib/vite.config.js src/lib/scripts tests",
+    "format:check": "prettier --check package.json pnpm-workspace.yaml tsconfig.json vitest.config.js eslint.config.mjs .prettierrc.json apps/docs src/lib/package.json src/lib/vite.config.js src/lib/scripts tests",
+    "predeploy": "pnpm build",
+    "deploy": "gh-pages -d build -r https://github.com/virtualvivek/react-windows-ui"
   },
   "devDependencies": {
-    "@babel/cli": "^7.14.5",
-    "@babel/core": "^7.14.6",
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@babel/preset-env": "^7.14.7",
-    "babel-preset-minify": "^0.5.1",
-    "gh-pages": "^3.2.3",
-    "react-error-overlay": "^6.0.9"
+    "@eslint/js": "^9.39.1",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/node": "^24.10.1",
+    "@types/react": "^18.3.27",
+    "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^6.1.0",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "gh-pages": "^6.3.0",
+    "globals": "^16.5.0",
+    "jsdom": "^26.1.0",
+    "prettier": "^3.9.6",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.30.1",
+    "react-syntax-highlighter": "^15.6.1",
+    "sass": "^1.103.0",
+    "typescript": "^5.9.3",
+    "vite": "^8.2.2",
+    "vitest": "^4.1.11"
   }
 }

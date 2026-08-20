@@ -1,5 +1,6 @@
 export { default as AppTheme } from "./components/AppTheme";
 export { default as AppContainer } from "./components/AppContainer";
+export { default as Appearance } from "./api/Appearance";
 
 export { default as NavBar } from "./components/NavBar/NavBar";
 export { default as NavBarLink } from "./components/NavBar/NavBarLink";
@@ -26,6 +27,7 @@ export { default as MenuBar } from "./components/MenuBar";
 export { default as ProgressBar } from "./components/ProgressBar";
 export { default as RadioButton } from "./components/RadioButton";
 export { default as SliderBar } from "./components/SliderBar";
+export { default as SplashScreen } from "./components/SplashScreen";
 export { default as Select } from "./components/SelectMenus/Select";
 export { default as SelectNative } from "./components/SelectMenus/SelectNative";
 export { default as Switch } from "./components/Switch";

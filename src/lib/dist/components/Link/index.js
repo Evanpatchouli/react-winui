@@ -1,1 +1,14 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0,require("core-js/modules/es.object.assign.js");var _react=_interopRequireDefault(require("react")),_reactRouterDom=require("react-router-dom");function _interopRequireDefault(a){return a&&a.__esModule?a:{default:a}}function _extends(){return _extends=Object.assign?Object.assign.bind():function(a){for(var b,c=1;c<arguments.length;c++)for(var d in b=arguments[c],b)Object.prototype.hasOwnProperty.call(b,d)&&(a[d]=b[d]);return a},_extends.apply(this,arguments)}const Link=a=>/*#__PURE__*/_react.default.createElement(_reactRouterDom.Link,_extends({to:a.to,className:"ui-link",style:a.style},a),a.children);Link.defaultProps={to:"#"};var _default=Link;exports.default=_default;
+import "react";
+import { jsx as e } from "react/jsx-runtime";
+import { Link as t } from "react-router-dom";
+//#region src/components/Link/index.jsx
+var n = (n) => /* @__PURE__ */ e(t, {
+	to: n.to,
+	className: "ui-link",
+	style: n.style,
+	...n,
+	children: n.children
+});
+n.defaultProps = { to: "#" };
+//#endregion
+export { n as default };

@@ -70,7 +70,9 @@ class Home extends React.Component {
         language="javascript"
         style={vscDarkPlus}
         className="code code-container home-code">
-        {`$ npx create-react-app MyApp --template windows-ui`}
+        {`$ pnpm create vite MyApp --template react
+$ cd MyApp
+$ pnpm add react-windows-ui`}
       </SyntaxHighlighter>
 
       </div>

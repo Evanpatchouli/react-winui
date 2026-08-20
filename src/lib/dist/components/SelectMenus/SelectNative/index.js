@@ -1,1 +1,22 @@
-"use strict";var _react=_interopRequireDefault(require("react"));const _excluded=["data","name","tooltip","disabled","onChange","onClick"];require("core-js/modules/es.object.assign.js"),Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;function _interopRequireDefault(a){return a&&a.__esModule?a:{default:a}}function _extends(){return _extends=Object.assign?Object.assign.bind():function(a){for(var b,c=1;c<arguments.length;c++)for(var d in b=arguments[c],b)Object.prototype.hasOwnProperty.call(b,d)&&(a[d]=b[d]);return a},_extends.apply(this,arguments)}function _objectWithoutProperties(a,b){if(null==a)return{};var c,d,e=_objectWithoutPropertiesLoose(a,b);if(Object.getOwnPropertySymbols){var f=Object.getOwnPropertySymbols(a);for(d=0;d<f.length;d++)c=f[d],0<=b.indexOf(c)||Object.prototype.propertyIsEnumerable.call(a,c)&&(e[c]=a[c])}return e}function _objectWithoutPropertiesLoose(a,b){if(null==a)return{};var c,d,e={},f=Object.keys(a);for(d=0;d<f.length;d++)c=f[d],0<=b.indexOf(c)||(e[c]=a[c]);return e}const SelectNative=a=>{const{data:b,name:c,tooltip:d,disabled:e,onChange:f,onClick:g}=a,h=_objectWithoutProperties(a,_excluded);return/*#__PURE__*/_react.default.createElement("select",_extends({className:"ui-menu-title"},h,{name:c,title:d,onClick:g,disabled:e,onChange:f}),b.map(a=>/*#__PURE__*/_react.default.createElement("option",{value:a.value,key:a.value},a.label)))};SelectNative.defaultProps={data:[]};var _default=SelectNative;exports.default=_default;
+import "react";
+import { jsx as e } from "react/jsx-runtime";
+//#region src/components/SelectMenus/SelectNative/index.jsx
+var t = (t) => {
+	let { data: n, name: r, tooltip: i, disabled: a, onChange: o, onClick: s, ...c } = t;
+	return /* @__PURE__ */ e("select", {
+		className: "ui-menu-title",
+		...c,
+		name: r,
+		title: i,
+		onClick: s,
+		disabled: a,
+		onChange: o,
+		children: n.map((t) => /* @__PURE__ */ e("option", {
+			value: t.value,
+			children: t.label
+		}, t.value))
+	});
+};
+t.defaultProps = { data: [] };
+//#endregion
+export { t as default };

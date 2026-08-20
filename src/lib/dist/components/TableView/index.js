@@ -1,2 +1,44 @@
-"use strict";var _react=_interopRequireWildcard(require("react"));require("core-js/modules/es.weak-map.js"),Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0,require("core-js/modules/web.dom-collections.iterator.js"),require("core-js/modules/es.array.sort.js");function _getRequireWildcardCache(a){if("function"!=typeof WeakMap)return null;var b=new WeakMap,c=new WeakMap;return(_getRequireWildcardCache=function(a){return a?c:b})(a)}function _interopRequireWildcard(a,b){if(!b&&a&&a.__esModule)return a;if(null===a||"object"!=typeof a&&"function"!=typeof a)return{default:a};var c=_getRequireWildcardCache(b);if(c&&c.has(a))return c.get(a);var d={},e=Object.defineProperty&&Object.getOwnPropertyDescriptor;for(var f in a)if("default"!=f&&Object.prototype.hasOwnProperty.call(a,f)){var g=e?Object.getOwnPropertyDescriptor(a,f):null;g&&(g.get||g.set)?Object.defineProperty(d,f,g):d[f]=a[f]}return d.default=a,c&&c.set(a,d),d}const TableView=a=>{let{rows:d=[],columns:e=[],rowFontSize:f=16,headerFontSize:g=18,TableHeaderComponent:b,TableFooterComponent:c}=a;const h=()=>"row_".concat(Math.random()),i=d;(0,_react.useEffect)(()=>{//console.log('rows data state changed from parent');
-k(i)},[i]);const[j,k]=(0,_react.useState)(i),[l,m]=(0,_react.useState)(void 0),n=c=>{const d=[].concat(j).sort((d,a)=>d[c]>a[c]?1:-1);l===c?(k(i),m(void 0)):(k(d),m(c))};return/*#__PURE__*/_react.default.createElement("div",{className:"ui-table-view-container"},b,/*#__PURE__*/_react.default.createElement("table",{className:"ui-table-view"},/*#__PURE__*/_react.default.createElement("thead",{style:{fontSize:g}},/*#__PURE__*/_react.default.createElement("tr",{className:"ui-table-tr"},e.map((a,b)=>/*#__PURE__*/_react.default.createElement("th",{className:!1===a.sortable?"no-sortable":"sortable",align:"left",key:b,onClick:()=>n(b)},a.title," ",!1===a.showSortIcon?"":l===b?/*#__PURE__*/_react.default.createElement("i",{className:"icons10-arrow-up"}):/*#__PURE__*/_react.default.createElement("i",{className:"icons10-arrow-down"}))))),/*#__PURE__*/_react.default.createElement("tbody",{style:{fontSize:f}},j.map(a=>/*#__PURE__*/_react.default.createElement("tr",{key:h()},a.map((a,b)=>/*#__PURE__*/_react.default.createElement("td",{key:b+a},a)))))),c)};var _default=TableView;exports.default=_default;
+import { useEffect as e, useState as t } from "react";
+import { jsx as n, jsxs as r } from "react/jsx-runtime";
+//#region src/components/TableView/index.jsx
+var i = ({ rows: i = [], columns: a = [], rowFontSize: o = 16, headerFontSize: s = 18, TableHeaderComponent: c, TableFooterComponent: l }) => {
+	let u = () => `row_${Math.random()}`, d = i;
+	e(() => {
+		p(d);
+	}, [d]);
+	let [f, p] = t(d), [m, h] = t(void 0), g = (e) => {
+		let t = [].concat(f).sort((t, n) => t[e] > n[e] ? 1 : -1);
+		m === e ? (p(d), h(void 0)) : (p(t), h(e));
+	};
+	return /* @__PURE__ */ r("div", {
+		className: "ui-table-view-container",
+		children: [
+			c,
+			/* @__PURE__ */ r("table", {
+				className: "ui-table-view",
+				children: [/* @__PURE__ */ n("thead", {
+					style: { fontSize: s },
+					children: /* @__PURE__ */ n("tr", {
+						className: "ui-table-tr",
+						children: a.map((e, t) => /* @__PURE__ */ r("th", {
+							className: e.sortable === !1 ? "no-sortable" : "sortable",
+							align: "left",
+							onClick: () => g(t),
+							children: [
+								e.title,
+								" ",
+								e.showSortIcon === !1 ? "" : m === t ? /* @__PURE__ */ n("i", { className: "icons10-arrow-up" }) : /* @__PURE__ */ n("i", { className: "icons10-arrow-down" })
+							]
+						}, t + e))
+					})
+				}), /* @__PURE__ */ n("tbody", {
+					style: { fontSize: o },
+					children: f.map((e) => /* @__PURE__ */ n("tr", { children: e.map((e, t) => /* @__PURE__ */ n("td", { children: e }, t + e)) }, u()))
+				})]
+			}),
+			l
+		]
+	});
+};
+//#endregion
+export { i as default };

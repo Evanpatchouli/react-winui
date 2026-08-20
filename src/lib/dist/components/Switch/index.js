@@ -1,1 +1,32 @@
-"use strict";var _react=_interopRequireWildcard(require("react"));const _excluded=["tooltip","disabled","label","labelOn","labelOff","defaultChecked","labelFixedWidth","onChange","labelPosition"];require("core-js/modules/es.object.assign.js"),require("core-js/modules/es.weak-map.js"),require("core-js/modules/web.dom-collections.iterator.js"),Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;function _getRequireWildcardCache(a){if("function"!=typeof WeakMap)return null;var b=new WeakMap,c=new WeakMap;return(_getRequireWildcardCache=function(a){return a?c:b})(a)}function _interopRequireWildcard(a,b){if(!b&&a&&a.__esModule)return a;if(null===a||"object"!=typeof a&&"function"!=typeof a)return{default:a};var c=_getRequireWildcardCache(b);if(c&&c.has(a))return c.get(a);var d={},e=Object.defineProperty&&Object.getOwnPropertyDescriptor;for(var f in a)if("default"!=f&&Object.prototype.hasOwnProperty.call(a,f)){var g=e?Object.getOwnPropertyDescriptor(a,f):null;g&&(g.get||g.set)?Object.defineProperty(d,f,g):d[f]=a[f]}return d.default=a,c&&c.set(a,d),d}function _extends(){return _extends=Object.assign?Object.assign.bind():function(a){for(var b,c=1;c<arguments.length;c++)for(var d in b=arguments[c],b)Object.prototype.hasOwnProperty.call(b,d)&&(a[d]=b[d]);return a},_extends.apply(this,arguments)}function _objectWithoutProperties(a,b){if(null==a)return{};var c,d,e=_objectWithoutPropertiesLoose(a,b);if(Object.getOwnPropertySymbols){var f=Object.getOwnPropertySymbols(a);for(d=0;d<f.length;d++)c=f[d],0<=b.indexOf(c)||Object.prototype.propertyIsEnumerable.call(a,c)&&(e[c]=a[c])}return e}function _objectWithoutPropertiesLoose(a,b){if(null==a)return{};var c,d,e={},f=Object.keys(a);for(d=0;d<f.length;d++)c=f[d],0<=b.indexOf(c)||(e[c]=a[c]);return e}const Switch=/*#__PURE__*/(0,_react.forwardRef)((a,b)=>{let{tooltip:c,disabled:d,label:g=!0,labelOn:h="On",labelOff:i="Off",defaultChecked:e,labelFixedWidth:f,onChange:j=()=>{},labelPosition:k="end"}=a,l=_objectWithoutProperties(a,_excluded);return/*#__PURE__*/_react.default.createElement("label",{className:"ui-switch-container",title:c},g&&"start"===k&&/*#__PURE__*/_react.default.createElement("span",{className:"ui-switch-label","data-on":h,"data-off":i,style:{width:f}}),/*#__PURE__*/_react.default.createElement("input",_extends({ref:b},l,{type:"checkbox",className:"ui-switch",disabled:d,onChange:j,defaultChecked:e})),g&&"end"===k&&/*#__PURE__*/_react.default.createElement("span",{className:"ui-switch-label","data-on":h,"data-off":i,style:{width:f}}))});var _default=Switch;exports.default=_default;
+import { forwardRef as e } from "react";
+import { jsx as t, jsxs as n } from "react/jsx-runtime";
+//#region src/components/Switch/index.jsx
+var r = e(({ tooltip: e, disabled: r, label: i = !0, labelOn: a = "On", labelOff: o = "Off", defaultChecked: s, labelFixedWidth: c, onChange: l = () => {}, labelPosition: u = "end", ...d }, f) => /* @__PURE__ */ n("label", {
+	className: "ui-switch-container",
+	title: e,
+	children: [
+		i && u === "start" && /* @__PURE__ */ t("span", {
+			className: "ui-switch-label",
+			"data-on": a,
+			"data-off": o,
+			style: { width: c }
+		}),
+		/* @__PURE__ */ t("input", {
+			ref: f,
+			...d,
+			type: "checkbox",
+			className: "ui-switch",
+			disabled: r,
+			onChange: l,
+			defaultChecked: s
+		}),
+		i && u === "end" && /* @__PURE__ */ t("span", {
+			className: "ui-switch-label",
+			"data-on": a,
+			"data-off": o,
+			style: { width: c }
+		})
+	]
+}));
+//#endregion
+export { r as default };

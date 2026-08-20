@@ -1,1 +1,17 @@
-"use strict";var _react=_interopRequireDefault(require("react"));Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;function _interopRequireDefault(a){return a&&a.__esModule?a:{default:a}}const LoaderBar=a=>{let{setTheme:b,isLoading:c=!0}=a;const d=()=>"light"===b?" light":"";return/*#__PURE__*/_react.default.createElement("div",{className:c?"ui-loader-bar animate".concat(d()):"ui-loader-bar".concat(d())},/*#__PURE__*/_react.default.createElement("div",{className:"ui-ldr-bar ball-1"}),/*#__PURE__*/_react.default.createElement("div",{className:"ui-ldr-bar ball-2"}),/*#__PURE__*/_react.default.createElement("div",{className:"ui-ldr-bar ball-3"}),/*#__PURE__*/_react.default.createElement("div",{className:"ui-ldr-bar ball-4"}))};var _default=LoaderBar;exports.default=_default;
+import "react";
+import { jsx as e, jsxs as t } from "react/jsx-runtime";
+//#region src/components/Loaders/LoaderBar/index.jsx
+var n = ({ setTheme: n, isLoading: r = !0 }) => {
+	let i = () => n === "light" ? " light" : "";
+	return /* @__PURE__ */ t("div", {
+		className: r ? `ui-loader-bar animate${i()}` : `ui-loader-bar${i()}`,
+		children: [
+			/* @__PURE__ */ e("div", { className: "ui-ldr-bar ball-1" }),
+			/* @__PURE__ */ e("div", { className: "ui-ldr-bar ball-2" }),
+			/* @__PURE__ */ e("div", { className: "ui-ldr-bar ball-3" }),
+			/* @__PURE__ */ e("div", { className: "ui-ldr-bar ball-4" })
+		]
+	});
+};
+//#endregion
+export { n as default };

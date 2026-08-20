@@ -1,3 +1,77 @@
-"use strict";require("core-js/modules/es.weak-map.js"),Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0,require("core-js/modules/web.dom-collections.iterator.js");var _react=_interopRequireWildcard(require("react")),_ScrollView=_interopRequireDefault(require("../../../api/ScrollView"));function _interopRequireDefault(a){return a&&a.__esModule?a:{default:a}}function _getRequireWildcardCache(a){if("function"!=typeof WeakMap)return null;var b=new WeakMap,c=new WeakMap;return(_getRequireWildcardCache=function(a){return a?c:b})(a)}function _interopRequireWildcard(a,b){if(!b&&a&&a.__esModule)return a;if(null===a||"object"!=typeof a&&"function"!=typeof a)return{default:a};var c=_getRequireWildcardCache(b);if(c&&c.has(a))return c.get(a);var d={},e=Object.defineProperty&&Object.getOwnPropertyDescriptor;for(var f in a)if("default"!=f&&Object.prototype.hasOwnProperty.call(a,f)){var g=e?Object.getOwnPropertyDescriptor(a,f):null;g&&(g.get||g.set)?Object.defineProperty(d,f,g):d[f]=a[f]}return d.default=a,c&&c.set(a,d),d}const NavBar=a=>{// Once resize completes --
-function b(){d.current.style.transition="",j("")}const c=(0,_react.useRef)(window.innerWidth),d=(0,_react.useRef)(null),[e,f]=(0,_react.useState)(!1),[g,h]=(0,_react.useState)(!!a.collapsed),[i,j]=(0,_react.useState)(""),k=a=>{d.current.style.transition="transform 0.2s ease, width 0.2s ease",a(),setTimeout(()=>{d.current.style.transition=""},1e3)},l=()=>{var a=window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth;// If Click on <Small Screen Device> else <Large Screen Device> --
-760>a?j(""===i?" collapsed-float":""):k(()=>h(!g))},m=a=>{if(a.target&&a.target.matches("a")){var b=window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth;760>b&&j("")}};(0,_react.useEffect)(()=>{let a=document.getElementById("ui-navbar-list").getElementsByClassName("ui-input-search-box")[0];null===a||void 0===a?void 0:a.addEventListener("click",()=>{g&&h(!1)})},[g]);(0,_react.useEffect)(()=>{" collapsed-float"===i?_ScrollView.default.disableScroll():_ScrollView.default.enableScroll()},[i]);var n;return window.onresize=function(){const a=window.innerWidth;c.current!==a&&(clearTimeout(n),d.current.style.transition="unset",n=setTimeout(b,100),c.current=a)},/*#__PURE__*/_react.default.createElement("aside",{ref:a.ref,role:"navigation",id:"ui-navbar-wrap",className:g?"ui-navbar-wrap collapsed".concat(i):"ui-navbar-wrap".concat(i)},/*#__PURE__*/_react.default.createElement("div",{className:"ui-navbar-header-mobile"},/*#__PURE__*/_react.default.createElement("span",{className:"ui-navbar-toggler",onClick:l,"aria-label":"Toggle navigation"}),a.titleBarMobile),/*#__PURE__*/_react.default.createElement("nav",{className:"ui-navbar",ref:d},/*#__PURE__*/_react.default.createElement("div",{className:"ui-navbar-header",style:a.shadowOnScroll?e?{boxShadow:"0 4px 8px -8px #77777777"}:{boxShadow:""}:{boxShadow:""}},/*#__PURE__*/_react.default.createElement("span",{className:"ui-navbar-toggler",onClick:l,"aria-label":"Toggle navigation"}),/*#__PURE__*/_react.default.createElement("span",{className:"ui-navbar-name"},a.title)),/*#__PURE__*/_react.default.createElement("ul",{id:"ui-navbar-list",onScroll:a=>{50>a.target.scrollTop?f(!1):f(!0)},className:"ui-navbar-list",onClick:a=>m(a)},a.children)),/*#__PURE__*/_react.default.createElement("div",{onClick:l,className:" collapsed-float"===i?"ui-navbar-overlay show":"ui-navbar-overlay"}))};var _default=NavBar;exports.default=_default;
+import e from "../../../api/ScrollView.js";
+import { useEffect as t, useRef as n, useState as r } from "react";
+import { jsx as i, jsxs as a } from "react/jsx-runtime";
+//#region src/components/NavBar/NavBar/index.jsx
+var o = (o) => {
+	let s = n(window.innerWidth), c = n(null), [l, u] = r(!1), [d, f] = r(!!o.collapsed), [p, m] = r(""), h = (e) => {
+		c.current.style.transition = "transform 0.2s ease, width 0.2s ease", e(), setTimeout(() => {
+			c.current.style.transition = "";
+		}, 1e3);
+	}, g = () => {
+		(window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth) < 760 ? m(p === "" ? " collapsed-float" : "") : h(() => f(!d));
+	}, _ = (e) => {
+		e.target && e.target.matches("a") && (window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth) < 760 && m("");
+	};
+	t(() => {
+		document.getElementById("ui-navbar-list").getElementsByClassName("ui-input-search-box")[0]?.addEventListener("click", () => {
+			d && f(!1);
+		});
+	}, [d]);
+	let v = (e) => {
+		e.target.scrollTop < 50 ? u(!1) : u(!0);
+	};
+	t(() => {
+		p === " collapsed-float" ? e.disableScroll() : e.enableScroll();
+	}, [p]);
+	function y() {
+		c.current.style.transition = "", m("");
+	}
+	var b;
+	return window.onresize = function() {
+		let e = window.innerWidth;
+		s.current !== e && (clearTimeout(b), c.current.style.transition = "unset", b = setTimeout(y, 100), s.current = e);
+	}, /* @__PURE__ */ a("aside", {
+		ref: o.ref,
+		role: "navigation",
+		id: "ui-navbar-wrap",
+		className: d ? `ui-navbar-wrap collapsed${p}` : `ui-navbar-wrap${p}`,
+		children: [
+			/* @__PURE__ */ a("div", {
+				className: "ui-navbar-header-mobile",
+				children: [/* @__PURE__ */ i("span", {
+					className: "ui-navbar-toggler",
+					onClick: g,
+					"aria-label": "Toggle navigation"
+				}), o.titleBarMobile]
+			}),
+			/* @__PURE__ */ a("nav", {
+				className: "ui-navbar",
+				ref: c,
+				children: [/* @__PURE__ */ a("div", {
+					className: "ui-navbar-header",
+					style: o.shadowOnScroll && l ? { boxShadow: "0 4px 8px -8px #77777777" } : { boxShadow: "" },
+					children: [/* @__PURE__ */ i("span", {
+						className: "ui-navbar-toggler",
+						onClick: g,
+						"aria-label": "Toggle navigation"
+					}), /* @__PURE__ */ i("span", {
+						className: "ui-navbar-name",
+						children: o.title
+					})]
+				}), /* @__PURE__ */ i("ul", {
+					id: "ui-navbar-list",
+					onScroll: v,
+					className: "ui-navbar-list",
+					onClick: (e) => _(e),
+					children: o.children
+				})]
+			}),
+			/* @__PURE__ */ i("div", {
+				onClick: g,
+				className: p === " collapsed-float" ? "ui-navbar-overlay show" : "ui-navbar-overlay"
+			})
+		]
+	});
+};
+//#endregion
+export { o as default };

@@ -1,0 +1,6 @@
+node_modules
+build
+coverage
+src/lib/dist
+src/demo
+*.lock

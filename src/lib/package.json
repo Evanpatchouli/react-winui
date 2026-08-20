@@ -1,10 +1,39 @@
 {
   "name": "react-windows-ui",
   "version": "4.2.4",
-  "description": "Build full featured Windows fluent UI apps using reactjs.",
-  "main": "dist/index.js",
+  "description": "Build full featured Windows fluent UI apps using ReactJS.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./dist/react-windows-ui.min.css": "./dist/react-windows-ui.min.css",
+    "./config/app-config.css": "./config/app-config.css",
+    "./icons/winui-icons.min.css": "./icons/winui-icons.min.css",
+    "./icons/winui-icons.slim.css": "./icons/winui-icons.slim.css",
+    "./package.json": "./package.json"
+  },
+  "sideEffects": [
+    "./dist/**/*.css",
+    "./config/**/*.css",
+    "./icons/**/*.css"
+  ],
+  "files": [
+    "dist",
+    "config",
+    "icons",
+    "README.md"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node scripts/build.mjs",
+    "build:styles": "node scripts/build.mjs --styles-only",
+    "dev": "vite",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "homepage": "https://virtualvivek.github.io/react-windows-ui/",
   "repository": {
@@ -27,27 +56,14 @@
     "ui-design",
     "web-app"
   ],
-  "types": "dist/index.d.ts",
-  "author": {
-    "name": "Vivek Verma",
-    "email": "virtualvivek7@gmail.com"
-  },
-  "license": "MIT",
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ]
-  },
   "peerDependencies": {
     "react": "*",
     "react-dom": "*",
     "react-router-dom": "*"
-  }
+  },
+  "author": {
+    "name": "Vivek Verma",
+    "email": "virtualvivek7@gmail.com"
+  },
+  "license": "MIT"
 }

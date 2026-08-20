@@ -1,1 +1,38 @@
-"use strict";require("core-js/modules/es.weak-map.js"),require("core-js/modules/web.dom-collections.iterator.js"),Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var _react=_interopRequireWildcard(require("react")),_api=require("../../api");function _getRequireWildcardCache(a){if("function"!=typeof WeakMap)return null;var b=new WeakMap,c=new WeakMap;return(_getRequireWildcardCache=function(a){return a?c:b})(a)}function _interopRequireWildcard(a,b){if(!b&&a&&a.__esModule)return a;if(null===a||"object"!=typeof a&&"function"!=typeof a)return{default:a};var c=_getRequireWildcardCache(b);if(c&&c.has(a))return c.get(a);var d={},e=Object.defineProperty&&Object.getOwnPropertyDescriptor;for(var f in a)if("default"!=f&&Object.prototype.hasOwnProperty.call(a,f)){var g=e?Object.getOwnPropertyDescriptor(a,f):null;g&&(g.get||g.set)?Object.defineProperty(d,f,g):d[f]=a[f]}return d.default=a,c&&c.set(a,d),d}const AppTheme=/*#__PURE__*/_react.default.memo(a=>{const{scheme:b}=a;return(0,_react.useEffect)(()=>{switch(b){case"dark":_api.Appearance.setDarkScheme();break;case"light":_api.Appearance.setLightScheme();break;case"system":_api.Appearance.setSystemScheme();break;default:}},[b]),/*#__PURE__*/_react.default.createElement(_react.default.Fragment,null)},(a,b)=>{if(a.scheme!==b.scheme){switch(b.scheme){case"dark":_api.Appearance.setDarkScheme();break;case"light":_api.Appearance.setLightScheme();break;case"system":_api.Appearance.setSystemScheme();break;default:}b.onSchemeChange()}a.color!==b.color&&b.color&&(document.documentElement.style.setProperty("--PrimaryColor",b.color),b.colorDarkMode?document.documentElement.style.setProperty("--PrimaryColorLight",b.colorDarkMode):document.documentElement.style.setProperty("--PrimaryColorLight",b.color),b.onColorChange())});AppTheme.defaultProps={onColorChange:()=>{},onSchemeChange:()=>{}};var _default=AppTheme;exports.default=_default;
+import e from "../../api/Appearance.js";
+import t, { useEffect as n } from "react";
+import { Fragment as r, jsx as i } from "react/jsx-runtime";
+//#region src/components/AppTheme/index.jsx
+var a = t.memo((t) => {
+	let { scheme: a } = t;
+	return n(() => {
+		switch (a) {
+			case "dark":
+				e.setDarkScheme();
+				break;
+			case "light":
+				e.setLightScheme();
+				break;
+			case "system": e.setSystemScheme();
+		}
+	}, [a]), /* @__PURE__ */ i(r, {});
+}, (t, n) => {
+	if (t.scheme !== n.scheme) {
+		switch (n.scheme) {
+			case "dark":
+				e.setDarkScheme();
+				break;
+			case "light":
+				e.setLightScheme();
+				break;
+			case "system": e.setSystemScheme();
+		}
+		n.onSchemeChange();
+	}
+	t.color !== n.color && n.color && (document.documentElement.style.setProperty("--PrimaryColor", n.color), n.colorDarkMode ? document.documentElement.style.setProperty("--PrimaryColorLight", n.colorDarkMode) : document.documentElement.style.setProperty("--PrimaryColorLight", n.color), n.onColorChange());
+});
+a.defaultProps = {
+	onColorChange: () => {},
+	onSchemeChange: () => {}
+};
+//#endregion
+export { a as default };

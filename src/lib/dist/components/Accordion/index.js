@@ -1,1 +1,42 @@
-"use strict";var _react=_interopRequireWildcard(require("react"));require("core-js/modules/es.weak-map.js"),Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0,require("core-js/modules/web.dom-collections.iterator.js");function _getRequireWildcardCache(a){if("function"!=typeof WeakMap)return null;var b=new WeakMap,c=new WeakMap;return(_getRequireWildcardCache=function(a){return a?c:b})(a)}function _interopRequireWildcard(a,b){if(!b&&a&&a.__esModule)return a;if(null===a||"object"!=typeof a&&"function"!=typeof a)return{default:a};var c=_getRequireWildcardCache(b);if(c&&c.has(a))return c.get(a);var d={},e=Object.defineProperty&&Object.getOwnPropertyDescriptor;for(var f in a)if("default"!=f&&Object.prototype.hasOwnProperty.call(a,f)){var g=e?Object.getOwnPropertyDescriptor(a,f):null;g&&(g.get||g.set)?Object.defineProperty(d,f,g):d[f]=a[f]}return d.default=a,c&&c.set(a,d),d}const Accordion=a=>{let{style:b,children:c,headerStyle:d,headerTitle:e,onExpand:f=()=>{},onCollapse:g=()=>{}}=a;const h=(0,_react.useRef)(null),[i,j]=(0,_react.useState)(!1),[k,l]=(0,_react.useState)(10),m=_react.Children.map(c,a=>"Trigger"===a.type.displayName?a:null),n=_react.Children.map(c,a=>"Body"===a.type.displayName?a:null),o=(0,_react.useCallback)(()=>{setTimeout(()=>{var a;null===(a=h.current)||void 0===a?void 0:a.childNodes.forEach(a=>{l((null===a||void 0===a?void 0:a.clientHeight)+20)})},800)},[h]);(0,_react.useEffect)(()=>(window.addEventListener("resize",o),()=>{window.removeEventListener("resize",o)}),[o]);return(0,_react.useLayoutEffect)(()=>{var a;null===(a=h.current)||void 0===a?void 0:a.childNodes.forEach(a=>l((null===a||void 0===a?void 0:a.clientHeight)+20))},[]),/*#__PURE__*/_react.default.createElement("div",{className:"ui-accordion",style:b},/*#__PURE__*/_react.default.createElement("div",{style:d,className:"ui-accordion-header","aria-expanded":i,onClick:()=>{j(!i),i?g():f()}},0===m.length?/*#__PURE__*/_react.default.createElement("div",{className:"ui-accordion-title"},/*#__PURE__*/_react.default.createElement("span",null,e)):m),/*#__PURE__*/_react.default.createElement("div",{className:i?"ui-accordion-body show":"ui-accordion-body",ref:h,style:{height:i?k:0}},n))},AccordionTrigger=a=>{let{children:b}=a;return/*#__PURE__*/_react.default.createElement(_react.default.Fragment,null,b)};AccordionTrigger.displayName="Trigger",Accordion.Trigger=AccordionTrigger;const AccordionBody=a=>{let{children:b}=a;return/*#__PURE__*/_react.default.createElement(_react.default.Fragment,null,b)};AccordionBody.displayName="Body",Accordion.Body=AccordionBody;var _default=Accordion;exports.default=_default;
+import { Children as e, useCallback as t, useEffect as n, useLayoutEffect as r, useRef as i, useState as a } from "react";
+import { Fragment as o, jsx as s, jsxs as c } from "react/jsx-runtime";
+//#region src/components/Accordion/index.jsx
+var l = ({ style: o, children: l, headerStyle: u, headerTitle: d, onExpand: f = () => {}, onCollapse: p = () => {} }) => {
+	let m = i(null), [h, g] = a(!1), [_, v] = a(10), y = e.map(l, (e) => e.type.displayName === "Trigger" ? e : null), b = e.map(l, (e) => e.type.displayName === "Body" ? e : null), x = t(() => {
+		setTimeout(() => {
+			m.current?.childNodes.forEach((e) => {
+				v(e?.clientHeight + 20);
+			});
+		}, 800);
+	}, [m]);
+	return n(() => (window.addEventListener("resize", x), () => {
+		window.removeEventListener("resize", x);
+	}), [x]), r(() => {
+		m.current?.childNodes.forEach((e) => v(e?.clientHeight + 20));
+	}, []), /* @__PURE__ */ c("div", {
+		className: "ui-accordion",
+		style: o,
+		children: [/* @__PURE__ */ s("div", {
+			style: u,
+			className: "ui-accordion-header",
+			"aria-expanded": h,
+			onClick: () => {
+				g(!h), h ? p() : f();
+			},
+			children: y.length === 0 ? /* @__PURE__ */ s("div", {
+				className: "ui-accordion-title",
+				children: /* @__PURE__ */ s("span", { children: d })
+			}) : y
+		}), /* @__PURE__ */ s("div", {
+			className: h ? "ui-accordion-body show" : "ui-accordion-body",
+			ref: m,
+			style: { height: h ? _ : 0 },
+			children: b
+		})]
+	});
+}, u = ({ children: e }) => /* @__PURE__ */ s(o, { children: e });
+u.displayName = "Trigger", l.Trigger = u;
+var d = ({ children: e }) => /* @__PURE__ */ s(o, { children: e });
+d.displayName = "Body", l.Body = d;
+//#endregion
+export { l as default };

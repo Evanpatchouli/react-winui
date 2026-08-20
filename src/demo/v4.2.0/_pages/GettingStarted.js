@@ -12,13 +12,15 @@ const GettingStarted = () => {
       animateTransition>
 
       <h1>GettingStarted</h1>
-      <p>Select <b>windows-ui cra-template</b> to initialize your project.</p>
+      <p>Initialize a Vite React app and install <b>react-windows-ui</b>.</p>
 
       <SyntaxHighlighter
-        language="javascript"
+        language="bash"
         style={vscDarkPlus}
         className="code code-container">
-        {`npx create-react-app MyAppName --template windows-ui`}
+        {`pnpm create vite MyAppName --template react
+cd MyAppName
+pnpm add react-windows-ui`}
       </SyntaxHighlighter>
 
       

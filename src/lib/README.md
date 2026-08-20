@@ -31,7 +31,7 @@
  - Works with any <b>Routing Library</b>.
 
 # Works with
-<img src="https://github.com/virtualvivek/react-windows-ui/blob/main/markdown/support_vitejs.svg" width="90" title="ViteJS"/> &nbsp;&nbsp;&nbsp;&nbsp; <img src="https://github.com/virtualvivek/react-windows-ui/blob/main/markdown/support_nextjs.svg" width="90" title="NextJS"/> &nbsp;&nbsp;&nbsp;&nbsp; <img src="https://github.com/virtualvivek/react-windows-ui/blob/main/markdown/support_cra.svg" width="90" title="CRA"/>
+<img src="https://github.com/virtualvivek/react-windows-ui/blob/main/markdown/support_vitejs.svg" width="90" title="ViteJS"/> &nbsp;&nbsp;&nbsp;&nbsp; <img src="https://github.com/virtualvivek/react-windows-ui/blob/main/markdown/support_nextjs.svg" width="90" title="NextJS"/>
 
 # Getting Started
 ```ruby
@@ -39,7 +39,7 @@ npm install react-windows-ui
 ```
 ```js
 // Be sure to include styles at some point, probably during your bootstraping
-import "react-windows-ui/config/ui-config.css";
+import "react-windows-ui/config/app-config.css";
 import "react-windows-ui/dist/react-windows-ui.min.css";
 import "react-windows-ui/icons/winui-icons.min.css";
 ```

@@ -1,2 +1,14 @@
-"use strict";var _react=require("react");Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;const useOutSideClick=(a,b)=>{(0,_react.useEffect)(()=>{function c(c){a.current&&!a.current.contains(c.target)&&b()}// Bind the event listener
-return document.addEventListener("mousedown",c),()=>{document.removeEventListener("mousedown",c)}},[a,b])};var _default=useOutSideClick;exports.default=_default;
+import { useEffect as e } from "react";
+//#region src/hooks/useOutSideClick.jsx
+var t = (t, n) => {
+	e(() => {
+		function e(e) {
+			t.current && !t.current.contains(e.target) && n();
+		}
+		return document.addEventListener("mousedown", e), () => {
+			document.removeEventListener("mousedown", e);
+		};
+	}, [t, n]);
+};
+//#endregion
+export { t as default };

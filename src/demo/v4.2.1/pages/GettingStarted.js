@@ -12,25 +12,24 @@ const GettingStarted = () => {
       animateTransition>
 
       <h1>GettingStarted</h1>
-      <p>Select <b>windows-ui cra-template</b> to initialize your project.</p>
+      <p>Initialize a Vite React app and install <b>react-windows-ui</b>.</p>
 
       <SyntaxHighlighter
-        language="javascript"
+        language="bash"
         style={vscDarkPlus}
         className="code code-container">
-        {`npx create-react-app MyAppName --template windows-ui`}
+        {`pnpm create vite MyAppName --template react
+cd MyAppName
+pnpm add react-windows-ui`}
       </SyntaxHighlighter>
 
       <h1>Structure</h1>
 
       <div className='app-code' style={{whiteSpace: "pre-line", lineHeight: "normal", padding:"10px 40px 15px 20px"}}>
-        ./src<br/>
-          │ &nbsp; ├─ <a className="app-link" target="_blank" rel="noopener noreferrer" href="https://github.com/virtualvivek/react-windows-ui/blob/main/src/cra-template/template/src/App.js">App.js</a><br/>
-          │ &nbsp; └─ index.js<br/>
-          └─ pages/<br/>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ├─ <a className="app-link" target="_blank" rel="noopener noreferrer" href="https://github.com/virtualvivek/react-windows-ui/blob/main/src/cra-template/template/src/pages/page1/index.js">Page1.js</a><br/>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :<br/>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; └─ PageN.js<br/>
+        src/<br/>
+          │ &nbsp; ├─ App.jsx<br/>
+          │ &nbsp; └─ main.jsx<br/>
+        package.json<br/>
       </div>
       <br/><br/>
       

@@ -1,2 +1,40 @@
-"use strict";var _react=_interopRequireDefault(require("react"));require("core-js/modules/es.object.assign.js"),Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0,require("core-js/modules/es.regexp.exec.js"),require("core-js/modules/es.regexp.test.js");function _interopRequireDefault(a){return a&&a.__esModule?a:{default:a}}function _extends(){return _extends=Object.assign?Object.assign.bind():function(a){for(var b,c=1;c<arguments.length;c++)for(var d in b=arguments[c],b)Object.prototype.hasOwnProperty.call(b,d)&&(a[d]=b[d]);return a},_extends.apply(this,arguments)}// eslint-disable-next-line
-const isJavaScriptProtocol=/^[\u0000-\u001F ]*j[\r\n\t]*a[\r\n\t]*v[\r\n\t]*a[\r\n\t]*s[\r\n\t]*c[\r\n\t]*r[\r\n\t]*i[\r\n\t]*p[\r\n\t]*t[\r\n\t]*\:/i,NavBarLink=a=>{const{icon:b,text:c,href:d,active:e,imgSrc:f,imgAlt:g,onClick:h,showBadge:i,imgBorderRadius:j,badgeBackgroundColor:k,allowJavaScriptUrls:l=!0}=a;if(isJavaScriptProtocol.test(d)&&!l)return console.warn("NavBarLink has blocked a javascript: URL as a security precaution"),null;return/*#__PURE__*/_react.default.createElement("li",{className:"ui-navbar-list-item"},/*#__PURE__*/_react.default.createElement("a",_extends({},e&&{"aria-current":"page",className:"active","aria-selected":"true"},{onClick:h,href:d}),b,(()=>f?/*#__PURE__*/_react.default.createElement("img",{src:f,alt:g,style:{borderRadius:j}}):"")(),/*#__PURE__*/_react.default.createElement("span",null,c),i?(()=>0<i||""!==i?/*#__PURE__*/_react.default.createElement("div",{className:"ui-badge",style:{backgroundColor:k}},i):/*#__PURE__*/_react.default.createElement(_react.default.Fragment,null))():""))};NavBarLink.defaultProps={text:"Nav Link",onClick:()=>{}};var _default=NavBarLink;exports.default=_default;
+import "react";
+import { Fragment as e, jsx as t, jsxs as n } from "react/jsx-runtime";
+//#region src/components/NavBar/NavBarLink/index.jsx
+var r = /^[\u0000-\u001F ]*j[\r\n\t]*a[\r\n\t]*v[\r\n\t]*a[\r\n\t]*s[\r\n\t]*c[\r\n\t]*r[\r\n\t]*i[\r\n\t]*p[\r\n\t]*t[\r\n\t]*\:/i, i = (i) => {
+	let { icon: a, text: o, href: s, active: c, imgSrc: l, imgAlt: u, onClick: d, showBadge: f, imgBorderRadius: p, badgeBackgroundColor: m, allowJavaScriptUrls: h = !0 } = i;
+	if (r.test(s) && !h) return console.warn("NavBarLink has blocked a javascript: URL as a security precaution"), null;
+	let g = () => f > 0 || f !== "" ? /* @__PURE__ */ t("div", {
+		className: "ui-badge",
+		style: { backgroundColor: m },
+		children: f
+	}) : /* @__PURE__ */ t(e, {}), _ = () => l ? /* @__PURE__ */ t("img", {
+		src: l,
+		alt: u,
+		style: { borderRadius: p }
+	}) : "";
+	return /* @__PURE__ */ t("li", {
+		className: "ui-navbar-list-item",
+		children: /* @__PURE__ */ n("a", {
+			...c && {
+				"aria-current": "page",
+				className: "active",
+				"aria-selected": "true"
+			},
+			onClick: d,
+			href: s,
+			children: [
+				a,
+				_(),
+				/* @__PURE__ */ t("span", { children: o }),
+				f ? g() : ""
+			]
+		})
+	});
+};
+i.defaultProps = {
+	text: "Nav Link",
+	onClick: () => {}
+};
+//#endregion
+export { i as default };
