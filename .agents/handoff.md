@@ -239,3 +239,12 @@
 - 34 张基线按 panel 与高风险状态拆分，包含 light/dark 主题、桌面/移动 NavBar、弹层、菜单、搜索建议、排序、加载和媒体状态；不依赖完整 docs 页面，避免文档路由变化污染组件回归。
 - 视觉基线首次生成后已使用 `view_image` 审阅代表性 controls、selection、feedback、loading、desktop/mobile navigation 截图，并修正 fixture-only 的布局裁切与不可见 loader 展示问题。
 - 所有基线均通过未更新模式验证；CI 仍在 `windows-latest` 生成/消费 `chromium-win32` 基线。
+
+# Demo 收敛到 @evanpatchouli/react-winui@1.0.0
+
+- 当前 docs Demo 已从历史 `v4.2.4` 目录迁移为 `src/demo/v1.0.0`，根路由统一跳转到 `/v1.0.0/home`。
+- Demo 运行时和示例代码统一使用 `@evanpatchouli/react-winui`、`styles.css`、`config/app-config.css` 与 icons exports；不再直接引用 `src/lib/src` 或本地 `_lib` 副本。
+- 已删除历史 `src/demo/v4.2.0`、`src/demo/v4.2.1`、`src/demo/v4.2.2` 以及原 `v4.2.4/_lib`。
+- `apps/docs` 新增 `@evanpatchouli/react-winui: workspace:*` 依赖，锁文件已同步。
+- 验证通过：`pnpm format:check`、`pnpm lint`、`pnpm typecheck`、`pnpm test`（55 tests）、`pnpm test:consumer`、`pnpm build`、`pnpm test:browser`（33 tests）。
+- 已知遗留：docs production build 仍有既有大 chunk warning；组件库 package metadata 中的原始上游 homepage/repository 未在本次 Demo 收敛中改动。

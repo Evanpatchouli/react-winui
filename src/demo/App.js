@@ -1,10 +1,7 @@
 import React from "react";
 import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 
-const AppFourTwoZero = React.lazy(() => import("./v4.2.0"));
-const AppFourTwoOne = React.lazy(() => import("./v4.2.1"));
-const AppFourTwoTwo = React.lazy(() => import("./v4.2.2"));
-const AppFourTwoFour = React.lazy(() => import("./v4.2.4"));
+const AppCurrent = React.lazy(() => import("./v1.0.0"));
 
 const Splash = () => {
   return <div style={{
@@ -24,22 +21,10 @@ class App extends React.Component {
   return (
     <HashRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/v4.2.4/home" />}/>
+        <Route path="/" element={<Navigate to="/v1.0.0/home" />}/>
         <Route
-          path="/v4.2.0/*"
-          element={<React.Suspense fallback={<Splash/>}><AppFourTwoZero/></React.Suspense>}
-        />
-        <Route
-          path="/v4.2.1/*"
-          element={<React.Suspense fallback={<Splash/>}><AppFourTwoOne/></React.Suspense>}
-        />
-        <Route
-          path="/v4.2.2/*"
-          element={<React.Suspense fallback={<Splash/>}><AppFourTwoTwo/></React.Suspense>}
-        />
-        <Route
-          path="/v4.2.4/*"
-          element={<React.Suspense fallback={<Splash/>}><AppFourTwoFour/></React.Suspense>}
+          path="/v1.0.0/*"
+          element={<React.Suspense fallback={<Splash/>}><AppCurrent/></React.Suspense>}
         />
       </Routes>
     </HashRouter>

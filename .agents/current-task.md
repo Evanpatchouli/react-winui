@@ -2,6 +2,20 @@
 
 ## 状态
 
+已完成：将 Demo 从历史 `v4.2.x` 版本结构收敛到 `@evanpatchouli/react-winui@1.0.0`。
+
+## 本次 follow-up
+
+- 当前 Demo 迁移为直接消费 workspace 组件包及其 CSS exports。
+- 删除旧的 `v4.2.0`、`v4.2.1`、`v4.2.2` Demo 和当前 Demo 内的本地 `_lib` 副本。
+- 将当前 Demo 路由、版本显示和安装文案统一为 `v1.0.0` / `@evanpatchouli/react-winui`。
+
+## 本次验证
+
+- `pnpm install`、`pnpm format:check`、`pnpm lint`、`pnpm typecheck`、`pnpm test` 通过。
+- `pnpm build`、`pnpm test:consumer` 通过；docs production build 已从 workspace 包解析组件和 CSS。
+- `pnpm test:browser` 通过：33 个用例，视觉快照未更新。
+
 已完成：阶段 5「建立测试与视觉回归基线」及其全库视觉保护扩展、React warning 清理。
 
 ## 本阶段交付

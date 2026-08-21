@@ -62,4 +62,3 @@ Release @Latest
 ------------------------------------
 Search & Updating Data in VSCode
 ------------------------------------
-excluding = src/demo/v4.2.0/**

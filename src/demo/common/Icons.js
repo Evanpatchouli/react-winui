@@ -8,7 +8,7 @@ const IconsView = () => {
     <div>
       <h1 className="m-b-15">Icons</h1>
 
-      <p><b>react-windows-ui</b> comes with the free <b>font</b> set of icons. <br/>
+      <p><b>react-winui</b> comes with the free <b>font</b> set of icons. <br/>
       <br/>However if you need a wide variety of Fluent Icons please refer:<br/>
 
       <a className="app-link" target="_blank" rel="noopener noreferrer" href="https://github.com/microsoft/fluentui-system-icons">
@@ -19,7 +19,7 @@ const IconsView = () => {
         language="javascript"
         style={vscDarkPlus}
         className="code code-container">
-        {`import "react-windows-ui/icons/fonts/fonts.min.css";`}
+        {`import "@evanpatchouli/react-winui/icons/winui-icons.min.css";`}
       </SyntaxHighlighter>
 
       <br/>It’s easy to incorporate icons into your app. Here’s a small example:

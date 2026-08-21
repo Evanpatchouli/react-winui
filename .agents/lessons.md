@@ -62,3 +62,6 @@
 - 全量 fixture 会暴露只在未挂载组件中隐藏的 React warning；扩展截图前应先扫描所有静态 `defaultProps`，并把 console/pageerror 作为浏览器测试的失败条件。
 - Windows 上多个 Playwright worker 同时启动重型 Vite fixture 会放大 browser context teardown 竞争；全库截图更适合限制 workers，并适当提高单测 timeout，而不是放宽像素差异阈值。
 - 固定定位的移动导航如果嵌在长 gallery 页面中，物理 click 可能因元素脱离 viewport 而不稳定；应让 fixture 提供真实定位上下文，必要时用 DOM `dispatchEvent` 验证组件 handler，再对 viewport overlay 截图。
+
+- docs Demo 改为消费 workspace 组件包时，必须在 `apps/docs/package.json` 声明 `workspace:*` 依赖并执行完整 `pnpm install`；只执行 `--lockfile-only` 不会创建本地包链接，Vite 会无法解析包入口。
+- 删除历史版本 Demo 后，应同步清理根路由、版本选择器、文档链接和本地 `_lib`，并先运行 production build 确认当前 Demo 已从发布包入口加载组件与 CSS。

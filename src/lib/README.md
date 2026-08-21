@@ -43,7 +43,7 @@ import "@evanpatchouli/react-winui/config/app-config.css";
 import "@evanpatchouli/react-winui/styles.css";
 import "@evanpatchouli/react-winui/icons/winui-icons.min.css";
 ```
-## 🚀 [See `App.js` code & more »](https://Evanpatchouli.github.io/react-winui/#/v4.2.2/getting_started)
+## 🚀 [See `App.js` code & more »](https://Evanpatchouli.github.io/react-winui/#/v1.0.0/getting_started)
 
 # Usage
 
