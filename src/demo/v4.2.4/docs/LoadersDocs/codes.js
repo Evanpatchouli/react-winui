@@ -1,8 +1,8 @@
 const LoaderBarImportCode =
-`import { LoaderBar } from "react-windows-ui";`;
+`import { LoaderBar } from "@evanpatchouli/react-winui";`;
 
 const LoaderBusyImportCode =
-`import { LoaderBusy } from "react-windows-ui";`;
+`import { LoaderBusy } from "@evanpatchouli/react-winui";`;
 
 const LoaderBarUsageCode =
 `<LoaderBar

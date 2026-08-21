@@ -7,7 +7,7 @@
 消费者继续加载 canonical stylesheet：
 
 ```js
-import "react-windows-ui/styles.css";
+import "@evanpatchouli/react-winui/styles.css";
 ```
 
 新组件优先使用语义 token：

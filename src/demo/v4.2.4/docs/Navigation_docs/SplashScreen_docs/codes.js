@@ -1,5 +1,5 @@
 const SplashScreenImportCode =
-`import { SplashScreen } from "react-windows-ui";`;
+`import { SplashScreen } from "@evanpatchouli/react-winui";`;
 
 const SplashScreenUsageCode =
 `/* Usually at ./src/App.js */

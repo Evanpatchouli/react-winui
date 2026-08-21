@@ -1,5 +1,5 @@
 const InputTextImportCode =
-`import { InputText } from "react-windows-ui";`;
+`import { InputText } from "@evanpatchouli/react-winui";`;
 
 const InputTextUsageCode =
 `<InputText
@@ -37,7 +37,7 @@ const InputDateUsageCode =
 />`;
 
 const InputSearchBarUsageCode =
-`import { InputSearchBar } from "react-windows-ui";
+`import { InputSearchBar } from "@evanpatchouli/react-winui";
 
 <InputSearchBar
   placeholder="Search here"
@@ -46,7 +46,7 @@ const InputSearchBarUsageCode =
 />`;
 
 const InputSearchBoxUsageCode =
-`import { InputSearchBox } from "react-windows-ui";
+`import { InputSearchBox } from "@evanpatchouli/react-winui";
 
 <InputSearchBox
   placeholder="Enter to Search"
@@ -64,7 +64,7 @@ const InputSearchBoxUsageCode =
 />`;
 
 const InputTextAreaUsageCode =
-`import { TextArea } from "react-windows-ui";
+`import { TextArea } from "@evanpatchouli/react-winui";
 
 <TextArea
   resizer={false}

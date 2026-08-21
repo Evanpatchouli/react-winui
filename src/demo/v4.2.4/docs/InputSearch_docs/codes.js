@@ -1,11 +1,11 @@
 const SearchBarImportCode =
-`import { InputSearchBar } from "react-windows-ui";`;
+`import { InputSearchBar } from "@evanpatchouli/react-winui";`;
 
 const SearchBoxImportCode =
-`import { InputSearchBox } from "react-windows-ui";`;
+`import { InputSearchBox } from "@evanpatchouli/react-winui";`;
 
 const SearchSuggestionImportCode =
-`import { InputSearchSuggestion } from "react-windows-ui";`;
+`import { InputSearchSuggestion } from "@evanpatchouli/react-winui";`;
 
 const SearchBarUsageCode =
 `<InputSearchBar

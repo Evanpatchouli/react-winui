@@ -1,5 +1,5 @@
 const DialogImportCode =
-`import { Dialog } from "react-windows-ui";`;
+`import { Dialog } from "@evanpatchouli/react-winui";`;
 
 const DialogUsageCode =
 `<Dialog

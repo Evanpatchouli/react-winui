@@ -1,5 +1,5 @@
 const MenuBarImportCode =
-`import { MenuBar } from "react-windows-ui";`;
+`import { MenuBar } from "@evanpatchouli/react-winui";`;
 
 const MenuBarUsageCode =
 `const anchorRef = useRef(null);

@@ -15,7 +15,7 @@
   <a href="https://github.com/virtualvivek/react-windows-ui/blob/main/LICENSE">
     <img src="https://img.shields.io/badge/License-MIT-darklime.svg?style=flat-square&color=blue" alt="License: MIT" />
   </a>
-	<a href="https://www.npmjs.com/package/react-windows-ui">
+	<a href="https://www.npmjs.com/package/@evanpatchouli/react-winui">
     <img src="https://img.shields.io/github/package-json/v/virtualvivek/react-windows-ui?style=flat-square&color=CB3837&logo=npm&logoColor=ffffff&label=npm"
       alt="npm" />
   </a>
@@ -36,13 +36,13 @@
 
 # Getting Started
 ```ruby
-pnpm add react-windows-ui
+pnpm add @evanpatchouli/react-winui
 ```
 ```js
 // Be sure to include styles at some point, probably during your bootstraping
-import "react-windows-ui/config/app-config.css";
-import "react-windows-ui/styles.css";
-import "react-windows-ui/icons/winui-icons.min.css";
+import "@evanpatchouli/react-winui/config/app-config.css";
+import "@evanpatchouli/react-winui/styles.css";
+import "@evanpatchouli/react-winui/icons/winui-icons.min.css";
 ```
 ## 🚀 [See `App.js` code & more »](https://virtualvivek.github.io/react-windows-ui/#/v4.2.2/getting_started)
 
@@ -50,9 +50,9 @@ import "react-windows-ui/icons/winui-icons.min.css";
 
 # Usage
 ```js
-import { Button, InputText } from "react-windows-ui";
+import { Button, InputText } from "@evanpatchouli/react-winui";
 // Optional direct entry for smaller consumer graphs:
-import ButtonDirect from "react-windows-ui/button";
+import ButtonDirect from "@evanpatchouli/react-winui/button";
 
 const App = () => (
   <>
@@ -83,7 +83,7 @@ pnpm typecheck
 
 `pnpm test:browser` starts an isolated Vite fixture that mounts the public visual component library and checks real browser interactions plus 34 checked-in visual baselines. To intentionally update visual baselines, use `pnpm test:browser:update` and review every changed image before committing it.
 
-The package also keeps the legacy `react-windows-ui/dist/react-windows-ui.min.css` CSS path for existing applications. React, React DOM, and React Router DOM are peer dependencies and must be installed by the consuming app.
+The package also keeps the legacy `@evanpatchouli/react-winui/dist/react-windows-ui.min.css` CSS path for existing applications. React, React DOM, and React Router DOM are peer dependencies and must be installed by the consuming app.
 
 # Find this project useful? :heart:
 Support it by joining [**stargazers**](https://github.com/virtualvivek/react-windows-ui/stargazers) for this repository. :star:

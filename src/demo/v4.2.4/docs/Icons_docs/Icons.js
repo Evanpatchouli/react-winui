@@ -26,7 +26,7 @@ const IconsView = () => {
         language="javascript"
         style={vscDarkPlus}
         className="code code-container">
-        {`import "react-windows-ui/icons/winui-icons.min.css";`}
+        {`import "@evanpatchouli/react-winui/icons/winui-icons.min.css";`}
       </SyntaxHighlighter>
 
       <h2>Usage</h2>

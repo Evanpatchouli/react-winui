@@ -1,11 +1,11 @@
 const UIAppJS =
 `import React, { useState } from "react";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
-import { AppContainer, NavBar, NavBarLink, NavBarThemeSwitch, NavPageContainer } from "react-windows-ui";
+import { AppContainer, NavBar, NavBarLink, NavBarThemeSwitch, NavPageContainer } from "@evanpatchouli/react-winui";
 
-import "react-windows-ui/config/app-config.css";
-import "react-windows-ui/dist/react-windows-ui.min.css";
-import "react-windows-ui/icons/winui-icons.min.css";
+import "@evanpatchouli/react-winui/config/app-config.css";
+import "@evanpatchouli/react-winui/dist/react-windows-ui.min.css";
+import "@evanpatchouli/react-winui/icons/winui-icons.min.css";
 
 const App = () => {
   return (
@@ -70,7 +70,7 @@ export default App;
 `;
 
 const NavBarSearch = 
-`import { InputSearchBox } from "react-windows-ui";
+`import { InputSearchBox } from "@evanpatchouli/react-winui";
 
 <InputSearchBox
   placeholder="Search Here.."
@@ -83,7 +83,7 @@ const NavBarSearch =
 `;
 
 const NavBarThemeSwitch = 
-`import { NavBarThemeSwitch } from "react-windows-ui";
+`import { NavBarThemeSwitch } from "@evanpatchouli/react-winui";
 
 <NavBarThemeSwitch
   onChange={(scheme) => console.log(scheme)}
@@ -91,7 +91,7 @@ const NavBarThemeSwitch =
 `
 
 const NavBarSubMenu = 
-`import { NavBarSubMenu } from "react-windows-ui";
+`import { NavBarSubMenu } from "@evanpatchouli/react-winui";
 
 <NavBarSubMenu title="Title">
   ...
@@ -105,7 +105,7 @@ const NavBarSubMenu =
 `
 
 const NavBarLink = 
-`import { NavBarLink } from "react-windows-ui";
+`import { NavBarLink } from "@evanpatchouli/react-winui";
 
 <NavBarLink
   text="Page1"
@@ -116,7 +116,7 @@ const NavBarLink =
 `
 
 const NavBarLinkImg = 
-`import { NavBarLink } from "react-windows-ui";
+`import { NavBarLink } from "@evanpatchouli/react-winui";
 
 <NavBarLink
   text="Page1"
@@ -134,7 +134,7 @@ const NavBarTitle =
 `
 
 const PageContainer = 
-`import { NavPageContainer } from "react-windows-ui";
+`import { NavPageContainer } from "@evanpatchouli/react-winui";
 
 <NavPageContainer
   hasPadding={true}

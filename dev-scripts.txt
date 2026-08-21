@@ -6,7 +6,7 @@ pnpm install
 -effects-
 package.json >
 	"scripts": {
-	"compile:sass": "pnpm --filter react-windows-ui build:styles",
+	"compile:sass": "pnpm --filter @evanpatchouli/react-winui build:styles",
 		},
 
 --compile--
@@ -14,21 +14,10 @@ package.json >
 pnpm compile:sass
 
 ----------------------------------------------------------------------------
-[ GitHub Pages ] ------------
-Installing gh-pages
-pnpm install
-
--effects-
-package.json >
-	"homepage": "https://virtualvivek.github.io/react-windows-ui/",
-	"scripts": {
-	"predeploy": "pnpm build",
-    		"deploy": "gh-pages -d build",
-		},
-
---compile--
-
-pnpm deploy
+[ GitHub Actions ] ------------
+GitHub Pages deployment and npm publishing are handled by workflows:
+	.github/workflows/jekyll-gh-pages.yml
+	.github/workflows/npm-publish.yml
 
 ----------------------------------------------------------------------------
 #### Compile Production ####

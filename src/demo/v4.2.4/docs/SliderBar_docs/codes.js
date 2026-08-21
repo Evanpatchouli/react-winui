@@ -1,5 +1,5 @@
 const SliderBarImportCode =
-`import { SliderBar } from "react-windows-ui";`;
+`import { SliderBar } from "@evanpatchouli/react-winui";`;
 
 const SliderBarUsageCode =
 `<SliderBar

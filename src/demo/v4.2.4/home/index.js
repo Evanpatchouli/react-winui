@@ -127,7 +127,7 @@ class Home extends React.Component {
         language="javascript"
         style={vscDarkPlus}
         className="code code-container home-code">
-        {`$ npm install react-windows-ui`}
+        {`$ npm install @evanpatchouli/react-winui`}
       </SyntaxHighlighter>
 
 

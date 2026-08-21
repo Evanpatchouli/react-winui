@@ -1,5 +1,5 @@
 const RadioButtonImportCode =
-`import { RadioButton } from "react-windows-ui";`;
+`import { RadioButton } from "@evanpatchouli/react-winui";`;
 
 const RadioButtonUsageCode =
 `<RadioButton

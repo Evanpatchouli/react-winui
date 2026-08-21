@@ -1,5 +1,5 @@
 const NavPageContainerImportCode =
-`import { NavPageContainer } from "react-windows-ui";`;
+`import { NavPageContainer } from "@evanpatchouli/react-winui";`;
 
 const NavPageContainerUsageCode =
 `<NavPageContainer

@@ -1,6 +1,6 @@
 {
-  "name": "react-windows-ui",
-  "version": "4.2.4",
+  "name": "@evanpatchouli/react-winui",
+  "version": "1.0.0",
   "description": "Build full featured Windows fluent UI apps using ReactJS.",
   "type": "module",
   "main": "./dist/index.js",

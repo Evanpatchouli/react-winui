@@ -1,5 +1,5 @@
 const AppThemeImportCode =
-`import { AppTheme } from "react-windows-ui";`;
+`import { AppTheme } from "@evanpatchouli/react-winui";`;
 
 const AppThemeUsageCode =
 `<AppTheme

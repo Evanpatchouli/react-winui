@@ -1,5 +1,5 @@
 const AppearanceImportCode =
-`import { Appearance } from "react-windows-ui";`;
+`import { Appearance } from "@evanpatchouli/react-winui";`;
 
 const AppearanceUsageCode =
 `const colorScheme = Appearance.getColorScheme();

@@ -32,7 +32,7 @@ import {
   Switch,
   TableView,
   TextArea
-} from "react-windows-ui";
+} from "@evanpatchouli/react-winui";
 import type {
   ButtonProps,
   ButtonGroupProps,
@@ -85,8 +85,8 @@ import type {
   TableViewProps,
   TableViewRow,
   TextAreaProps
-} from "react-windows-ui";
-import ButtonDirect from "react-windows-ui/button";
+} from "@evanpatchouli/react-winui";
+import ButtonDirect from "@evanpatchouli/react-winui/button";
 
 const typedProps: [
   ButtonProps,

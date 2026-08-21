@@ -1,5 +1,5 @@
 const ButtonImportCode = 
-`import { Button } from "react-windows-ui";`;
+`import { Button } from "@evanpatchouli/react-winui";`;
 
 const ButtonTypesCode =
 `<Button

@@ -1,8 +1,8 @@
 const SelectImportCode =
-`import { Select } from "react-windows-ui";`;
+`import { Select } from "@evanpatchouli/react-winui";`;
 
 const SelectNativeImportCode =
-`import { SelectNative } from "react-windows-ui";`;
+`import { SelectNative } from "@evanpatchouli/react-winui";`;
 
 const SelectUsageCode =
 `<Select
