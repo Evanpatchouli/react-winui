@@ -1,4 +1,4 @@
-import { createRef, type ReactElement } from "react";
+import { createRef, type CSSProperties, type ReactElement } from "react";
 import {
   Button,
   ButtonGroup,
@@ -91,6 +91,8 @@ import type {
   TooltipRelationship
 } from "@evanpatchouli/react-winui";
 import ButtonDirect from "@evanpatchouli/react-winui/button";
+import { Shadows } from "@evanpatchouli/react-winui/theme";
+import type { ShadowName, ShadowToken } from "@evanpatchouli/react-winui/theme";
 import TooltipDirect from "@evanpatchouli/react-winui/tooltip";
 
 const typedProps: [
@@ -184,6 +186,9 @@ export const selectOptionValueTypeCheck: SelectOptionValue = 1;
 export const selectChangeTypeCheck: SelectChangeHandler = () => {};
 export const tooltipPlacementTypeCheck: TooltipPlacement = "top";
 export const tooltipRelationshipTypeCheck: TooltipRelationship = "description";
+export const shadowNameTypeCheck: ShadowName = "shadow8";
+export const shadowTokenTypeCheck: ShadowToken = Shadows.shadow8;
+export const shadowStyleTypeCheck: CSSProperties = { boxShadow: Shadows.shadow8 };
 export const menuBarAnchorRef = createRef<HTMLButtonElement>();
 export const menuBarRef = createRef<MenuBarHandle>();
 export const menuBarComponentTypeCheck: MenuBarComponent | undefined = undefined;

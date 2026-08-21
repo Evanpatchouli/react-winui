@@ -3,6 +3,8 @@ export type { AppThemeProps, AppThemeScheme } from "./components/AppTheme";
 export type { AppContainerProps } from "./components/AppContainer";
 export { default as AppContainer } from "./components/AppContainer";
 export { default as Appearance } from "./api/Appearance";
+export { Shadows } from "./theme";
+export type { ShadowName, ShadowToken } from "./theme";
 
 export { default as NavBar } from "./components/NavBar/NavBar";
 export type { NavBarComponent, NavBarProps } from "./components/NavBar/NavBar";

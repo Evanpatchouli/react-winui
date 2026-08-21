@@ -74,4 +74,6 @@
 - fixed portal 的定位测试应覆盖顶部空间不足时的 placement fallback；仅验证默认 top placement 无法发现窗口边缘的真实问题。
 
 - Tooltip 与 Flyout 都属于浮层，但透明度不应共享实现 token；应让 Tooltip 使用实心 surface，只有显式启用 backdrop blur 的 dropdown/flyout 使用 translucent surface。
-- 当单个浮层需要比通用 Flyout 更轻的阴影时，应增加语义化 Tooltip shadow token，而不是直接调小共享 Flyout shadow；这样可以保持其他下拉/菜单的既有视觉基线。
+- 当单个浮层需要与通用 Flyout 不同的阴影层级时，应选择合适的语义化 `--rwu-shadow-*` token，而不是直接调小共享 Flyout shadow；这样可以保持其他下拉/菜单的既有视觉基线。
+- Theme/Shadows 这类多层阴影应先落入本库的 `--rwu-shadow-*` scale，再由组件选择具体层级；Tooltip 使用 `box-shadow: var(--rwu-shadow-8)`，不要把 Fluent UI 的包或 Griffel recipe 引入运行时。
+- JavaScript-facing token 常量应只保存 `var(--rwu-*)` 引用，不要复制 Sass 中的实际阴影值；这样 inline style 能获得自动补全，同时仍保留消费者 CSS 覆盖和主题切换能力。

@@ -180,4 +180,15 @@
 ## 2026-08-21：Tooltip 阴影与圆角收敛
 
 - Tooltip 圆角改用现有 `--rwu-radius-small`（4px），不新增独立圆角 literal。
-- 新增 `--rwu-shadow-tooltip`，由向下偏移的 `drop-shadow(0 1px 1px rgba(34, 34, 34, 0.14))` 与 `drop-shadow(0 2px 2px rgba(34, 34, 34, 0.08))` 组成，避免 Tooltip 顶部出现环境阴影和底部过长延伸；不修改通用 `--rwu-shadow-flyout`，避免下拉菜单视觉回归。
+- 此处记录的 Tooltip 专用 `drop-shadow` 方案已由后续 Theme/Shadows scale 决策取代；通用 `--rwu-shadow-flyout` 仍保持不变。
+
+## 2026-08-21：Tooltip 使用 Theme/Shadows shadow8
+
+- 将 Fluent UI v9 Theme/Shadows 的层级思路迁移为本库自有 `--rwu-shadow-2`、`--rwu-shadow-4`、`--rwu-shadow-8`、`--rwu-shadow-16`、`--rwu-shadow-28` 和 `--rwu-shadow-64` token，不引入 Fluent UI 运行时依赖。
+- Tooltip 改用 `box-shadow: var(--rwu-shadow-8)`；shadow8 由 `0 0 2px rgba(0, 0, 0, 0.12)` 与 `0 4px 8px rgba(0, 0, 0, 0.14)` 两层组成，保持当前 Tooltip 的实心表面和 4px 圆角。
+
+## 2026-08-21：Theme 子路径作为 CSS token 引用层
+
+- 新增 `@evanpatchouli/react-winui/theme` 子路径，导出只包含 `var(--rwu-*)` 引用的 `Shadows` 常量；Sass/CSS token 仍是阴影真实值的唯一来源。
+- `Shadows` 同时覆盖 shadow scale 与既有 `flyout`、`flyoutNested`、`dialog`、`alert` 语义 token，支持 inline style 等 JavaScript-facing CSS API，不替代组件 SCSS 中的 CSS token 用法。
+- 保留根入口的同名导出以确保 preserveModules 构建稳定产出 `dist/theme/index.js`；文档和推荐用法以独立 `theme` 子路径为准。

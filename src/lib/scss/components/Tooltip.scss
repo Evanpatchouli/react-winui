@@ -15,7 +15,7 @@
   border-radius: var(--rwu-radius-small);
   color: var(--rwu-color-text-primary);
   background: var(--rwu-color-surface-flyout);
-  filter: var(--rwu-shadow-tooltip);
+  box-shadow: var(--rwu-shadow-8);
   font: inherit;
   font-size: var(--rwu-font-size-control);
   line-height: 1.35;

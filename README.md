@@ -53,6 +53,8 @@ import "@evanpatchouli/react-winui/icons/winui-icons.min.css";
 import { Button, InputText, Tooltip } from "@evanpatchouli/react-winui";
 // Optional direct entry for smaller consumer graphs:
 import ButtonDirect from "@evanpatchouli/react-winui/button";
+// CSS token references for JavaScript-facing style APIs:
+import { Shadows } from "@evanpatchouli/react-winui/theme";
 
 const App = () => (
   <>
@@ -62,6 +64,7 @@ const App = () => (
     <Tooltip content="Supplemental information">
       <Button value="Hover or focus" />
     </Tooltip>
+    <div style={{ boxShadow: Shadows.shadow8 }}>Token-backed surface</div>
   </>
 );
 ```

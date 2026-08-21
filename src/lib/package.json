@@ -22,6 +22,11 @@
       "import": "./dist/components/Tooltip/index.js",
       "default": "./dist/components/Tooltip/index.js"
     },
+    "./theme": {
+      "types": "./dist/theme/index.d.ts",
+      "import": "./dist/theme/index.js",
+      "default": "./dist/theme/index.js"
+    },
     "./styles.css": "./dist/react-winui.min.css",
     "./dist/react-winui.min.css": "./dist/react-winui.min.css",
     "./config/app-config.css": "./config/app-config.css",

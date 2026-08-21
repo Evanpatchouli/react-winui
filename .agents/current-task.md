@@ -8,6 +8,13 @@
 - 验证：pnpm lint、pnpm typecheck、pnpm test（64 tests）、pnpm test:consumer、pnpm build、pnpm test:browser（36 tests）、pnpm format:check 均通过。
 - 遗留：docs production build 仍有既有大 chunk warning；未复制 Fluent UI 源码，因此无需新增 THIRD_PARTY_NOTICES.md。
 
+## 阶段 6 follow-up：Theme CSS token 引用层（已完成）
+
+- 新增独立 `@evanpatchouli/react-winui/theme` 子路径，提供 `Shadows` CSS token 引用对象；真实值仍由 Sass/CSS token 层维护。
+- 补充 package exports、类型声明、consumer 运行时/类型导入样例、README 和 design-system 文档。
+- 验证：`pnpm lint`、`pnpm typecheck`、`pnpm test`（64 tests）、`pnpm test:consumer`、`pnpm build`、`pnpm test:browser`（36 tests）、`pnpm format:check` 均通过。
+- 遗留：docs production build 仍有既有大 chunk warning。
+
 ## 下一步
 
 阶段 6 已完成，等待用户指定阶段 7 或其他组件任务，不自动进入下一阶段。

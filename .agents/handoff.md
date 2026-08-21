@@ -270,3 +270,14 @@
 - 新增并应用由两层 `drop-shadow` 组成的 `--rwu-shadow-tooltip`；通用 Flyout shadow 未改动。
 - 两层阴影均向下偏移，第二层收缩为 `0 2px 2px`，避免顶部环境光晕和 Tooltip 底部阴影长尾。
 - 已更新 Tooltip light/dark 视觉基线；全量 36 个 Playwright 用例通过。
+
+# 阶段 6 follow-up：移植 Theme/Shadows 并应用 shadow8
+
+- 在 `src/lib/scss/themes/tokens.scss` 新增 `--rwu-shadow-2`、`--rwu-shadow-4`、`--rwu-shadow-8`、`--rwu-shadow-16`、`--rwu-shadow-28` 和 `--rwu-shadow-64` 层级 token，并抽取 ambient/key 阴影颜色 token。
+- Tooltip 改用 `box-shadow: var(--rwu-shadow-8)`；之前的 Tooltip 专用 `drop-shadow` token 已移除，通用 Flyout 阴影保持不变。
+
+# 阶段 6 follow-up：Theme CSS token 引用层
+
+- 新增 `src/lib/src/theme/index.ts` 与对应 declaration，提供 `Shadows.shadow2` 至 `Shadows.shadow64`、`none`、`flyout`、`flyoutNested`、`dialog`、`alert`，所有值均为 `var(--rwu-*)` 引用。
+- 新增 package `./theme` exports；consumer 已验证 `import { Shadows } from "@evanpatchouli/react-winui/theme"` 的类型解析、运行时解析和 `boxShadow` 使用。
+- README 与 `docs/design-system.md` 已补充 CSS token 引用层用法；真实值仍由 Sass/CSS token 层维护。

@@ -48,6 +48,8 @@
     --rwu-color-border-input-strong: var(--color-input-border-strong);
     --rwu-color-border-dialog: var(--color-foreground-dark);
     --rwu-color-border-divider: var(--color-ui-border-default);
+    --rwu-color-shadow-ambient: rgba(0, 0, 0, 0.12);
+    --rwu-color-shadow-key: rgba(0, 0, 0, 0.14);
     --rwu-color-hover-strong: var(--color-ui-hover-strong);
     --rwu-color-switch: var(--color-switch-ui);
     --rwu-color-slider-thumb: var(--color-slider-thumb-bg);
@@ -74,13 +76,28 @@
     --rwu-spacing-2xl: 20px;
     --rwu-spacing-3xl: 30px;
 
-    // Elevation
+    // Elevation: Fluent UI-style semantic shadow scale
     --rwu-shadow-none: none;
+    --rwu-shadow-2:
+      0 0 2px var(--rwu-color-shadow-ambient),
+      0 1px 2px var(--rwu-color-shadow-key);
+    --rwu-shadow-4:
+      0 0 2px var(--rwu-color-shadow-ambient),
+      0 2px 4px var(--rwu-color-shadow-key);
+    --rwu-shadow-8:
+      0 0 2px var(--rwu-color-shadow-ambient),
+      0 4px 8px var(--rwu-color-shadow-key);
+    --rwu-shadow-16:
+      0 0 2px var(--rwu-color-shadow-ambient),
+      0 8px 16px var(--rwu-color-shadow-key);
+    --rwu-shadow-28:
+      0 0 8px var(--rwu-color-shadow-ambient),
+      0 14px 28px var(--rwu-color-shadow-key);
+    --rwu-shadow-64:
+      0 0 8px var(--rwu-color-shadow-ambient),
+      0 32px 64px var(--rwu-color-shadow-key);
     --rwu-shadow-flyout: 0 2px 5px #22222244;
     --rwu-shadow-flyout-nested: 2px 2px 5px #22222244;
-    --rwu-shadow-tooltip:
-      drop-shadow(0 1px 1px rgba(34, 34, 34, 0.14))
-      drop-shadow(0 2px 2px rgba(34, 34, 34, 0.08));
     --rwu-shadow-dialog: 0 0 7vh rgba(0, 0, 0, 0.25);
     --rwu-shadow-alert: 0 0 24vh rgba(0, 0, 0, 0.25);
 

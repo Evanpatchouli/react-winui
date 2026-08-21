@@ -22,6 +22,17 @@ import "@evanpatchouli/react-winui/styles.css";
 }
 ```
 
+需要在 React inline style 或其他 JavaScript CSS API 中引用阴影时，使用独立的 `theme` 子路径：
+
+```tsx
+import { Shadows } from "@evanpatchouli/react-winui/theme";
+import "@evanpatchouli/react-winui/styles.css";
+
+const style = { boxShadow: Shadows.shadow8 };
+```
+
+`Shadows` 只提供 `var(--rwu-*)` 引用，真实值仍由 CSS token 层维护。
+
 ## Token 分类
 
 | 分类 | 示例 | 用途 |
@@ -32,7 +43,7 @@ import "@evanpatchouli/react-winui/styles.css";
 | 颜色 / border | `--rwu-color-border-control`、`--rwu-color-border-input`、`--rwu-color-border-divider` | 控件、输入框和分隔线 |
 | 圆角 | `--rwu-radius-small`、`--rwu-radius-control`、`--rwu-radius-dialog` | 保留现有 4px、5px、8.6px 等圆角 |
 | 间距 | `--rwu-spacing-xs` 至 `--rwu-spacing-3xl` | 复用现有 4/5/8/10/15/20/30px 间距 |
-| 阴影 | `--rwu-shadow-flyout`、`--rwu-shadow-dialog`、`--rwu-shadow-alert` | 下拉菜单、Dialog 和 Alert 层级 |
+| 阴影 | `--rwu-shadow-2` 至 `--rwu-shadow-64`、`--rwu-shadow-flyout`、`--rwu-shadow-dialog`、`--rwu-shadow-alert` | Fluent UI 风格层级阴影，以及现有下拉菜单、Dialog 和 Alert 阴影 |
 | 动效 | `--rwu-duration-fast`、`--rwu-duration-control`、`--rwu-duration-dropdown` | 复用现有 transition/animation 时长 |
 
 完整 token 列表以 `src/lib/scss/themes/tokens.scss` 为准。
@@ -59,7 +70,7 @@ import "@evanpatchouli/react-winui/styles.css";
 
 ## Tooltip
 
-Tooltip 的浮层使用 `--rwu-color-surface-flyout-translucent`、`--rwu-color-border-divider`、
-`--rwu-radius-flyout` 和 `--rwu-shadow-flyout`，不依赖 Fluent UI 的视觉 token。浮层默认通过
+Tooltip 的浮层使用实心 `--rwu-color-surface-flyout`、`--rwu-color-border-divider`、
+`--rwu-radius-small` 和 `--rwu-shadow-8`，不引入 Fluent UI 依赖或默认组件外观。浮层默认通过
 `aria-describedby` 与 trigger 关联；只有非必要的补充信息才适合放入 Tooltip，交互式内容应使用
 Popover 或其他可持续交互的组件。
