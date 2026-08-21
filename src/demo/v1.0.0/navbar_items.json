@@ -124,5 +124,12 @@
     "text": "TableView",
     "icon": "icons10-grid-3",
     "showBadge": false
+  },
+  {
+    "to": "tooltip",
+    "exact": false,
+    "text": "Tooltip",
+    "icon": "icons10-notification",
+    "showBadge": false
   }
 ]

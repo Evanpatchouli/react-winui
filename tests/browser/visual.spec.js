@@ -112,6 +112,31 @@ test.describe("Public component visual baselines", () => {
     });
   });
 
+  test.describe("Tooltip visual states", () => {
+    test("captures the light Tooltip surface", async ({ page }) => {
+      const tooltip = page.locator(".ui-tooltip-open");
+
+      await expect(tooltip).toBeVisible();
+      await expect(tooltip).toHaveText("Create a new document");
+      await expect(tooltip).toHaveScreenshot("tooltip-light.png", screenshotOptions);
+    });
+
+    test("captures the hover Tooltip surface in dark theme", async ({ page }) => {
+      await page.getByTestId("theme-dark").click();
+      await page.getByRole("button", { name: "Hover me" }).hover();
+
+      const tooltip = page.locator(".ui-tooltip-open");
+      await expect(tooltip).toBeVisible();
+      await expect(tooltip).toHaveText("Supplemental information");
+      await expect(tooltip).toHaveScreenshot("tooltip-dark.png", screenshotOptions);
+    });
+
+    test("opens the Tooltip from keyboard focus", async ({ page }) => {
+      await page.getByRole("button", { name: "Hover me" }).focus();
+      await expect(page.locator(".ui-tooltip-open")).toHaveText("Supplemental information");
+    });
+  });
+
   test.describe("Control and selection baselines", () => {
     test("captures the light form controls", async ({ page }) => {
       await expect(panel(page, "controls-panel")).toHaveScreenshot(

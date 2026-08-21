@@ -100,3 +100,11 @@ export type {
 } from "./components/TableView";
 export { default as TextArea } from "./components/TextArea";
 export type { TextAreaProps, TextAreaResize } from "./components/TextArea";
+export { default as Tooltip } from "./components/Tooltip";
+export type {
+  TooltipOpenChangeEvent,
+  TooltipOpenChangeHandler,
+  TooltipPlacement,
+  TooltipProps,
+  TooltipRelationship
+} from "./components/Tooltip";

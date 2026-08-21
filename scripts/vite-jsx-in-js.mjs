@@ -15,7 +15,7 @@ export function jsxInJavaScript(sourceRoot, name = "jsx-in-js") {
   };
 
   return {
-    name: `react-windows-ui-${name}`,
+    name: `react-winui-${name}`,
     enforce: "pre",
     async resolveId(source, importer) {
       const resolved = await this.resolve(source, importer, { skipSelf: true });

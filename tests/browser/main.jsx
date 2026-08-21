@@ -33,6 +33,7 @@ import SplashScreen from "../../src/lib/src/components/SplashScreen/index.tsx";
 import Switch from "../../src/lib/src/components/Switch/index.tsx";
 import TableView from "../../src/lib/src/components/TableView/index.tsx";
 import TextArea from "../../src/lib/src/components/TextArea/index.tsx";
+import Tooltip from "../../src/lib/src/components/Tooltip/index.tsx";
 import "../../src/lib/config/app-config.css";
 import "../../src/lib/scss/main.scss";
 import "./fixture.css";
@@ -80,7 +81,7 @@ function VisualFixture() {
       <main className="visual-fixture">
         <header className="visual-fixture-header">
           <div>
-            <p className="visual-fixture-eyebrow">react-windows-ui</p>
+            <p className="visual-fixture-eyebrow">react-winui</p>
             <h1>Component visual regression gallery</h1>
             <p className="visual-fixture-intro">
               Every public visual component is mounted here so browser baselines protect the library
@@ -151,6 +152,25 @@ function VisualFixture() {
           </div>
           <p className="visual-fixture-status">
             Keyboard activation: <output data-testid="interaction-result">{activation}</output>
+          </p>
+        </Section>
+
+        <Section
+          caption="hover · focus · delay · viewport placement · arrow"
+          eyebrow="feedback"
+          testId="tooltip-panel"
+          title="Tooltip"
+        >
+          <div className="visual-fixture-row">
+            <Tooltip content="Create a new document" defaultOpen placement="top" withArrow>
+              <Button value="Tooltip preview" />
+            </Tooltip>
+            <Tooltip content="Supplemental information" placement="bottom" showDelay={0}>
+              <Button value="Hover me" />
+            </Tooltip>
+          </div>
+          <p className="visual-fixture-status">
+            Tooltip content is supplemental and connected to the trigger with ARIA.
           </p>
         </Section>
 

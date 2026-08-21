@@ -5,7 +5,7 @@
 - workspace 包暂使用现有 `src/lib`，Demo 使用新建的 `apps/docs`，不强制搬迁历史 Demo 和组件源码。
 - 组件构建使用 Vite 8 library mode + `preserveModules`，输出 ESM，外置 React/React DOM/React Router。
 - 声明文件在 TypeScript 全量迁移前沿用现有 public `.d.ts` 并随构建复制到 `dist`。
-- CSS 由 Sass JS API 单独编译到既有 `dist/react-windows-ui.min.css`，保持原 Demo 和消费者路径。
+- CSS 由 Sass JS API 单独编译到既有 `dist/react-winui.min.css`，保持原 Demo 和消费者路径。
 
 ## 2026-08-20：移除 CRA 模板
 
@@ -16,7 +16,7 @@
 
 - 组件包继续保留在 `src/lib`，通过 `exports` 暴露 root ESM、`button` 直达入口和 CSS 资源；不把 `src`、`scss`、tests 或开发配置发布到 npm。
 - React 与 React DOM 由消费者提供，最低 peer 版本为 18；`react-router-dom` 因 `Link` 组件在运行时直接依赖它，作为 `>=6` peer 保留。
-- `styles.css` 是新的 canonical CSS specifier，原有 `dist/react-windows-ui.min.css` 路径继续保留，避免已有应用出现发布路径 breaking change。
+- `styles.css` 是新的 canonical CSS specifier，原有 `dist/react-winui.min.css` 路径继续保留，避免已有应用出现发布路径 breaking change。
 - `examples/test-app` 使用空 `paths` 覆盖根 tsconfig 的源码别名，确保 consumer 类型检查通过真实 package exports，而不是仓库内部源码路径。
 
 ## 2026-08-20：阶段 3 首批渐进 TypeScript 迁移
@@ -134,7 +134,7 @@
 - `--rwu-color-*` 有意引用现有主题变量，而不是复制一套 light/dark literal。这样 `[data-theme="dark"]`、`Appearance`、`AppTheme`、`--PrimaryColor` / `--PrimaryColorLight` 和消费者旧变量覆盖都继续生效。
 - 尺寸、间距、阴影和动效 token 使用当前 SCSS 已存在的精确值；本阶段仅迁移基础父选择器与 Button、InputText、Checkbox、Switch、Dialog、Alert、Select、TableView 等相关样式，不修改组件 DOM、Props 或 class。
 - 保留历史 `--color-button-border-bottom-defult` 拼写作为兼容变量，新代码通过语义 token `--rwu-color-border-control-bottom` 访问它。
-- 发布 CSS 产物继续写入 `src/lib/dist/react-windows-ui.min.css`；新增 token 文档保持轻量，完整 token 列表以 Sass 源文件为准。
+- 发布 CSS 产物继续写入 `src/lib/dist/react-winui.min.css`；新增 token 文档保持轻量，完整 token 列表以 Sass 源文件为准。
 
 ## 2026-08-21：阶段 4 全量消费端迁移
 
@@ -164,3 +164,20 @@
 - 全部静态 `defaultProps` 改为参数默认值或 fallback；这属于 React 兼容性和测试可观测性修复，不改变 public Props、DOM 或视觉 recipe。
 - ColorPickerPalette 的可选 `onChange` 使用内部 noop，避免受控 color input 产生 read-only console error；该修复直接改善组件在默认用法下的开发体验。
 - Playwright fixture 使用 2 workers 和 60 秒 test timeout，解决全库挂载时 Windows browser context teardown 资源竞争；不通过放宽 `maxDiffPixelRatio` 接受视觉变化。
+
+## 2026-08-21：阶段 6 Tooltip
+
+- 阶段 6 只实现 Tooltip，不提前扩展 Popover、Menu 或其他新组件；行为边界参考 WinUI Tooltip 与 Fluent UI React v9，视觉继续使用 react-winui 自有 token。
+- API 采用必需的 `content`/单一 `children` trigger，并支持 `open`、`defaultOpen`、`onOpenChange`、`showDelay`、`hideDelay`、`placement`、`relationship`、`withArrow` 和 `disabled`；保留 controlled/uncontrolled 两种用法。
+- Tooltip 内容通过 portal 渲染并根据 viewport 做 placement fallback；模块级关闭句柄保证同一时间只有最新 Tooltip 可见，避免多层悬浮内容相互遮挡。
+- 没有复制 Fluent UI 源码、Griffel 样式或 Fluent token，因此不新增 `THIRD_PARTY_NOTICES.md`；只记录行为/API 设计参考。
+
+## 2026-08-21：Tooltip 背景改为实心
+
+- Tooltip 与箭头改用 `--rwu-color-surface-flyout`，不再消费 `--rwu-color-surface-flyout-translucent`；Flyout/Select/MenuBar 的既有半透明行为保持不变。
+- 同步重新生成 Sass CSS 产物并更新 Tooltip light/dark 视觉基线，避免视觉变更未被截图测试记录。
+
+## 2026-08-21：Tooltip 阴影与圆角收敛
+
+- Tooltip 圆角改用现有 `--rwu-radius-small`（4px），不新增独立圆角 literal。
+- 新增 `--rwu-shadow-tooltip`，由向下偏移的 `drop-shadow(0 1px 1px rgba(34, 34, 34, 0.14))` 与 `drop-shadow(0 2px 2px rgba(34, 34, 34, 0.08))` 组成，避免 Tooltip 顶部出现环境阴影和底部过长延伸；不修改通用 `--rwu-shadow-flyout`，避免下拉菜单视觉回归。

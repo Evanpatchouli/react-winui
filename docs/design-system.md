@@ -1,4 +1,4 @@
-# react-windows-ui Design Tokens
+# react-winui Design Tokens
 
 阶段 4 的 token 层只抽取现有样式中的视觉值，不重新设计组件。新的语义变量以 `--rwu-*` 命名，组件和浏览器 SCSS 的消费端已完成迁移；主题兼容桥接仍保留。
 
@@ -56,3 +56,10 @@ import "@evanpatchouli/react-winui/styles.css";
 - DOM、className、Props 和现有交互状态不因 token 抽取而改变。
 - 数据 URI、组件专属几何值和浏览器兼容值只有在确认复用关系后再抽取。
 - 任何视觉数值调整都必须通过后续 Visual Regression 基线确认。
+
+## Tooltip
+
+Tooltip 的浮层使用 `--rwu-color-surface-flyout-translucent`、`--rwu-color-border-divider`、
+`--rwu-radius-flyout` 和 `--rwu-shadow-flyout`，不依赖 Fluent UI 的视觉 token。浮层默认通过
+`aria-describedby` 与 trigger 关联；只有非必要的补充信息才适合放入 Tooltip，交互式内容应使用
+Popover 或其他可持续交互的组件。

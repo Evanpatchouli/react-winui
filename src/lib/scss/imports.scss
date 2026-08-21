@@ -33,6 +33,7 @@
 @use "./components/SplashScreen";
 @use "./components/TableView";
 @use "./components/TextArea";
+@use "./components/Tooltip";
 
 @use "./browsers/webkit/main" as webkit;
 @use "./browsers/mozilla/main" as mozilla;

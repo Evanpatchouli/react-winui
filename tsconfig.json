@@ -16,8 +16,8 @@
     "types": ["node", "vitest/globals", "@testing-library/jest-dom"],
     "baseUrl": ".",
     "paths": {
-      "react-windows-ui": ["src/lib/src/index.ts"],
-      "react-windows-ui/*": ["src/lib/src/*"]
+      "react-winui": ["src/lib/src/index.ts"],
+      "react-winui/*": ["src/lib/src/*"]
     }
   },
   "include": [

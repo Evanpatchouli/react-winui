@@ -1,0 +1,95 @@
+.ui-tooltip-trigger {
+  display: inline-flex;
+  position: relative;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+.ui-tooltip {
+  box-sizing: border-box;
+  max-width: 364px;
+  padding: var(--rwu-spacing-sm) var(--rwu-spacing-lg);
+  position: fixed;
+  z-index: 1000;
+  border: 1px solid var(--rwu-color-border-divider);
+  border-radius: var(--rwu-radius-small);
+  color: var(--rwu-color-text-primary);
+  background: var(--rwu-color-surface-flyout);
+  filter: var(--rwu-shadow-tooltip);
+  font: inherit;
+  font-size: var(--rwu-font-size-control);
+  line-height: 1.35;
+  overflow-wrap: break-word;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--rwu-duration-fast) var(--rwu-ease-standard),
+    visibility var(--rwu-duration-fast) var(--rwu-ease-standard);
+}
+
+.ui-tooltip.ui-tooltip-open {
+  opacity: 1;
+}
+
+.ui-tooltip-content {
+  display: block;
+}
+
+.ui-tooltip-arrow {
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  border: 1px solid var(--rwu-color-border-divider);
+  background: var(--rwu-color-surface-flyout);
+  transform: rotate(45deg);
+}
+
+.ui-tooltip[data-placement="top"] .ui-tooltip-arrow {
+  bottom: -5px;
+  left: calc(50% - 4px);
+  border-top: 0;
+  border-left: 0;
+}
+
+.ui-tooltip[data-placement="bottom"] .ui-tooltip-arrow {
+  top: -5px;
+  left: calc(50% - 4px);
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.ui-tooltip[data-placement="left"] .ui-tooltip-arrow {
+  top: calc(50% - 4px);
+  right: -5px;
+  border-bottom: 0;
+  border-left: 0;
+}
+
+.ui-tooltip[data-placement="right"] .ui-tooltip-arrow {
+  top: calc(50% - 4px);
+  left: -5px;
+  border-top: 0;
+  border-right: 0;
+}
+
+.ui-tooltip-visually-hidden {
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  position: absolute;
+  overflow: hidden;
+  border: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  opacity: 1;
+  visibility: visible;
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-tooltip {
+    transition: none;
+  }
+}

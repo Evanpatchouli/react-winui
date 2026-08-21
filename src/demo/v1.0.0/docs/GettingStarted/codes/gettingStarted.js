@@ -33,7 +33,7 @@ const NavBarRoutes = () => {
       <NavBar
         title="App Name"
         shadowOnScroll={true}
-        titleBarMobile={<div><span className="ui-navbar-name">React-windows-ui</span></div>}>
+        titleBarMobile={<div><span className="ui-navbar-name">react-winui</span></div>}>
 
         <NavBarThemeSwitch/>
         <h1>Pages</h1>

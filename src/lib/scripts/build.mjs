@@ -17,7 +17,7 @@ async function compileStyles() {
   });
 
   await mkdir(outputRoot, { recursive: true });
-  await writeFile(path.join(outputRoot, "react-windows-ui.min.css"), result.css, "utf8");
+  await writeFile(path.join(outputRoot, "react-winui.min.css"), result.css, "utf8");
 }
 
 async function copyDeclarationFiles(currentDirectory = sourceRoot) {

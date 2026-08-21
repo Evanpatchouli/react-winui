@@ -11,7 +11,7 @@
 
 ## 验证结果
 
-- `pnpm --filter react-windows-ui build:styles`：通过且不再输出 Sass deprecation warning
+- `pnpm --filter react-winui build:styles`：通过且不再输出 Sass deprecation warning
 - `pnpm lint`：通过
 - `pnpm typecheck`：通过
 - `pnpm test`：通过，55/55

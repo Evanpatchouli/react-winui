@@ -78,6 +78,9 @@
     --rwu-shadow-none: none;
     --rwu-shadow-flyout: 0 2px 5px #22222244;
     --rwu-shadow-flyout-nested: 2px 2px 5px #22222244;
+    --rwu-shadow-tooltip:
+      drop-shadow(0 1px 1px rgba(34, 34, 34, 0.14))
+      drop-shadow(0 2px 2px rgba(34, 34, 34, 0.08));
     --rwu-shadow-dialog: 0 0 7vh rgba(0, 0, 0, 0.25);
     --rwu-shadow-alert: 0 0 24vh rgba(0, 0, 0, 0.25);
 

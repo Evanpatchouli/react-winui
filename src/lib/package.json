@@ -17,8 +17,13 @@
       "import": "./dist/components/Button/index.js",
       "default": "./dist/components/Button/index.js"
     },
-    "./styles.css": "./dist/react-windows-ui.min.css",
-    "./dist/react-windows-ui.min.css": "./dist/react-windows-ui.min.css",
+    "./tooltip": {
+      "types": "./dist/components/Tooltip/index.d.ts",
+      "import": "./dist/components/Tooltip/index.js",
+      "default": "./dist/components/Tooltip/index.js"
+    },
+    "./styles.css": "./dist/react-winui.min.css",
+    "./dist/react-winui.min.css": "./dist/react-winui.min.css",
     "./config/app-config.css": "./config/app-config.css",
     "./icons/winui-icons.min.css": "./icons/winui-icons.min.css",
     "./icons/winui-icons.slim.css": "./icons/winui-icons.slim.css",
@@ -60,10 +65,10 @@
   "publishConfig": {
     "access": "public"
   },
-  "homepage": "https://virtualvivek.github.io/react-windows-ui/",
+  "homepage": "https://virtualvivek.github.io/react-winui/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/virtualvivek/react-windows-ui.git"
+    "url": "git+https://github.com/virtualvivek/react-winui.git"
   },
   "keywords": [
     "react",

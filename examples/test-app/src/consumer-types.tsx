@@ -31,7 +31,8 @@ import {
   SelectNative,
   Switch,
   TableView,
-  TextArea
+  TextArea,
+  Tooltip
 } from "@evanpatchouli/react-winui";
 import type {
   ButtonProps,
@@ -84,9 +85,13 @@ import type {
   TableViewColumn,
   TableViewProps,
   TableViewRow,
-  TextAreaProps
+  TextAreaProps,
+  TooltipPlacement,
+  TooltipProps,
+  TooltipRelationship
 } from "@evanpatchouli/react-winui";
 import ButtonDirect from "@evanpatchouli/react-winui/button";
+import TooltipDirect from "@evanpatchouli/react-winui/tooltip";
 
 const typedProps: [
   ButtonProps,
@@ -120,7 +125,8 @@ const typedProps: [
   SelectProps,
   SwitchProps,
   TableViewProps,
-  TextAreaProps
+  TextAreaProps,
+  TooltipProps
 ] = [
   { value: "Button" },
   { "aria-label": "Actions" },
@@ -156,11 +162,17 @@ const typedProps: [
     columns: [{ title: "Name" }],
     rows: [["Apple", 1]]
   },
-  { placeholder: "Text" }
+  { placeholder: "Text" },
+  { content: "More information", children: <button type="button">Action</button> }
 ];
 
 export const rootImport: ReactElement = <Button value="Root export" />;
 export const subpathImport: ReactElement = <ButtonDirect value="Button subpath" />;
+export const tooltipSubpathImport: ReactElement = (
+  <TooltipDirect content="Tooltip subpath" showDelay={0}>
+    <button type="button">Tooltip trigger</button>
+  </TooltipDirect>
+);
 export const propsTypeCheck = typedProps;
 export const schemeTypeCheck: AppThemeScheme = "system";
 export const alertHandleTypeCheck: AlertHandle | undefined = undefined;
@@ -170,6 +182,8 @@ export const searchSuggestionTypeCheck: InputSearchSuggestion = { text: "Windows
 export const selectOptionTypeCheck: SelectOption = { label: "One", value: "one" };
 export const selectOptionValueTypeCheck: SelectOptionValue = 1;
 export const selectChangeTypeCheck: SelectChangeHandler = () => {};
+export const tooltipPlacementTypeCheck: TooltipPlacement = "top";
+export const tooltipRelationshipTypeCheck: TooltipRelationship = "description";
 export const menuBarAnchorRef = createRef<HTMLButtonElement>();
 export const menuBarRef = createRef<MenuBarHandle>();
 export const menuBarComponentTypeCheck: MenuBarComponent | undefined = undefined;
@@ -251,5 +265,8 @@ export const basicControls: ReactElement = (
       TableHeaderComponent={<span>Header</span>}
     />
     <TextArea placeholder="Notes" onChange={(event) => event.currentTarget.value} />
+    <Tooltip content="More information">
+      <Button value="Tooltip" />
+    </Tooltip>
   </>
 );

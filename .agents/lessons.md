@@ -65,3 +65,13 @@
 
 - docs Demo 改为消费 workspace 组件包时，必须在 `apps/docs/package.json` 声明 `workspace:*` 依赖并执行完整 `pnpm install`；只执行 `--lockfile-only` 不会创建本地包链接，Vite 会无法解析包入口。
 - 删除历史版本 Demo 后，应同步清理根路由、版本选择器、文档链接和本地 `_lib`，并先运行 production build 确认当前 Demo 已从发布包入口加载组件与 CSS。
+
+## 2026-08-21：阶段 6 Tooltip
+
+- Tooltip trigger 使用 wrapper 承担 pointer/focus 事件，同时 clone 单一 child 注入 ARIA；这样可以保持任意原生/组件 trigger 的 DOM 兼容性，不要求子组件实现特定 ref 接口。
+- hide delay 期间重新进入 trigger 时必须先清除 hide timer，再判断当前可见状态；否则快速离开再进入会在新 Tooltip 已打开后被旧 timer 关闭。
+- `aria-describedby` 关系的 Tooltip 在关闭时仍需保留 visually clipped 内容；使用 `visibility: hidden` 会让屏幕阅读器关系失效。`inaccessible` relationship 才完全不渲染关闭内容。
+- fixed portal 的定位测试应覆盖顶部空间不足时的 placement fallback；仅验证默认 top placement 无法发现窗口边缘的真实问题。
+
+- Tooltip 与 Flyout 都属于浮层，但透明度不应共享实现 token；应让 Tooltip 使用实心 surface，只有显式启用 backdrop blur 的 dropdown/flyout 使用 translucent surface。
+- 当单个浮层需要比通用 Flyout 更轻的阴影时，应增加语义化 Tooltip shadow token，而不是直接调小共享 Flyout shadow；这样可以保持其他下拉/菜单的既有视觉基线。

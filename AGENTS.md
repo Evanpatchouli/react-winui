@@ -1,12 +1,12 @@
-# react-windows-ui Fork 现代化分阶段 Codex 提示词
+# react-winui Fork 现代化分阶段 Codex 提示词
 
 ## 阶段 1：建立现代化工程基线
 
-你正在维护我 fork 的 `react-windows-ui` 项目。
+你正在维护我 fork 的 `react-winui` 项目。
 
 项目目标：
 
-- 保留原 `react-windows-ui` 的 Windows 11 / WinUI 风格和视觉质感。
+- 保留原 `react-winui` 的 Windows 11 / WinUI 风格和视觉质感。
 - 第一阶段只进行工程现代化。
 - 不重新设计组件。
 - 不修改现有组件视觉效果。
@@ -55,7 +55,7 @@
 │  └─ docs/
 │
 ├─ packages/
-│  └─ react-windows-ui/
+│  └─ react-winui/
 │     ├─ src/
 │     ├─ package.json
 │     └─ tsconfig.json
@@ -152,7 +152,7 @@
 
 ## 阶段 2：整理 React 依赖与 npm 包发布结构
 
-继续维护当前已经完成第一阶段现代化的 `react-windows-ui` fork。
+继续维护当前已经完成第一阶段现代化的 `react-winui` fork。
 
 本阶段只处理：
 
@@ -220,13 +220,13 @@ react-router-dom
 确保消费者可以正常：
 
 ```tsx
-import { Button } from 'react-windows-ui'
+import { Button } from 'react-winui'
 ```
 
 如果架构允许，同时考虑：
 
 ```tsx
-import { Button } from 'react-windows-ui/button'
+import { Button } from 'react-winui/button'
 ```
 
 但只有在不会显著增加复杂度时才做。
@@ -269,7 +269,7 @@ examples/test-app
 验证：
 
 ```tsx
-import { Button } from 'react-windows-ui'
+import { Button } from 'react-winui'
 ```
 
 可以运行。
@@ -453,19 +453,19 @@ forwardRef
 
 ---
 
-## 阶段 4：抽取 react-windows-ui Design Tokens
+## 阶段 4：抽取 react-winui Design Tokens
 
 现在开始整理样式系统。
 
 本阶段目标不是重新设计 UI，而是：
 
-> 从现有 react-windows-ui 样式中提取其视觉 DNA。
+> 从现有 react-winui 样式中提取其视觉 DNA。
 
 ### 核心原则
 
 最终页面应该保持原来的视觉质感。
 
-不要按照 Fluent UI 的 token 重新设计 react-windows-ui。
+不要按照 Fluent UI 的 token 重新设计 react-winui。
 
 ### 分析现有 SCSS
 
@@ -593,7 +593,7 @@ docs/design-system.md
 未来新组件应该可以只依赖：
 
 ```text
-react-windows-ui tokens
+react-winui tokens
 ```
 
 而不复制旧组件的 CSS literal。
@@ -761,7 +761,7 @@ Tooltip
 - Fluent visual tokens
 - Griffel styling
 - Fluent Web / Microsoft 365 外观
-- 与当前 react-windows-ui 不一致的视觉 recipe
+- 与当前 react-winui 不一致的视觉 recipe
 
 ### Tooltip 实现
 
@@ -779,12 +779,12 @@ Tooltip
 - edge cases
 - tests
 
-然后为 react-windows-ui 设计自己的 Tooltip。
+然后为 react-winui 设计自己的 Tooltip。
 
 视觉必须使用：
 
 ```text
-react-windows-ui Design Tokens
+react-winui Design Tokens
 ```
 
 和当前 Windows 11 风格。
@@ -943,7 +943,7 @@ ContextMenu
 4. 分析 accessibility。
 5. 分析 keyboard。
 6. 分析 edge cases。
-7. 设计适合 react-windows-ui 的 API。
+7. 设计适合 react-winui 的 API。
 8. 使用现有 Design Tokens 实现视觉。
 9. 写测试。
 10. 写 Visual Regression。
@@ -972,7 +972,7 @@ ContextMenu
 - icons
 - nested navigation
 
-视觉继续遵循 react-windows-ui，而不是 Microsoft 365 Web Navigation。
+视觉继续遵循 react-winui，而不是 Microsoft 365 Web Navigation。
 
 ### Settings 系列
 
@@ -1021,7 +1021,7 @@ SettingsExpander
 ## 第一原则
 
 ```text
-Visual DNA = react-windows-ui
+Visual DNA = react-winui
 ```
 
 不要把项目逐渐改成 Fluent UI Web。
