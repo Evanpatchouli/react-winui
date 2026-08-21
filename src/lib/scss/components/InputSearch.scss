@@ -1,3 +1,5 @@
+@use "./_base/parents" as *;
+
 .ui-input-search-box {
   ul {
     @extend .ui-dropdown-ul-default;

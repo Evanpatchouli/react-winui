@@ -1,8 +1,11 @@
-import React, { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
+/** Props for the flex-row application container. */
 export interface AppContainerProps {
-  children ?: ReactNode;
+  children?: ReactNode;
+  style?: CSSProperties;
 }
-declare const AppContainer: React.FC<AppContainerProps>;
+
+declare const AppContainer: (props: AppContainerProps) => JSX.Element;
 
 export default AppContainer;

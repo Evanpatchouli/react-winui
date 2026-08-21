@@ -1,12 +1,16 @@
-import React from "react";
+import type { ChangeEventHandler, CSSProperties, InputHTMLAttributes } from "react";
 
-export interface ColorPickerPaletteProps {
-  color ?: any;
-  disabled ?: boolean;
-  onChange ?: Function;
-  width ?: number | string;
-  height ?: number | string;
+/** Props for the native color-picker palette control. */
+export interface ColorPickerPaletteProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  "type" | "value" | "onChange" | "onChangeCapture"
+> {
+  color?: string;
+  width?: CSSProperties["width"];
+  height?: CSSProperties["height"];
+  onChange?: ChangeEventHandler<HTMLInputElement>;
 }
-declare const ColorPickerPalette: React.FC<ColorPickerPaletteProps>;
+
+declare const ColorPickerPalette: (props: ColorPickerPaletteProps) => JSX.Element;
 
 export default ColorPickerPalette;

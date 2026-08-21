@@ -1,6 +1,5 @@
-import "react";
 import { jsx as e, jsxs as t } from "react/jsx-runtime";
-//#region src/components/Loaders/LoaderBar/index.jsx
+//#region src/components/Loaders/LoaderBar/index.tsx
 var n = ({ setTheme: n, isLoading: r = !0 }) => {
 	let i = () => n === "light" ? " light" : "";
 	return /* @__PURE__ */ t("div", {

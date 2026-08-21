@@ -1,10 +1,8 @@
-import "react";
 import { Fragment as e, jsx as t, jsxs as n } from "react/jsx-runtime";
-//#region src/components/NavBar/NavBarLink/index.jsx
-var r = /^[\u0000-\u001F ]*j[\r\n\t]*a[\r\n\t]*v[\r\n\t]*a[\r\n\t]*s[\r\n\t]*c[\r\n\t]*r[\r\n\t]*i[\r\n\t]*p[\r\n\t]*t[\r\n\t]*\:/i, i = (i) => {
-	let { icon: a, text: o, href: s, active: c, imgSrc: l, imgAlt: u, onClick: d, showBadge: f, imgBorderRadius: p, badgeBackgroundColor: m, allowJavaScriptUrls: h = !0 } = i;
-	if (r.test(s) && !h) return console.warn("NavBarLink has blocked a javascript: URL as a security precaution"), null;
-	let g = () => f > 0 || f !== "" ? /* @__PURE__ */ t("div", {
+//#region src/components/NavBar/NavBarLink/index.tsx
+var r = /^[\u0000-\u001F ]*j[\r\n\t]*a[\r\n\t]*v[\r\n\t]*a[\r\n\t]*s[\r\n\t]*c[\r\n\t]*r[\r\n\t]*i[\r\n\t]*p[\r\n\t]*t[\r\n\t]*\:/i, i = () => {}, a = ({ icon: a, text: o, href: s, active: c, imgSrc: l, imgAlt: u, onClick: d = i, showBadge: f, imgBorderRadius: p, badgeBackgroundColor: m, allowJavaScriptUrls: h = !0 }) => {
+	if (r.test(s ?? "") && !h) return console.warn("NavBarLink has blocked a javascript: URL as a security precaution"), null;
+	let g = () => f !== void 0 && f !== "" ? /* @__PURE__ */ t("div", {
 		className: "ui-badge",
 		style: { backgroundColor: m },
 		children: f
@@ -16,11 +14,11 @@ var r = /^[\u0000-\u001F ]*j[\r\n\t]*a[\r\n\t]*v[\r\n\t]*a[\r\n\t]*s[\r\n\t]*c[\
 	return /* @__PURE__ */ t("li", {
 		className: "ui-navbar-list-item",
 		children: /* @__PURE__ */ n("a", {
-			...c && {
+			...c ? {
 				"aria-current": "page",
 				className: "active",
 				"aria-selected": "true"
-			},
+			} : {},
 			onClick: d,
 			href: s,
 			children: [
@@ -32,9 +30,9 @@ var r = /^[\u0000-\u001F ]*j[\r\n\t]*a[\r\n\t]*v[\r\n\t]*a[\r\n\t]*s[\r\n\t]*c[\
 		})
 	});
 };
-i.defaultProps = {
+a.defaultProps = {
 	text: "Nav Link",
-	onClick: () => {}
+	onClick: i
 };
 //#endregion
-export { i as default };
+export { a as default };

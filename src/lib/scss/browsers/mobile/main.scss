@@ -1,15 +1,27 @@
-@media only screen and (max-width: 760px) {
-  @include browser-webkit-mobile();
-  @include browser-mozilla-mobile();
+@use "../webkit/scrollbars" as webkit;
+@use "../mozilla/main" as mozilla;
+@use "../../components/NavBar/PageContainer" as page;
+@use "../../components/NavBar/NavBar" as navbar;
+@use "../../components/Accordion" as accordion;
+@use "../../components/Alert" as alert;
+@use "../../components/Button" as button;
+@use "../../components/Dialog" as dialog;
+@use "../../components/InputSearch" as input-search;
+@use "../../components/Links" as links;
+@use "../../components/SliderBar" as slider-bar;
 
-  @include ui-content-wrap-mobile();
-  @include ui-navbar-mobile();
+@media only screen and (max-width: 760px) {
+  @include webkit.browser-webkit-mobile();
+  @include mozilla.browser-mozilla-mobile();
+
+  @include page.ui-content-wrap-mobile();
+  @include navbar.ui-navbar-mobile();
   
-  @include accordion-mobile();
-  @include alert-mobile();
-  @include button-mobile();
-  @include dialog-mobile();
-  @include input-search-mobile();
-  @include links-mobile();
-  @include slider-bar-mobile();
+  @include accordion.accordion-mobile();
+  @include alert.alert-mobile();
+  @include button.button-mobile();
+  @include dialog.dialog-mobile();
+  @include input-search.input-search-mobile();
+  @include links.links-mobile();
+  @include slider-bar.slider-bar-mobile();
 }

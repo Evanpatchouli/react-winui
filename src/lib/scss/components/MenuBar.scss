@@ -1,3 +1,5 @@
+@use "./_base/parents" as *;
+
 .ui-menu-list-dialog {
   @extend .ui-dropdown-ul-default;
   width: max-content;

@@ -1,3 +1,5 @@
+@use "./_base/parents" as *;
+
 .ui-splash-screen {
   @extend .ui-overlay;
 

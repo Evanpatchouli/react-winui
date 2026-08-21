@@ -1,25 +1,21 @@
 import { useEffect as e } from "react";
 import { jsx as t } from "react/jsx-runtime";
-//#region src/components/NavBar/NavPageContainer/index.jsx
-var n = (n) => {
+//#region src/components/NavBar/NavPageContainer/index.tsx
+var n = ({ hasPadding: n, children: r, animateTransition: i, backgroundColor: a, scrollTopOnMount: o, style: s }) => {
 	e(() => {
-		var e = document.getElementById("ui-page-container");
-		e && n.animateTransition && e.classList.add("transition-left"), n.scrollTopOnMount && window.scrollTo({
-			top: 0,
-			left: 0,
-			behavior: "instant"
-		});
-	}, [n.animateTransition, n.scrollTopOnMount]);
-	let r = () => n.animateTransition ? " transition" : "";
+		let e = document.getElementById("ui-page-container");
+		e && i && e.classList.add("transition-left"), o && window.scrollTo(0, 0);
+	}, [i, o]);
+	let c = i ? " transition" : "";
 	return /* @__PURE__ */ t("main", {
 		role: "main",
 		id: "ui-page-container",
-		className: n.hasPadding ? `ui-page-container has-padding${r()}` : `ui-page-container${r()}`,
+		className: n ? `ui-page-container has-padding${c}` : `ui-page-container${c}`,
 		style: {
-			backgroundColor: n.backgroundColor,
-			...n.style
+			backgroundColor: a,
+			...s
 		},
-		children: n.children
+		children: r
 	});
 };
 //#endregion

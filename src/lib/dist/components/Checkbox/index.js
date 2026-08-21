@@ -1,6 +1,6 @@
 import { forwardRef as e } from "react";
 import { jsx as t, jsxs as n } from "react/jsx-runtime";
-//#region src/components/Checkbox/index.jsx
+//#region src/components/Checkbox/index.tsx
 var r = e((e, r) => /* @__PURE__ */ n("label", { children: [/* @__PURE__ */ t("input", {
 	ref: r,
 	className: "ui-checkbox",

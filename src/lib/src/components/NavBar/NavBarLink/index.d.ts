@@ -1,15 +1,18 @@
-import React, { ReactNode } from "react";
+import type { CSSProperties, FC, MouseEventHandler, ReactNode } from "react";
 
 export interface NavBarLinkProps {
-  href ?: any;
-  text ?: string;
-  active ?: boolean;
-  onClick ?: Function;
-  imgSrc ?: string | any;
-  icon ?: ReactNode | any;
-  showBadge ?: number | string;
-  badgeBackgroundColor ?: string | any;
+  href?: string;
+  text?: ReactNode;
+  active?: boolean;
+  onClick?: MouseEventHandler<HTMLAnchorElement>;
+  imgSrc?: string;
+  imgAlt?: string;
+  imgBorderRadius?: CSSProperties["borderRadius"];
+  icon?: ReactNode;
+  showBadge?: number | string;
+  badgeBackgroundColor?: CSSProperties["backgroundColor"];
+  allowJavaScriptUrls?: boolean;
 }
-declare const NavBarLink: React.FC<NavBarLinkProps>;
+declare const NavBarLink: FC<NavBarLinkProps>;
 
 export default NavBarLink;

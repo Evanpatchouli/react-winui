@@ -1,47 +1,47 @@
 import e from "../../api/ScrollView.js";
-import { forwardRef as t, useImperativeHandle as n, useMemo as r, useState as i } from "react";
-import { jsx as a, jsxs as o } from "react/jsx-runtime";
-//#region src/components/Alert/index.jsx
-var s = t(({ title: t, message: s, children: c, isVisible: l = !1, backdropBlur: u = !1, onBackdropPress: d = () => {} }, f) => {
-	let [p, m] = i(!1), h = () => {
-		m(!0);
-	}, g = () => {
-		m(!1);
+import { forwardRef as t, useImperativeHandle as n, useMemo as r, useRef as i, useState as a } from "react";
+import { jsx as o, jsxs as s } from "react/jsx-runtime";
+//#region src/components/Alert/index.tsx
+var c = () => {}, l = Object.assign(t(({ title: t, message: l, children: u, isVisible: d = !1, backdropBlur: f = !1, onBackdropPress: p = c }, m) => {
+	let [h, g] = a(!1), _ = i(null), v = () => {
+		g(!0);
+	}, y = () => {
+		g(!1);
 	};
-	n(f, () => ({
-		open: h,
-		close: g
-	}));
-	let _ = (e) => {
-		e.preventDefault(), e.target === e.currentTarget && d();
-	};
-	return r(() => {
-		l || p ? e.disableScroll() : e.enableScroll();
-	}, [l, p]), /* @__PURE__ */ a("div", {
-		ref: f,
-		tabIndex: "-1",
-		onClick: (e) => _(e),
-		className: l || p ? "ui-alert show" : "ui-alert",
-		children: /* @__PURE__ */ o("div", {
-			className: `ui-alert-modal${u ? " ui-backdrop-blur" : ""}`,
+	return n(m, () => ({
+		open: v,
+		close: y
+	})), r(() => {
+		d || h ? e.disableScroll() : e.enableScroll();
+	}, [d, h]), /* @__PURE__ */ o("div", {
+		ref: _,
+		tabIndex: -1,
+		onClick: (e) => {
+			e.preventDefault(), e.target === e.currentTarget && p();
+		},
+		className: d || h ? "ui-alert show" : "ui-alert",
+		children: /* @__PURE__ */ s("div", {
+			className: `ui-alert-modal${f ? " ui-backdrop-blur" : ""}`,
 			"aria-modal": "true",
 			role: "dialog",
-			children: [(t || s) && /* @__PURE__ */ o("div", {
+			children: [(t || l) && /* @__PURE__ */ s("div", {
 				className: "ui-alert-header",
-				children: [t && /* @__PURE__ */ a("h1", { children: t }), s && /* @__PURE__ */ a("div", {
+				children: [t && /* @__PURE__ */ o("h1", { children: t }), l && /* @__PURE__ */ o("div", {
 					className: "ui-alert-message",
-					children: s
+					children: l
 				})]
-			}), c]
+			}), u]
 		})
 	});
-});
-s.Header = ({ children: e }) => /* @__PURE__ */ a("div", {
-	className: "ui-alert-haeder",
-	children: e
-}), s.Footer = ({ children: e }) => /* @__PURE__ */ a("div", {
-	className: "ui-alert-footer",
-	children: e
+}), {
+	Header: ({ children: e }) => /* @__PURE__ */ o("div", {
+		className: "ui-alert-haeder",
+		children: e
+	}),
+	Footer: ({ children: e }) => /* @__PURE__ */ o("div", {
+		className: "ui-alert-footer",
+		children: e
+	})
 });
 //#endregion
-export { s as default };
+export { l as default };

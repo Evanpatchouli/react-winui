@@ -1,77 +1,78 @@
 import e from "../../../api/ScrollView.js";
-import { useEffect as t, useRef as n, useState as r } from "react";
-import { jsx as i, jsxs as a } from "react/jsx-runtime";
-//#region src/components/NavBar/NavBar/index.jsx
-var o = (o) => {
-	let s = n(window.innerWidth), c = n(null), [l, u] = r(!1), [d, f] = r(!!o.collapsed), [p, m] = r(""), h = (e) => {
-		c.current.style.transition = "transform 0.2s ease, width 0.2s ease", e(), setTimeout(() => {
-			c.current.style.transition = "";
+import { forwardRef as t, useEffect as n, useRef as r, useState as i } from "react";
+import { jsx as a, jsxs as o } from "react/jsx-runtime";
+//#region src/components/NavBar/NavBar/index.tsx
+var s = t(({ title: t, collapsed: s = !1, children: c, shadowOnScroll: l = !1, titleBarMobile: u }, d) => {
+	let f = r(window.innerWidth), p = r(null), m = r(void 0), [h, g] = i(!1), [_, v] = i(s), [y, b] = i(""), x = (e) => {
+		p.current && (p.current.style.transition = "transform 0.2s ease, width 0.2s ease"), e(), window.setTimeout(() => {
+			p.current && (p.current.style.transition = "");
 		}, 1e3);
-	}, g = () => {
-		(window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth) < 760 ? m(p === "" ? " collapsed-float" : "") : h(() => f(!d));
-	}, _ = (e) => {
-		e.target && e.target.matches("a") && (window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth) < 760 && m("");
+	}, S = () => {
+		(window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth) < 760 ? b(y === "" ? " collapsed-float" : "") : x(() => v(!_));
 	};
-	t(() => {
-		document.getElementById("ui-navbar-list").getElementsByClassName("ui-input-search-box")[0]?.addEventListener("click", () => {
-			d && f(!1);
-		});
-	}, [d]);
-	let v = (e) => {
-		e.target.scrollTop < 50 ? u(!1) : u(!0);
-	};
-	t(() => {
-		p === " collapsed-float" ? e.disableScroll() : e.enableScroll();
-	}, [p]);
-	function y() {
-		c.current.style.transition = "", m("");
-	}
-	var b;
-	return window.onresize = function() {
-		let e = window.innerWidth;
-		s.current !== e && (clearTimeout(b), c.current.style.transition = "unset", b = setTimeout(y, 100), s.current = e);
-	}, /* @__PURE__ */ a("aside", {
-		ref: o.ref,
+	return n(() => {
+		let e = document.getElementById("ui-navbar-list")?.getElementsByClassName("ui-input-search-box")[0], t = () => {
+			_ && v(!1);
+		};
+		return e?.addEventListener("click", t), () => e?.removeEventListener("click", t);
+	}, [_]), n(() => {
+		y === " collapsed-float" ? e.disableScroll() : e.enableScroll();
+	}, [y]), n(() => {
+		let e = () => {
+			let e = window.innerWidth;
+			f.current !== e && (m.current && window.clearTimeout(m.current), p.current && (p.current.style.transition = "unset"), m.current = window.setTimeout(() => {
+				p.current && (p.current.style.transition = ""), b("");
+			}, 100), f.current = e);
+		};
+		return window.addEventListener("resize", e), () => {
+			window.removeEventListener("resize", e), m.current && window.clearTimeout(m.current);
+		};
+	}, []), /* @__PURE__ */ o("aside", {
+		ref: d,
 		role: "navigation",
 		id: "ui-navbar-wrap",
-		className: d ? `ui-navbar-wrap collapsed${p}` : `ui-navbar-wrap${p}`,
+		className: _ ? `ui-navbar-wrap collapsed${y}` : `ui-navbar-wrap${y}`,
 		children: [
-			/* @__PURE__ */ a("div", {
+			/* @__PURE__ */ o("div", {
 				className: "ui-navbar-header-mobile",
-				children: [/* @__PURE__ */ i("span", {
+				children: [/* @__PURE__ */ a("span", {
 					className: "ui-navbar-toggler",
-					onClick: g,
+					onClick: S,
 					"aria-label": "Toggle navigation"
-				}), o.titleBarMobile]
+				}), u]
 			}),
-			/* @__PURE__ */ a("nav", {
+			/* @__PURE__ */ o("nav", {
 				className: "ui-navbar",
-				ref: c,
-				children: [/* @__PURE__ */ a("div", {
+				ref: p,
+				children: [/* @__PURE__ */ o("div", {
 					className: "ui-navbar-header",
-					style: o.shadowOnScroll && l ? { boxShadow: "0 4px 8px -8px #77777777" } : { boxShadow: "" },
-					children: [/* @__PURE__ */ i("span", {
+					style: l && h ? { boxShadow: "0 4px 8px -8px #77777777" } : { boxShadow: "" },
+					children: [/* @__PURE__ */ a("span", {
 						className: "ui-navbar-toggler",
-						onClick: g,
+						onClick: S,
 						"aria-label": "Toggle navigation"
-					}), /* @__PURE__ */ i("span", {
+					}), /* @__PURE__ */ a("span", {
 						className: "ui-navbar-name",
-						children: o.title
+						children: t
 					})]
-				}), /* @__PURE__ */ i("ul", {
+				}), /* @__PURE__ */ a("ul", {
 					id: "ui-navbar-list",
-					onScroll: v,
+					onScroll: (e) => {
+						e.target instanceof HTMLElement && g(e.target.scrollTop >= 50);
+					},
 					className: "ui-navbar-list",
-					onClick: (e) => _(e),
-					children: o.children
+					onClick: (e) => {
+						e.target instanceof Element && e.target.matches("a") && (window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth) < 760 && b("");
+					},
+					children: c
 				})]
 			}),
-			/* @__PURE__ */ i("div", {
-				onClick: g,
-				className: p === " collapsed-float" ? "ui-navbar-overlay show" : "ui-navbar-overlay"
+			/* @__PURE__ */ a("div", {
+				onClick: S,
+				className: y === " collapsed-float" ? "ui-navbar-overlay show" : "ui-navbar-overlay"
 			})
 		]
 	});
-};
+});
 //#endregion
-export { o as default };
+export { s as default };

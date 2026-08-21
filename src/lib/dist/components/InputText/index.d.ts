@@ -1,30 +1,33 @@
-import React from "react";
+import type {
+  ChangeEventHandler,
+  CSSProperties,
+  ForwardRefExoticComponent,
+  HTMLInputTypeAttribute,
+  InputHTMLAttributes,
+  ReactNode,
+  RefAttributes
+} from "react";
 
-export interface InputTextProps {
-  key ?: any;
-  value ?: any;
-  name ?: string;
-  label ?: string;
-  tooltip ?: string;
-  readOnly ?: boolean;
-  defaultValue ?: any;
-  disabled ?: boolean;
-  onClick ?: Function;
-  onChange ?: Function;
-  onKeyUp ?: Function;
-  onFocus ?: Function;
-  onInput ?: Function;
-  autoFocus ?: boolean;
-  onKeyDown ?: Function;
-  placeholder ?: string;
-  autoCapitalize ?: any;
-  clearButton ?: boolean;
-  autoComplete ?: string;
-  width ?: number | string;
-  onClearButtonClick ?: Function;
-  setStatus ?: "default" | "success" | "danger" | "loading";
-  type ?: "text" | "password" | "date" | "time" | "month" | "datetime-local";
+/** Status values rendered in the input's trailing content area. */
+export type InputTextStatus = "default" | "success" | "danger" | "loading";
+
+/** Props for the Windows-styled text input component. */
+export interface InputTextProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  "type" | "onChange"
+> {
+  label?: ReactNode;
+  tooltip?: string;
+  clearButton?: boolean;
+  width?: CSSProperties["width"];
+  onClearButtonClick?: () => void;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
+  setStatus?: InputTextStatus;
+  type?: HTMLInputTypeAttribute | (string & {});
 }
-declare const InputText: React.FC<InputTextProps>;
+
+declare const InputText: ForwardRefExoticComponent<
+  InputTextProps & RefAttributes<HTMLInputElement>
+>;
 
 export default InputText;

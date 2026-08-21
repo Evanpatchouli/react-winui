@@ -1,6 +1,5 @@
-import "react";
 import { jsx as e, jsxs as t } from "react/jsx-runtime";
-//#region src/components/ColorPicker/ColorPickerItem/index.jsx
+//#region src/components/ColorPicker/ColorPickerItem/index.tsx
 var n = (n) => /* @__PURE__ */ t("label", {
 	className: "ui-color-picker-item",
 	children: [/* @__PURE__ */ e("input", {

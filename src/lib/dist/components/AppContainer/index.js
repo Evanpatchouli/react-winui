@@ -1,7 +1,7 @@
 import e from "../../api/Appearance.js";
 import { useEffect as t } from "react";
 import { jsx as n } from "react/jsx-runtime";
-//#region src/components/AppContainer/index.jsx
+//#region src/components/AppContainer/index.tsx
 var r = (r) => {
 	let i = (t) => {
 		(t.matches ? "dark" : "light") == "dark" ? e.setDarkScheme(!1) : e.setLightScheme(!1);

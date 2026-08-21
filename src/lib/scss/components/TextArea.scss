@@ -1,3 +1,5 @@
+@use "./_base/parents" as *;
+
 .ui-textarea {
   @extend .input-field-default;
 

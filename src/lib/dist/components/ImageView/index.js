@@ -1,54 +1,54 @@
 import e from "../_common/LoaderBusyWrapper.js";
 import { useState as t } from "react";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";
-//#region src/components/ImageView/index.jsx
-var i = (i) => {
-	let { src: a, alt: o, objectFit: s, tooltip: c, width: l, height: u, margin: d, padding: f, borderRadius: p, isLoading: m, ...h } = i, [g, _] = t(!1), v = () => /* @__PURE__ */ n("div", {
+//#region src/components/ImageView/index.tsx
+var i = () => {}, a = (a) => {
+	let { src: o, alt: s, objectFit: c, tooltip: l, width: u, height: d, margin: f, padding: p, borderRadius: m, isLoading: h, onLoad: g = i, onError: _ = i, ...v } = a, [y, b] = t(!1), x = () => /* @__PURE__ */ n("div", {
 		className: "ui-img-view-loader",
 		children: /* @__PURE__ */ n("div", {
 			className: "ui-loader-busy light animate",
 			children: /* @__PURE__ */ n(e, {})
 		})
-	}), y = () => {
-		_(!0);
+	}), S = () => {
+		b(!0);
 	};
 	return /* @__PURE__ */ r("div", {
 		className: "ui-img-view-container",
-		title: c,
+		title: l,
 		style: {
-			width: l,
-			height: u,
-			margin: d,
-			padding: f,
-			borderRadius: p
+			width: u,
+			height: d,
+			margin: f,
+			padding: p,
+			borderRadius: m
 		},
 		children: [
 			/* @__PURE__ */ n("img", {
 				className: "ui-img-view",
-				src: a,
-				alt: o,
-				...h,
-				style: { objectFit: s },
+				src: o,
+				alt: s,
+				...v,
+				style: { objectFit: c },
 				onLoad: () => {
-					y(), i.onLoad();
+					S(), g();
 				},
 				onError: () => {
-					y(), i.onError();
+					S(), _();
 				}
 			}),
-			m ? v() : "",
-			g ? "" : v()
+			h ? x() : "",
+			y ? "" : x()
 		]
 	});
 };
-i.defaultProps = {
+a.defaultProps = {
 	width: 124,
 	height: 124,
 	alt: "image",
 	isLoading: !1,
 	objectFit: "cover",
-	onLoad: () => {},
-	onError: () => {}
+	onLoad: i,
+	onError: i
 };
 //#endregion
-export { i as default };
+export { a as default };

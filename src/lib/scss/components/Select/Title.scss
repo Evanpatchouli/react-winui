@@ -1,3 +1,5 @@
+@use "../_base/parents" as *;
+
 .ui-menu-title {
   @extend .input-btn-default;
   padding-right: 40px;

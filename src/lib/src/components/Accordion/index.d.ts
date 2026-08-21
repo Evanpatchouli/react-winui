@@ -1,13 +1,23 @@
-import React, { ReactNode, CSSProperties } from "react";
+import type { CSSProperties, FC, ReactNode } from "react";
 
 export interface AccordionProps {
-  style ?: CSSProperties;
-  headerTitle ?: string;
-  headerStyle ?: CSSProperties;
-  children ?: ReactNode;
-  onExpand ?: () => void;
-  onCollapse ?: () => void;
+  style?: CSSProperties;
+  headerTitle?: ReactNode;
+  headerStyle?: CSSProperties;
+  children?: ReactNode;
+  onExpand?: () => void;
+  onCollapse?: () => void;
 }
-declare const Accordion: React.FC<AccordionProps>;
+
+export interface AccordionSlotProps {
+  children?: ReactNode;
+}
+
+export interface AccordionComponent extends FC<AccordionProps> {
+  Trigger: FC<AccordionSlotProps>;
+  Body: FC<AccordionSlotProps>;
+}
+
+declare const Accordion: AccordionComponent;
 
 export default Accordion;

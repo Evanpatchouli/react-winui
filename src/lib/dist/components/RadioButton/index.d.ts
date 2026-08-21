@@ -1,15 +1,26 @@
-import React from "react";
+import type {
+  ChangeEventHandler,
+  ForwardRefExoticComponent,
+  HTMLInputTypeAttribute,
+  InputHTMLAttributes,
+  ReactNode,
+  RefAttributes
+} from "react";
 
-export interface RadioButtonProps {
-  ref ?: any;
-  value ?: any;
-  name ?: string;
-  label ?: string;
-  tooltip ?: string;
-  disabled ?: boolean;
-  defaultChecked ?: boolean;
-  onChange ?: () => void;
+/** Props for the Windows-styled radio button component. */
+export interface RadioButtonProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  "type" | "value" | "onChange"
+> {
+  type?: HTMLInputTypeAttribute;
+  value?: InputHTMLAttributes<HTMLInputElement>["value"];
+  label?: ReactNode;
+  tooltip?: string;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
 }
-declare const RadioButton: React.FC<RadioButtonProps>;
+
+declare const RadioButton: ForwardRefExoticComponent<
+  RadioButtonProps & RefAttributes<HTMLInputElement>
+>;
 
 export default RadioButton;

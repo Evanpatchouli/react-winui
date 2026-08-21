@@ -1,17 +1,27 @@
-import React from "react";
+import type {
+  ChangeEventHandler,
+  CSSProperties,
+  ForwardRefExoticComponent,
+  HTMLInputTypeAttribute,
+  InputHTMLAttributes,
+  RefAttributes
+} from "react";
 
-export interface SwitchProps {
-  ref ?: any;
-  label ?: boolean;
-  tooltip ?: string;
-  labelOn ?: string;
-  labelOff ?: string;
-  disabled ?: boolean;
-  onChange ?: () => void;
-  defaultChecked ?: boolean;
-  labelPosition ?: "start" | "end";
-  labelFixedWidth ?: number | string;
+/** Props for the Windows-styled switch component. */
+export interface SwitchProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  "type" | "onChange"
+> {
+  type?: HTMLInputTypeAttribute;
+  label?: boolean;
+  tooltip?: string;
+  labelOn?: string;
+  labelOff?: string;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
+  labelPosition?: "start" | "end";
+  labelFixedWidth?: CSSProperties["width"];
 }
-declare const Switch: React.FC<SwitchProps>;
+
+declare const Switch: ForwardRefExoticComponent<SwitchProps & RefAttributes<HTMLInputElement>>;
 
 export default Switch;

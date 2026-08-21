@@ -1,10 +1,13 @@
-import React, { ReactNode, CSSProperties } from "react";
+import type { ReactNode } from "react";
+import type { LinkProps as RouterLinkProps } from "react-router-dom";
 
-export interface LinkProps {
-  to ?: string;
-  children ?: ReactNode;
-  style ?: CSSProperties;
+/** Props for the Windows-styled router link component. */
+export interface LinkProps extends Omit<RouterLinkProps, "to" | "children"> {
+  /** Destination accepted by React Router's `Link`. */
+  to?: RouterLinkProps["to"];
+  children?: ReactNode;
 }
-declare const Link: React.FC<LinkProps>;
+
+declare const Link: (props: LinkProps) => JSX.Element;
 
 export default Link;

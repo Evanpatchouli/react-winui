@@ -2,6 +2,7 @@ import js from "@eslint/js";
 import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 import globals from "globals";
+import tseslint from "typescript-eslint";
 
 export default [
   {
@@ -18,6 +19,7 @@ export default [
   {
     files: [
       "src/lib/src/**/*.{js,jsx}",
+      "src/lib/src/**/*.{ts,tsx}",
       "apps/docs/**/*.{js,jsx}",
       "examples/test-app/**/*.{js,jsx}",
       "tests/**/*.{js,jsx}",
@@ -29,6 +31,7 @@ export default [
     languageOptions: {
       ecmaVersion: "latest",
       sourceType: "module",
+      parser: tseslint.parser,
       parserOptions: {
         ecmaFeatures: {
           jsx: true

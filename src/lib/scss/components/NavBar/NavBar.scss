@@ -1,16 +1,16 @@
-@import "./sub-components/AppName.scss";
-@import "./sub-components/ListItem.scss";
-@import "./sub-components/List.scss";
-@import "./sub-components/ToggleButton.scss";
-@import "./sub-components/Badge.scss";
-@import "./sub-components/Hr_line.scss";
-@import "./sub-components/Overlay.scss";
-@import "./sub-components/SubMenu.scss";
-@import "./sub-components/Header.scss";
-@import "./sub-components/HeaderMobile.scss";
-@import "./sub-components/SearchBox.scss";
-@import "./sub-components/ThemeSwitch.scss";
-@import "./NavBarCollapsed.scss";
+@use "./sub-components/AppName";
+@use "./sub-components/ListItem";
+@use "./sub-components/List";
+@use "./sub-components/ToggleButton";
+@use "./sub-components/Badge";
+@use "./sub-components/Hr_line";
+@use "./sub-components/Overlay";
+@use "./sub-components/SubMenu";
+@use "./sub-components/Header";
+@use "./sub-components/HeaderMobile";
+@use "./sub-components/SearchBox";
+@use "./sub-components/ThemeSwitch";
+@use "./NavBarCollapsed";
 
 
 .ui-navbar-wrap {

@@ -1,32 +1,32 @@
 import { forwardRef as e } from "react";
 import { jsx as t, jsxs as n } from "react/jsx-runtime";
-//#region src/components/Switch/index.jsx
-var r = e(({ tooltip: e, disabled: r, label: i = !0, labelOn: a = "On", labelOff: o = "Off", defaultChecked: s, labelFixedWidth: c, onChange: l = () => {}, labelPosition: u = "end", ...d }, f) => /* @__PURE__ */ n("label", {
+//#region src/components/Switch/index.tsx
+var r = () => {}, i = e(({ tooltip: e, disabled: i, label: a = !0, labelOn: o = "On", labelOff: s = "Off", defaultChecked: c, labelFixedWidth: l, onChange: u = r, labelPosition: d = "end", ...f }, p) => /* @__PURE__ */ n("label", {
 	className: "ui-switch-container",
 	title: e,
 	children: [
-		i && u === "start" && /* @__PURE__ */ t("span", {
+		a && d === "start" && /* @__PURE__ */ t("span", {
 			className: "ui-switch-label",
-			"data-on": a,
-			"data-off": o,
-			style: { width: c }
+			"data-on": o,
+			"data-off": s,
+			style: { width: l }
 		}),
 		/* @__PURE__ */ t("input", {
-			ref: f,
-			...d,
+			ref: p,
+			...f,
 			type: "checkbox",
 			className: "ui-switch",
-			disabled: r,
-			onChange: l,
-			defaultChecked: s
+			disabled: i,
+			onChange: u,
+			defaultChecked: c
 		}),
-		i && u === "end" && /* @__PURE__ */ t("span", {
+		a && d === "end" && /* @__PURE__ */ t("span", {
 			className: "ui-switch-label",
-			"data-on": a,
-			"data-off": o,
-			style: { width: c }
+			"data-on": o,
+			"data-off": s,
+			style: { width: l }
 		})
 	]
 }));
 //#endregion
-export { r as default };
+export { i as default };

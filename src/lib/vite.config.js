@@ -16,7 +16,7 @@ export default defineConfig({
     outDir: path.resolve(packageRoot, "dist"),
     emptyOutDir: true,
     lib: {
-      entry: path.resolve(sourceRoot, "index.js"),
+      entry: path.resolve(sourceRoot, "index.ts"),
       formats: ["es"],
       fileName: "index"
     },

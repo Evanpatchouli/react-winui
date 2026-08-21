@@ -1,5 +1,5 @@
-@import "./light.scss";
-@import "./dark.scss";
+@use "./light" as *;
+@use "./dark" as *;
 
 @include colors-light();
 @include colors-dark();

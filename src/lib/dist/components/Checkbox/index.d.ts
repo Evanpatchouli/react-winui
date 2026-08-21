@@ -1,15 +1,24 @@
-import React from "react";
+import type {
+  ChangeEventHandler,
+  ForwardRefExoticComponent,
+  HTMLInputTypeAttribute,
+  InputHTMLAttributes,
+  ReactNode,
+  RefAttributes
+} from "react";
 
-export interface CheckboxProps {
-  ref ?: any;
-  name ?: any;
-  value ?: any;
-  label ?: string;
-  tooltip ?: string;
-  disabled ?: boolean;
-  onChange ?: Function;
-  defaultChecked ?: boolean;
+/** Props for the Windows-styled checkbox component. */
+export interface CheckboxProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  "type" | "value" | "onChange"
+> {
+  type?: HTMLInputTypeAttribute;
+  value?: InputHTMLAttributes<HTMLInputElement>["value"];
+  label?: ReactNode;
+  tooltip?: string;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
 }
-declare const Checkbox: React.FC<CheckboxProps>;
+
+declare const Checkbox: ForwardRefExoticComponent<CheckboxProps & RefAttributes<HTMLInputElement>>;
 
 export default Checkbox;

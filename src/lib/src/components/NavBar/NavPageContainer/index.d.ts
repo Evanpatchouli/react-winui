@@ -1,11 +1,14 @@
-import React, { ReactNode } from "react";
+import type { CSSProperties, FC, ReactNode } from "react";
 
 export interface NavPageContainerProps {
-  hasPadding ?: boolean;
-  overscroll ?: boolean;
-  children ?: ReactNode;
-  animateTransition ?: boolean;
+  hasPadding?: boolean;
+  overscroll?: boolean;
+  children?: ReactNode;
+  animateTransition?: boolean;
+  backgroundColor?: CSSProperties["backgroundColor"];
+  scrollTopOnMount?: boolean;
+  style?: CSSProperties;
 }
-declare const NavPageContainer: React.FC<NavPageContainerProps>;
+declare const NavPageContainer: FC<NavPageContainerProps>;
 
 export default NavPageContainer;

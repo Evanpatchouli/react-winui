@@ -1,66 +1,69 @@
 import e from "../_common/LoaderBusyWrapper.js";
-import { forwardRef as t, useCallback as n, useMemo as r, useRef as i } from "react";
-import { Fragment as a, jsx as o, jsxs as s } from "react/jsx-runtime";
-//#region src/components/InputText/index.jsx
-var c = t((t, c) => {
-	let l = i(null), u = c ?? l, d = i(), { onClearButtonClick: f, clearButton: p, setStatus: m, onChange: h, tooltip: g, label: _, type: v, width: y, ...b } = t, x = () => /* @__PURE__ */ o("span", {
+import { forwardRef as t, useCallback as n, useImperativeHandle as r, useMemo as i, useRef as a } from "react";
+import { jsx as o, jsxs as s } from "react/jsx-runtime";
+//#region src/components/InputText/index.tsx
+var c = () => {}, l = t(({ onClearButtonClick: t = c, clearButton: l, setStatus: u = "default", onChange: d = c, tooltip: f, label: p, type: m = "text", width: h, placeholder: g = "Input Text", name: _, value: v, ...y }, b) => {
+	let x = a(null), S = a(null);
+	r(b, () => x.current, [b]);
+	let C = () => /* @__PURE__ */ o("span", {
 		className: "ui-input-label",
-		children: _
-	}), S = () => {
-		let e = u.current;
-		e.type = e.type === "text" ? "password" : "text";
-	}, C = () => v === "password" ? /* @__PURE__ */ o("button", {
+		children: p
+	}), w = () => {
+		let e = x.current;
+		e && (e.type = e.type === "text" ? "password" : "text");
+	}, T = () => m === "password" ? /* @__PURE__ */ o("button", {
 		"data-win-toggle": "password",
-		onClick: S
-	}) : /* @__PURE__ */ o(a, {}), w = r(() => m === "success" || m === "danger" ? /* @__PURE__ */ o("i", { className: "icons10-status" }) : m === "loading" ? /* @__PURE__ */ o("div", {
+		onClick: w
+	}) : null, E = i(() => u === "success" || u === "danger" ? /* @__PURE__ */ o("i", { className: "icons10-status" }) : u === "loading" ? /* @__PURE__ */ o("div", {
 		className: "ui-loader-busy loader-sm animate",
 		children: /* @__PURE__ */ o(e, {})
-	}) : /* @__PURE__ */ o(a, {}), [m]), T = n(() => {
-		u.current.value = "", d.current.classList.remove("show"), h({ target: { value: "" } }), f();
-	}, [
-		f,
-		u,
-		h
-	]), E = r(() => p ? /* @__PURE__ */ o("button", {
-		ref: d,
+	}) : null, [u]), D = n(() => {
+		x.current && (x.current.value = ""), S.current?.classList.remove("show"), d({ target: { value: "" } }), t();
+	}, [d, t]), O = i(() => l ? /* @__PURE__ */ o("button", {
+		ref: S,
 		type: "button",
-		onClick: T,
+		onClick: D,
 		"data-win-clear": "text"
-	}) : /* @__PURE__ */ o(a, {}), [p, T]), D = (e) => {
-		h(e), p && (u.current.value === "" ? d.current.classList.remove("show") : d.current.classList.add("show"));
+	}) : null, [l, D]), k = (e) => {
+		if (d(e), l) {
+			let e = S.current;
+			if (!e || !x.current) return;
+			x.current.value === "" ? e.classList.remove("show") : e.classList.add("show");
+		}
 	};
 	return /* @__PURE__ */ s("div", {
-		className: `ui-input-container ${m === "default" ? "" : "input-" + m}`,
-		title: g,
+		className: `ui-input-container ${u === "default" ? "" : `input-${u}`}`,
+		title: f,
 		children: [
-			_ && x(),
+			p && C(),
 			/* @__PURE__ */ o("input", {
 				className: "ui-input-text",
-				...b,
-				ref: u,
-				type: t.type,
-				name: t.name,
-				value: t.value,
-				onChange: (e) => D(e),
-				style: { width: y }
+				...y,
+				ref: x,
+				type: m,
+				name: _,
+				value: v,
+				placeholder: g,
+				onChange: k,
+				style: { width: h }
 			}),
 			/* @__PURE__ */ s("div", {
 				className: "ui-input-end-content",
 				children: [
+					O,
 					E,
-					w,
-					/* @__PURE__ */ o(C, {})
+					/* @__PURE__ */ o(T, {})
 				]
 			})
 		]
 	});
 });
-c.defaultProps = {
+l.defaultProps = {
 	type: "text",
 	setStatus: "default",
 	placeholder: "Input Text",
-	onChange: () => {},
-	onClearButtonClick: () => {}
+	onChange: c,
+	onClearButtonClick: c
 };
 //#endregion
-export { c as default };
+export { l as default };

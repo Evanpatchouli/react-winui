@@ -1,9 +1,11 @@
-import React from "react";
-
+/** Props for the animated horizontal loader bar. */
 export interface LoaderBarProps {
-  setTheme ?: string;
-  isLoading ?: boolean;
+  /** Use the light loader color variant. */
+  setTheme?: string;
+  /** Whether the four loader balls should animate. */
+  isLoading?: boolean;
 }
-declare const LoaderBar: React.FC<LoaderBarProps>;
+
+declare const LoaderBar: (props: LoaderBarProps) => JSX.Element;
 
 export default LoaderBar;

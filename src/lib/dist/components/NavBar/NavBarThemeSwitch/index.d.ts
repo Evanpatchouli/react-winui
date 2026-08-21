@@ -1,8 +1,10 @@
-import React from "react";
+import type { FC } from "react";
+
+export type NavBarTheme = "dark" | "light";
 
 export interface NavBarThemeSwitchProps {
-   onChange ?: Function;
+  onChange?: (theme: NavBarTheme) => void;
 }
-declare const NavBarThemeSwitch: React.FC<NavBarThemeSwitchProps>;
+declare const NavBarThemeSwitch: FC<NavBarThemeSwitchProps>;
 
 export default NavBarThemeSwitch;

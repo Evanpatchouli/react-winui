@@ -1,18 +1,31 @@
-import React from "react";
+import type {
+  ChangeEventHandler,
+  CSSProperties,
+  ForwardRefExoticComponent,
+  InputHTMLAttributes,
+  MouseEventHandler,
+  ReactNode,
+  RefAttributes
+} from "react";
 
-export interface InputSearchBoxProps {
-  name ?: any;
-  value ?: any;
-  width ?: any;
-  tooltip ?: string;
-  disabled ?: boolean;
-  onClick ?: Function;
-  onKeyUp ?: Function;
-  onChange ?: Function;
-  onKeyDown ?: Function;
-  placeholder ?: string;
+export interface InputSearchSuggestion {
+  text: string;
+  icon?: ReactNode;
+  onClick?: MouseEventHandler<HTMLSpanElement>;
 }
 
-declare const InputSearchBox: React.FC<InputSearchBoxProps>;
+export interface InputSearchBoxProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  "onChange" | "style" | "type"
+> {
+  width?: CSSProperties["width"];
+  suggest?: InputSearchSuggestion[];
+  tooltip?: string;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
+}
+
+declare const InputSearchBox: ForwardRefExoticComponent<
+  InputSearchBoxProps & RefAttributes<HTMLInputElement>
+>;
 
 export default InputSearchBox;

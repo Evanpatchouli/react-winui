@@ -1,3 +1,5 @@
+@use "./_base/parents" as *;
+
 .ui-input-text {
   &:not(:focus) + div [data-win-clear="text"] {
     opacity: 0;

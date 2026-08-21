@@ -1,55 +1,51 @@
-import e, { forwardRef as t } from "react";
+import { forwardRef as e, useRef as t } from "react";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";
-//#region src/components/SliderBar/index.jsx
-var i = t(({ step: t = 1, min: i = 0, max: a = 100, defaultValue: o = 0, onChange: s = () => {}, showPopupValue: c = !0, width: l, ticks: u, tooltip: d, orientation: f, onDragEnd: p, onDragStart: m, onMouseEnter: h, ...g }, _) => {
-	let v = e.useRef(), y = () => {
-		if (c && v.current.visibility !== "visible") {
-			let e = v.current;
-			e.style.visibility = "visible", e.style.opacity = "1";
-		}
-	}, b = () => {
-		if (c) {
-			let e = v.current;
-			e.style.visibility = "hidden", e.style.opacity = "0";
-		}
-	}, x = (e) => {
-		y(), s(e);
+//#region src/components/SliderBar/index.tsx
+var i = () => {}, a = e(({ step: e = 1, min: a = 0, max: o = 100, defaultValue: s = 0, onChange: c = i, showPopupValue: l = !0, width: u, ticks: d, tooltip: f, orientation: p, onDragEnd: m, onDragStart: h, onMouseEnter: g, ..._ }, v) => {
+	let y = t(null), b = Number(s), x = Number(o), S = b / x * 100, C = b / x * 72, w = () => {
+		let e = y.current;
+		l && e && e.style.visibility !== "visible" && (e.style.visibility = "visible", e.style.opacity = "1");
+	}, T = () => {
+		let e = y.current;
+		l && e && (e.style.visibility = "hidden", e.style.opacity = "0");
+	}, E = (e) => {
+		w(), c(e);
 	};
 	return /* @__PURE__ */ r("div", {
-		title: d,
-		style: { width: l },
+		title: f,
+		style: { width: u },
 		className: "ui-range-slider",
-		"data-win-orient": f === "vertical" ? "vertical" : "horizontal",
+		"data-win-orient": p === "vertical" ? "vertical" : "horizontal",
 		children: [
 			/* @__PURE__ */ n("input", {
-				...g,
-				ref: _,
-				type: "range",
-				min: i,
-				max: a,
-				step: t,
-				defaultValue: o,
-				onMouseUp: p,
-				onMouseDown: m,
-				onTouchStart: m,
-				onTouchEnd: p,
-				onChange: (e) => x(e),
-				onMouseEnter: h,
-				onMouseLeave: () => b(),
-				style: { background: `linear-gradient(90deg, var(--color-primary-adaptive) ${o / a * 100}%, #999999 20.1%)` }
-			}),
-			c && /* @__PURE__ */ n("span", {
+				..._,
 				ref: v,
-				className: "ui-range-slider-popup",
-				style: { left: o / a * 72 + "%" },
-				children: o
+				type: "range",
+				min: a,
+				max: o,
+				step: e,
+				defaultValue: s,
+				onMouseUp: m,
+				onMouseDown: h,
+				onTouchStart: h,
+				onTouchEnd: m,
+				onChange: E,
+				onMouseEnter: g,
+				onMouseLeave: T,
+				style: { background: `linear-gradient(90deg, var(--color-primary-adaptive) ${S}%, #999999 20.1%)` }
 			}),
-			u && /* @__PURE__ */ n("div", {
+			l && /* @__PURE__ */ n("span", {
+				ref: y,
+				className: "ui-range-slider-popup",
+				style: { left: `${C}%` },
+				children: s
+			}),
+			d && /* @__PURE__ */ n("div", {
 				className: "ui-datalist",
-				children: u.map((e, t) => /* @__PURE__ */ n("p", { value: e }, t))
+				children: d.map((e, t) => /* @__PURE__ */ n("p", { value: e }, t))
 			})
 		]
 	});
 });
 //#endregion
-export { i as default };
+export { a as default };

@@ -16,11 +16,13 @@
     "types": ["node", "vitest/globals", "@testing-library/jest-dom"],
     "baseUrl": ".",
     "paths": {
-      "react-windows-ui": ["src/lib/src/index.js"],
+      "react-windows-ui": ["src/lib/src/index.ts"],
       "react-windows-ui/*": ["src/lib/src/*"]
     }
   },
   "include": [
+    "src/lib/src/**/*.ts",
+    "src/lib/src/**/*.tsx",
     "src/lib/src/**/*.d.ts",
     "tests/**/*.ts",
     "tests/**/*.tsx",

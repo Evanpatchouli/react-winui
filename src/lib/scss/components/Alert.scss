@@ -1,3 +1,5 @@
+@use "./_base/parents" as *;
+
 .ui-alert {
   @extend .ui-dim-overlay;
   color: var(--color-text-default);

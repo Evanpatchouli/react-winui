@@ -1,13 +1,16 @@
-import React, { ReactNode } from "react";
+import type { FC, ReactNode, RefAttributes } from "react";
 
 export interface NavBarProps {
-  title ?: string;
-  collapsed ?: boolean;
-  goBack ?: () => void;
-  children ?: ReactNode;
-  shadowOnScroll ?: boolean;
-  titleBarMobile ?: ReactNode;
+  title?: ReactNode;
+  collapsed?: boolean;
+  goBack?: () => void;
+  children?: ReactNode;
+  shadowOnScroll?: boolean;
+  titleBarMobile?: ReactNode;
 }
-declare const NavBar: React.FC<NavBarProps>;
+
+export type NavBarComponent = FC<NavBarProps & RefAttributes<HTMLElement>>;
+
+declare const NavBar: NavBarComponent;
 
 export default NavBar;

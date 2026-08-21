@@ -1,9 +1,9 @@
-import React, { ReactNode } from "react";
+import type { FC, ReactNode } from "react";
 
 export interface NavBarSubMenuProps {
-  title ?: string;
-  children ?: ReactNode;
+  title?: ReactNode;
+  children?: ReactNode;
 }
-declare const NavBarSubMenu: React.FC<NavBarSubMenuProps>;
+declare const NavBarSubMenu: FC<NavBarSubMenuProps>;
 
 export default NavBarSubMenu;
