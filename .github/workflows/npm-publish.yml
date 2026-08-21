@@ -1,4 +1,4 @@
-name: Publish Node.js package
+name: Publish npm package
 
 on:
   release:
@@ -17,8 +17,6 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v6
-        with:
-          version: 10
 
       - name: Setup Node
         uses: actions/setup-node@v6
