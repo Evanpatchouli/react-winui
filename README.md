@@ -1,5 +1,5 @@
-<p align="center">                         
-	
+<p align="center">
+
   <img src="https://github.com/evanpatchouli/react-winui/blob/main/markdown/md_img_header.png" width="250" />
 </p>
 <h1 align="center">react-winui</h1>
@@ -8,6 +8,7 @@
 <p align="center"><a href="https://evanpatchouli.github.io/react-winui/" target="_blank">« Explore Project Docs »</a></p>
 
 # Status
+
 <p>
   <a href="https://evanpatchouli.github.io/react-winui/">
     <img src="https://img.shields.io/circleci/build/github/evanpatchouli/react-winui?style=flat-square&logo=circleci&token=6fe7637a17a269e8b002b11474d70c9d25c71f30" alt="Build" />
@@ -26,32 +27,38 @@
 </p>
 
 # Features
- - Provides Native feel Windows UI Controls.
- - Comparably small CSS file size.
- - Cleaner HTML.
- - Works with any <b>Routing Library</b>.
+
+- Provides Native feel Windows UI Controls.
+- Comparably small CSS file size.
+- Cleaner HTML.
+- Works with any <b>Routing Library</b>.
 
 # Works with
+
 <img src="https://github.com/evanpatchouli/react-winui/blob/main/markdown/support_vitejs.svg" width="90" title="ViteJS"/> &nbsp;&nbsp;&nbsp;&nbsp; <img src="https://github.com/evanpatchouli/react-winui/blob/main/markdown/support_nextjs.svg" width="90" title="NextJS"/>
 
 # Getting Started
+
 ```ruby
 pnpm add @evanpatchouli/react-winui
 ```
+
 ```js
 // Be sure to include styles at some point, probably during your bootstraping
 import "@evanpatchouli/react-winui/config/app-config.css";
 import "@evanpatchouli/react-winui/styles.css";
 import "@evanpatchouli/react-winui/icons/winui-icons.min.css";
 ```
+
 ## 🚀 [See `App.js` code & more »](https://evanpatchouli.github.io/react-winui/#/v1.0.0/getting_started)
 
 样式 token 规范见 [`docs/design-system.md`](docs/design-system.md)。
 组件借鉴与迁移规范见 [`docs/component-migration-guidelines.md`](docs/component-migration-guidelines.md)。
 
 # Usage
+
 ```js
-import { Button, InputText, Tooltip } from "@evanpatchouli/react-winui";
+import { Button, InputText, Popover, Tooltip } from "@evanpatchouli/react-winui";
 // Optional direct entry for smaller consumer graphs:
 import ButtonDirect from "@evanpatchouli/react-winui/button";
 // CSS token references for JavaScript-facing style APIs:
@@ -65,12 +72,16 @@ const App = () => (
     <Tooltip content="Supplemental information">
       <Button value="Hover or focus" />
     </Tooltip>
+    <Popover content={<strong>Contextual actions</strong>}>
+      <Button value="Open actions" />
+    </Popover>
     <div style={{ boxShadow: Shadows.shadow8 }}>Token-backed surface</div>
   </>
 );
 ```
 
 # Run Locally
+
 ```html
 git clone https://github.com/evanpatchouli/react-winui.git
 cd react-winui
@@ -93,6 +104,7 @@ pnpm typecheck
 The package also keeps the legacy `@evanpatchouli/react-winui/dist/react-winui.min.css` CSS path for existing applications. React, React DOM, and React Router DOM are peer dependencies and must be installed by the consuming app.
 
 # Find this project useful? :heart:
+
 Support it by joining [**stargazers**](https://github.com/evanpatchouli/react-winui/stargazers) for this repository. :star:
 
 # License

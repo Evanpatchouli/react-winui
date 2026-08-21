@@ -76,6 +76,14 @@ export type {
 } from "./components/MenuBar";
 export { default as ProgressBar } from "./components/ProgressBar";
 export type { ProgressBarProps, ProgressBarValue } from "./components/ProgressBar";
+export { default as Popover } from "./components/Popover";
+export type {
+  PopoverContentProps,
+  PopoverOpenChangeEvent,
+  PopoverOpenChangeHandler,
+  PopoverPlacement,
+  PopoverProps
+} from "./components/Popover";
 export { default as RadioButton } from "./components/RadioButton";
 export type { RadioButtonProps } from "./components/RadioButton";
 export { default as SliderBar } from "./components/SliderBar";
@@ -110,3 +118,5 @@ export type {
   TooltipProps,
   TooltipRelationship
 } from "./components/Tooltip";
+export { default as Flyout } from "./components/Flyout";
+export type { FlyoutProps } from "./components/Flyout";

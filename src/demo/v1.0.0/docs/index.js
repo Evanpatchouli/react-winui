@@ -22,6 +22,7 @@ export { default as NavBarSubMenuDocs } from "./Navigation_docs/NavBarSubMenu_do
 export { default as NavPageContainerDocs } from "./Navigation_docs/NavPageContainer_docs";
 export { default as SplashScreenDocs } from "./Navigation_docs/SplashScreen_docs";
 export { default as ProgressBarDocs } from "./ProgressBar_docs";
+export { default as PopoverDocs } from "./Popover_docs";
 export { default as RadioButtonDocs } from "./RadioButton_docs";
 export { default as SelectBoxDocs } from "./SelectBox_docs";
 export { default as SliderBarDocs } from "./SliderBar_docs";

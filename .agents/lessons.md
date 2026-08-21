@@ -78,3 +78,7 @@
 - Theme/Shadows 这类多层阴影应先落入本库的 `--rwu-shadow-*` scale，再由组件选择具体层级；Tooltip 使用 `box-shadow: var(--rwu-shadow-8)`，不要把 Fluent UI 的包或 Griffel recipe 引入运行时。
 - JavaScript-facing token 常量应只保存 `var(--rwu-*)` 引用，不要复制 Sass 中的实际阴影值；这样 inline style 能获得自动补全，同时仍保留消费者 CSS 覆盖和主题切换能力。
 - 阶段性组件规范应集中保留为公共轻量文档，内部 decisions/handoff 只记录具体决策和交付结果；这样后续组件可以复用流程而不必从历史记录中拼接规则。
+
+- Portal overlay 的 `defaultOpen` 会污染完整页面截图（尤其是移动端全页基线）；视觉 fixture 应保持默认关闭，并在对应 Playwright 用例中显式打开目标 overlay。
+- Portal 容器在首次 effect 后才存在时，`autoFocus` effect 需要依赖 portal 容器或使用等价的挂载时机，否则 `defaultOpen + autoFocus` 会把焦点留在 body；这个边界必须由 RTL 测试锁定。
+- 新增组件的 consumer 验证必须在 library build 之后执行，才能同时覆盖 root export、subpath export、真实 dist declaration 和 ESM 产物。

@@ -137,6 +137,39 @@ test.describe("Public component visual baselines", () => {
     });
   });
 
+  test.describe("Popover and Flyout visual states", () => {
+    test("captures the light Popover surface", async ({ page }) => {
+      await page.getByRole("button", { name: "Popover preview" }).click();
+      const popover = page.locator(".ui-popover-open").first();
+
+      await expect(popover).toBeVisible();
+      await expect(popover).toHaveText(/Quick actions/);
+      await expect(popover).toHaveScreenshot("popover-light.png", screenshotOptions);
+    });
+
+    test("captures the dark Popover surface", async ({ page }) => {
+      await page.getByTestId("theme-dark").click();
+      await page.getByRole("button", { name: "Popover preview" }).click();
+
+      const popover = page.locator(".ui-popover-open").first();
+      await expect(popover).toBeVisible();
+      await expect(popover).toHaveScreenshot("popover-dark.png", screenshotOptions);
+    });
+
+    test("opens and dismisses the Flyout with click and Escape", async ({ page }) => {
+      const flyout = page.locator(".ui-popover-open").filter({
+        hasText: "Flyout closes on outside click or Escape"
+      });
+
+      await page.getByRole("button", { name: "Flyout preview" }).click();
+      await expect(flyout).toBeVisible();
+      await expect(flyout).toHaveScreenshot("flyout-open.png", screenshotOptions);
+
+      await page.keyboard.press("Escape");
+      await expect(flyout).toHaveCount(0);
+    });
+  });
+
   test.describe("Control and selection baselines", () => {
     test("captures the light form controls", async ({ page }) => {
       await expect(panel(page, "controls-panel")).toHaveScreenshot(

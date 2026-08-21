@@ -75,3 +75,10 @@ Tooltip 的浮层使用实心 `--rwu-color-surface-flyout`、`--rwu-color-border
 `--rwu-radius-small` 和 `--rwu-shadow-8`，不引入 Fluent UI 依赖或默认组件外观。浮层默认通过
 `aria-describedby` 与 trigger 关联；只有非必要的补充信息才适合放入 Tooltip，交互式内容应使用
 Popover 或其他可持续交互的组件。
+
+## Popover / Flyout
+
+Popover / Flyout 使用 `--rwu-color-surface-flyout`、`--rwu-color-border-divider`、
+`--rwu-radius-flyout` 和 `--rwu-shadow-8`。它们面向可包含交互控件的 contextual surface，
+默认通过 portal 渲染并支持 outside click、Escape 和 viewport placement fallback；不引入 Fluent UI
+视觉 token 或运行时依赖。

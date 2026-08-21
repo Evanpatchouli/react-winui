@@ -22,6 +22,16 @@
       "import": "./dist/components/Tooltip/index.js",
       "default": "./dist/components/Tooltip/index.js"
     },
+    "./popover": {
+      "types": "./dist/components/Popover/index.d.ts",
+      "import": "./dist/components/Popover/index.js",
+      "default": "./dist/components/Popover/index.js"
+    },
+    "./flyout": {
+      "types": "./dist/components/Flyout/index.d.ts",
+      "import": "./dist/components/Flyout/index.js",
+      "default": "./dist/components/Flyout/index.js"
+    },
     "./theme": {
       "types": "./dist/theme/index.d.ts",
       "import": "./dist/theme/index.js",

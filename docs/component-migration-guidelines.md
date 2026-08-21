@@ -152,4 +152,15 @@ Tooltip 是阶段 6 的首个模板组件，当前约定如下：
 - 未复制 Fluent UI 源码、Griffel 样式或 Fluent token；
 - 已覆盖 unit、RTL、Playwright、light / dark 和 consumer 验证。
 
+## 12. Popover / Flyout 模板
+
+Popover / Flyout 是阶段 7 的首个组件组，当前约定如下：
+
+- API 使用必需的 `content` / 单一 `children` trigger，并支持 `open`、`defaultOpen`、`onOpenChange`、`placement`、`withArrow`、`openOnHover`、`trapFocus`、`autoFocus`、`closeOnScroll` 和 `disabled`；
+- 行为参考 WinUI Flyout 的 light-dismiss（outside click、Escape）与 Fluent UI v9 Popover 的受控状态、portal、定位和 focus 处理；
+- surface 使用现有 `--rwu-color-surface-flyout`、`--rwu-color-border-divider`、`--rwu-radius-flyout` 和 `--rwu-shadow-8`；
+- `Flyout` 是同 API 的语义别名，不创建第二套状态或视觉 recipe；
+- 未复制 Fluent UI 源码、Griffel 样式或 Fluent token；
+- 已覆盖 unit、RTL、controlled/uncontrolled、hover delay、outside click、Escape、focus trap、consumer、docs 和 light / dark visual regression。
+
 后续组件应沿用本规范，但只实现当前组件实际需要的能力，不提前扩展通用抽象。

@@ -197,3 +197,10 @@
 
 - 将阶段 6 已验证的 WinUI / Windows 11 行为参考、Fluent UI v9 架构参考、react-winui 视觉边界、源码许可、测试和完成标准集中到 `docs/component-migration-guidelines.md`。
 - 公共规范只描述当前组件开发需要的规则，不建立与项目规模不匹配的通用 framework；Tooltip 作为首个完成模板保留在文档末尾。
+
+## 2026-08-21：阶段 7 P0 Popover / Flyout
+
+- 采用现有 Tooltip 一致的 `content` + 单一 `children` trigger API，避免为一个新 overlay 提前建立 Fluent UI 式 compound/context framework；同时提供 `open`、`defaultOpen`、`onOpenChange`，满足受控和非受控场景。
+- `Flyout` 采用 Popover 的语义别名实现，二者共享 portal、定位、light-dismiss、focus 和 token 逻辑；这样 WinUI 命名可以进入公共 API，但不会产生两套容易漂移的视觉/状态实现。
+- surface 使用既有 `--rwu-color-surface-flyout`、`--rwu-color-border-divider`、`--rwu-radius-flyout`、`--rwu-shadow-8` 和 spacing/motion token；未引入 Fluent UI 运行时、Griffel 或第三方定位依赖。
+- 采用模块级 active close 句柄，保证同一 document 中最后打开的 Popover/Flyout 关闭旧 surface；outside pointer、Escape、visibility、可选 scroll 和 focus restore 作为轻量 overlay 生命周期的一部分处理。

@@ -34,7 +34,8 @@ import {
   SliderBarDocs,
   SwitchDocs,
   TableViewDocs,
-  TooltipDocs
+  TooltipDocs,
+  PopoverDocs
 } from "./docs";
 
 import { lib_version } from "./values";
@@ -96,6 +97,8 @@ const AppFourTwoThree = () => {
             {text: "imageview", link: 'imageview'},
             {text: "inputtext", link: 'input_group'},
             {text: "menubar", link: 'menubar'},
+            {text: "popover", link: 'popover'},
+            {text: "flyout", link: 'popover'},
             {text: "select", link: 'selectbox'},
             {text: "tooltip", link: 'tooltip'}
           ]}
@@ -189,6 +192,7 @@ const AppFourTwoThree = () => {
           <Route path="sliderbar" element={<SliderBarDocs/>} />
           <Route path="switch" element={<SwitchDocs/>} />
           <Route path="tableview" element={<TableViewDocs/>} />
+          <Route path="popover" element={<PopoverDocs/>} />
           <Route path="tooltip" element={<TooltipDocs/>} />
 
           <Route path="icons" element={<Icons/>} />

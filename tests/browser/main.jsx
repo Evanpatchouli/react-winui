@@ -25,6 +25,8 @@ import NavBarSubMenu from "../../src/lib/src/components/NavBar/NavBarSubMenu/ind
 import NavBarThemeSwitch from "../../src/lib/src/components/NavBar/NavBarThemeSwitch/index.tsx";
 import NavPageContainer from "../../src/lib/src/components/NavBar/NavPageContainer/index.tsx";
 import ProgressBar from "../../src/lib/src/components/ProgressBar/index.tsx";
+import Flyout from "../../src/lib/src/components/Flyout/index.tsx";
+import Popover from "../../src/lib/src/components/Popover/index.tsx";
 import RadioButton from "../../src/lib/src/components/RadioButton/index.tsx";
 import Select from "../../src/lib/src/components/SelectMenus/Select/index.tsx";
 import SelectNative from "../../src/lib/src/components/SelectMenus/SelectNative/index.tsx";
@@ -171,6 +173,36 @@ function VisualFixture() {
           </div>
           <p className="visual-fixture-status">
             Tooltip content is supplemental and connected to the trigger with ARIA.
+          </p>
+        </Section>
+
+        <Section
+          caption="click · light dismiss · focusable content · arrow"
+          eyebrow="overlay"
+          testId="popover-panel"
+          title="Popover and Flyout"
+        >
+          <div className="visual-fixture-row">
+            <Popover
+              content={
+                <div className="visual-fixture-popover-content">
+                  <strong>Quick actions</strong>
+                  <span>Structured content can include controls.</span>
+                  <button type="button">Continue</button>
+                </div>
+              }
+              contentProps={{ "aria-label": "Quick actions" }}
+              placement="bottom"
+              withArrow
+            >
+              <Button value="Popover preview" />
+            </Popover>
+            <Flyout content="Flyout closes on outside click or Escape" placement="right">
+              <Button value="Flyout preview" />
+            </Flyout>
+          </div>
+          <p className="visual-fixture-status">
+            Popover and Flyout share light-dismiss behavior while preserving structured content.
           </p>
         </Section>
 

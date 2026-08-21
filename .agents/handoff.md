@@ -287,3 +287,16 @@
 - 新增 `docs/component-migration-guidelines.md`，集中记录 WinUI / Windows 11 与 Fluent UI v9 的参考优先级、可借鉴/禁止复制边界、API、无障碍、视觉 token、测试、许可和完成标准。
 - 文档以 Tooltip 作为首个模板，明确 `aria-describedby`、实心 surface、`--rwu-shadow-8`、测试矩阵和停止边界。
 - README 与 `docs/design-system.md` 已增加规范入口；未修改组件实现或 public API。
+
+# 阶段 7 P0 首个组件组：Popover / Flyout
+
+- 新增 `src/lib/src/components/Popover/index.tsx` 与 public declaration，支持 click toggle、controlled/uncontrolled、`onOpenChange`、`openOnHover`、show/hide delay、outside pointer light-dismiss、Escape、visibility close、scroll close、placement fallback、arrow、ARIA trigger state、`trapFocus`、`autoFocus`、`restoreFocus` 和 disabled。
+- 新增 `src/lib/src/components/Flyout/index.tsx` 作为同 API 的语义别名；没有复制第二套状态机或视觉 recipe。
+- 新增 `src/lib/scss/components/Popover.scss`，只使用现有 `--rwu-*` token（surface、divider、flyout radius、shadow8、spacing、motion），并接入 Sass 聚合入口；没有修改旧组件颜色、圆角、阴影、DOM 或 class。
+- root export、`./popover`、`./flyout` package exports、类型声明和 build dist 已同步；`pnpm pack --dry-run` 确认 Popover/Flyout ESM、`.d.ts`、CSS 和必要包资产进入 tarball，未包含 docs/tests/source。
+- 新增 `tests/popover.test.tsx`，覆盖 render/ARIA、portal、controlled visibility、outside pointer、Escape、hover delay、autoFocus、focus trap、自定义 Enter/Space trigger、disabled 和 Flyout alias；全量 Vitest 当前为 70 tests。
+- `tests/browser` 新增 Popover/Flyout fixture、click/Escape 交互、light/dark surface 和 3 张 Chromium Windows visual baselines；全量 Playwright 当前为 39/39，通过后才显式更新新快照。
+- docs Demo 新增 `Popover_docs`，同步导航、路由、搜索建议、README、design-system 和 component migration guidelines；consumer 示例覆盖 root import 与 `popover`/`flyout` subpath 及类型。
+- 参考 WinUI Flyout 的 light-dismiss / Escape 行为，以及 Fluent UI React v9 Popover 的 controlled state、portal、定位与 focus 思路；没有复制实际 Fluent UI 源码、Griffel 样式或 Fluent token，因此无需 `THIRD_PARTY_NOTICES.md`。
+- 验证通过：`pnpm lint`、`pnpm typecheck`、`pnpm test`（69 tests）、`pnpm test:consumer`、`pnpm build:library`、`pnpm build:docs`、`pnpm build`、`pnpm test:browser`（39 tests）和新增文件 Prettier check。
+- 已知遗留：docs production build 仍有既有大 chunk warning；阶段 7 的 `Menu`、`ContextMenu`、`Toast`、`InfoBar` 等尚未开始，等待下一次明确指定。

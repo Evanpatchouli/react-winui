@@ -126,6 +126,13 @@
     "showBadge": false
   },
   {
+    "to": "popover",
+    "exact": false,
+    "text": "Popover / Flyout",
+    "icon": "icons10-notification",
+    "showBadge": false
+  },
+  {
     "to": "tooltip",
     "exact": false,
     "text": "Tooltip",

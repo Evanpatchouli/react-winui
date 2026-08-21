@@ -32,7 +32,9 @@ import {
   Switch,
   TableView,
   TextArea,
-  Tooltip
+  Tooltip,
+  Popover,
+  Flyout
 } from "@evanpatchouli/react-winui";
 import type {
   ButtonProps,
@@ -88,12 +90,16 @@ import type {
   TextAreaProps,
   TooltipPlacement,
   TooltipProps,
-  TooltipRelationship
+  TooltipRelationship,
+  PopoverProps,
+  FlyoutProps
 } from "@evanpatchouli/react-winui";
 import ButtonDirect from "@evanpatchouli/react-winui/button";
 import { Shadows } from "@evanpatchouli/react-winui/theme";
 import type { ShadowName, ShadowToken } from "@evanpatchouli/react-winui/theme";
 import TooltipDirect from "@evanpatchouli/react-winui/tooltip";
+import PopoverDirect from "@evanpatchouli/react-winui/popover";
+import FlyoutDirect from "@evanpatchouli/react-winui/flyout";
 
 const typedProps: [
   ButtonProps,
@@ -186,6 +192,15 @@ export const selectOptionValueTypeCheck: SelectOptionValue = 1;
 export const selectChangeTypeCheck: SelectChangeHandler = () => {};
 export const tooltipPlacementTypeCheck: TooltipPlacement = "top";
 export const tooltipRelationshipTypeCheck: TooltipRelationship = "description";
+export const popoverPropsTypeCheck: PopoverProps = {
+  content: "Popover content",
+  children: <button type="button">Trigger</button>,
+  placement: "bottom"
+};
+export const flyoutPropsTypeCheck: FlyoutProps = {
+  content: "Flyout content",
+  children: <button type="button">Trigger</button>
+};
 export const shadowNameTypeCheck: ShadowName = "shadow8";
 export const shadowTokenTypeCheck: ShadowToken = Shadows.shadow8;
 export const shadowStyleTypeCheck: CSSProperties = { boxShadow: Shadows.shadow8 };
@@ -273,5 +288,22 @@ export const basicControls: ReactElement = (
     <Tooltip content="More information">
       <Button value="Tooltip" />
     </Tooltip>
+    <Popover content="More details">
+      <Button value="Popover" />
+    </Popover>
+    <Flyout content="More details">
+      <Button value="Flyout" />
+    </Flyout>
   </>
+);
+
+export const popoverSubpathImport: ReactElement = (
+  <PopoverDirect content="Popover subpath">
+    <button type="button">Popover trigger</button>
+  </PopoverDirect>
+);
+export const flyoutSubpathImport: ReactElement = (
+  <FlyoutDirect content="Flyout subpath">
+    <button type="button">Flyout trigger</button>
+  </FlyoutDirect>
 );
