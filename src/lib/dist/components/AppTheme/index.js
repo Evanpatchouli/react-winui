@@ -17,10 +17,6 @@ var a = () => {}, o = (t) => {
 	return n(() => {
 		o(t);
 	}, [t]), /* @__PURE__ */ i(r, {});
-}, (e, t) => (e.scheme !== t.scheme && (o(t.scheme), t.onSchemeChange?.()), e.color !== t.color && t.color && (document.documentElement.style.setProperty("--PrimaryColor", t.color), document.documentElement.style.setProperty("--PrimaryColorLight", t.colorDarkMode || t.color), t.onColorChange?.()), !1));
-s.defaultProps = {
-	onColorChange: a,
-	onSchemeChange: a
-};
+}, (e, t) => (e.scheme !== t.scheme && (o(t.scheme), (t.onSchemeChange ?? a)()), e.color !== t.color && t.color && (document.documentElement.style.setProperty("--PrimaryColor", t.color), document.documentElement.style.setProperty("--PrimaryColorLight", t.colorDarkMode || t.color), (t.onColorChange ?? a)()), !1));
 //#endregion
 export { s as default };

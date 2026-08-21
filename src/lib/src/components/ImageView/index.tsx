@@ -26,15 +26,15 @@ const noop = () => {};
 const ImageView: FC<ImageViewProps> = (props) => {
   const {
     src,
-    alt,
-    objectFit,
+    alt = "image",
     tooltip,
-    width,
-    height,
+    width = 124,
+    height = 124,
     margin,
     padding,
     borderRadius,
-    isLoading,
+    isLoading = false,
+    objectFit = "cover",
     onLoad = noop,
     onError = noop,
     ...otherProps
@@ -89,16 +89,6 @@ const ImageView: FC<ImageViewProps> = (props) => {
       {didLoad ? "" : renderLoader()}
     </div>
   );
-};
-
-ImageView.defaultProps = {
-  width: 124,
-  height: 124,
-  alt: "image",
-  isLoading: false,
-  objectFit: "cover",
-  onLoad: noop,
-  onError: noop
 };
 
 export default ImageView;

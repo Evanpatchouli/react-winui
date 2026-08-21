@@ -12,13 +12,15 @@ export interface ColorPickerItemProps {
 }
 
 const ColorPickerItem: FC<ColorPickerItemProps> = (props) => {
+  const { color = "#eee" } = props;
+
   return (
     <label className="ui-color-picker-item">
       <input
         type="radio"
         className="item"
         name={props.name}
-        value={props.color}
+        value={color}
         disabled={props.disabled}
         onChange={props.onChange}
         defaultChecked={props.defaultChecked}
@@ -27,15 +29,11 @@ const ColorPickerItem: FC<ColorPickerItemProps> = (props) => {
         style={{
           width: props.width,
           height: props.height,
-          backgroundColor: props.color
+          backgroundColor: color
         }}
       />
     </label>
   );
-};
-
-ColorPickerItem.defaultProps = {
-  color: "#eee"
 };
 
 export default ColorPickerItem;

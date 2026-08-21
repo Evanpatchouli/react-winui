@@ -20,6 +20,7 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: [path.resolve(repositoryRoot, "tests/setup.js")],
     include: ["tests/**/*.{test,spec}.{js,jsx,ts,tsx}"],
+    exclude: ["tests/browser/**"],
     css: false
   }
 });

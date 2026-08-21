@@ -212,3 +212,30 @@
 - 额外审计：编译 CSS 中 70 个 `--rwu-*` 声明、59 个使用点，缺失声明 0；本阶段触碰文件均为 UTF-8 无 BOM。
 - 已知遗留：docs 构建仍有既有大 chunk warning；阶段 5 再建立 Playwright 与截图基线，本阶段未引入视觉回归基础设施。
 - 全量迁移复核：组件/浏览器 SCSS 中旧变量消费端为 0；最新编译 CSS 为 75 个 token 声明、67 个使用点，缺失声明 0。
+
+# 阶段 5 handoff
+
+- 保留现有 Vitest + React Testing Library 体系，并在 `vitest.config.js` 中排除 `tests/browser/**`，避免 Playwright spec 被 Vitest 误识别；现有单元/交互测试为 55 个。
+- 新增 `@playwright/test`、`playwright.config.js` 和 `tests/browser/vite.config.js`，使用独立 Vite fixture 运行真实 Chromium 测试；失败截图、trace、video 和 HTML report 写入 `output/playwright`。
+- 新增 `tests/browser/main.jsx` 与 `fixture.css`，加载既有 `app-config.css` 和完整 Sass 样式，挂载全部 31 个公共视觉组件/复合组件；状态由 fixture 控制，不修改正式组件 DOM、Props 或视觉规则。
+- 新增 `tests/browser/visual.spec.js`，覆盖 Button 状态、light/dark 面板、Accordion、Select、Alert/Dialog、搜索建议、SplashScreen、MenuBar、NavBar 桌面/移动端、TableView 排序，以及键盘/主题/提交行为。
+- 新增 34 张 Chromium Windows 截图基线，位于 `tests/browser/snapshots/visual.spec.js-snapshots/`；`pnpm test:browser:update` 是显式更新入口，普通 `pnpm test:browser` 不会接受新截图。
+- 新增 `.github/workflows/ci.yml`，在 `windows-latest` 执行 install、Chromium 安装、lint、typecheck、unit test、consumer build、production build 和 Playwright visual regression，并上传失败产物。
+- README 已记录 `pnpm test:browser` 和 `pnpm test:browser:update`；`output/playwright` 已加入 `.gitignore`。
+- 验证通过：`pnpm format:check`、`pnpm lint`、`pnpm typecheck`、`pnpm test`（55 tests）、`pnpm test:consumer`、`pnpm build`、`pnpm test:browser`（33 tests）。
+- 已知遗留：docs production build 仍有既有大 chunk warning；本阶段没有改变 docs 分包策略。
+
+# 阶段 5 follow-up：移除 fixture defaultProps warning
+
+- 公共源码中全部静态 `defaultProps` 已迁移为参数默认值或内部 fallback；`AppTheme` 回调、Select 选择逻辑和旧 Props 行为保持不变。
+- `ColorPickerPalette` 增加默认 noop change handler，避免受控 color input 产生 React read-only warning。
+- Playwright `beforeEach` 监听浏览器 console，并对 `Support for defaultProps` 与 page runtime error 做回归断言；当前 33 个浏览器测试均通过。
+- Playwright 全量 fixture 使用 2 workers、60 秒 test timeout，避免 Windows 下并发浏览器 teardown 资源竞争；截图更新仍必须显式执行。
+- 验证通过：`pnpm format:check`、`pnpm lint`、`pnpm typecheck`、`pnpm test`（55 tests）、`pnpm test:browser`（33 tests）、`pnpm build`、`pnpm test:consumer`。
+
+# 阶段 5 全库视觉保护扩展
+
+- 按公共 root export 盘点组件，fixture 覆盖 AppContainer、NavBar 系列、NavPageContainer、Accordion、Alert、Button、ButtonGroup、Checkbox、ColorPicker、Dialog、ImageView、InputText、InputSearch、Link、Loaders、MenuBar、ProgressBar、RadioButton、Select、SelectNative、SliderBar、SplashScreen、Switch、TableView、TextArea；AppTheme/Appearance 由主题行为与 console 回归覆盖。
+- 34 张基线按 panel 与高风险状态拆分，包含 light/dark 主题、桌面/移动 NavBar、弹层、菜单、搜索建议、排序、加载和媒体状态；不依赖完整 docs 页面，避免文档路由变化污染组件回归。
+- 视觉基线首次生成后已使用 `view_image` 审阅代表性 controls、selection、feedback、loading、desktop/mobile navigation 截图，并修正 fixture-only 的布局裁切与不可见 loader 展示问题。
+- 所有基线均通过未更新模式验证；CI 仍在 `windows-latest` 生成/消费 `chromium-win32` 基线。

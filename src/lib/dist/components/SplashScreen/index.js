@@ -1,38 +1,30 @@
 import { useEffect as e, useState as t } from "react";
 import { Fragment as n, jsx as r, jsxs as i } from "react/jsx-runtime";
 //#region src/components/SplashScreen/index.tsx
-var a = (a) => {
-	let [o, s] = t(!0);
-	e(() => {
+var a = ({ title: a = "", subtitle: o = "", logo: s, duration: c = 0, isVisible: l = !1, backgroundColor: u }) => {
+	let [d, f] = t(!0);
+	return e(() => {
 		setTimeout(() => {
-			a.isVisible ? s(!0) : s(!1);
-		}, a.duration);
-	}, [a.isVisible, a.duration]);
-	let c = o ? {
-		display: "flex",
-		backgroundColor: a.backgroundColor
-	} : { display: "none" };
-	return /* @__PURE__ */ i("div", {
-		style: c,
+			f(!!l);
+		}, c);
+	}, [l, c]), /* @__PURE__ */ i("div", {
+		style: d ? {
+			display: "flex",
+			backgroundColor: u
+		} : { display: "none" },
 		className: "ui-splash-screen ui-flex-center",
 		children: [
-			a.logo && /* @__PURE__ */ r(n, { children: a.logo }),
-			a.title && /* @__PURE__ */ r("h1", {
+			s && /* @__PURE__ */ r(n, { children: s }),
+			a && /* @__PURE__ */ r("h1", {
 				className: "color-white",
-				children: a.title
+				children: a
 			}),
-			a.subtitle && /* @__PURE__ */ r("h3", {
+			o && /* @__PURE__ */ r("h3", {
 				className: "color-white",
-				children: a.subtitle
+				children: o
 			})
 		]
 	});
-};
-a.defaultProps = {
-	title: "",
-	subtitle: "",
-	duration: 0,
-	isVisible: !1
 };
 //#endregion
 export { a as default };

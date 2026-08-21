@@ -28,11 +28,5 @@ var o = t(({ type: t = "button", icon: o, value: s, children: c, tooltip: l, onC
 		]
 	});
 });
-o.defaultProps = {
-	type: "button",
-	disabled: !1,
-	isLoading: !1,
-	onClick: () => {}
-};
 //#endregion
 export { o as default };

@@ -142,3 +142,25 @@
 - `light.scss`、`dark.scss` 与 `tokens.scss` 中的旧变量引用保留为兼容桥接层；不删除旧 CSS 自定义属性，确保已有消费者覆盖仍然可用。
 - 新增 `--rwu-color-brand`、`--rwu-color-loader-primary` 和滚动条 thumb token，覆盖原先没有语义映射的主色、loader 和 scrollbar 变量。
 - 通过 `rg` 审计确认组件/浏览器 SCSS 的旧变量消费端为 0；不把主题兼容桥接本身误判为未迁移组件样式。
+
+## 2026-08-21：阶段 5 测试与视觉回归基线
+
+- 采用 `@playwright/test` 作为提交到仓库的浏览器/视觉回归运行器；Playwright CLI 适合临时探索，但阶段 5 需要可在 CI 重复执行的 test spec、截图基线和显式 snapshot update workflow。
+- 视觉回归不直接依赖完整 docs 页面，而使用 `tests/browser` 独立 Vite fixture 加载真实组件和既有 Sass；这样能稳定控制状态，同时不为测试修改 docs 路由或组件 DOM。
+- 截图基线只覆盖代表性高风险状态：Button 的 default/hover/pressed/focus/disabled、light/dark controls、Select flyout；其余组件状态继续由 Vitest/Testing Library 行为测试覆盖，避免一次性制造大量脆弱截图。
+- Playwright CI 使用 Windows runner，与当前 `chromium-win32` 基线保持同一平台方向；跨平台支持另行增加平台项目和对应基线，不在本阶段放宽截图断言来掩盖平台差异。
+- Vitest 明确排除 `tests/browser/**`；production build、consumer build、unit test 和 browser regression 在 CI 中串联，保证测试基础设施不会脱离真实 package 产物验证。
+
+## 2026-08-21：移除 fixture 中的 React `defaultProps` warning
+
+- 只处理实际由 fixture 挂载并产生 warning 的 `AppTheme` 与 `Select`，不把所有未挂载组件的 legacy `defaultProps` 在本次 follow-up 中扩大重构。
+- `AppTheme` 的可选回调继续在 comparator 中通过 `noop` fallback 调用；`Select` 继续使用已有的参数默认值；两者都不改变 public API、DOM 或视觉行为。
+
+## 2026-08-21：阶段 5 全库视觉保护扩展
+
+- 将视觉 fixture 从 6 个代表性组件扩展为 root export 中的全部公共视觉组件；AppTheme/Appearance 没有独立视觉 DOM，因此保留在主题行为和 console 回归中验证。
+- 采用 34 张截图而不是为每个组件穷举所有状态：每个组件至少落入一个稳定 light/dark panel，高风险交互另加状态截图，以平衡覆盖面和基线维护成本。
+- 继续使用 Chromium Windows 单项目，因为 CI runner 为 `windows-latest`；移动 NavBar 通过 viewport 用例补充响应式 overlay 覆盖，不引入跨平台快照噪声。
+- 全部静态 `defaultProps` 改为参数默认值或 fallback；这属于 React 兼容性和测试可观测性修复，不改变 public Props、DOM 或视觉 recipe。
+- ColorPickerPalette 的可选 `onChange` 使用内部 noop，避免受控 color input 产生 read-only console error；该修复直接改善组件在默认用法下的开发体验。
+- Playwright fixture 使用 2 workers 和 60 秒 test timeout，解决全库挂载时 Windows browser context teardown 资源竞争；不通过放宽 `maxDiffPixelRatio` 接受视觉变化。

@@ -53,8 +53,4 @@ const SelectNative: FC<SelectNativeProps> = ({
   );
 };
 
-SelectNative.defaultProps = {
-  data: []
-};
-
 export default SelectNative;

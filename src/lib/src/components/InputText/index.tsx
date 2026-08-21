@@ -147,12 +147,4 @@ const InputText = forwardRef<HTMLInputElement, InputTextProps>(
   }
 );
 
-InputText.defaultProps = {
-  type: "text",
-  setStatus: "default",
-  placeholder: "Input Text",
-  onChange: noop,
-  onClearButtonClick: noop
-};
-
 export default InputText;

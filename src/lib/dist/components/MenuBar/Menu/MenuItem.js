@@ -8,6 +8,5 @@ var t = () => {}, n = ({ children: n, icon: r, label: i, onClick: a = t }) => /*
 		children: [r, i]
 	}), n]
 });
-n.defaultProps = { onClick: t };
 //#endregion
 export { n as default };

@@ -50,6 +50,5 @@ var u = () => {}, d = ({ data: d, trigger: f, tooltip: p, defaultValue: m, backd
 		})]
 	});
 };
-d.defaultProps = { onChange: u };
 //#endregion
 export { d as default };

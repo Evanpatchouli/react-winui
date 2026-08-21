@@ -19,6 +19,5 @@ var i = () => {}, a = ({ onChange: a = i }) => {
 		}), /* @__PURE__ */ n("div", { className: "ui-navbar-theme-switch-icon" })]
 	});
 };
-a.defaultProps = { onChange: i };
 //#endregion
 export { a as default };

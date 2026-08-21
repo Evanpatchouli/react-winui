@@ -1,0 +1,334 @@
+html {
+  min-width: 100%;
+}
+
+body {
+  min-height: 100vh;
+  padding: 32px;
+}
+
+.visual-fixture {
+  width: 960px;
+  margin: 0 auto;
+  color: var(--rwu-color-text-primary);
+}
+
+.visual-fixture-header,
+.visual-fixture-panel-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.visual-fixture-header h1,
+.visual-fixture-panel h2 {
+  margin: 0;
+  font-weight: 500;
+}
+
+.visual-fixture-header h1 {
+  font-size: 28px;
+}
+
+.visual-fixture-intro {
+  max-width: 600px;
+  margin: 12px 0 0;
+  color: var(--rwu-color-text-secondary);
+  font-size: 14px;
+}
+
+.visual-fixture-panel h2 {
+  font-size: 21px;
+}
+
+.visual-fixture-eyebrow {
+  margin: 0 0 6px;
+  color: var(--rwu-color-accent);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.visual-fixture-caption {
+  max-width: 330px;
+  padding-top: 18px;
+  color: var(--rwu-color-text-secondary);
+  font-size: 12px;
+  line-height: 1.4;
+  text-align: right;
+}
+
+.visual-fixture-theme-controls {
+  display: flex;
+  flex-shrink: 0;
+  gap: 8px;
+}
+
+.visual-fixture-theme-controls button {
+  min-height: 32px;
+  padding: 5px 10px;
+  border: 1px solid var(--rwu-color-border-divider);
+  border-radius: var(--rwu-radius-control);
+  color: var(--rwu-color-text-primary);
+  background: var(--rwu-color-surface-control);
+  cursor: pointer;
+}
+
+.visual-fixture-ready {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.visual-fixture-panel {
+  margin-top: 20px;
+  padding: 24px;
+  border: 1px solid var(--rwu-color-border-divider);
+  border-radius: var(--rwu-radius-dialog);
+  background: var(--rwu-color-surface-card);
+}
+
+.visual-fixture-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.visual-fixture-row-start {
+  align-items: flex-start;
+}
+
+.visual-fixture-row > div {
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+}
+
+.visual-fixture-status,
+.visual-fixture-interaction-status {
+  margin: 18px 0 0;
+  color: var(--rwu-color-text-secondary);
+  font-size: 13px;
+}
+
+.visual-fixture-chip,
+.visual-fixture-page-content {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 10px;
+  border: 1px solid var(--rwu-color-border-divider);
+  border-radius: var(--rwu-radius-control);
+  background: var(--rwu-color-surface-control);
+}
+
+.visual-fixture-app-container {
+  align-items: center;
+  min-height: 44px;
+}
+
+.visual-fixture-app-container .ui-link {
+  white-space: nowrap;
+}
+
+.visual-fixture-panel > .ui-page-container {
+  min-height: 74px;
+  margin-top: 16px;
+}
+
+.visual-fixture-page-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  border: 0;
+  background: transparent;
+}
+
+.visual-fixture-page-content span {
+  color: var(--rwu-color-text-secondary);
+  font-size: 13px;
+}
+
+.visual-fixture-color-group {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+}
+
+.visual-fixture-color-group .ui-color-picker-item {
+  min-height: 40px;
+}
+
+.visual-fixture-select-wrap {
+  display: flex !important;
+  align-items: center;
+  gap: 12px;
+}
+
+.visual-fixture-inline-status {
+  color: var(--rwu-color-text-secondary);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.visual-fixture-accordion-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  color: var(--rwu-color-text-primary);
+}
+
+.visual-fixture-loading-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  align-items: start;
+  margin-top: 24px;
+}
+
+.visual-fixture-loading-grid > div {
+  min-height: 72px;
+}
+
+.visual-fixture-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--rwu-color-text-secondary);
+  font-size: 12px;
+}
+
+.visual-fixture-loader-surface {
+  padding: 12px;
+  border-radius: var(--rwu-radius-control);
+  background: #2b2b2b;
+}
+
+.visual-fixture-loader-surface .visual-fixture-label {
+  color: #d6d6d6;
+}
+
+.visual-fixture-progress-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.visual-fixture-progress-stack .visual-fixture-label {
+  margin-bottom: 0;
+}
+
+.visual-fixture-image-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.visual-fixture-image-wrap output {
+  color: var(--rwu-color-text-secondary);
+  font-size: 12px;
+}
+
+.visual-fixture-splash-trigger {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.visual-fixture-splash-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border: 1px solid #60cdff;
+  border-radius: 12px;
+  color: #60cdff;
+  font-weight: 600;
+}
+
+.visual-fixture-navbar-host {
+  height: 360px;
+  margin-top: 24px;
+  overflow: hidden;
+  border: 1px solid var(--rwu-color-border-divider);
+  border-radius: var(--rwu-radius-control);
+}
+
+.visual-fixture-navbar-host #ui-navbar-wrap {
+  height: 360px;
+  position: relative;
+}
+
+.visual-fixture-navbar-host #ui-navbar-wrap nav {
+  height: 360px;
+}
+
+.visual-fixture-navbar-host #ui-navbar-wrap .ui-navbar-list {
+  min-height: 0;
+}
+
+.visual-fixture-mobile-title {
+  color: var(--rwu-color-text-primary);
+}
+
+.visual-fixture-table-header,
+.visual-fixture-table-footer {
+  padding: 10px 12px;
+  color: var(--rwu-color-text-secondary);
+  font-size: 13px;
+}
+
+.visual-fixture-table-footer {
+  border-top: 1px solid var(--rwu-color-border-divider);
+}
+
+@media only screen and (max-width: 760px) {
+  body {
+    padding: 16px;
+  }
+
+  .visual-fixture {
+    width: auto;
+  }
+
+  .visual-fixture-header,
+  .visual-fixture-panel-heading {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .visual-fixture-caption {
+    max-width: none;
+    padding-top: 0;
+    text-align: left;
+  }
+
+  .visual-fixture-navbar-host,
+  .visual-fixture-navbar-host #ui-navbar-wrap {
+    height: 420px;
+  }
+
+  .visual-fixture-navbar-host {
+    overflow: visible;
+  }
+
+  .visual-fixture-navbar-host #ui-navbar-wrap .ui-navbar-header-mobile,
+  .visual-fixture-navbar-host #ui-navbar-wrap nav {
+    top: 0;
+    left: 0;
+  }
+
+  .visual-fixture-navbar-host #ui-navbar-wrap nav {
+    height: 420px;
+  }
+}

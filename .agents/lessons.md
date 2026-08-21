@@ -49,3 +49,16 @@
 - Design Token 渐进迁移应让新 `--rwu-*` 变量引用旧主题变量；直接复制 light/dark literal 会切断旧消费者对 `--color-*` 和自定义主色的覆盖能力。
 - CSS 自定义属性可以保存 `rgba(var(--color-model-ui-bg), alpha)` 这类运行时主题表达式；Sass 编译通过后仍需检查每个 `--rwu-*` 使用都有对应声明，避免拼写错误导致运行时值失效。
 - 全量 token 迁移审计应把 `components`/`browsers` 消费端与 `themes/tokens.scss` 兼容桥接分开统计；目标是前者旧引用为 0，而不是删除后者的旧变量映射。
+- Playwright spec 如果与 Vitest 的 `tests/**/*.{test,spec}.*` glob 重叠，必须在 Vitest `exclude` 中明确隔离浏览器测试目录，否则 Vitest 会把 Playwright 的 `test.beforeEach` 当作非法 suite hook。
+- 视觉 fixture 必须加载正式 Demo 使用的 `app-config.css`；否则 `--PrimaryColor` 和字体缺失会让截图看似通过但不代表真实组件样式。
+- Playwright 视觉回归应把截图更新命令与普通测试命令分开，并将 `snapshotDir`、失败产物和 report 目录显式配置，避免 CI 意外接受新截图或污染仓库。
+- 自定义菜单的 `li` 不一定在 Chromium accessibility tree 中稳定暴露预期 accessible name；行为测试应优先使用组件已有的稳定 class，再用可见文本过滤，保留语义断言给真正稳定的节点。
+- React 19 的 `defaultProps` 弃用 warning 只会在实际挂载对应函数/memo 组件时暴露；应从 warning 的真实组件入手移除静态声明，并在浏览器 fixture 的 console 上增加回归断言，避免只依赖人工查看日志。
+
+## 2026-08-21：全库视觉 fixture 扩展
+
+- 保护整个组件库时，先按 root export 建立组件清单，再用 panel fixture 覆盖每个公共视觉组件；无可见 DOM 的 AppTheme/Appearance 用行为和主题断言覆盖，避免伪造截图。
+- 视觉基线不需要把每个组件的每个状态都截图，但必须为高风险状态单独建用例：弹层、菜单、下拉、搜索建议、排序、移动导航和主题切换不能只依赖 default screenshot。
+- 全量 fixture 会暴露只在未挂载组件中隐藏的 React warning；扩展截图前应先扫描所有静态 `defaultProps`，并把 console/pageerror 作为浏览器测试的失败条件。
+- Windows 上多个 Playwright worker 同时启动重型 Vite fixture 会放大 browser context teardown 竞争；全库截图更适合限制 workers，并适当提高单测 timeout，而不是放宽像素差异阈值。
+- 固定定位的移动导航如果嵌在长 gallery 页面中，物理 click 可能因元素脱离 viewport 而不稳定；应让 fixture 提供真实定位上下文，必要时用 DOM `dispatchEvent` 验证组件 handler，再对 viewport overlay 截图。

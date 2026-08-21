@@ -11,19 +11,10 @@ export interface LinkProps extends Omit<RouterLinkProps, "to" | "children"> {
 
 const Link: FC<LinkProps> = ({ to = "#", children, ...otherProps }) => {
   return (
-    <LinkRouter
-      to={to}
-      className="ui-link"
-      style={otherProps.style}
-      {...otherProps}
-    >
+    <LinkRouter to={to} className="ui-link" style={otherProps.style} {...otherProps}>
       {children}
     </LinkRouter>
   );
-};
-
-Link.defaultProps = {
-  to: "#"
 };
 
 export default Link;

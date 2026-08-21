@@ -77,10 +77,6 @@ const UiMenuItem: FC<MenuBarItemProps> = ({ children }) => <>{children}</>;
 const UiSubMenu: FC<MenuBarSubMenuProps> = ({ children }) => <>{children}</>;
 const UiItemDivider: FC<MenuBarDividerProps> = () => <hr className="ui-menu-list-item-hr" />;
 
-UiMenuItem.defaultProps = {
-  onClick: () => {}
-};
-
 const menuBarItem = Object.assign(UiMenuItem, {
   Divider: UiItemDivider,
   SubMenu: UiSubMenu

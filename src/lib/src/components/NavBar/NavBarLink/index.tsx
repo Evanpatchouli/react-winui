@@ -25,7 +25,7 @@ const noopClick: MouseEventHandler<HTMLAnchorElement> = () => {};
 
 const NavBarLink: FC<NavBarLinkProps> = ({
   icon,
-  text,
+  text = "Nav Link",
   href,
   active,
   imgSrc,
@@ -71,11 +71,6 @@ const NavBarLink: FC<NavBarLinkProps> = ({
       </a>
     </li>
   );
-};
-
-NavBarLink.defaultProps = {
-  text: "Nav Link",
-  onClick: noopClick
 };
 
 export default NavBarLink;

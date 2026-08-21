@@ -5,9 +5,7 @@ import r from "./Menu/MenuList.js";
 import { Children as i, forwardRef as a, isValidElement as o, useEffect as s, useImperativeHandle as c, useMemo as l, useRef as u, useState as d } from "react";
 import { Fragment as f, jsx as p } from "react/jsx-runtime";
 //#region src/components/MenuBar/index.tsx
-var m = (e, t) => o(e) && e.type === t, h = ({ children: e }) => /* @__PURE__ */ p(f, { children: e }), g = ({ children: e }) => /* @__PURE__ */ p(f, { children: e }), _ = () => /* @__PURE__ */ p("hr", { className: "ui-menu-list-item-hr" });
-h.defaultProps = { onClick: () => {} };
-var v = Object.assign(h, {
+var m = (e, t) => o(e) && e.type === t, h = ({ children: e }) => /* @__PURE__ */ p(f, { children: e }), g = ({ children: e }) => /* @__PURE__ */ p(f, { children: e }), _ = () => /* @__PURE__ */ p("hr", { className: "ui-menu-list-item-hr" }), v = Object.assign(h, {
 	Divider: _,
 	SubMenu: g
 }), y = Object.assign(a(({ children: a, anchorRef: f, menuDirection: v, backdropBlur: y = !1 }, b) => {

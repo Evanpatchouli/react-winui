@@ -13,6 +13,5 @@ var t = ({ data: t = [], name: n, tooltip: r, disabled: i, onChange: a, onClick:
 		children: t.label
 	}, t.value))
 });
-t.defaultProps = { data: [] };
 //#endregion
 export { t as default };

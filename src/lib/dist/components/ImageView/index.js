@@ -3,7 +3,7 @@ import { useState as t } from "react";
 import { jsx as n, jsxs as r } from "react/jsx-runtime";
 //#region src/components/ImageView/index.tsx
 var i = () => {}, a = (a) => {
-	let { src: o, alt: s, objectFit: c, tooltip: l, width: u, height: d, margin: f, padding: p, borderRadius: m, isLoading: h, onLoad: g = i, onError: _ = i, ...v } = a, [y, b] = t(!1), x = () => /* @__PURE__ */ n("div", {
+	let { src: o, alt: s = "image", tooltip: c, width: l = 124, height: u = 124, margin: d, padding: f, borderRadius: p, isLoading: m = !1, objectFit: h = "cover", onLoad: g = i, onError: _ = i, ...v } = a, [y, b] = t(!1), x = () => /* @__PURE__ */ n("div", {
 		className: "ui-img-view-loader",
 		children: /* @__PURE__ */ n("div", {
 			className: "ui-loader-busy light animate",
@@ -14,13 +14,13 @@ var i = () => {}, a = (a) => {
 	};
 	return /* @__PURE__ */ r("div", {
 		className: "ui-img-view-container",
-		title: l,
+		title: c,
 		style: {
-			width: u,
-			height: d,
-			margin: f,
-			padding: p,
-			borderRadius: m
+			width: l,
+			height: u,
+			margin: d,
+			padding: f,
+			borderRadius: p
 		},
 		children: [
 			/* @__PURE__ */ n("img", {
@@ -28,7 +28,7 @@ var i = () => {}, a = (a) => {
 				src: o,
 				alt: s,
 				...v,
-				style: { objectFit: c },
+				style: { objectFit: h },
 				onLoad: () => {
 					S(), g();
 				},
@@ -36,19 +36,10 @@ var i = () => {}, a = (a) => {
 					S(), _();
 				}
 			}),
-			h ? x() : "",
+			m ? x() : "",
 			y ? "" : x()
 		]
 	});
-};
-a.defaultProps = {
-	width: 124,
-	height: 124,
-	alt: "image",
-	isLoading: !1,
-	objectFit: "cover",
-	onLoad: i,
-	onError: i
 };
 //#endregion
 export { a as default };

@@ -1,24 +1,23 @@
 import { useState as e } from "react";
 import { jsx as t, jsxs as n } from "react/jsx-runtime";
 //#region src/components/ColorPicker/ColorPickerPalette/index.tsx
-var r = (r) => {
-	let { color: i, width: a, height: o, ...s } = r, [c, l] = e(i);
+var r = () => {}, i = (i) => {
+	let { color: a = "#eee", width: o, height: s, onChange: c = r, ...l } = i, [u, d] = e(a);
 	return /* @__PURE__ */ n("label", {
 		className: "ui-color-picker-item palette",
 		children: [/* @__PURE__ */ t("input", {
 			type: "color",
-			value: c,
-			...s,
-			disabled: r.disabled,
-			onChange: r.onChange,
-			onChangeCapture: (e) => l(e.currentTarget.value)
+			value: u,
+			...l,
+			disabled: i.disabled,
+			onChange: c,
+			onChangeCapture: (e) => d(e.currentTarget.value)
 		}), /* @__PURE__ */ t("div", { style: {
-			width: a,
-			height: o,
-			backgroundColor: c
+			width: o,
+			height: s,
+			backgroundColor: u
 		} })]
 	});
 };
-r.defaultProps = { color: "#eee" };
 //#endregion
-export { r as default };
+export { i as default };

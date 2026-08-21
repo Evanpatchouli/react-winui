@@ -120,8 +120,4 @@ const Select: FC<SelectProps> = ({
   );
 };
 
-Select.defaultProps = {
-  onChange: noop
-};
-
 export default Select;

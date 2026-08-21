@@ -44,8 +44,4 @@ const SubMenu: FC<SubMenuProps> = ({
   );
 };
 
-SubMenu.defaultProps = {
-  onClick: noopClick
-};
-
 export default SubMenu;

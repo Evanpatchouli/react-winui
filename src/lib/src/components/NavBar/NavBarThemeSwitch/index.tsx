@@ -34,8 +34,4 @@ const NavBarThemeSwitch: FC<NavBarThemeSwitchProps> = ({ onChange = noop }) => {
   );
 };
 
-NavBarThemeSwitch.defaultProps = {
-  onChange: noop
-};
-
 export default NavBarThemeSwitch;

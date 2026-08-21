@@ -8,6 +8,5 @@ var n = ({ to: n = "#", children: r, ...i }) => /* @__PURE__ */ e(t, {
 	...i,
 	children: r
 });
-n.defaultProps = { to: "#" };
 //#endregion
 export { n as default };

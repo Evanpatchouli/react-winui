@@ -102,11 +102,4 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   }
 );
 
-Button.defaultProps = {
-  type: "button",
-  disabled: false,
-  isLoading: false,
-  onClick: () => {}
-};
-
 export default Button;

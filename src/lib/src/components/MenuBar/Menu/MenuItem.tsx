@@ -22,8 +22,4 @@ const MenuItem: FC<MenuItemProps> = ({ children, icon, label, onClick = noopClic
   );
 };
 
-MenuItem.defaultProps = {
-  onClick: noopClick
-};
-
 export default MenuItem;

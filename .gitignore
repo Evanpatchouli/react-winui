@@ -10,6 +10,7 @@
 /coverage
 **/.vite/
 *.tsbuildinfo
+/output/playwright
 
 # production
 /build

@@ -12,8 +12,10 @@ export interface ColorPickerPaletteProps extends Omit<
   onChange?: ChangeEventHandler<HTMLInputElement>;
 }
 
+const noop: ChangeEventHandler<HTMLInputElement> = () => {};
+
 const ColorPickerPalette: FC<ColorPickerPaletteProps> = (props) => {
-  const { color, width, height, ...otherProps } = props;
+  const { color = "#eee", width, height, onChange = noop, ...otherProps } = props;
   const [icolor, setColor] = useState(color);
 
   return (
@@ -23,7 +25,7 @@ const ColorPickerPalette: FC<ColorPickerPaletteProps> = (props) => {
         value={icolor}
         {...otherProps}
         disabled={props.disabled}
-        onChange={props.onChange}
+        onChange={onChange}
         onChangeCapture={(event) => setColor(event.currentTarget.value)}
       />
       <div
@@ -35,10 +37,6 @@ const ColorPickerPalette: FC<ColorPickerPaletteProps> = (props) => {
       />
     </label>
   );
-};
-
-ColorPickerPalette.defaultProps = {
-  color: "#eee"
 };
 
 export default ColorPickerPalette;

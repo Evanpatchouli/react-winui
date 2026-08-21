@@ -27,7 +27,10 @@ const noopSubmit: InputSearchSubmitHandler = () => {};
 const InputSearchBar: ForwardRefExoticComponent<
   InputSearchBarProps & RefAttributes<HTMLInputElement>
 > = forwardRef<HTMLInputElement, InputSearchBarProps>(
-  ({ width, tooltip, onSubmit = noopSubmit, ...otherProps }, ref) => {
+  (
+    { width, tooltip, onSubmit = noopSubmit, placeholder = "Search here..", ...otherProps },
+    ref
+  ) => {
     return (
       <div className="ui-input-search-bar" title={tooltip}>
         <input
@@ -41,7 +44,7 @@ const InputSearchBar: ForwardRefExoticComponent<
           disabled={otherProps.disabled}
           onChange={otherProps.onChange}
           style={{ width }}
-          placeholder={otherProps.placeholder}
+          placeholder={placeholder}
         />
         <div className="ui-input-end-content">
           <button type="submit" onClick={() => onSubmit(otherProps.value)} />
@@ -50,10 +53,5 @@ const InputSearchBar: ForwardRefExoticComponent<
     );
   }
 );
-
-InputSearchBar.defaultProps = {
-  onSubmit: noopSubmit,
-  placeholder: "Search here.."
-};
 
 export default InputSearchBar;

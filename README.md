@@ -71,14 +71,17 @@ pnpm install
 pnpm dev
 ```
 
-The repository uses a pnpm workspace, Vite 8, Sass, TypeScript, Vitest and React Testing Library. The documentation app is under `apps/docs`; the component package remains under `src/lib` during this incremental migration.
+The repository uses a pnpm workspace, Vite 8, Sass, TypeScript, Vitest, React Testing Library and Playwright. The documentation app is under `apps/docs`; the component package remains under `src/lib` during this incremental migration.
 
 ```bash
 pnpm build
 pnpm test
+pnpm test:browser
 pnpm lint
 pnpm typecheck
 ```
+
+`pnpm test:browser` starts an isolated Vite fixture that mounts the public visual component library and checks real browser interactions plus 34 checked-in visual baselines. To intentionally update visual baselines, use `pnpm test:browser:update` and review every changed image before committing it.
 
 The package also keeps the legacy `react-windows-ui/dist/react-windows-ui.min.css` CSS path for existing applications. React, React DOM, and React Router DOM are peer dependencies and must be installed by the consuming app.
 

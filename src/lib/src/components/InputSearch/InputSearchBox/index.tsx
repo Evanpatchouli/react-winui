@@ -33,7 +33,17 @@ const noopChange: ChangeEventHandler<HTMLInputElement> = () => {};
 const InputSearchBox: ForwardRefExoticComponent<
   InputSearchBoxProps & RefAttributes<HTMLInputElement>
 > = forwardRef<HTMLInputElement, InputSearchBoxProps>(
-  ({ width, suggest = [], tooltip, onChange = noopChange, ...otherProps }, ref) => {
+  (
+    {
+      width,
+      suggest = [],
+      tooltip,
+      onChange = noopChange,
+      placeholder = "Search here..",
+      ...otherProps
+    },
+    ref
+  ) => {
     const suggestRef = useRef<HTMLUListElement>(null);
     const [suggestData, setSuggestData] = useState(suggest);
 
@@ -63,7 +73,7 @@ const InputSearchBox: ForwardRefExoticComponent<
           name={otherProps.name}
           value={otherProps.value}
           onClick={otherProps.onClick}
-          placeholder={otherProps.placeholder}
+          placeholder={placeholder}
           disabled={otherProps.disabled}
           onChange={handleChange}
         />
@@ -81,11 +91,5 @@ const InputSearchBox: ForwardRefExoticComponent<
     );
   }
 );
-
-InputSearchBox.defaultProps = {
-  suggest: [],
-  onChange: noopChange,
-  placeholder: "Search here.."
-};
 
 export default InputSearchBox;

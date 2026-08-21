@@ -23,6 +23,7 @@ export default [
       "apps/docs/**/*.{js,jsx}",
       "examples/test-app/**/*.{js,jsx}",
       "tests/**/*.{js,jsx}",
+      "playwright.config.js",
       "src/lib/vite.config.js",
       "src/lib/scripts/**/*.mjs",
       "vitest.config.js",

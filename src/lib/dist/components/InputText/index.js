@@ -58,12 +58,5 @@ var c = () => {}, l = t(({ onClearButtonClick: t = c, clearButton: l, setStatus:
 		]
 	});
 });
-l.defaultProps = {
-	type: "text",
-	setStatus: "default",
-	placeholder: "Input Text",
-	onChange: c,
-	onClearButtonClick: c
-};
 //#endregion
 export { l as default };

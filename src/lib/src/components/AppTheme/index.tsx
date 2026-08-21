@@ -44,7 +44,7 @@ const AppTheme: React.FC<AppThemeProps> = React.memo(
   (prevProps, nextProps) => {
     if (prevProps.scheme !== nextProps.scheme) {
       applyScheme(nextProps.scheme);
-      nextProps.onSchemeChange?.();
+      (nextProps.onSchemeChange ?? noop)();
     }
 
     if (prevProps.color !== nextProps.color) {
@@ -54,17 +54,12 @@ const AppTheme: React.FC<AppThemeProps> = React.memo(
           "--PrimaryColorLight",
           nextProps.colorDarkMode || nextProps.color
         );
-        nextProps.onColorChange?.();
+        (nextProps.onColorChange ?? noop)();
       }
     }
 
     return false;
   }
 );
-
-AppTheme.defaultProps = {
-  onColorChange: noop,
-  onSchemeChange: noop
-};
 
 export default AppTheme;
