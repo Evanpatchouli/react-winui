@@ -192,3 +192,8 @@
 - 新增 `@evanpatchouli/react-winui/theme` 子路径，导出只包含 `var(--rwu-*)` 引用的 `Shadows` 常量；Sass/CSS token 仍是阴影真实值的唯一来源。
 - `Shadows` 同时覆盖 shadow scale 与既有 `flyout`、`flyoutNested`、`dialog`、`alert` 语义 token，支持 inline style 等 JavaScript-facing CSS API，不替代组件 SCSS 中的 CSS token 用法。
 - 保留根入口的同名导出以确保 preserveModules 构建稳定产出 `dist/theme/index.js`；文档和推荐用法以独立 `theme` 子路径为准。
+
+## 2026-08-21：集中整理组件借鉴规范
+
+- 将阶段 6 已验证的 WinUI / Windows 11 行为参考、Fluent UI v9 架构参考、react-winui 视觉边界、源码许可、测试和完成标准集中到 `docs/component-migration-guidelines.md`。
+- 公共规范只描述当前组件开发需要的规则，不建立与项目规模不匹配的通用 framework；Tooltip 作为首个完成模板保留在文档末尾。

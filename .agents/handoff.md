@@ -281,3 +281,9 @@
 - 新增 `src/lib/src/theme/index.ts` 与对应 declaration，提供 `Shadows.shadow2` 至 `Shadows.shadow64`、`none`、`flyout`、`flyoutNested`、`dialog`、`alert`，所有值均为 `var(--rwu-*)` 引用。
 - 新增 package `./theme` exports；consumer 已验证 `import { Shadows } from "@evanpatchouli/react-winui/theme"` 的类型解析、运行时解析和 `boxShadow` 使用。
 - README 与 `docs/design-system.md` 已补充 CSS token 引用层用法；真实值仍由 Sass/CSS token 层维护。
+
+# 阶段 6 follow-up：组件借鉴规范整理
+
+- 新增 `docs/component-migration-guidelines.md`，集中记录 WinUI / Windows 11 与 Fluent UI v9 的参考优先级、可借鉴/禁止复制边界、API、无障碍、视觉 token、测试、许可和完成标准。
+- 文档以 Tooltip 作为首个模板，明确 `aria-describedby`、实心 surface、`--rwu-shadow-8`、测试矩阵和停止边界。
+- README 与 `docs/design-system.md` 已增加规范入口；未修改组件实现或 public API。

@@ -35,16 +35,16 @@ const style = { boxShadow: Shadows.shadow8 };
 
 ## Token 分类
 
-| 分类 | 示例 | 用途 |
-| --- | --- | --- |
-| 颜色 / 文字 | `--rwu-color-accent`、`--rwu-color-text-primary`、`--rwu-color-text-secondary` | 主色、正文和弱化文字 |
-| 颜色 / surface | `--rwu-color-surface-canvas`、`--rwu-color-surface-control`、`--rwu-color-surface-dialog` | 页面、控件和弹窗表面 |
-| 颜色 / 状态 | `--rwu-color-surface-control-hover`、`--rwu-color-surface-control-pressed`、`--rwu-color-danger` | hover、pressed 与状态色 |
-| 颜色 / border | `--rwu-color-border-control`、`--rwu-color-border-input`、`--rwu-color-border-divider` | 控件、输入框和分隔线 |
-| 圆角 | `--rwu-radius-small`、`--rwu-radius-control`、`--rwu-radius-dialog` | 保留现有 4px、5px、8.6px 等圆角 |
-| 间距 | `--rwu-spacing-xs` 至 `--rwu-spacing-3xl` | 复用现有 4/5/8/10/15/20/30px 间距 |
-| 阴影 | `--rwu-shadow-2` 至 `--rwu-shadow-64`、`--rwu-shadow-flyout`、`--rwu-shadow-dialog`、`--rwu-shadow-alert` | Fluent UI 风格层级阴影，以及现有下拉菜单、Dialog 和 Alert 阴影 |
-| 动效 | `--rwu-duration-fast`、`--rwu-duration-control`、`--rwu-duration-dropdown` | 复用现有 transition/animation 时长 |
+| 分类           | 示例                                                                                                      | 用途                                                           |
+| -------------- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| 颜色 / 文字    | `--rwu-color-accent`、`--rwu-color-text-primary`、`--rwu-color-text-secondary`                            | 主色、正文和弱化文字                                           |
+| 颜色 / surface | `--rwu-color-surface-canvas`、`--rwu-color-surface-control`、`--rwu-color-surface-dialog`                 | 页面、控件和弹窗表面                                           |
+| 颜色 / 状态    | `--rwu-color-surface-control-hover`、`--rwu-color-surface-control-pressed`、`--rwu-color-danger`          | hover、pressed 与状态色                                        |
+| 颜色 / border  | `--rwu-color-border-control`、`--rwu-color-border-input`、`--rwu-color-border-divider`                    | 控件、输入框和分隔线                                           |
+| 圆角           | `--rwu-radius-small`、`--rwu-radius-control`、`--rwu-radius-dialog`                                       | 保留现有 4px、5px、8.6px 等圆角                                |
+| 间距           | `--rwu-spacing-xs` 至 `--rwu-spacing-3xl`                                                                 | 复用现有 4/5/8/10/15/20/30px 间距                              |
+| 阴影           | `--rwu-shadow-2` 至 `--rwu-shadow-64`、`--rwu-shadow-flyout`、`--rwu-shadow-dialog`、`--rwu-shadow-alert` | Fluent UI 风格层级阴影，以及现有下拉菜单、Dialog 和 Alert 阴影 |
+| 动效           | `--rwu-duration-fast`、`--rwu-duration-control`、`--rwu-duration-dropdown`                                | 复用现有 transition/animation 时长                             |
 
 完整 token 列表以 `src/lib/scss/themes/tokens.scss` 为准。
 
@@ -64,6 +64,7 @@ const style = { boxShadow: Shadows.shadow8 };
 
 - 新组件必须优先使用 `--rwu-*`，不要复制现有 SCSS literal。
 - 不引入 Fluent UI 的视觉 token、Griffel recipe 或默认外观。
+- 组件从 WinUI / Fluent UI 借鉴行为的流程见 [`component-migration-guidelines.md`](component-migration-guidelines.md)。
 - DOM、className、Props 和现有交互状态不因 token 抽取而改变。
 - 数据 URI、组件专属几何值和浏览器兼容值只有在确认复用关系后再抽取。
 - 任何视觉数值调整都必须通过后续 Visual Regression 基线确认。

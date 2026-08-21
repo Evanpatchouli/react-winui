@@ -77,3 +77,4 @@
 - 当单个浮层需要与通用 Flyout 不同的阴影层级时，应选择合适的语义化 `--rwu-shadow-*` token，而不是直接调小共享 Flyout shadow；这样可以保持其他下拉/菜单的既有视觉基线。
 - Theme/Shadows 这类多层阴影应先落入本库的 `--rwu-shadow-*` scale，再由组件选择具体层级；Tooltip 使用 `box-shadow: var(--rwu-shadow-8)`，不要把 Fluent UI 的包或 Griffel recipe 引入运行时。
 - JavaScript-facing token 常量应只保存 `var(--rwu-*)` 引用，不要复制 Sass 中的实际阴影值；这样 inline style 能获得自动补全，同时仍保留消费者 CSS 覆盖和主题切换能力。
+- 阶段性组件规范应集中保留为公共轻量文档，内部 decisions/handoff 只记录具体决策和交付结果；这样后续组件可以复用流程而不必从历史记录中拼接规则。

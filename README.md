@@ -47,6 +47,7 @@ import "@evanpatchouli/react-winui/icons/winui-icons.min.css";
 ## 🚀 [See `App.js` code & more »](https://evanpatchouli.github.io/react-winui/#/v1.0.0/getting_started)
 
 样式 token 规范见 [`docs/design-system.md`](docs/design-system.md)。
+组件借鉴与迁移规范见 [`docs/component-migration-guidelines.md`](docs/component-migration-guidelines.md)。
 
 # Usage
 ```js

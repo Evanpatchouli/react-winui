@@ -15,6 +15,11 @@
 - 验证：`pnpm lint`、`pnpm typecheck`、`pnpm test`（64 tests）、`pnpm test:consumer`、`pnpm build`、`pnpm test:browser`（36 tests）、`pnpm format:check` 均通过。
 - 遗留：docs production build 仍有既有大 chunk warning。
 
+## 阶段 6 follow-up：组件借鉴规范整理（已完成）
+
+- 新增 `docs/component-migration-guidelines.md`，集中阶段 6 的来源优先级、借鉴边界、API、无障碍、视觉、测试和完成标准。
+- README 与 `docs/design-system.md` 已增加文档入口；Tooltip 作为首个模板记录在规范末尾。
+
 ## 下一步
 
 阶段 6 已完成，等待用户指定阶段 7 或其他组件任务，不自动进入下一阶段。
