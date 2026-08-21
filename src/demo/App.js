@@ -14,7 +14,7 @@ const Splash = () => {
                       backgroundColor: "#0078D7"
                     }}>
             <h1 style={{margin: "0 auto", color: "white"}}>
-              react-windows-ui
+              @evanpatchouli/react-winui
             </h1>
           </div>
 }
