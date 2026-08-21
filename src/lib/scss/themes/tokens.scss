@@ -1,0 +1,93 @@
+// The semantic token layer intentionally resolves through the existing
+// --color-* variables. This keeps the current light/dark theme contract and
+// consumer overrides intact while giving new styles a stable API.
+@mixin design-tokens() {
+  :root {
+    // Color: intent and surfaces
+    --rwu-color-accent: var(--color-primary-adaptive);
+    --rwu-color-brand: var(--PrimaryColor);
+    --rwu-color-danger: var(--color-danger-default);
+    --rwu-color-success: var(--color-success-default);
+    --rwu-color-text-primary: var(--color-text-default);
+    --rwu-color-text-secondary: var(--color-input-placeholder);
+    --rwu-color-text-disabled: var(--color-input-placeholder);
+    --rwu-color-text-on-accent: var(--color-scheme-absolute);
+    --rwu-color-surface-canvas: var(--color-background-default);
+    --rwu-color-surface-control: var(--color-button-default);
+    --rwu-color-surface-control-hover: var(--color-ui-hover-default);
+    --rwu-color-surface-control-pressed: var(--color-ui-active-default);
+    --rwu-color-surface-input: var(--color-input-bg-default);
+    --rwu-color-surface-input-hover: var(--color-input-bg-hover);
+    --rwu-color-surface-input-focus: var(--color-input-bg-focused);
+    --rwu-color-surface-card: var(--color-card-bg-default);
+    --rwu-color-surface-flyout: rgba(var(--color-dropdown-menu-bg), 1);
+    --rwu-color-surface-flyout-translucent: rgba(var(--color-dropdown-menu-bg), 0.86);
+    --rwu-color-surface-dialog: rgba(var(--color-model-ui-bg), 1);
+    --rwu-color-surface-dialog-translucent: rgba(var(--color-model-ui-bg), 0.84);
+    --rwu-color-surface-dialog-footer: var(--color-model-footer-bg);
+    --rwu-color-surface-navigation: var(--color-navbar-bg-default);
+    --rwu-color-surface-progress: var(--color-progress-bg);
+    --rwu-color-surface-overlay: #77777777;
+    --rwu-color-loader-primary: var(--color-day-primary-night-white);
+    --rwu-color-scroll-thumb: var(--color-scroll-thumb);
+    --rwu-color-scroll-thumb-hover: var(--color-scroll-thumb-hover);
+    --rwu-color-scroll-thumb-active: var(--color-scroll-thumb-active);
+
+    // Color: borders and component states
+    --rwu-color-border-control: rgba(0, 0, 0, 0.08);
+    --rwu-color-border-control-top: var(--color-button-border-top-default);
+    --rwu-color-border-control-bottom: var(--color-button-border-bottom-defult);
+    --rwu-color-border-control-outline: var(--color-button-border-outline);
+    --rwu-color-border-control-success: var(--color-button-border-bottom-success);
+    --rwu-color-border-control-danger: var(--color-button-border-bottom-danger);
+    --rwu-color-border-control-on-accent: rgba(255, 255, 255, 0.08);
+    --rwu-color-border-control-accent-bottom: rgba(0, 0, 0, 0.6);
+    --rwu-color-border-input: var(--color-input-border-default);
+    --rwu-color-border-input-focus: var(--color-input-border-focused);
+    --rwu-color-border-input-bottom: var(--color-input-border-bottom);
+    --rwu-color-border-input-strong: var(--color-input-border-strong);
+    --rwu-color-border-dialog: var(--color-foreground-dark);
+    --rwu-color-border-divider: var(--color-ui-border-default);
+    --rwu-color-hover-strong: var(--color-ui-hover-strong);
+    --rwu-color-switch: var(--color-switch-ui);
+    --rwu-color-slider-thumb: var(--color-slider-thumb-bg);
+    --rwu-color-slider-tick: var(--color-slider-tick-bg);
+
+    // Typography and sizing
+    --rwu-font-size-control: 14px;
+    --rwu-font-size-label: 15px;
+    --rwu-control-height: 32px;
+    --rwu-radius-small: 4px;
+    --rwu-radius-control: 5px;
+    --rwu-radius-flyout: 6px;
+    --rwu-radius-dialog: 8.6px;
+    --rwu-radius-switch-track: 20px;
+    --rwu-radius-switch-thumb: 7px;
+    --rwu-radius-pill: 100px;
+
+    // Spacing
+    --rwu-spacing-xs: 4px;
+    --rwu-spacing-sm: 5px;
+    --rwu-spacing-md: 8px;
+    --rwu-spacing-lg: 10px;
+    --rwu-spacing-xl: 15px;
+    --rwu-spacing-2xl: 20px;
+    --rwu-spacing-3xl: 30px;
+
+    // Elevation
+    --rwu-shadow-none: none;
+    --rwu-shadow-flyout: 0 2px 5px #22222244;
+    --rwu-shadow-flyout-nested: 2px 2px 5px #22222244;
+    --rwu-shadow-dialog: 0 0 7vh rgba(0, 0, 0, 0.25);
+    --rwu-shadow-alert: 0 0 24vh rgba(0, 0, 0, 0.25);
+
+    // Motion
+    --rwu-duration-fast: 0.09s;
+    --rwu-duration-control: 0.24s;
+    --rwu-duration-overlay: 0.25s;
+    --rwu-duration-switch: 100ms;
+    --rwu-duration-slow: 0.4s;
+    --rwu-duration-dropdown: 0.367s;
+    --rwu-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}

@@ -46,9 +46,9 @@
   .ui-input-search-bar {
     button:not(:active) {
       &:hover {
-        background: var(--color-navbar-bg-default);
+        background: var(--rwu-color-surface-navigation);
         &::after {
-          color: var(--color-text-default) !important;
+          color: var(--rwu-color-text-primary) !important;
         }
       }
     }

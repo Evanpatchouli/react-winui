@@ -20,19 +20,19 @@
 
   .ui-input-label {
     display: flex;
-    font-size: 15px;
+    font-size: var(--rwu-font-size-label);
     align-items: center;
     place-content: center;
     width: max-content;
-    padding: 0 10px;
+    padding: 0 var(--rwu-spacing-lg);
     border-right-width: 0 !important;
-    // background: var(--color-background-default);
-    border-radius: 5px;
+    // background: var(--rwu-color-surface-canvas);
+    border-radius: var(--rwu-radius-control);
     border-end-end-radius: 0;
     border-start-end-radius: 0;
-    border: 1px solid var(--color-input-border-default);
+    border: 1px solid var(--rwu-color-border-input);
     // border-bottom: 1px solid #777;
-    background-image: radial-gradient(var(--color-input-border-bottom) 100%, transparent 100%) !important;
+    background-image: radial-gradient(var(--rwu-color-border-input-bottom) 100%, transparent 100%) !important;
     background-repeat: no-repeat !important;
     background-position: bottom !important;
     background-size: 100% 1px !important;
@@ -41,31 +41,31 @@
 
   &.input-success {
     .ui-input-text {
-      background-image: radial-gradient(var(--color-success-default) 100%, transparent 100%) !important;
+      background-image: radial-gradient(var(--rwu-color-success) 100%, transparent 100%) !important;
       &:focus {
-        border-bottom-color: var(--color-success-default);
+        border-bottom-color: var(--rwu-color-success);
       }
     }
     .ui-input-end-content {
       .icons10-status::before {
         content: "\f12e";
-        padding-right: 5px;
-        color: var(--color-success-default);
+        padding-right: var(--rwu-spacing-sm);
+        color: var(--rwu-color-success);
       }
     }
   }
   &.input-danger {
     .ui-input-text {
-      background-image: radial-gradient(var(--color-danger-default) 100%, transparent 100%) !important;
+      background-image: radial-gradient(var(--rwu-color-danger) 100%, transparent 100%) !important;
       &:focus {
-        border-bottom-color: var(--color-danger-default);
+        border-bottom-color: var(--rwu-color-danger);
       }
     }
     .ui-input-end-content {
       .icons10-status::before {
         content: "\f116";
-        padding-right: 5px;
-        color: var(--color-danger-default);
+        padding-right: var(--rwu-spacing-sm);
+        color: var(--rwu-color-danger);
       }
     }
   }
@@ -77,8 +77,8 @@
 }
 
 .ui-input-end-content {
-  gap: 5px;
-  right: 5px;
+  gap: var(--rwu-spacing-sm);
+  right: var(--rwu-spacing-sm);
   height: 100%;
   display: flex;
   line-height: 1;
@@ -87,11 +87,11 @@
 
   button {
     border: none;
-    font-size: 15px;
+    font-size: var(--rwu-font-size-label);
     line-height: 1.2;
     background: transparent;
     &:hover {
-      background-color: var(--color-button-default);
+      background-color: var(--rwu-color-surface-control);
     }
     &:active {
       opacity: 0.7;

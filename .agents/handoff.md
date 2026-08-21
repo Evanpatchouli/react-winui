@@ -200,3 +200,15 @@
 - `pnpm --filter react-windows-ui build:styles` 和完整 `pnpm build` 均不再输出 Sass `@import` 弃用警告。
 - 基线 CSS 与新 CSS 的规则/声明结构一致；只有 selector list 的生成顺序变化，未改变视觉规则。
 - 当前仅剩 docs 大 chunk warning；未在本任务中改动代码分包策略。
+
+# 阶段 4 Design Tokens handoff
+
+- 已新增 `src/lib/scss/themes/tokens.scss`，提供 `--rwu-*` 语义 token，覆盖颜色、surface、border、圆角、间距、阴影和动效分类。
+- token 层通过现有 `--color-*` 变量解析；`[data-theme="dark"]`、`Appearance`、`AppTheme` 及主色变量行为保持不变，旧变量和历史拼写暂不删除。
+- 已将全部组件与浏览器 SCSS 消费端的旧 `--color-*` / `--PrimaryColor*` 引用替换为 token，覆盖基础父选择器、Button、Body、Dialog、Alert、MenuBar、TableView、InputText、Checkbox、Switch、Links、ButtonGroup、ProgressBar、Select、NavBar、RadioButton、SliderBar、Loader、ColorPicker、AlertBar、滚动条等；没有修改 DOM、Props、className 或组件结构。
+- 新增 `docs/design-system.md`，记录 token 分类、主题机制、兼容策略和新组件使用规范；README 已增加文档入口。
+- `src/lib/dist/react-windows-ui.min.css` 已由 Sass 构建更新并纳入变更。
+- 验证通过：`pnpm --filter react-windows-ui build:styles`、`pnpm lint`、`pnpm typecheck`、`pnpm test`（2 files / 55 tests）、`pnpm build`。
+- 额外审计：编译 CSS 中 70 个 `--rwu-*` 声明、59 个使用点，缺失声明 0；本阶段触碰文件均为 UTF-8 无 BOM。
+- 已知遗留：docs 构建仍有既有大 chunk warning；阶段 5 再建立 Playwright 与截图基线，本阶段未引入视觉回归基础设施。
+- 全量迁移复核：组件/浏览器 SCSS 中旧变量消费端为 0；最新编译 CSS 为 75 个 token 声明、67 个使用点，缺失声明 0。

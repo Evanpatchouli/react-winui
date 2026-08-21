@@ -127,3 +127,18 @@
 - 采用 `@use` 而不是压制 deprecation warning；保留 `@import` 语义会继续依赖 Sass 全局作用域，无法解决 Dart Sass 3.0 的移除风险。
 - 组件对 `_base/parents.scss` 使用 `@use ... as *`，因为这些文件依赖历史全局 selector 的 `@extend`；浏览器移动端 mixin 使用显式命名空间，减少全局成员污染。
 - 接受 Sass 模块化造成的 selector list 排序变化，但要求 CSS 规则和声明结构保持一致；通过基线 CSS 规范化对比验证。
+
+## 2026-08-21：阶段 4 Design Tokens 渐进抽取
+
+- 新增 `src/lib/scss/themes/tokens.scss`，使用 `--rwu-*` 作为新的语义 token 命名空间；不把旧 `--color-*` 变量一次性替换或删除。
+- `--rwu-color-*` 有意引用现有主题变量，而不是复制一套 light/dark literal。这样 `[data-theme="dark"]`、`Appearance`、`AppTheme`、`--PrimaryColor` / `--PrimaryColorLight` 和消费者旧变量覆盖都继续生效。
+- 尺寸、间距、阴影和动效 token 使用当前 SCSS 已存在的精确值；本阶段仅迁移基础父选择器与 Button、InputText、Checkbox、Switch、Dialog、Alert、Select、TableView 等相关样式，不修改组件 DOM、Props 或 class。
+- 保留历史 `--color-button-border-bottom-defult` 拼写作为兼容变量，新代码通过语义 token `--rwu-color-border-control-bottom` 访问它。
+- 发布 CSS 产物继续写入 `src/lib/dist/react-windows-ui.min.css`；新增 token 文档保持轻量，完整 token 列表以 Sass 源文件为准。
+
+## 2026-08-21：阶段 4 全量消费端迁移
+
+- 用户要求继续完成迁移后，将 `src/lib/scss/components` 和 `src/lib/scss/browsers` 中全部 `var(--color-*)` / `var(--PrimaryColor*)` 消费端替换为 `--rwu-*` 语义 token。
+- `light.scss`、`dark.scss` 与 `tokens.scss` 中的旧变量引用保留为兼容桥接层；不删除旧 CSS 自定义属性，确保已有消费者覆盖仍然可用。
+- 新增 `--rwu-color-brand`、`--rwu-color-loader-primary` 和滚动条 thumb token，覆盖原先没有语义映射的主色、loader 和 scrollbar 变量。
+- 通过 `rg` 审计确认组件/浏览器 SCSS 的旧变量消费端为 0；不把主题兼容桥接本身误判为未迁移组件样式。

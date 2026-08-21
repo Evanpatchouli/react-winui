@@ -2,7 +2,7 @@
   font-weight: 400;
   display: inline-flex;
   line-break: anywhere;
-  color: var(--color-primary-adaptive);
+  color: var(--rwu-color-accent);
 
   &:hover {
     filter: contrast(0.4);
@@ -14,11 +14,11 @@
 }
 
 .ui-link-subtle {
-  padding: 4px 6px;
-  border-radius: 4px;
-  color: var(--color-text-default);
+  padding: var(--rwu-spacing-xs) 6px;
+  border-radius: var(--rwu-radius-small);
+  color: var(--rwu-color-text-primary);
   &:hover {
-    background-color: var(--color-ui-hover-default);
+    background-color: var(--rwu-color-surface-control-hover);
   }
   &:active {
     opacity: 0.8;

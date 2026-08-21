@@ -10,7 +10,7 @@
     border: 1px solid transparent;
 
     &:hover {
-      border: 1px solid var(--color-text-default);
+      border: 1px solid var(--rwu-color-text-primary);
     }
     &:active {
       filter: brightness(0.6);
@@ -27,8 +27,8 @@
       position: relative;
       transition: transform 0.24s;
       border-bottom-left-radius: 3px;
-      color: var(--color-background-default);
-      background: var(--color-text-default);  
+      color: var(--rwu-color-surface-canvas);
+      background: var(--rwu-color-text-primary);
     }
   }
   .item:not(:checked) + div::before {
@@ -47,7 +47,7 @@
   }
   div:hover,
   .item:checked + div {
-    border: 1px solid var(--color-text-default);
+    border: 1px solid var(--rwu-color-text-primary);
   }
 
   &.palette {
@@ -57,7 +57,7 @@
       position: absolute;
     }
     div {
-      border: 1px solid var(--color-text-default);
+      border: 1px solid var(--rwu-color-text-primary);
       &::before {
         content: "\f10c";
       }

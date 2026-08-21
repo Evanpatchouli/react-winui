@@ -1,5 +1,5 @@
 .transition-scale-active {
-  transition-duration: 0.09s;
+  transition-duration: var(--rwu-duration-fast);
   transform: scale(0.99, 0.99);
   transition-timing-function: ease;
   transition-property: background, transform;
@@ -33,7 +33,7 @@
   display: initial;
   visibility: visible;
   animation-fill-mode: both;
-  animation-duration: 0.367s;
+  animation-duration: var(--rwu-duration-dropdown);
   animation-name: transition_dropdown;
   animation-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
 }
@@ -43,15 +43,15 @@
 
 .input-btn-default {
   cursor: pointer;
-  font-size: 14px;
+  font-size: var(--rwu-font-size-control);
   border: 1px solid;
   user-select: none;
-  border-radius: 5px;
-  color: var(--color-text-default);
-  background-color: var(--color-button-default);
-  border-color: rgba(0,0,0,0.08);
-  border-bottom-color: var(--color-button-border-bottom-defult);
-  border-top-color: var(--color-button-border-top-default);
+  border-radius: var(--rwu-radius-control);
+  color: var(--rwu-color-text-primary);
+  background-color: var(--rwu-color-surface-control);
+  border-color: var(--rwu-color-border-control);
+  border-bottom-color: var(--rwu-color-border-control-bottom);
+  border-top-color: var(--rwu-color-border-control-top);
   &:hover {
     opacity: 0.85;
     filter: brightness(0.9);
@@ -65,43 +65,43 @@
 .ui-input-container:focus-within .ui-input-label {
   outline: none;
   transition: 0s;
-  border: 1px solid var(--color-input-border-focused);
-  background-color: var(--color-input-bg-focused);
+  border: 1px solid var(--rwu-color-border-input-focus);
+  background-color: var(--rwu-color-surface-input-focus);
   background-position-y: bottom !important;
-  border-bottom-color: var(--color-primary-adaptive);
-  background-image: radial-gradient(var(--color-primary-adaptive) 100%, transparent 100%) !important;
+  border-bottom-color: var(--rwu-color-accent);
+  background-image: radial-gradient(var(--rwu-color-accent) 100%, transparent 100%) !important;
 }
 
 .input-field-default {
   width: inherit;
   line-height: 1;
-  font-size: 14px;
-  box-shadow: none;
-  padding: 0 0 0 10px;
-  color: var(--color-text-default);
+  font-size: var(--rwu-font-size-control);
+  box-shadow: var(--rwu-shadow-none);
+  padding: 0 0 0 var(--rwu-spacing-lg);
+  color: var(--rwu-color-text-primary);
   -webkit-tap-highlight-color: transparent;
-  background-color: var(--color-input-bg-default);
+  background-color: var(--rwu-color-surface-input);
   
-  height: 32px;
-  border-radius: 5px;
-  border: 1px solid var(--color-input-border-default);
-  background-image: radial-gradient(var(--color-input-border-bottom) 100%, transparent 100%);
+  height: var(--rwu-control-height);
+  border-radius: var(--rwu-radius-control);
+  border: 1px solid var(--rwu-color-border-input);
+  background-image: radial-gradient(var(--rwu-color-border-input-bottom) 100%, transparent 100%);
   background-repeat: no-repeat !important;
   background-position: bottom !important;
   background-size: 100% 1px !important;
   background-position-y: calc(100% + 1px) !important;
   &:hover:not(:focus) {
-    background-color: var(--color-input-bg-hover);
+    background-color: var(--rwu-color-surface-input-hover);
   }
   &:focus {
-    //border: 1px solid var(--color-input-border-focused);
+    //border: 1px solid var(--rwu-color-border-input-focus);
     @extend .input-field-focused;
   }
   &[disabled] {
     @extend .input-field-default-disabled;
   }
   &::placeholder {
-    color: var(--color-input-placeholder);
+    color: var(--rwu-color-text-secondary);
   }
 }
 .input-field-default-disabled {
@@ -125,8 +125,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #77777777;
-  transition: visibility 0.25s, opacity 0.25s ease;
+  background: var(--rwu-color-surface-overlay);
+  transition: visibility var(--rwu-duration-overlay), opacity var(--rwu-duration-overlay) ease;
 
   &.show {
     opacity: 1;
@@ -138,20 +138,20 @@
   a, span {
     display: flex;
     line-height: 1;
-    font-size: 14px;
+    font-size: var(--rwu-font-size-control);
     cursor: pointer;
     position: relative;
     align-items: center;
-    color: var(--color-text-default);
+    color: var(--rwu-color-text-primary);
     -webkit-tap-highlight-color: transparent;
-    margin: 5px;
-    padding: 8px;
-    border-radius: 4px;
+    margin: var(--rwu-spacing-sm);
+    padding: var(--rwu-spacing-md);
+    border-radius: var(--rwu-radius-small);
     &:active {
       opacity: 0.7;
     }
     &:hover {
-      background-color: var(--color-ui-hover-strong);
+      background-color: var(--rwu-color-hover-strong);
     }
   }
   i::before {
@@ -167,7 +167,7 @@
   cursor: auto;
   z-index: 999;
   display: none;
-  margin: 5px 0;
+  margin: var(--rwu-spacing-sm) 0;
   width: inherit;
   max-height: 37vh;
   list-style: none;
@@ -177,14 +177,14 @@
   visibility: hidden;
   position: absolute;
   -webkit-tap-highlight-color: transparent;
-  background: rgba($color: var(--color-dropdown-menu-bg), $alpha: 1.0);
-  border-radius: 6px;
-  box-shadow: 0 2px 5px #22222244;
-  border-color: var(--color-ui-border-default);
+  background: var(--rwu-color-surface-flyout);
+  border-radius: var(--rwu-radius-flyout);
+  box-shadow: var(--rwu-shadow-flyout);
+  border-color: var(--rwu-color-border-divider);
 
   &.ui-backdrop-blur {
     backdrop-filter: blur(12px);
-    background: rgba($color: var(--color-dropdown-menu-bg), $alpha: 0.86);
+    background: var(--rwu-color-surface-flyout-translucent);
   }
 
   &.show {
@@ -200,15 +200,15 @@
     border: 0;
     height: 1px;
     margin: 0 5px;
-    background-color: var(--color-ui-border-default);
+    background-color: var(--rwu-color-border-divider);
   }
 }
 
 
 .ui-modal-footer-default {
-  padding: 15px;
+  padding: var(--rwu-spacing-xl);
   display: block;
   text-align: right;
-  border-top: 1px solid var(--color-ui-hover-strong);
-  background-color: var(--color-model-footer-bg);
+  border-top: 1px solid var(--rwu-color-hover-strong);
+  background-color: var(--rwu-color-surface-dialog-footer);
 }

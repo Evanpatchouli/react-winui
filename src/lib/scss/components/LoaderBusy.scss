@@ -30,7 +30,7 @@
   }
 
   .ui-ldr-busy {
-    stroke: var(--color-primary-adaptive);
+    stroke: var(--rwu-color-accent);
     fill: none;
     stroke-width: 2px;
     stroke-linecap: round;
@@ -60,6 +60,6 @@
 .ui-btn-danger,
 .ui-btn-success {
   .ui-ldr-busy {
-    stroke: var(--color-scheme-absolute);
+    stroke: var(--rwu-color-text-on-accent);
   }
 }

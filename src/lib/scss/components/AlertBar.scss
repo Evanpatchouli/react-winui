@@ -20,21 +20,21 @@
     background: #dddddd22;
     &::before, strong {
       content: "\f1cf";
-      color: var(--color-primary-adaptive);
+      color: var(--rwu-color-accent);
     }
   }
   &.alert-success {
     background: #57E84A22;
     &::before, strong {
       content: "\f130";
-      color: var(--color-success-default);
+      color: var(--rwu-color-success);
     }
   }
   &.alert-danger {
     background: #E8475622;
     &::before, strong {
       content: "\f1a9";
-      color: var(--color-danger-default);
+      color: var(--rwu-color-danger);
     }
   }
   [aria-label="Close"] {

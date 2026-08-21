@@ -2,12 +2,20 @@
 
 ## 状态
 
-已完成：Sass `@import` 弃用警告修复，全部 SCSS 已迁移到 Sass 模块系统。
+已完成：阶段 4「抽取 react-windows-ui Design Tokens」。
 
-## 归档
+## 本阶段交付
 
-详见 `.agents/archive/2026-08-21-sass-import-migration.md`；阶段 3 迁移记录见 `.agents/archive/2026-08-21-phase3-batch15.md` 及其前序批次记录。
+- 新增 `src/lib/scss/themes/tokens.scss`，建立 `--rwu-*` 语义 token 层。
+- token 通过现有 `--color-*` 变量解析，保留 light/dark、`--PrimaryColor` / `--PrimaryColorLight` 和旧变量覆盖行为。
+- 全部组件与浏览器 SCSS 消费端完成替换，未修改组件 DOM、Props、className 或视觉数值。
+- 新增 `docs/design-system.md`，并在 README 增加入口。
+- 更新 `src/lib/dist/react-windows-ui.min.css` 发布样式产物。
+
+## 验证
+
+`pnpm lint`、`pnpm typecheck`、`pnpm test`（55 tests）、`pnpm build` 和 `pnpm --filter react-windows-ui build:styles` 均通过；组件/浏览器 SCSS 的旧变量消费端为 0；完整 build 仍保留既有 docs 大 chunk warning。
 
 ## 下一步
 
-Sass 构建已无 `@import` deprecation warning；当前仍有既有 docs 大 chunk warning。等待下一步指令，不自动进入阶段 4。
+等待用户指定阶段 5 或下一批 token/视觉回归工作，不自动进入下一阶段。

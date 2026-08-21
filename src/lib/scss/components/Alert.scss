@@ -2,7 +2,7 @@
 
 .ui-alert {
   @extend .ui-dim-overlay;
-  color: var(--color-text-default);
+  color: var(--rwu-color-text-primary);
 
   .ui-alert-modal {
     z-index: 11;
@@ -10,17 +10,17 @@
     position: fixed;
     overflow: hidden;
     flex-direction: column;
-    transition-duration: 0.24s;
-    box-shadow: 0 0 24vh rgba(0, 0, 0, 0.25);
+    transition-duration: var(--rwu-duration-control);
+    box-shadow: var(--rwu-shadow-alert);
     width: 40%;
     max-width: 400px;
-    border-radius: 8.6px;
+    border-radius: var(--rwu-radius-dialog);
     transform: translate3d(0,-1%,0) scale(1.034);
-    background: rgba($color: var(--color-model-ui-bg), $alpha: 1.0);
+    background: var(--rwu-color-surface-dialog);
 
     &.ui-backdrop-blur {
       backdrop-filter: blur(12px);
-      background: rgba($color: var(--color-model-ui-bg), $alpha: 0.84);
+      background: var(--rwu-color-surface-dialog-translucent);
     }
   }  
 

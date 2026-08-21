@@ -11,7 +11,7 @@
   position: relative;
   
   .ui-menu-list-dialog {
-    box-shadow: 2px 2px 5px #22222244;
+    box-shadow: var(--rwu-shadow-flyout-nested);
     border-top-left-radius: 0;
     position: absolute;
     left: 100%;

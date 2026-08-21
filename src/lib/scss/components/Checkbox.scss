@@ -14,9 +14,9 @@
     content: "";
     display: flex;
     padding: 1px;
-    border-radius: 4px;
-    border: 1px solid var(--color-input-border-strong);
-    background-color: var(--color-ui-hover-default);
+    border-radius: var(--rwu-radius-small);
+    border: 1px solid var(--rwu-color-border-input-strong);
+    background-color: var(--rwu-color-surface-control-hover);
   }
   &::after {
     width: 0px;
@@ -27,14 +27,14 @@
     position: absolute;
     pointer-events: none;
     background-size: cover;
-    transition: width 0.24s;
+    transition: width var(--rwu-duration-control);
     background-image: url("data:image/svg+xml,%3Csvg width='14px' height='10px' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='1,5 6,9 14,1' style='fill:none;stroke:black;stroke-width:1.6'/%3E%3C/svg%3E");
   }
   &:checked {
     &::before {
       padding: 0;
-      background: var(--color-primary-adaptive);
-      border: 2px solid var(--color-primary-adaptive);
+      background: var(--rwu-color-accent);
+      border: 2px solid var(--rwu-color-accent);
     }
     
     &::after {

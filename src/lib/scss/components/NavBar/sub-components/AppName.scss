@@ -4,16 +4,16 @@
   white-space: nowrap;
   display: inline-block;
   text-overflow: ellipsis;
-  color: var(--color-text-default);
+  color: var(--rwu-color-text-primary);
   // padding-inline-start: 10px;
 
   &::-moz-selection {
     background: transparent;
-    color: var(--color-text-default);
+    color: var(--rwu-color-text-primary);
   }
   &::selection {
     background: transparent;
-    color: var(--color-text-default);
+    color: var(--rwu-color-text-primary);
   }
 }
 

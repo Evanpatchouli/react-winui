@@ -1,5 +1,7 @@
 @use "./light" as *;
 @use "./dark" as *;
+@use "./tokens" as tokens;
 
 @include colors-light();
 @include colors-dark();
+@include tokens.design-tokens();

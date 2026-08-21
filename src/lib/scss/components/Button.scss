@@ -14,12 +14,12 @@ button,
     outline: none;
   }
   &:focus-visible {
-    outline: 1px solid var(--color-text-default);
+    outline: 1px solid var(--rwu-color-text-primary);
   }
 }
 
 .ui-btn {
-  min-height: 32px;
+  min-height: var(--rwu-control-height);
   padding: 6px 11px;
   vertical-align: middle;
   
@@ -31,26 +31,26 @@ button,
   }
 
   &.ui-btn-primary {
-    background-color: var(--color-primary-adaptive);
+    background-color: var(--rwu-color-accent);
   }
   &.ui-btn-outline-primary {
-    color: var(--color-primary-adaptive);
+    color: var(--rwu-color-accent);
   }
   
   &.ui-btn-success {
-    background: var(--color-success-default);
+    background: var(--rwu-color-success);
   }
   &.ui-btn-outline-success {
-    color: var(--color-success-default);
-    border-bottom-color: var(--color-button-border-bottom-success);
+    color: var(--rwu-color-success);
+    border-bottom-color: var(--rwu-color-border-control-success);
   }
   
   &.ui-btn-danger {
-    background: var(--color-danger-default);
+    background: var(--rwu-color-danger);
   }
   &.ui-btn-outline-danger {
-    color: var(--color-danger-default);
-    border-bottom-color: var(--color-button-border-bottom-danger);
+    color: var(--rwu-color-danger);
+    border-bottom-color: var(--rwu-color-border-control-danger);
   }
   
   &.ui-btn-subtle {
@@ -58,7 +58,7 @@ button,
     background-color: transparent;
     &:hover {
       opacity: 1;
-      background-color: var(--color-ui-hover-default);
+      background-color: var(--rwu-color-surface-control-hover);
     } 
   }
   
@@ -98,9 +98,9 @@ button,
 .ui-btn-primary,
 .ui-btn-danger,
 .ui-btn-success {
-  color: var(--color-scheme-absolute);
-  border-color: rgba(255, 255, 255, 0.08);
-  border-bottom-color: rgba(0, 0, 0, 0.6);
+  color: var(--rwu-color-text-on-accent);
+  border-color: var(--rwu-color-border-control-on-accent);
+  border-bottom-color: var(--rwu-color-border-control-accent-bottom);
 }
 
 

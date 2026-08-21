@@ -46,3 +46,6 @@
 - 将 root entry 从 JS 切换到 TS 后，手写 `.d.ts` 中的 public type exports 必须同时存在于 TS 实现，否则 source typecheck 会暴露声明与实现漂移。
 - Sass 从 `@import` 迁移到 `@use` 时，不能只做字符串替换；跨文件 `@extend` 必须在使用方显式加载基础 selector 模块，跨文件 mixin 必须显式使用模块命名空间。
 - 迁移 Sass 后应同时比较压缩 CSS 的 AST/规则结构，而不是只比较字节哈希；模块系统可能只改变 selector list 顺序，不代表视觉规则发生变化。
+- Design Token 渐进迁移应让新 `--rwu-*` 变量引用旧主题变量；直接复制 light/dark literal 会切断旧消费者对 `--color-*` 和自定义主色的覆盖能力。
+- CSS 自定义属性可以保存 `rgba(var(--color-model-ui-bg), alpha)` 这类运行时主题表达式；Sass 编译通过后仍需检查每个 `--rwu-*` 使用都有对应声明，避免拼写错误导致运行时值失效。
+- 全量 token 迁移审计应把 `components`/`browsers` 消费端与 `themes/tokens.scss` 兼容桥接分开统计；目标是前者旧引用为 0，而不是删除后者的旧变量映射。

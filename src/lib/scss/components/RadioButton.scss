@@ -9,12 +9,12 @@
   vertical-align: bottom;
   transition: border 0.2s ease;
   -webkit-tap-highlight-color: transparent; 
-  background: var(--color-ui-hover-default);
-  border: 1px solid var(--color-input-border-strong);
+  background: var(--rwu-color-surface-control-hover);
+  border: 1px solid var(--rwu-color-border-input-strong);
 
   &:checked {
-    background: var(--color-background-default);
-    border: 4.8px solid var(--color-primary-adaptive);
+    background: var(--rwu-color-surface-canvas);
+    border: 4.8px solid var(--rwu-color-accent);
     transition: border-color 0.2s cubic-bezier(0.4, 0, 1, 1), border-width 0.2s cubic-bezier(0.4, 0, 1, 1);
     &:hover {
       border-width: 3.8px;
@@ -22,7 +22,7 @@
     }
     &:active {
       transition: 0s ease;
-      border: 5.8px solid var(--color-primary-adaptive);
+      border: 5.8px solid var(--rwu-color-accent);
     }
   }
   &:hover {
@@ -30,13 +30,13 @@
   }
   &:active {
     transition: 0s ease;
-    border: 5.8px solid var(--color-input-border-strong);
+    border: 5.8px solid var(--rwu-color-border-input-strong);
   }
   
   &:disabled {
     cursor: not-allowed;
     filter: opacity(0.7);
-    border-color: var(--color-input-border-strong);
-    background-color: var(--color-input-border-strong);
+    border-color: var(--rwu-color-border-input-strong);
+    background-color: var(--rwu-color-border-input-strong);
   }
 }
