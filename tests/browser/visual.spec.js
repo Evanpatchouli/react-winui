@@ -558,11 +558,15 @@ test.describe("Public component visual baselines", () => {
       await page.setViewportSize({ width: 360, height: 480 });
       const autoSuggestBox = page.getByTestId("auto-suggest-box-viewport");
       await autoSuggestBox.evaluate((element) => {
-        const spacer = document.createElement("div");
-        spacer.style.height = `${window.innerHeight}px`;
-        document.body.append(spacer);
-        const rect = element.getBoundingClientRect();
-        window.scrollBy(0, rect.bottom - window.innerHeight + 6);
+        const control = element.closest(".ui-auto-suggest-box");
+        if (!(control instanceof HTMLElement)) {
+          throw new Error("AutoSuggestBox control was not found");
+        }
+        control.style.position = "fixed";
+        control.style.right = "16px";
+        control.style.bottom = "8px";
+        control.style.width = "320px";
+        control.style.zIndex = "1";
       });
       await autoSuggestBox.click();
 
