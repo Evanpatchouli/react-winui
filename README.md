@@ -61,6 +61,7 @@ import "@evanpatchouli/react-winui/icons/winui-icons.min.css";
 import {
   AutoSuggestBox,
   Button,
+  CommandBar,
   InputText,
   Popover,
   SettingsCard,
@@ -84,6 +85,13 @@ const App = () => (
       suggestions={[{ value: "Windows 11" }, { value: "WinUI Gallery" }]}
       queryButton
     />
+    <CommandBar
+      aria-label="Document commands"
+      secondaryCommands={<CommandBar.Button label="Settings" />}
+    >
+      <CommandBar.Button label="Save" />
+      <CommandBar.Button label="Copy" />
+    </CommandBar>
     <Tooltip content="Supplemental information">
       <Button value="Hover or focus" />
     </Tooltip>

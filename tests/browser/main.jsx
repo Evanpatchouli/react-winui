@@ -12,6 +12,7 @@ import Checkbox from "../../src/lib/src/components/Checkbox/index.tsx";
 import ColorPickerItem from "../../src/lib/src/components/ColorPicker/ColorPickerItem/index.tsx";
 import ColorPickerPalette from "../../src/lib/src/components/ColorPicker/ColorPickerPalette/index.tsx";
 import ComboBox from "../../src/lib/src/components/ComboBox/index.tsx";
+import CommandBar from "../../src/lib/src/components/CommandBar/index.tsx";
 import Dialog from "../../src/lib/src/components/Dialog/index.tsx";
 import Expander from "../../src/lib/src/components/Expander/index.tsx";
 import ImageView from "../../src/lib/src/components/ImageView/index.tsx";
@@ -117,6 +118,8 @@ function VisualFixture() {
   const [activation, setActivation] = useState("none");
   const [contextMenuAction, setContextMenuAction] = useState("none");
   const [comboBoxResult, setComboBoxResult] = useState("windows");
+  const [commandBarOpen, setCommandBarOpen] = useState(false);
+  const [commandBarResult, setCommandBarResult] = useState("none");
   const [autoSuggestBoxResult, setAutoSuggestBoxResult] = useState("none");
   const [autoSuggestBoxText, setAutoSuggestBoxText] = useState("Win");
   const [editableComboBoxResult, setEditableComboBoxResult] = useState("none");
@@ -1018,6 +1021,62 @@ function VisualFixture() {
           </div>
           <p className="visual-fixture-status">
             Expander lifecycle: <output data-testid="expander-result">{expanderResult}</output>
+          </p>
+        </Section>
+
+        <Section
+          caption="primary · secondary · disabled · controlled overflow · responsive"
+          eyebrow="actions"
+          testId="command-bar-panel"
+          title="CommandBar"
+        >
+          <div className="visual-fixture-command-bars">
+            <CommandBar
+              aria-label="Editor commands"
+              onOverflowOpenChange={setCommandBarOpen}
+              overflowOpen={commandBarOpen}
+              secondaryCommands={
+                <>
+                  <CommandBar.Button
+                    icon={<span>✎</span>}
+                    label="Rename"
+                    onClick={() => setCommandBarResult("Rename selected")}
+                  />
+                  <CommandBar.Separator />
+                  <CommandBar.Button
+                    icon={<span>⚙</span>}
+                    label="Properties"
+                    onClick={() => setCommandBarResult("Properties selected")}
+                  />
+                </>
+              }
+            >
+              <CommandBar.Button
+                icon={<span>↓</span>}
+                label="Save"
+                onClick={() => setCommandBarResult("Save selected")}
+              />
+              <CommandBar.Button icon={<span>▣</span>} label="Copy" />
+              <CommandBar.Separator />
+              <CommandBar.Button disabled icon={<span>▧</span>} label="Paste" />
+              <CommandBar.Button icon={<span>↗</span>} label="Share" />
+            </CommandBar>
+
+            <div className="visual-fixture-command-bar-narrow">
+              <CommandBar
+                aria-label="Responsive commands"
+                minimumPrimaryCommands={1}
+                overflowLabel="More responsive commands"
+              >
+                <CommandBar.Button icon={<span>↓</span>} label="Save" />
+                <CommandBar.Button icon={<span>▣</span>} label="Copy" />
+                <CommandBar.Button icon={<span>↗</span>} label="Share" />
+                <CommandBar.Button icon={<span>↻</span>} label="Refresh" />
+              </CommandBar>
+            </div>
+          </div>
+          <p className="visual-fixture-status">
+            Command action: <output data-testid="command-bar-result">{commandBarResult}</output>
           </p>
         </Section>
       </main>

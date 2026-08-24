@@ -1,0 +1,180 @@
+.ui-command-bar {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  min-height: calc(var(--rwu-control-height) + (var(--rwu-spacing-xs) * 2));
+  gap: var(--rwu-spacing-xs);
+  padding: var(--rwu-spacing-xs);
+  border: 1px solid var(--rwu-color-border-divider);
+  border-radius: var(--rwu-radius-flyout);
+  color: var(--rwu-color-text-primary);
+  background: var(--rwu-color-surface-card);
+}
+
+.ui-command-bar-primary {
+  display: flex;
+  min-width: 0;
+  gap: var(--rwu-spacing-xs);
+
+  > [data-rwu-command-index] {
+    display: inline-flex;
+    flex: 0 0 auto;
+    min-width: 0;
+  }
+}
+
+.ui-command-bar-button,
+.ui-command-bar-overflow-button {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--rwu-control-height);
+  min-height: var(--rwu-control-height);
+  gap: var(--rwu-spacing-md);
+  padding: 0 var(--rwu-spacing-lg);
+  border: 1px solid transparent;
+  border-radius: var(--rwu-radius-control);
+  outline: none;
+  color: var(--rwu-color-text-primary);
+  background: transparent;
+  font: inherit;
+  font-size: var(--rwu-font-size-control);
+  cursor: default;
+
+  &:hover:not(:disabled) {
+    background: var(--rwu-color-surface-control-hover);
+  }
+
+  &:active:not(:disabled),
+  &[aria-expanded="true"] {
+    background: var(--rwu-color-surface-control-pressed);
+  }
+
+  &:focus-visible {
+    border-color: var(--rwu-color-border-input-focus);
+    box-shadow: inset 0 0 0 1px var(--rwu-color-border-input-strong);
+  }
+
+  &:disabled {
+    color: var(--rwu-color-text-disabled);
+    cursor: not-allowed;
+  }
+}
+
+.ui-command-bar-button-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: var(--rwu-spacing-2xl);
+  height: var(--rwu-spacing-2xl);
+  font-size: var(--rwu-font-size-label);
+}
+
+.ui-command-bar-button-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ui-command-bar-label-compact {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.ui-command-bar.compact .ui-command-bar-button {
+  padding-inline: var(--rwu-spacing-sm);
+}
+
+.ui-command-bar-separator {
+  align-self: center;
+  width: 1px;
+  height: calc(var(--rwu-control-height) - var(--rwu-spacing-lg));
+  margin: 0 var(--rwu-spacing-xs);
+  padding: 0;
+  border: 0;
+  background: var(--rwu-color-border-divider);
+}
+
+.ui-command-bar-overflow-button {
+  flex: 0 0 auto;
+  margin-inline-start: auto;
+  padding-inline: var(--rwu-spacing-sm);
+  letter-spacing: 1px;
+
+  &.measure-only {
+    position: absolute;
+    inset-inline-end: var(--rwu-spacing-xs);
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+.ui-command-bar-menu {
+  position: fixed;
+  z-index: 1000;
+  box-sizing: border-box;
+  display: grid;
+  width: max-content;
+  min-width: calc(var(--rwu-control-height) * 6);
+  max-width: calc(100vw - (var(--rwu-spacing-md) * 2));
+  max-height: calc(100vh - (var(--rwu-spacing-md) * 2));
+  gap: var(--rwu-spacing-xs);
+  margin: 0;
+  padding: var(--rwu-spacing-xs);
+  overflow-y: auto;
+  border: 1px solid var(--rwu-color-border-divider);
+  border-radius: var(--rwu-radius-flyout);
+  color: var(--rwu-color-text-primary);
+  background: var(--rwu-color-surface-flyout);
+  box-shadow: var(--rwu-shadow-flyout);
+  list-style: none;
+  animation: rwu-command-bar-menu-enter var(--rwu-duration-fast) var(--rwu-ease-standard);
+}
+
+.ui-command-bar-menu-entry {
+  display: contents;
+}
+
+.ui-command-bar-menu-item {
+  justify-content: flex-start;
+  width: 100%;
+  min-width: calc(var(--rwu-control-height) * 5);
+
+  .ui-command-bar-button-label {
+    flex: 1 1 auto;
+    text-align: start;
+  }
+}
+
+.ui-command-bar-menu-separator {
+  width: auto;
+  height: 1px;
+  margin: var(--rwu-spacing-xs) var(--rwu-spacing-sm);
+}
+
+@keyframes rwu-command-bar-menu-enter {
+  from {
+    opacity: 0;
+    transform: translateY(calc(var(--rwu-spacing-xs) * -1));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-command-bar-menu {
+    animation: none;
+  }
+}

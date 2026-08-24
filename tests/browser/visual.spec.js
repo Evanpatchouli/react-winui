@@ -112,6 +112,97 @@ test.describe("Public component visual baselines", () => {
     });
   });
 
+  test.describe("CommandBar interaction and visual states", () => {
+    test("supports toolbar roving focus and controlled overflow keyboard behavior", async ({
+      page
+    }) => {
+      const toolbar = page.getByRole("toolbar", { name: "Editor commands" });
+      const save = toolbar.getByRole("button", { name: "Save" });
+      const copy = toolbar.getByRole("button", { name: "Copy" });
+      const more = toolbar.getByRole("button", { name: "More commands" });
+
+      await expect(toolbar).toHaveAttribute("aria-orientation", "horizontal");
+      await expect(toolbar.getByRole("button", { name: "Paste" })).toBeDisabled();
+      await save.focus();
+      await page.keyboard.press("Space");
+      await expect(page.getByTestId("command-bar-result")).toHaveText("Save selected");
+      await page.keyboard.press("ArrowRight");
+      await expect(copy).toBeFocused();
+      await page.keyboard.press("End");
+      await expect(more).toBeFocused();
+      await page.keyboard.press("Enter");
+
+      const menu = page.getByRole("menu", { name: "More commands" });
+      await expect(menu).toBeVisible();
+      await expect(page.getByRole("menuitem", { name: "Rename" })).toBeFocused();
+      await page.keyboard.press("ArrowDown");
+      await expect(page.getByRole("menuitem", { name: "Properties" })).toBeFocused();
+      await page.keyboard.press("Escape");
+      await expect(menu).toHaveCount(0);
+      await expect(more).toBeFocused();
+    });
+
+    test("selects a secondary command, restores focus, and light-dismisses", async ({ page }) => {
+      const more = page
+        .getByRole("toolbar", { name: "Editor commands" })
+        .getByRole("button", { name: "More commands" });
+      await more.click();
+      await page.getByRole("menuitem", { name: "Rename" }).click();
+      await expect(page.getByTestId("command-bar-result")).toHaveText("Rename selected");
+      await expect(page.getByRole("menu", { name: "More commands" })).toHaveCount(0);
+      await expect(more).toBeFocused();
+
+      await more.click();
+      await panel(page, "command-bar-panel").getByRole("heading", { name: "CommandBar" }).click();
+      await expect(page.getByRole("menu", { name: "More commands" })).toHaveCount(0);
+    });
+
+    test("moves trailing commands into responsive overflow", async ({ page }) => {
+      const toolbar = page.getByRole("toolbar", { name: "Responsive commands" });
+      await expect(toolbar.getByRole("button", { name: "Save" })).toBeVisible();
+      await toolbar.getByRole("button", { name: "More responsive commands" }).click();
+
+      const menu = page.getByRole("menu", { name: "More responsive commands" });
+      await expect(menu).toBeVisible();
+      await expect(menu.getByRole("menuitem", { name: "Refresh" })).toBeVisible();
+    });
+
+    test("captures the light CommandBar states", async ({ page }) => {
+      await expect(panel(page, "command-bar-panel")).toHaveScreenshot(
+        "command-bar-light.png",
+        screenshotOptions
+      );
+    });
+
+    test("captures the dark CommandBar states", async ({ page }) => {
+      await page.getByTestId("theme-dark").click();
+      await expect(panel(page, "command-bar-panel")).toHaveScreenshot(
+        "command-bar-dark.png",
+        screenshotOptions
+      );
+    });
+
+    test("captures the light and dark overflow surfaces", async ({ page }) => {
+      await page
+        .getByRole("toolbar", { name: "Editor commands" })
+        .getByRole("button", { name: "More commands" })
+        .click();
+      const lightMenu = page.getByRole("menu", { name: "More commands" });
+      await expect(lightMenu).toHaveScreenshot("command-bar-menu-light.png", screenshotOptions);
+
+      await page.keyboard.press("Escape");
+      await page.getByTestId("theme-dark").click();
+      await page
+        .getByRole("toolbar", { name: "Editor commands" })
+        .getByRole("button", { name: "More commands" })
+        .click();
+      await expect(page.getByRole("menu", { name: "More commands" })).toHaveScreenshot(
+        "command-bar-menu-dark.png",
+        screenshotOptions
+      );
+    });
+  });
+
   test.describe("Tooltip visual states", () => {
     test("captures the light Tooltip surface", async ({ page }) => {
       const tooltip = page.locator(".ui-tooltip-open");

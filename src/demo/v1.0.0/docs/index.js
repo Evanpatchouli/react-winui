@@ -12,6 +12,7 @@ export { default as ButtonsDocs } from "./Buttons_docs";
 export { default as CheckboxDocs } from "./Checkbox_docs";
 export { default as ColorPickerDocs } from "./ColorPicker_docs";
 export { default as ComboBoxDocs } from "./ComboBox_docs";
+export { default as CommandBarDocs } from "./CommandBar_docs";
 export { default as ContextMenuDocs } from "./ContextMenu_docs";
 export { default as DialogDocs } from "./Dialog_docs";
 export { default as ExpanderDocs } from "./Expander_docs";

@@ -4,6 +4,7 @@ import {
   Button,
   AutoSuggestBox,
   ComboBox,
+  CommandBar,
   ContextMenu,
   Expander,
   Flyout,
@@ -19,6 +20,7 @@ import {
 import ButtonDirect from "@evanpatchouli/react-winui/button";
 import AutoSuggestBoxDirect from "@evanpatchouli/react-winui/auto-suggest-box";
 import ComboBoxDirect from "@evanpatchouli/react-winui/combo-box";
+import CommandBarDirect from "@evanpatchouli/react-winui/command-bar";
 import ContextMenuDirect from "@evanpatchouli/react-winui/context-menu";
 import ExpanderDirect from "@evanpatchouli/react-winui/expander";
 import FlyoutDirect from "@evanpatchouli/react-winui/flyout";
@@ -61,6 +63,15 @@ const ConsumerApp = () => {
         aria-label="ComboBox subpath"
         options={[{ label: "Two", value: "two" }]}
       />
+      <CommandBar
+        aria-label="Root CommandBar"
+        secondaryCommands={<CommandBar.Button label="Root settings" />}
+      >
+        <CommandBar.Button label="Root save" />
+      </CommandBar>
+      <CommandBarDirect aria-label="CommandBar subpath">
+        <CommandBarDirect.Button label="Direct save" />
+      </CommandBarDirect>
       <ContextMenu content={<ContextMenu.Item>Root command</ContextMenu.Item>}>
         <button type="button">Root ContextMenu</button>
       </ContextMenu>

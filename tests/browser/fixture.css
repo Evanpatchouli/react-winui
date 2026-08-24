@@ -139,6 +139,16 @@ body {
   margin-top: 24px;
 }
 
+.visual-fixture-command-bars {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.visual-fixture-command-bar-narrow {
+  width: 200px;
+}
+
 .visual-fixture-tree-view {
   width: 340px;
   margin-top: 24px;

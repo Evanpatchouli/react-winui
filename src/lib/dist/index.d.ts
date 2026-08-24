@@ -59,6 +59,19 @@ export type {
   ComboBoxValueChangeEvent,
   ComboBoxValueChangeHandler
 } from "./components/ComboBox";
+export {
+  default as CommandBar,
+  CommandBarButton,
+  CommandBarSeparator
+} from "./components/CommandBar";
+export type {
+  CommandBarButtonProps,
+  CommandBarComponent,
+  CommandBarOpenChangeEvent,
+  CommandBarOpenChangeHandler,
+  CommandBarProps,
+  CommandBarSeparatorProps
+} from "./components/CommandBar";
 export { default as Dialog } from "./components/Dialog";
 export type {
   DialogComponent,

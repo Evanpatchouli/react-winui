@@ -13,6 +13,7 @@ import {
   ColorPickerItem,
   ColorPickerPalette,
   ComboBox,
+  CommandBar,
   ImageView,
   InfoBar,
   InputSearchBar,
@@ -84,6 +85,12 @@ import type {
   ComboBoxValue,
   ComboBoxValueChangeEvent,
   ComboBoxValueChangeHandler,
+  CommandBarButtonProps,
+  CommandBarComponent,
+  CommandBarOpenChangeEvent,
+  CommandBarOpenChangeHandler,
+  CommandBarProps,
+  CommandBarSeparatorProps,
   ImageViewProps,
   InfoBarOpenChangeEvent,
   InfoBarOpenChangeHandler,
@@ -176,6 +183,10 @@ import ComboBoxDirect, {
   type ComboBoxOption as ComboBoxDirectOption,
   type ComboBoxProps as ComboBoxDirectProps
 } from "@evanpatchouli/react-winui/combo-box";
+import CommandBarDirect, {
+  type CommandBarButtonProps as CommandBarDirectButtonProps,
+  type CommandBarProps as CommandBarDirectProps
+} from "@evanpatchouli/react-winui/command-bar";
 import { Shadows } from "@evanpatchouli/react-winui/theme";
 import type { ShadowName, ShadowToken } from "@evanpatchouli/react-winui/theme";
 import TooltipDirect from "@evanpatchouli/react-winui/tooltip";
@@ -223,6 +234,7 @@ const typedProps: [
   ColorPickerItemProps,
   ColorPickerPaletteProps,
   ComboBoxProps,
+  CommandBarProps,
   ImageViewProps,
   InfoBarProps,
   InputSearchBarProps,
@@ -266,6 +278,7 @@ const typedProps: [
   { color: "#ff0000", name: "accent" },
   { color: "#00ff00" },
   { options: [{ label: "One", value: "one" }] },
+  { "aria-label": "Document commands", minimumPrimaryCommands: 1 },
   { alt: "Windows logo", src: "/windows.png", width: 128 },
   { defaultOpen: true, message: "Update available", severity: "informational" },
   { placeholder: "Search", width: 240 },
@@ -380,6 +393,20 @@ export const comboBoxDirectOptionTypeCheck: ComboBoxDirectOption = {
 export const comboBoxDirectPropsTypeCheck: ComboBoxDirectProps = {
   editable: true,
   options: [comboBoxDirectOptionTypeCheck]
+};
+export const commandBarComponentTypeCheck: CommandBarComponent | undefined = undefined;
+export const commandBarButtonTypeCheck: CommandBarButtonProps = { label: "Save" };
+export const commandBarSeparatorTypeCheck: CommandBarSeparatorProps = {};
+export const commandBarOpenChangeEventTypeCheck = (_event: CommandBarOpenChangeEvent) => {};
+export const commandBarOpenChangeTypeCheck: CommandBarOpenChangeHandler = (_open, event) => {
+  if (event) {
+    commandBarOpenChangeEventTypeCheck(event);
+  }
+};
+export const commandBarDirectButtonTypeCheck: CommandBarDirectButtonProps = { label: "Share" };
+export const commandBarDirectPropsTypeCheck: CommandBarDirectProps = {
+  "aria-label": "Direct commands",
+  secondaryCommands: <CommandBarDirect.Button label="Settings" />
 };
 export const tooltipPlacementTypeCheck: TooltipPlacement = "top";
 export const tooltipRelationshipTypeCheck: TooltipRelationship = "description";
@@ -526,6 +553,15 @@ export const basicControls: ReactElement = (
       onOpenChange={comboBoxOpenChangeTypeCheck}
       onValueChange={comboBoxValueChangeTypeCheck}
     />
+    <CommandBar
+      aria-label="Document commands"
+      onOverflowOpenChange={commandBarOpenChangeTypeCheck}
+      secondaryCommands={<CommandBar.Button label="Rename" />}
+    >
+      <CommandBar.Button icon={<span>Save</span>} label="Save" />
+      <CommandBar.Separator />
+      <CommandBar.Button disabled label="Paste" />
+    </CommandBar>
     <AutoSuggestBox
       aria-label="Consumer AutoSuggestBox"
       onOpenChange={autoSuggestBoxOpenChangeTypeCheck}
@@ -629,6 +665,11 @@ export const comboBoxSubpathImport: ReactElement = (
     aria-label="ComboBox subpath"
     options={[comboBoxDirectOptionTypeCheck]}
   />
+);
+export const commandBarSubpathImport: ReactElement = (
+  <CommandBarDirect {...commandBarDirectPropsTypeCheck}>
+    <CommandBarDirect.Button {...commandBarDirectButtonTypeCheck} />
+  </CommandBarDirect>
 );
 export const autoSuggestBoxSubpathImport: ReactElement = (
   <AutoSuggestBoxDirect

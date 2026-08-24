@@ -22,6 +22,7 @@ import {
   ButtonsDocs,
   CheckboxDocs,
   ComboBoxDocs,
+  CommandBarDocs,
   ColorPickerDocs,
   ContextMenuDocs,
   DialogDocs,
@@ -197,6 +198,7 @@ const AppFourTwoThree = () => {
           <Route path="buttons" element={<ButtonsDocs/>} />
           <Route path="checkbox" element={<CheckboxDocs/>} />
           <Route path="combobox" element={<ComboBoxDocs/>} />
+          <Route path="commandbar" element={<CommandBarDocs/>} />
           <Route path="colorpicker" element={<ColorPickerDocs/>} />
           <Route path="contextmenu" element={<ContextMenuDocs/>} />
           <Route path="dialogs" element={<DialogDocs/>} />
