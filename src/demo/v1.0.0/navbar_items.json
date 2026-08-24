@@ -145,5 +145,12 @@
     "text": "Tooltip",
     "icon": "icons10-notification",
     "showBadge": false
+  },
+  {
+    "to": "toast",
+    "exact": false,
+    "text": "Toast",
+    "icon": "icons10-notification",
+    "showBadge": false
   }
 ]

@@ -37,6 +37,11 @@
       "import": "./dist/components/ContextMenu/index.js",
       "default": "./dist/components/ContextMenu/index.js"
     },
+    "./toast": {
+      "types": "./dist/components/Toast/index.d.ts",
+      "import": "./dist/components/Toast/index.js",
+      "default": "./dist/components/Toast/index.js"
+    },
     "./theme": {
       "types": "./dist/theme/index.d.ts",
       "import": "./dist/theme/index.js",

@@ -36,6 +36,7 @@
 @use "./components/TableView";
 @use "./components/TextArea";
 @use "./components/Tooltip";
+@use "./components/Toast";
 
 @use "./browsers/webkit/main" as webkit;
 @use "./browsers/mozilla/main" as mozilla;

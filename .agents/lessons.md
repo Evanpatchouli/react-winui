@@ -95,3 +95,11 @@
 - Menu 的 Tab 与 Escape 关闭语义不同：Escape 应回到调用上下文，Tab 应让浏览器继续原生顺序；把两者复用同一个 focus-restore 分支会让键盘用户被送回触发器。
 - keyboard selection handler 若先调用内部 `preventDefault()`，再用 `event.defaultPrevented` 判断消费者是否取消关闭，会把所有 Enter/Space 选择误判为取消；应先执行 consumer `onSelect` 与 dismiss 决策，再阻止按键的浏览器默认动作。
 - Portaled context menu 的视觉快照应直接截 surface；父 fixture panel 不包含 portal，截图 panel 会漏掉菜单本体并产生虚假的基线覆盖。
+
+## 2026-08-24：Toast 队列与计时边界
+
+- 队列中尚未展示的 Toast 不应提前挂载；否则它们会在不可见时消耗 timeout。只渲染 `maxVisible` 范围，并在前项关闭后再让下一项开始生命周期。
+- 受控 Toast 的关闭是请求而不是本地状态事实；timeout 发出关闭请求后应标记本轮已请求，避免父级故意保持 `open=true` 时反复重启 timeout 和重复回调。
+- pointer/focus pause 需要记录剩余时长，而不只是 clear 后重新使用完整 duration；这样短暂交互不会无意延长通知寿命。
+- 命令式 `show` 若收到已有 id，应更新原条目并保持堆栈数量与顺序；这一行为必须由 RTL 数量断言和更新后内容断言共同锁定。
+- 在长页面视觉 fixture 中新增 Section 会改变后续元素相对固定背景的位置；把新 Section 追加到末尾，可避免无关旧组件快照产生噪声。

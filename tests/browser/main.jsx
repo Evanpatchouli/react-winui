@@ -37,6 +37,7 @@ import Switch from "../../src/lib/src/components/Switch/index.tsx";
 import TableView from "../../src/lib/src/components/TableView/index.tsx";
 import TextArea from "../../src/lib/src/components/TextArea/index.tsx";
 import Tooltip from "../../src/lib/src/components/Tooltip/index.tsx";
+import Toast, { Toaster } from "../../src/lib/src/components/Toast/index.tsx";
 import "../../src/lib/config/app-config.css";
 import "../../src/lib/scss/main.scss";
 import "./fixture.css";
@@ -72,12 +73,57 @@ function VisualFixture() {
   const [selection, setSelection] = useState("windows");
   const [searchBarValue, setSearchBarValue] = useState("Windows");
   const [searchResult, setSearchResult] = useState("none");
+  const [toastResult, setToastResult] = useState("none");
   const [imageState, setImageState] = useState("loading");
   const [showSplash, setShowSplash] = useState(false);
   const alertRef = useRef(null);
   const dialogRef = useRef(null);
   const menuAnchorRef = useRef(null);
   const menuRef = useRef(null);
+  const toasterRef = useRef(null);
+
+  const showToastStack = () => {
+    toasterRef.current?.dismissAll();
+    toasterRef.current?.show({
+      id: "toast-one",
+      message: "Your document is available on this device.",
+      persistent: true,
+      title: "Saved"
+    });
+    toasterRef.current?.show({
+      id: "toast-two",
+      intent: "success",
+      message: "4 files are now up to date.",
+      persistent: true,
+      title: "Sync complete"
+    });
+    toasterRef.current?.show({
+      id: "toast-three",
+      intent: "warning",
+      message: "Changes will upload when the connection returns.",
+      persistent: true,
+      title: "Working offline"
+    });
+    toasterRef.current?.show({
+      id: "toast-four",
+      intent: "error",
+      persistent: true,
+      title: "Queued notification"
+    });
+    setToastResult("stack shown");
+  };
+
+  const showPausableToast = () => {
+    toasterRef.current?.dismissAll();
+    toasterRef.current?.show({
+      duration: 500,
+      id: "toast-pause",
+      message: "The timer stops while the pointer is here.",
+      onOpenChange: (_open, data) => setToastResult(data.reason),
+      title: "Hover to pause"
+    });
+    setToastResult("timer running");
+  };
 
   return (
     <MemoryRouter future={{ v7_relativeSplatPath: true, v7_startTransition: true }}>
@@ -512,6 +558,30 @@ function VisualFixture() {
             TableFooterComponent={<div className="visual-fixture-table-footer">2 items</div>}
             TableHeaderComponent={<div className="visual-fixture-table-header">Recent items</div>}
           />
+        </Section>
+
+        <Section
+          caption="FIFO queue · stack limit · action · timeout pause · Escape"
+          eyebrow="feedback"
+          testId="toast-panel"
+          title="Toast and Toaster"
+        >
+          <div className="visual-fixture-row">
+            <Button onClick={showToastStack} value="Show toast stack" />
+            <Button onClick={showPausableToast} value="Show pausable toast" />
+            <Button onClick={() => toasterRef.current?.dismissAll()} value="Dismiss all toasts" />
+          </div>
+          <p className="visual-fixture-status">
+            Toast lifecycle: <output data-testid="toast-result">{toastResult}</output>
+          </p>
+          <Toast
+            className="visual-fixture-inline-toast"
+            closable={false}
+            duration={0}
+            message="Standalone Toasts can also be controlled directly."
+            title="Inline example"
+          />
+          <Toaster label="Visual fixture notifications" maxVisible={3} ref={toasterRef} />
         </Section>
       </main>
     </MemoryRouter>

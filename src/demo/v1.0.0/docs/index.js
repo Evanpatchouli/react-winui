@@ -30,3 +30,4 @@ export { default as SliderBarDocs } from "./SliderBar_docs";
 export { default as SwitchDocs } from "./Switch_docs";
 export { default as TableViewDocs } from "./TableView_docs";
 export { default as TooltipDocs } from "./Tooltip_docs";
+export { default as ToastDocs } from "./Toast_docs";

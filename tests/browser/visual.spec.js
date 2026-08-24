@@ -170,6 +170,53 @@ test.describe("Public component visual baselines", () => {
     });
   });
 
+  test.describe("Toast interaction and visual states", () => {
+    test("captures a limited FIFO stack in the light theme", async ({ page }) => {
+      await page.getByRole("button", { name: "Show toast stack" }).click();
+
+      const toaster = page.getByRole("region", { name: "Visual fixture notifications" });
+      await expect(toaster.getByRole("status")).toHaveCount(3);
+      await expect(toaster.getByText("Queued notification")).toHaveCount(0);
+      await expect(toaster).toHaveScreenshot("toast-stack-light.png", screenshotOptions);
+    });
+
+    test("captures the same stack through dark theme tokens", async ({ page }) => {
+      await page.getByTestId("theme-dark").click();
+      await page.getByRole("button", { name: "Show toast stack" }).click();
+
+      const toaster = page.getByRole("region", { name: "Visual fixture notifications" });
+      await expect(toaster.getByRole("status")).toHaveCount(3);
+      await expect(toaster).toHaveScreenshot("toast-stack-dark.png", screenshotOptions);
+    });
+
+    test("dismisses the focused Toast with Escape and promotes the queue", async ({ page }) => {
+      await page.getByRole("button", { name: "Show toast stack" }).click();
+
+      const toaster = page.getByRole("region", { name: "Visual fixture notifications" });
+      const firstToast = toaster.getByRole("status").first();
+      await firstToast.getByRole("button", { name: "Dismiss notification" }).focus();
+      await page.keyboard.press("Escape");
+
+      await expect(toaster.getByText("Saved", { exact: true })).toHaveCount(0);
+      await expect(toaster.getByText("Queued notification")).toBeVisible();
+      await expect(toaster.getByRole("status")).toHaveCount(3);
+    });
+
+    test("pauses timeout while hovered and resumes the remaining duration", async ({ page }) => {
+      await page.getByRole("button", { name: "Show pausable toast" }).click();
+
+      const toaster = page.getByRole("region", { name: "Visual fixture notifications" });
+      const toast = toaster.getByRole("status").filter({ hasText: "Hover to pause" });
+      await toast.hover();
+      await page.waitForTimeout(700);
+      await expect(toast).toBeVisible();
+
+      await page.getByTestId("theme-light").hover();
+      await expect(toast).toHaveCount(0, { timeout: 1000 });
+      await expect(page.getByTestId("toast-result")).toHaveText("timeout");
+    });
+  });
+
   test.describe("ContextMenu interaction and visual states", () => {
     test("opens from right click and captures the light surface", async ({ page }) => {
       await page.getByTestId("context-menu-trigger").click({ button: "right" });

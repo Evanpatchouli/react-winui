@@ -133,5 +133,21 @@ export type {
   TooltipProps,
   TooltipRelationship
 } from "./components/Tooltip";
+export { default as Toast, Toaster } from "./components/Toast";
+export type {
+  ToasterHandle,
+  ToasterProps,
+  ToastAction,
+  ToastContentProps,
+  ToastDismissReason,
+  ToastId,
+  ToastIntent,
+  ToastOpenChangeData,
+  ToastOpenChangeHandler,
+  ToastOptions,
+  ToastPoliteness,
+  ToastPosition,
+  ToastProps
+} from "./components/Toast";
 export { default as Flyout } from "./components/Flyout";
 export type { FlyoutProps } from "./components/Flyout";

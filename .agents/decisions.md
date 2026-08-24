@@ -218,3 +218,11 @@
 - 右键、`Shift+F10` 和 Context Menu 键打开菜单；Escape 与命令选择按 `restoreFocus` 恢复触发目标，outside pointer 不抢回焦点，Tab 关闭菜单但不阻止浏览器默认 Tab 顺序、也不强制恢复到触发目标。
 - disabled menuitem 保持可聚焦和 `aria-disabled` 可发现性但不可激活；方向键、Home、End、字符导航、Enter/Space 遵循 WAI-ARIA menu 模式。
 - 仅参考 WinUI MenuFlyout、Fluent UI React v9 Menu 和 WAI-ARIA APG 的行为/API/测试思路；未复制 Fluent UI 源码、Griffel 或视觉 token，因此不新增第三方源码声明。
+
+## 2026-08-24：阶段 7 P0 Toast
+
+- 采用轻量 `Toast + Toaster` 组合：独立 `Toast` 覆盖受控/非受控状态，`Toaster` 通过 ref 提供 `show`、`dismiss`、`dismissAll`；当前规模不引入 Provider、全局总线或通知中心 framework。
+- `Toaster` 使用 FIFO 队列与 `maxVisible` 控制堆栈；相同 `id` 的 `show` 原位更新已有条目，不增加队列长度，也不重排其他通知。
+- 默认 polite 通知使用 `role="status"`，assertive 通知使用 `role="alert"`；交互时暂停剩余计时，焦点位于 Toast 内时 Escape 关闭，persistent / `duration={0}` 不启动自动关闭。
+- 受控 Toast 的 timeout 或关闭操作只发出一次 `onOpenChange(false, data)` 请求；若父级保持 `open=true`，组件不会因重新渲染重复启动同一轮 timeout。
+- surface、intent 指示、焦点、间距、阴影与动画只消费已有 `--rwu-*` token；参考 Windows notification、Fluent UI React v9 Toast 与 WAI-ARIA live region 的行为/API/测试边界，未复制第三方源码、Griffel 或视觉 token。

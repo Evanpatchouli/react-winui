@@ -36,7 +36,8 @@ import {
   SwitchDocs,
   TableViewDocs,
   TooltipDocs,
-  PopoverDocs
+  PopoverDocs,
+  ToastDocs
 } from "./docs";
 
 import { lib_version } from "./values";
@@ -197,6 +198,7 @@ const AppFourTwoThree = () => {
           <Route path="tableview" element={<TableViewDocs/>} />
           <Route path="popover" element={<PopoverDocs/>} />
           <Route path="tooltip" element={<TooltipDocs/>} />
+          <Route path="toast" element={<ToastDocs/>} />
 
           <Route path="icons" element={<Icons/>} />
         </Routes>

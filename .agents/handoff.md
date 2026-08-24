@@ -320,3 +320,12 @@
 - 参考 WinUI MenuFlyout、Fluent UI React v9 Menu/MenuTrigger 与 WAI-ARIA APG Menu Pattern；仅借鉴行为、API 和测试边界，未复制实际源码、Griffel 或 Fluent token。
 - 验证通过：`pnpm format:check`、`pnpm lint`、`pnpm typecheck`、ContextMenu RTL（9/9）、`pnpm test`（共享工作树 106/106）、`pnpm test:consumer`、`pnpm build`、`pnpm test:browser:update`（44/44）、`pnpm test:browser`（44/44）、`pnpm --filter @evanpatchouli/react-winui pack --dry-run`、UTF-8 BOM 与 `git diff --check`。
 - 已知遗留：本批未实现 submenu、checkbox/radio menuitem；docs build 仍有既有大 chunk warning。P0 其余组件由各自独立提交处理。
+
+# 阶段 7 P0 Toast
+
+- 新增默认导出的 `Toast` 与 named `Toaster`；支持 title/message/icon/action、intent、受控/非受控 open、自动消失、persistent、pointer/focus pause、close、Escape、polite/assertive live region、FIFO 队列、`maxVisible`、position、portal，以及 ref 命令式 `show` / `dismiss` / `dismissAll`。
+- root export、`./toast` package subpath、ESM、`.d.ts`、CSS dist、consumer root/subpath/types/runtime、docs Demo/导航/路由/API 说明均已接入；相同 id 的 `show` 原位更新语义已有 RTL 回归锁定。
+- 新增 10 个 Toast Vitest/RTL tests；Playwright 新增 4 个实际浏览器用例，覆盖 light/dark 三层堆栈、FIFO 队列晋升、焦点内 Escape 关闭、hover 暂停与剩余计时恢复，并新增 2 张 Chromium Windows 视觉基线。
+- 参考 Windows notification UX、Windows dialogs/flyouts boundary、Fluent UI React v9 Toast guidance/custom timeout/pause/limit 与 WAI-ARIA live region；只借鉴行为、API 和测试边界，未复制源码、Griffel 或 Fluent token。
+- 验证通过：`pnpm format:check`、`pnpm lint`、`pnpm typecheck`、Toast RTL（10/10）、`pnpm test`（共享工作树 108/108）、`pnpm test:consumer`、`pnpm build`、`pnpm test:browser:update`（Toast 4/4，首次全量 48/48）、`pnpm test:browser`（48/48）及 `pnpm --filter @evanpatchouli/react-winui pack --dry-run`。
+- 已知遗留：当前没有 Provider/global dispatch、跨 Toaster 通知中心或系统级 Windows toast bridge；这些不属于应用内 Toast 的最小完整边界。docs production build 仍有既有大 chunk warning。

@@ -35,7 +35,9 @@ import {
   TextArea,
   Tooltip,
   Popover,
-  Flyout
+  Flyout,
+  Toast,
+  Toaster
 } from "@evanpatchouli/react-winui";
 import type {
   ButtonProps,
@@ -100,7 +102,20 @@ import type {
   TooltipProps,
   TooltipRelationship,
   PopoverProps,
-  FlyoutProps
+  FlyoutProps,
+  ToasterHandle,
+  ToasterProps,
+  ToastAction,
+  ToastContentProps,
+  ToastDismissReason,
+  ToastId,
+  ToastIntent,
+  ToastOpenChangeData,
+  ToastOpenChangeHandler,
+  ToastOptions,
+  ToastPoliteness,
+  ToastPosition,
+  ToastProps
 } from "@evanpatchouli/react-winui";
 import ButtonDirect from "@evanpatchouli/react-winui/button";
 import { Shadows } from "@evanpatchouli/react-winui/theme";
@@ -111,6 +126,11 @@ import FlyoutDirect from "@evanpatchouli/react-winui/flyout";
 import ContextMenuDirect, {
   type ContextMenuProps as ContextMenuDirectProps
 } from "@evanpatchouli/react-winui/context-menu";
+import ToastDirect, {
+  Toaster as ToasterDirect,
+  type ToasterProps as ToasterDirectProps,
+  type ToastProps as ToastDirectProps
+} from "@evanpatchouli/react-winui/toast";
 
 const typedProps: [
   ButtonProps,
@@ -146,7 +166,9 @@ const typedProps: [
   SwitchProps,
   TableViewProps,
   TextAreaProps,
-  TooltipProps
+  TooltipProps,
+  ToastProps,
+  ToasterProps
 ] = [
   { value: "Button" },
   { "aria-label": "Actions" },
@@ -187,7 +209,9 @@ const typedProps: [
     rows: [["Apple", 1]]
   },
   { placeholder: "Text" },
-  { content: "More information", children: <button type="button">Action</button> }
+  { content: "More information", children: <button type="button">Action</button> },
+  { duration: 0, title: "Saved" },
+  { label: "Notifications", maxVisible: 3 }
 ];
 
 export const rootImport: ReactElement = <Button value="Root export" />;
@@ -240,6 +264,24 @@ export const contextMenuDirectPropsTypeCheck: ContextMenuDirectProps = {
   content: <ContextMenuDirect.Item>Copy</ContextMenuDirect.Item>,
   children: <button type="button">Target</button>
 };
+export const toasterRef = createRef<ToasterHandle>();
+export const toastActionTypeCheck: ToastAction = { label: "Undo", onClick: () => {} };
+export const toastContentTypeCheck: ToastContentProps = { message: "Saved", title: "Complete" };
+export const toastDismissReasonTypeCheck: ToastDismissReason = "escape";
+export const toastIdTypeCheck: ToastId = "consumer-toast";
+export const toastIntentTypeCheck: ToastIntent = "success";
+export const toastOpenChangeDataTypeCheck: ToastOpenChangeData = { reason: "close" };
+export const toastOpenChangeTypeCheck: ToastOpenChangeHandler = () => {};
+export const toastOptionsTypeCheck: ToastOptions = {
+  id: toastIdTypeCheck,
+  intent: toastIntentTypeCheck,
+  persistent: true,
+  title: "Consumer notification"
+};
+export const toastPolitenessTypeCheck: ToastPoliteness = "polite";
+export const toastPositionTypeCheck: ToastPosition = "bottom-end";
+export const toastDirectPropsTypeCheck: ToastDirectProps = { duration: 0, title: "Direct" };
+export const toasterDirectPropsTypeCheck: ToasterDirectProps = { maxVisible: 2 };
 export const navBarRef = createRef<HTMLElement>();
 export const navBarComponentTypeCheck: NavBarComponent | undefined = undefined;
 export const navBarLinkTypeCheck: NavBarLinkProps = { href: "/home", text: "Home" };
@@ -319,6 +361,8 @@ export const basicControls: ReactElement = (
     <Tooltip content="More information">
       <Button value="Tooltip" />
     </Tooltip>
+    <Toast duration={0} title="Root Toast" />
+    <Toaster label="Consumer notifications" ref={toasterRef} />
     <Popover content="More details">
       <Button value="Popover" />
     </Popover>
@@ -342,4 +386,8 @@ export const contextMenuSubpathImport: ReactElement = (
   <ContextMenuDirect content={<ContextMenuDirect.Item>Copy</ContextMenuDirect.Item>}>
     <button type="button">ContextMenu subpath target</button>
   </ContextMenuDirect>
+);
+export const toastSubpathImport: ReactElement = <ToastDirect duration={0} title="Toast subpath" />;
+export const toasterSubpathImport: ReactElement = (
+  <ToasterDirect label="Subpath notifications" maxVisible={2} />
 );
