@@ -18,6 +18,7 @@ import {
 
   AccordionDocs,
   AlertDocs,
+  AutoSuggestBoxDocs,
   ButtonsDocs,
   CheckboxDocs,
   ComboBoxDocs,
@@ -186,6 +187,7 @@ const AppFourTwoThree = () => {
           {/* Components */}
           <Route path="accordion" element={<AccordionDocs/>} />
           <Route path="alerts" element={<AlertDocs/>} />
+          <Route path="autosuggestbox" element={<AutoSuggestBoxDocs/>} />
           <Route path="apptheme" element={<AppThemeDocs/>} />
           <Route path="appearance" element={<AppearanceDocs/>} />
           <Route path="buttons" element={<ButtonsDocs/>} />

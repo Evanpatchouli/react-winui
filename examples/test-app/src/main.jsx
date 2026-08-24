@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { createRoot } from "react-dom/client";
 import {
   Button,
+  AutoSuggestBox,
   ComboBox,
   ContextMenu,
   Flyout,
@@ -14,6 +15,7 @@ import {
   Toaster
 } from "@evanpatchouli/react-winui";
 import ButtonDirect from "@evanpatchouli/react-winui/button";
+import AutoSuggestBoxDirect from "@evanpatchouli/react-winui/auto-suggest-box";
 import ComboBoxDirect from "@evanpatchouli/react-winui/combo-box";
 import ContextMenuDirect from "@evanpatchouli/react-winui/context-menu";
 import FlyoutDirect from "@evanpatchouli/react-winui/flyout";
@@ -35,6 +37,16 @@ const ConsumerApp = () => {
     <main style={{ display: "flex", gap: "8px", padding: "24px", boxShadow: Shadows.shadow8 }}>
       <Button type="primary" value="Root export" />
       <ButtonDirect type="subtle" value="Button subpath" />
+      <AutoSuggestBox
+        aria-label="Root AutoSuggestBox"
+        defaultText="Win"
+        queryButton
+        suggestions={[{ value: "Windows 11" }]}
+      />
+      <AutoSuggestBoxDirect
+        aria-label="AutoSuggestBox subpath"
+        suggestions={[{ value: "WinUI Gallery" }]}
+      />
       <ComboBox
         aria-label="Root ComboBox"
         defaultValue="one"

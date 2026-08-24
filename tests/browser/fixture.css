@@ -116,6 +116,7 @@ body {
   margin-top: 24px;
 }
 
+.visual-fixture-auto-suggest-boxes,
 .visual-fixture-combo-boxes {
   display: flex;
   flex-wrap: wrap;
@@ -124,6 +125,7 @@ body {
   margin-top: 24px;
 }
 
+.visual-fixture-auto-suggest-boxes > div,
 .visual-fixture-combo-boxes > div {
   display: grid;
   gap: 8px;

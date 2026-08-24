@@ -331,6 +331,90 @@ test.describe("Public component visual baselines", () => {
     });
   });
 
+  test.describe("AutoSuggestBox interaction and visual states", () => {
+    test("distinguishes suggestion choice from typed query submission", async ({ page }) => {
+      const autoSuggestBox = page.getByTestId("auto-suggest-box-interactive");
+      await autoSuggestBox.fill("Sea");
+
+      const listbox = page.getByRole("listbox", { name: "Topic suggestions" });
+      await expect(listbox.getByRole("option")).toHaveCount(1);
+      await page.keyboard.press("ArrowDown");
+      await page.keyboard.press("Enter");
+      await expect(page.getByTestId("auto-suggest-box-result")).toHaveText("suggestion: Seattle");
+      await expect(listbox).toHaveCount(0);
+
+      await autoSuggestBox.fill("Custom query");
+      await expect(listbox.getByRole("status")).toHaveText("No matching topics");
+      await page.keyboard.press("Enter");
+      await expect(page.getByTestId("auto-suggest-box-result")).toHaveText("text: Custom query");
+    });
+
+    test("clears, light-dismisses, and blocks disabled interaction", async ({ page }) => {
+      const autoSuggestBox = page.getByTestId("auto-suggest-box-interactive");
+      const listbox = page.getByRole("listbox", { name: "Topic suggestions" });
+      await autoSuggestBox.click();
+      await expect(listbox).toBeVisible();
+      await page.keyboard.press("Escape");
+      await expect(listbox).toHaveCount(0);
+
+      await autoSuggestBox.click();
+      await page.getByTestId("auto-suggest-box-outside").click();
+      await expect(listbox).toHaveCount(0);
+
+      await page.getByRole("button", { name: "Clear text" }).first().click();
+      await expect(autoSuggestBox).toHaveValue("");
+      await expect(page.getByTestId("auto-suggest-box-disabled")).toBeDisabled();
+      await expect(page.getByTestId("auto-suggest-box-disabled")).toHaveAttribute(
+        "aria-expanded",
+        "false"
+      );
+    });
+
+    test("uses a real top fallback near the viewport edge", async ({ page }) => {
+      await page.setViewportSize({ width: 360, height: 480 });
+      const autoSuggestBox = page.getByTestId("auto-suggest-box-viewport");
+      await autoSuggestBox.evaluate((element) => {
+        const spacer = document.createElement("div");
+        spacer.style.height = `${window.innerHeight}px`;
+        document.body.append(spacer);
+        const rect = element.getBoundingClientRect();
+        window.scrollBy(0, rect.bottom - window.innerHeight + 6);
+      });
+      await autoSuggestBox.click();
+
+      const listbox = page.getByRole("listbox", { name: "Viewport topic suggestions" });
+      await expect(listbox).toHaveAttribute("data-placement", "top");
+      const inputBounds = await autoSuggestBox.boundingBox();
+      const listboxBounds = await listbox.boundingBox();
+      expect(inputBounds).not.toBeNull();
+      expect(listboxBounds).not.toBeNull();
+      expect(listboxBounds.y + listboxBounds.height).toBeLessThanOrEqual(inputBounds.y);
+    });
+
+    test("captures the light suggestion surface", async ({ page }) => {
+      await page.getByTestId("auto-suggest-box-interactive").click();
+      const listbox = page.getByRole("listbox", { name: "Topic suggestions" });
+
+      await expect(listbox).toBeVisible();
+      await expect(listbox).toHaveScreenshot(
+        "auto-suggest-box-listbox-light.png",
+        screenshotOptions
+      );
+    });
+
+    test("captures the dark suggestion surface", async ({ page }) => {
+      await page.getByTestId("theme-dark").click();
+      await page.getByTestId("auto-suggest-box-interactive").click();
+      const listbox = page.getByRole("listbox", { name: "Topic suggestions" });
+
+      await expect(listbox).toBeVisible();
+      await expect(listbox).toHaveScreenshot(
+        "auto-suggest-box-listbox-dark.png",
+        screenshotOptions
+      );
+    });
+  });
+
   test.describe("ComboBox interaction and visual states", () => {
     test("commits select-only keyboard navigation while skipping a disabled option", async ({
       page

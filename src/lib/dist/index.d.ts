@@ -25,6 +25,19 @@ export type {
 } from "./components/Accordion";
 export { default as Alert } from "./components/Alert";
 export type { AlertComponent, AlertHandle, AlertProps, AlertSlotProps } from "./components/Alert";
+export { default as AutoSuggestBox } from "./components/AutoSuggestBox";
+export type {
+  AutoSuggestBoxOpenChangeEvent,
+  AutoSuggestBoxOpenChangeHandler,
+  AutoSuggestBoxProps,
+  AutoSuggestBoxQuerySubmitHandler,
+  AutoSuggestBoxSubmitEvent,
+  AutoSuggestBoxSuggestion,
+  AutoSuggestBoxSuggestionChooseHandler,
+  AutoSuggestBoxTextChangeEvent,
+  AutoSuggestBoxTextChangeHandler,
+  AutoSuggestBoxTextChangeReason
+} from "./components/AutoSuggestBox";
 export { default as Button } from "./components/Button";
 export type { ButtonProps, ButtonType } from "./components/Button";
 export { default as ButtonGroup } from "./components/ButtonGroup";

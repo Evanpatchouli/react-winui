@@ -17,6 +17,11 @@
       "import": "./dist/components/Button/index.js",
       "default": "./dist/components/Button/index.js"
     },
+    "./auto-suggest-box": {
+      "types": "./dist/components/AutoSuggestBox/index.d.ts",
+      "import": "./dist/components/AutoSuggestBox/index.js",
+      "default": "./dist/components/AutoSuggestBox/index.js"
+    },
     "./combo-box": {
       "types": "./dist/components/ComboBox/index.d.ts",
       "import": "./dist/components/ComboBox/index.js",

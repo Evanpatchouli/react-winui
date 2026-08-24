@@ -6,6 +6,7 @@ import {
   AppContainer,
   AppTheme,
   Alert,
+  AutoSuggestBox,
   Dialog,
   Accordion,
   ColorPickerItem,
@@ -53,6 +54,16 @@ import type {
   AppThemeScheme,
   AlertProps,
   AlertHandle,
+  AutoSuggestBoxOpenChangeEvent,
+  AutoSuggestBoxOpenChangeHandler,
+  AutoSuggestBoxProps,
+  AutoSuggestBoxQuerySubmitHandler,
+  AutoSuggestBoxSubmitEvent,
+  AutoSuggestBoxSuggestion,
+  AutoSuggestBoxSuggestionChooseHandler,
+  AutoSuggestBoxTextChangeEvent,
+  AutoSuggestBoxTextChangeHandler,
+  AutoSuggestBoxTextChangeReason,
   DialogProps,
   DialogHandle,
   AccordionProps,
@@ -148,6 +159,10 @@ import type {
   ToastProps
 } from "@evanpatchouli/react-winui";
 import ButtonDirect from "@evanpatchouli/react-winui/button";
+import AutoSuggestBoxDirect, {
+  type AutoSuggestBoxProps as AutoSuggestBoxDirectProps,
+  type AutoSuggestBoxSuggestion as AutoSuggestBoxDirectSuggestion
+} from "@evanpatchouli/react-winui/auto-suggest-box";
 import ComboBoxDirect, {
   type ComboBoxOption as ComboBoxDirectOption,
   type ComboBoxProps as ComboBoxDirectProps
@@ -185,6 +200,7 @@ const typedProps: [
   AppContainerProps,
   AppThemeProps,
   AlertProps,
+  AutoSuggestBoxProps,
   DialogProps,
   AccordionProps,
   ColorPickerItemProps,
@@ -226,6 +242,7 @@ const typedProps: [
   { style: { gap: "8px" } },
   { color: "#123456", colorDarkMode: "#abcdef", scheme: "dark" },
   { message: "Please confirm", title: "Notice" },
+  { suggestions: [{ value: "Windows" }] },
   { backdropBlur: true, isVisible: true, style: { width: "320px" } },
   { headerTitle: "General", style: { gap: "8px" } },
   { color: "#ff0000", name: "accent" },
@@ -281,6 +298,39 @@ export const alertHandleTypeCheck: AlertHandle | undefined = undefined;
 export const dialogHandleTypeCheck: DialogHandle | undefined = undefined;
 export const accordionSlotTypeCheck: AccordionSlotProps = { children: "Content" };
 export const searchSuggestionTypeCheck: InputSearchSuggestion = { text: "Windows" };
+export const autoSuggestBoxSuggestionTypeCheck: AutoSuggestBoxSuggestion = { value: "Windows" };
+export const autoSuggestBoxTextChangeReasonTypeCheck: AutoSuggestBoxTextChangeReason = "input";
+export const autoSuggestBoxOpenChangeEventTypeCheck = (_event: AutoSuggestBoxOpenChangeEvent) => {};
+export const autoSuggestBoxOpenChangeTypeCheck: AutoSuggestBoxOpenChangeHandler = (
+  _open,
+  event
+) => {
+  if (event) {
+    autoSuggestBoxOpenChangeEventTypeCheck(event);
+  }
+};
+export const autoSuggestBoxTextChangeEventTypeCheck = (_event: AutoSuggestBoxTextChangeEvent) => {};
+export const autoSuggestBoxTextChangeTypeCheck: AutoSuggestBoxTextChangeHandler = (
+  _text,
+  event,
+  _reason
+) => autoSuggestBoxTextChangeEventTypeCheck(event);
+export const autoSuggestBoxSubmitEventTypeCheck = (_event: AutoSuggestBoxSubmitEvent) => {};
+export const autoSuggestBoxSuggestionChooseTypeCheck: AutoSuggestBoxSuggestionChooseHandler = (
+  _suggestion,
+  event
+) => autoSuggestBoxSubmitEventTypeCheck(event);
+export const autoSuggestBoxQuerySubmitTypeCheck: AutoSuggestBoxQuerySubmitHandler = (
+  _query,
+  _suggestion,
+  event
+) => autoSuggestBoxSubmitEventTypeCheck(event);
+export const autoSuggestBoxDirectSuggestionTypeCheck: AutoSuggestBoxDirectSuggestion = {
+  value: "Direct"
+};
+export const autoSuggestBoxDirectPropsTypeCheck: AutoSuggestBoxDirectProps = {
+  suggestions: [autoSuggestBoxDirectSuggestionTypeCheck]
+};
 export const selectOptionTypeCheck: SelectOption = { label: "One", value: "one" };
 export const selectOptionValueTypeCheck: SelectOptionValue = 1;
 export const selectChangeTypeCheck: SelectChangeHandler = () => {};
@@ -430,6 +480,14 @@ export const basicControls: ReactElement = (
       onOpenChange={comboBoxOpenChangeTypeCheck}
       onValueChange={comboBoxValueChangeTypeCheck}
     />
+    <AutoSuggestBox
+      aria-label="Consumer AutoSuggestBox"
+      onOpenChange={autoSuggestBoxOpenChangeTypeCheck}
+      onQuerySubmit={autoSuggestBoxQuerySubmitTypeCheck}
+      onSuggestionChoose={autoSuggestBoxSuggestionChooseTypeCheck}
+      onTextChange={autoSuggestBoxTextChangeTypeCheck}
+      suggestions={[autoSuggestBoxSuggestionTypeCheck]}
+    />
     <ImageView alt="Windows logo" src="/windows.png" />
     <InfoBar open closable={false} message="Root InfoBar" severity={infoBarSeverityTypeCheck} />
     <InputSearchBar placeholder="Search" />
@@ -518,6 +576,12 @@ export const comboBoxSubpathImport: ReactElement = (
     editable
     aria-label="ComboBox subpath"
     options={[comboBoxDirectOptionTypeCheck]}
+  />
+);
+export const autoSuggestBoxSubpathImport: ReactElement = (
+  <AutoSuggestBoxDirect
+    aria-label="AutoSuggestBox subpath"
+    suggestions={[autoSuggestBoxDirectSuggestionTypeCheck]}
   />
 );
 export const contextMenuSubpathImport: ReactElement = (

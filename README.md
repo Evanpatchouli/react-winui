@@ -58,7 +58,7 @@ import "@evanpatchouli/react-winui/icons/winui-icons.min.css";
 # Usage
 
 ```js
-import { Button, InputText, Popover, Tooltip } from "@evanpatchouli/react-winui";
+import { AutoSuggestBox, Button, InputText, Popover, Tooltip } from "@evanpatchouli/react-winui";
 // Optional direct entry for smaller consumer graphs:
 import ButtonDirect from "@evanpatchouli/react-winui/button";
 // CSS token references for JavaScript-facing style APIs:
@@ -69,6 +69,11 @@ const App = () => (
     <Button type="primary" value="Press Me" />
     <ButtonDirect type="subtle" value="Direct entry" />
     <InputText placeholder="Enter a text" />
+    <AutoSuggestBox
+      aria-label="Search Windows topics"
+      suggestions={[{ value: "Windows 11" }, { value: "WinUI Gallery" }]}
+      queryButton
+    />
     <Tooltip content="Supplemental information">
       <Button value="Hover or focus" />
     </Tooltip>
@@ -82,7 +87,7 @@ const App = () => (
 
 # Run Locally
 
-```html
+```bash
 git clone https://github.com/evanpatchouli/react-winui.git
 cd react-winui
 pnpm install
@@ -99,7 +104,7 @@ pnpm lint
 pnpm typecheck
 ```
 
-`pnpm test:browser` starts an isolated Vite fixture that mounts the public visual component library and checks real browser interactions plus 36 checked-in visual baselines. To intentionally update visual baselines, use `pnpm test:browser:update` and review every changed image before committing it.
+`pnpm test:browser` starts an isolated Vite fixture that mounts the public visual component library and checks real browser interactions plus 38 checked-in visual baselines. To intentionally update visual baselines, use `pnpm test:browser:update` and review every changed image before committing it.
 
 The package also keeps the legacy `@evanpatchouli/react-winui/dist/react-winui.min.css` CSS path for existing applications. React, React DOM, and React Router DOM are peer dependencies and must be installed by the consuming app.
 

@@ -14,6 +14,13 @@
     "showBadge": false
   },
   {
+    "to": "autosuggestbox",
+    "exact": false,
+    "text": "AutoSuggestBox",
+    "icon": "icons10-search",
+    "showBadge": false
+  },
+  {
     "to": "buttons",
     "exact": false,
     "text": "Buttons",

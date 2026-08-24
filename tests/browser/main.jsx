@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { MemoryRouter } from "react-router-dom";
 import Accordion from "../../src/lib/src/components/Accordion/index.tsx";
 import Alert from "../../src/lib/src/components/Alert/index.tsx";
+import AutoSuggestBox from "../../src/lib/src/components/AutoSuggestBox/index.tsx";
 import AppContainer from "../../src/lib/src/components/AppContainer/index.tsx";
 import AppTheme from "../../src/lib/src/components/AppTheme/index.tsx";
 import Button from "../../src/lib/src/components/Button/index.tsx";
@@ -59,6 +60,13 @@ const comboBoxOptions = [
   { label: "Blue", value: "blue" }
 ];
 
+const autoSuggestBoxSuggestions = [
+  { value: "Windows 11" },
+  { disabled: true, label: "Windows Server unavailable", value: "Windows Server" },
+  { value: "WinUI Gallery" },
+  { value: "Seattle" }
+];
+
 const searchSuggestions = [{ text: "Windows 11" }, { text: "Windows UI" }, { text: "Linux" }];
 
 const imageSrc =
@@ -82,6 +90,8 @@ function VisualFixture() {
   const [activation, setActivation] = useState("none");
   const [contextMenuAction, setContextMenuAction] = useState("none");
   const [comboBoxResult, setComboBoxResult] = useState("windows");
+  const [autoSuggestBoxResult, setAutoSuggestBoxResult] = useState("none");
+  const [autoSuggestBoxText, setAutoSuggestBoxText] = useState("Win");
   const [editableComboBoxResult, setEditableComboBoxResult] = useState("none");
   const [selection, setSelection] = useState("windows");
   const [searchBarValue, setSearchBarValue] = useState("Windows");
@@ -792,6 +802,54 @@ function VisualFixture() {
           </div>
           <p className="visual-fixture-status">
             Selected item: <output data-testid="tree-view-result">{treeSelection}</output>
+          </p>
+        </Section>
+
+        <Section
+          caption="dynamic suggestions · query submit · clear · disabled · viewport fallback"
+          eyebrow="query"
+          testId="auto-suggest-box-panel"
+          title="AutoSuggestBox"
+        >
+          <div className="visual-fixture-auto-suggest-boxes">
+            <AutoSuggestBox
+              data-testid="auto-suggest-box-interactive"
+              label="Search topics"
+              listboxAriaLabel="Topic suggestions"
+              noSuggestionsMessage="No matching topics"
+              onQuerySubmit={(query, suggestion) =>
+                setAutoSuggestBoxResult(`${suggestion ? "suggestion" : "text"}: ${query}`)
+              }
+              onTextChange={(nextText) => setAutoSuggestBoxText(nextText)}
+              placeholder="Type a Windows topic"
+              queryButton
+              suggestions={autoSuggestBoxSuggestions.filter((suggestion) =>
+                suggestion.value.toLowerCase().includes(autoSuggestBoxText.toLowerCase())
+              )}
+              text={autoSuggestBoxText}
+            />
+            <AutoSuggestBox
+              data-testid="auto-suggest-box-viewport"
+              defaultText="Win"
+              label="Viewport fallback"
+              listboxAriaLabel="Viewport topic suggestions"
+              suggestions={autoSuggestBoxSuggestions}
+            />
+            <AutoSuggestBox
+              disabled
+              data-testid="auto-suggest-box-disabled"
+              defaultText="Disabled query"
+              label="Disabled"
+              queryButton
+              suggestions={autoSuggestBoxSuggestions}
+            />
+            <button className="ui-btn" data-testid="auto-suggest-box-outside" type="button">
+              Outside target
+            </button>
+          </div>
+          <p className="visual-fixture-status">
+            Query result:{" "}
+            <output data-testid="auto-suggest-box-result">{autoSuggestBoxResult}</output>
           </p>
         </Section>
       </main>
