@@ -57,6 +57,11 @@
       "import": "./dist/components/InfoBar/index.js",
       "default": "./dist/components/InfoBar/index.js"
     },
+    "./expander": {
+      "types": "./dist/components/Expander/index.d.ts",
+      "import": "./dist/components/Expander/index.js",
+      "default": "./dist/components/Expander/index.js"
+    },
     "./number-box": {
       "types": "./dist/components/NumberBox/index.d.ts",
       "import": "./dist/components/NumberBox/index.js",

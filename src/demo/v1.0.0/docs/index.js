@@ -14,6 +14,7 @@ export { default as ColorPickerDocs } from "./ColorPicker_docs";
 export { default as ComboBoxDocs } from "./ComboBox_docs";
 export { default as ContextMenuDocs } from "./ContextMenu_docs";
 export { default as DialogDocs } from "./Dialog_docs";
+export { default as ExpanderDocs } from "./Expander_docs";
 export { default as ImageViewDocs } from "./ImageView_docs";
 export { default as InfoBarDocs } from "./InfoBar_docs";
 export { default as InputGroupDocs } from "./InputGroup_docs";

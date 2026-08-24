@@ -275,6 +275,99 @@ test.describe("Public component visual baselines", () => {
     });
   });
 
+  test.describe("Expander interaction and visual states", () => {
+    test("supports native Enter and Space activation with dynamic content", async ({ page }) => {
+      const expander = page.getByTestId("expander-keyboard");
+      const header = expander.getByRole("button", { name: "Advanced network settings" });
+      const contentId = await header.getAttribute("aria-controls");
+
+      expect(contentId).toBeTruthy();
+      await expect(header).toHaveAttribute("aria-expanded", "false");
+      await expect(page.locator(`#${contentId}`)).toHaveAttribute("inert", "");
+
+      await header.press("Enter");
+      await expect(header).toHaveAttribute("aria-expanded", "true");
+      await expect(page.locator(`#${contentId}`)).not.toHaveAttribute("inert");
+      await expect(page.getByTestId("expander-result")).toHaveText("keyboard: true");
+
+      await page.getByRole("button", { name: "Add dynamic detail" }).click();
+      await expect(expander.getByText("Metered connection")).toBeVisible();
+
+      await header.focus();
+      await header.press("Space");
+      await expect(header).toHaveAttribute("aria-expanded", "false");
+      await expect(page.getByTestId("expander-result")).toHaveText("keyboard: false");
+    });
+
+    test("accepts controlled requests and blocks disabled keyboard events", async ({ page }) => {
+      const controlled = page.getByTestId("expander-controlled");
+      const controlledHeader = controlled.getByRole("button", { name: "Controlled details" });
+      const disabledHeader = page
+        .getByTestId("expander-disabled")
+        .getByRole("button", { name: "Managed by your organization" });
+
+      await controlledHeader.click();
+      await expect(controlledHeader).toHaveAttribute("aria-expanded", "true");
+      await expect(page.getByTestId("expander-result")).toHaveText("controlled: true");
+
+      await expect(disabledHeader).toBeDisabled();
+      await disabledHeader.dispatchEvent("keydown", { key: "Enter" });
+      await disabledHeader.dispatchEvent("keyup", { key: "Enter" });
+      await disabledHeader.dispatchEvent("keydown", { key: " " });
+      await disabledHeader.dispatchEvent("keyup", { key: " " });
+      await expect(disabledHeader).toHaveAttribute("aria-expanded", "false");
+      await expect(page.getByTestId("expander-result")).toHaveText("controlled: true");
+    });
+
+    test("keeps upward DOM order and ARIA stable while placing content above", async ({ page }) => {
+      const expander = page.getByTestId("expander-up");
+      const header = expander.getByRole("button", { name: "Recent activity" });
+      const contentId = await header.getAttribute("aria-controls");
+      const content = page.locator(`#${contentId}`);
+      const headerBox = await header.boundingBox();
+      const contentBox = await content.boundingBox();
+      const headerComesFirst = await expander.evaluate((root) => {
+        const headerElement = root.querySelector(".ui-expander-header");
+        const contentElement = root.querySelector(".ui-expander-content");
+        return Boolean(
+          headerElement.compareDocumentPosition(contentElement) & Node.DOCUMENT_POSITION_FOLLOWING
+        );
+      });
+
+      expect(headerComesFirst).toBe(true);
+      expect(headerBox).not.toBeNull();
+      expect(contentBox).not.toBeNull();
+      expect(contentBox.y).toBeLessThan(headerBox.y);
+      await expect(header).toHaveAttribute("aria-expanded", "true");
+      await expect(content).toHaveAttribute("aria-hidden", "false");
+    });
+
+    test("captures the expanded light surface", async ({ page }) => {
+      await page
+        .getByTestId("expander-keyboard")
+        .getByRole("button", { name: "Advanced network settings" })
+        .click();
+
+      await expect(panel(page, "expander-panel")).toHaveScreenshot(
+        "expander-light.png",
+        screenshotOptions
+      );
+    });
+
+    test("captures the expanded dark surface", async ({ page }) => {
+      await page.getByTestId("theme-dark").click();
+      await page
+        .getByTestId("expander-keyboard")
+        .getByRole("button", { name: "Advanced network settings" })
+        .click();
+
+      await expect(panel(page, "expander-panel")).toHaveScreenshot(
+        "expander-dark.png",
+        screenshotOptions
+      );
+    });
+  });
+
   test.describe("ContextMenu interaction and visual states", () => {
     test("opens from right click and captures the light surface", async ({ page }) => {
       await page.getByTestId("context-menu-trigger").click({ button: "right" });

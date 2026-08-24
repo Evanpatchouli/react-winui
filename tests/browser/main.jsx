@@ -13,6 +13,7 @@ import ColorPickerItem from "../../src/lib/src/components/ColorPicker/ColorPicke
 import ColorPickerPalette from "../../src/lib/src/components/ColorPicker/ColorPickerPalette/index.tsx";
 import ComboBox from "../../src/lib/src/components/ComboBox/index.tsx";
 import Dialog from "../../src/lib/src/components/Dialog/index.tsx";
+import Expander from "../../src/lib/src/components/Expander/index.tsx";
 import ImageView from "../../src/lib/src/components/ImageView/index.tsx";
 import InfoBar from "../../src/lib/src/components/InfoBar/index.tsx";
 import InputSearchBar from "../../src/lib/src/components/InputSearch/InputSearchBar/index.tsx";
@@ -99,6 +100,18 @@ const SettingsGlyph = () => (
   </svg>
 );
 
+const SettingsIcon = () => (
+  <svg aria-hidden="true" focusable="false" viewBox="0 0 16 16">
+    <circle cx="8" cy="8" fill="none" r="2.5" stroke="currentColor" />
+    <path
+      d="M8 1.5v2m0 9v2M1.5 8h2m9 0h2M3.4 3.4l1.4 1.4m6.4 6.4 1.4 1.4m0-9.2-1.4 1.4m-6.4 6.4-1.4 1.4"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+    />
+  </svg>
+);
+
 function VisualFixture() {
   const [scheme, setScheme] = useState("light");
   const [activation, setActivation] = useState("none");
@@ -107,6 +120,9 @@ function VisualFixture() {
   const [autoSuggestBoxResult, setAutoSuggestBoxResult] = useState("none");
   const [autoSuggestBoxText, setAutoSuggestBoxText] = useState("Win");
   const [editableComboBoxResult, setEditableComboBoxResult] = useState("none");
+  const [expanderControlled, setExpanderControlled] = useState(false);
+  const [expanderDetails, setExpanderDetails] = useState(["Network discovery"]);
+  const [expanderResult, setExpanderResult] = useState("none");
   const [selection, setSelection] = useState("windows");
   const [searchBarValue, setSearchBarValue] = useState("Windows");
   const [searchResult, setSearchResult] = useState("none");
@@ -936,6 +952,72 @@ function VisualFixture() {
           <p className="visual-fixture-status">
             Query result:{" "}
             <output data-testid="auto-suggest-box-result">{autoSuggestBoxResult}</output>
+          </p>
+        </Section>
+
+        <Section
+          caption="controlled and uncontrolled · up and down · disabled · dynamic content"
+          eyebrow="layout"
+          testId="expander-panel"
+          title="Expander"
+        >
+          <div className="visual-fixture-expander-grid">
+            <Expander
+              data-testid="expander-keyboard"
+              header="Advanced network settings"
+              icon={<SettingsIcon />}
+              onExpandedChange={(nextExpanded) => setExpanderResult(`keyboard: ${nextExpanded}`)}
+            >
+              <div className="visual-fixture-expander-content">
+                {expanderDetails.map((detail) => (
+                  <span key={detail}>{detail}</span>
+                ))}
+                <Button
+                  onClick={() =>
+                    setExpanderDetails((details) =>
+                      details.includes("Metered connection")
+                        ? details
+                        : [...details, "Metered connection"]
+                    )
+                  }
+                  value="Add dynamic detail"
+                />
+              </div>
+            </Expander>
+            <Expander
+              data-testid="expander-controlled"
+              expanded={expanderControlled}
+              header="Controlled details"
+              onExpandedChange={(nextExpanded) => {
+                setExpanderControlled(nextExpanded);
+                setExpanderResult(`controlled: ${nextExpanded}`);
+              }}
+            >
+              <div className="visual-fixture-expander-content">
+                Parent state accepted the request.
+              </div>
+            </Expander>
+            <Expander
+              defaultExpanded
+              data-testid="expander-up"
+              direction="up"
+              header="Recent activity"
+            >
+              <div className="visual-fixture-expander-content">
+                Content expands above the header.
+              </div>
+            </Expander>
+            <Expander
+              disabled
+              data-testid="expander-disabled"
+              header="Managed by your organization"
+              onExpandedChange={() => setExpanderResult("disabled activated")}
+            >
+              Unavailable content
+            </Expander>
+          </div>
+          <p className="visual-fixture-status">
+            Expander lifecycle: <output data-testid="expander-result">{expanderResult}</output>
           </p>
         </Section>
       </main>

@@ -5,6 +5,7 @@ import {
   AutoSuggestBox,
   ComboBox,
   ContextMenu,
+  Expander,
   Flyout,
   InfoBar,
   NumberBox,
@@ -19,6 +20,7 @@ import ButtonDirect from "@evanpatchouli/react-winui/button";
 import AutoSuggestBoxDirect from "@evanpatchouli/react-winui/auto-suggest-box";
 import ComboBoxDirect from "@evanpatchouli/react-winui/combo-box";
 import ContextMenuDirect from "@evanpatchouli/react-winui/context-menu";
+import ExpanderDirect from "@evanpatchouli/react-winui/expander";
 import FlyoutDirect from "@evanpatchouli/react-winui/flyout";
 import InfoBarDirect from "@evanpatchouli/react-winui/info-bar";
 import NumberBoxDirect from "@evanpatchouli/react-winui/number-box";
@@ -65,6 +67,12 @@ const ConsumerApp = () => {
       <ContextMenuDirect content={<ContextMenuDirect.Item>Direct command</ContextMenuDirect.Item>}>
         <button type="button">ContextMenu subpath</button>
       </ContextMenuDirect>
+      <Expander defaultExpanded header="Root Expander">
+        Root content
+      </Expander>
+      <ExpanderDirect direction="up" header="Expander subpath">
+        Direct content
+      </ExpanderDirect>
       <Popover content="Root Popover" defaultOpen>
         <Button value="Popover" />
       </Popover>

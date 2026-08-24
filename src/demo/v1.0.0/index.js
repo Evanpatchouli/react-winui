@@ -25,6 +25,7 @@ import {
   ColorPickerDocs,
   ContextMenuDocs,
   DialogDocs,
+  ExpanderDocs,
   Icons,
   ImageViewDocs,
   InfoBarDocs,
@@ -103,6 +104,7 @@ const AppFourTwoThree = () => {
             {text: "commandbar", link: 'commandbar'},
             {text: "contextmenu", link: 'contextmenu'},
             {text: "dialogs", link: 'dialogs'},
+            {text: "expander", link: 'expander'},
             {text: "icons", link: 'icons'},
             {text: "imageview", link: 'imageview'},
             {text: "infobar", link: 'infobar'},
@@ -198,6 +200,7 @@ const AppFourTwoThree = () => {
           <Route path="colorpicker" element={<ColorPickerDocs/>} />
           <Route path="contextmenu" element={<ContextMenuDocs/>} />
           <Route path="dialogs" element={<DialogDocs/>} />
+          <Route path="expander" element={<ExpanderDocs/>} />
           <Route path="imageview" element={<ImageViewDocs/>} />
           <Route path="infobar" element={<InfoBarDocs/>} />
           <Route path="input_group" element={<InputGroupDocs/>} />

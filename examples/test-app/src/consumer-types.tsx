@@ -9,6 +9,7 @@ import {
   AutoSuggestBox,
   Dialog,
   Accordion,
+  Expander,
   ColorPickerItem,
   ColorPickerPalette,
   ComboBox,
@@ -69,6 +70,10 @@ import type {
   DialogHandle,
   AccordionProps,
   AccordionSlotProps,
+  ExpanderDirection,
+  ExpanderExpandedChangeEvent,
+  ExpanderExpandedChangeHandler,
+  ExpanderProps,
   ColorPickerItemProps,
   ColorPickerPaletteProps,
   ComboBoxOpenChangeEvent,
@@ -176,6 +181,10 @@ import type { ShadowName, ShadowToken } from "@evanpatchouli/react-winui/theme";
 import TooltipDirect from "@evanpatchouli/react-winui/tooltip";
 import PopoverDirect from "@evanpatchouli/react-winui/popover";
 import FlyoutDirect from "@evanpatchouli/react-winui/flyout";
+import ExpanderDirect, {
+  type ExpanderDirection as ExpanderDirectDirection,
+  type ExpanderProps as ExpanderDirectProps
+} from "@evanpatchouli/react-winui/expander";
 import InfoBarDirect, {
   type InfoBarProps as InfoBarDirectProps,
   type InfoBarSeverity as InfoBarDirectSeverity
@@ -210,6 +219,7 @@ const typedProps: [
   AutoSuggestBoxProps,
   DialogProps,
   AccordionProps,
+  ExpanderProps,
   ColorPickerItemProps,
   ColorPickerPaletteProps,
   ComboBoxProps,
@@ -252,6 +262,7 @@ const typedProps: [
   { suggestions: [{ value: "Windows" }] },
   { backdropBlur: true, isVisible: true, style: { width: "320px" } },
   { headerTitle: "General", style: { gap: "8px" } },
+  { header: "Advanced settings", direction: "down" },
   { color: "#ff0000", name: "accent" },
   { color: "#00ff00" },
   { options: [{ label: "One", value: "one" }] },
@@ -304,6 +315,15 @@ export const schemeTypeCheck: AppThemeScheme = "system";
 export const alertHandleTypeCheck: AlertHandle | undefined = undefined;
 export const dialogHandleTypeCheck: DialogHandle | undefined = undefined;
 export const accordionSlotTypeCheck: AccordionSlotProps = { children: "Content" };
+export const expanderDirectionTypeCheck: ExpanderDirection = "up";
+export const expanderExpandedChangeEventTypeCheck = (_event: ExpanderExpandedChangeEvent) => {};
+export const expanderExpandedChangeTypeCheck: ExpanderExpandedChangeHandler = (_expanded, event) =>
+  expanderExpandedChangeEventTypeCheck(event);
+export const expanderDirectDirectionTypeCheck: ExpanderDirectDirection = "down";
+export const expanderDirectPropsTypeCheck: ExpanderDirectProps = {
+  header: "Direct Expander",
+  direction: expanderDirectDirectionTypeCheck
+};
 export const searchSuggestionTypeCheck: InputSearchSuggestion = { text: "Windows" };
 export const autoSuggestBoxSuggestionTypeCheck: AutoSuggestBoxSuggestion = { value: "Windows" };
 export const autoSuggestBoxTextChangeReasonTypeCheck: AutoSuggestBoxTextChangeReason = "input";
@@ -490,6 +510,13 @@ export const basicControls: ReactElement = (
       <Accordion.Trigger>Options</Accordion.Trigger>
       <Accordion.Body>Content</Accordion.Body>
     </Accordion>
+    <Expander
+      defaultExpanded
+      header="Advanced settings"
+      onExpandedChange={expanderExpandedChangeTypeCheck}
+    >
+      Expander content
+    </Expander>
     <ColorPickerItem color="#ff0000" name="accent" />
     <ColorPickerPalette color="#00ff00" />
     <ComboBox
@@ -592,6 +619,9 @@ export const flyoutSubpathImport: ReactElement = (
   <FlyoutDirect content="Flyout subpath">
     <button type="button">Flyout trigger</button>
   </FlyoutDirect>
+);
+export const expanderSubpathImport: ReactElement = (
+  <ExpanderDirect {...expanderDirectPropsTypeCheck}>Direct content</ExpanderDirect>
 );
 export const comboBoxSubpathImport: ReactElement = (
   <ComboBoxDirect

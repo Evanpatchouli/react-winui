@@ -66,6 +66,13 @@ export type {
   DialogProps,
   DialogSlotProps
 } from "./components/Dialog";
+export { default as Expander } from "./components/Expander";
+export type {
+  ExpanderDirection,
+  ExpanderExpandedChangeEvent,
+  ExpanderExpandedChangeHandler,
+  ExpanderProps
+} from "./components/Expander";
 export { default as ImageView } from "./components/ImageView";
 export type { ImageViewProps } from "./components/ImageView";
 export { default as InfoBar } from "./components/InfoBar";

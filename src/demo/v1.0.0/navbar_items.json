@@ -56,6 +56,13 @@
     "showBadge": false
   },
   {
+    "to": "expander",
+    "exact": false,
+    "text": "Expander",
+    "icon": "icons10-down-squared",
+    "showBadge": false
+  },
+  {
     "to": "icons",
     "exact": false,
     "text": "Icons",
