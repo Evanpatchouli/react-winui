@@ -7,6 +7,7 @@
 <p align="center"><a href="https://Evanpatchouli.github.io/react-winui/" target="_blank">« Explore Project Docs »</a></p>
 
 # Status
+
 <p>
   <a href="https://Evanpatchouli.github.io/react-winui/">
     <img src="https://img.shields.io/circleci/build/github/Evanpatchouli/react-winui?style=flat-square&logo=circleci&token=6fe7637a17a269e8b002b11474d70c9d25c71f30" alt="Build" />
@@ -25,35 +26,50 @@
 </p>
 
 # Features
- - Provides Native feel Windows UI Controls.
- - Comparably small CSS file size.
- - Cleaner HTML.
- - Works with any <b>Routing Library</b>.
+
+- Provides Native feel Windows UI Controls.
+- Comparably small CSS file size.
+- Cleaner HTML.
+- Works with any <b>Routing Library</b>.
 
 # Works with
+
 <img src="https://github.com/Evanpatchouli/react-winui/blob/main/markdown/support_vitejs.svg" width="90" title="ViteJS"/> &nbsp;&nbsp;&nbsp;&nbsp; <img src="https://github.com/Evanpatchouli/react-winui/blob/main/markdown/support_nextjs.svg" width="90" title="NextJS"/>
 
 # Getting Started
+
 ```ruby
 npm install @evanpatchouli/react-winui
 ```
+
 ```js
 // Be sure to include styles at some point, probably during your bootstraping
 import "@evanpatchouli/react-winui/config/app-config.css";
 import "@evanpatchouli/react-winui/styles.css";
 import "@evanpatchouli/react-winui/icons/winui-icons.min.css";
 ```
+
 ## 🚀 [See `App.js` code & more »](https://Evanpatchouli.github.io/react-winui/#/v1.0.0/getting_started)
 
 # Usage
 
 ```js
-import { Button, InputText, TreeItem, TreeView } from "@evanpatchouli/react-winui";
+import {
+  Button,
+  InputText,
+  SettingsCard,
+  SettingsExpander,
+  TreeItem,
+  TreeView
+} from "@evanpatchouli/react-winui";
 
 const App = () => (
   <>
     <Button type="primary" value="Press Me" />
     <InputText placeholder="Enter a text" />
+    <SettingsExpander title="Advanced settings">
+      <SettingsCard title="Developer mode" />
+    </SettingsExpander>
     <TreeView aria-label="Files" defaultExpandedItems={["documents"]}>
       <TreeItem label="Documents" value="documents">
         <TreeItem label="Readme" value="readme" />
@@ -63,17 +79,16 @@ const App = () => (
 );
 ```
 
-`@evanpatchouli/react-winui/button` and `@evanpatchouli/react-winui/tree-view` are available as direct ESM entries when a consumer wants to avoid the package barrel. The legacy `@evanpatchouli/react-winui/dist/react-winui.min.css` path remains supported.
+`@evanpatchouli/react-winui/button`, `@evanpatchouli/react-winui/settings-expander`, and `@evanpatchouli/react-winui/tree-view` are available as direct ESM entries when a consumer wants to avoid the package barrel. The legacy `@evanpatchouli/react-winui/dist/react-winui.min.css` path remains supported.
 
 # Run Locally
+
 ```html
-git clone https://github.com/Evanpatchouli/react-winui.git
-cd react-winui
-npm install
-npm start
+git clone https://github.com/Evanpatchouli/react-winui.git cd react-winui npm install npm start
 ```
 
 # Find this project useful? :heart:
+
 Support it by joining [**stargazers**](https://github.com/Evanpatchouli/react-winui/stargazers) for this repository. :star:
 
 # License

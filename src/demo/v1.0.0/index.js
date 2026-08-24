@@ -39,6 +39,7 @@ import {
   RadioButtonDocs,
   SelectBoxDocs,
   SettingsCardDocs,
+  SettingsExpanderDocs,
   SliderBarDocs,
   SwitchDocs,
   TableViewDocs,
@@ -116,6 +117,7 @@ const AppFourTwoThree = () => {
             {text: "flyout", link: 'popover'},
             {text: "select", link: 'selectbox'},
             {text: "settingscard", link: 'settingscard'},
+            {text: "settingsexpander", link: 'settingsexpander'},
             {text: "tooltip", link: 'tooltip'},
             {text: "treeview", link: 'treeview'}
           ]}
@@ -214,6 +216,7 @@ const AppFourTwoThree = () => {
           <Route path="radio_button" element={<RadioButtonDocs/>} />
           <Route path="selectbox" element={<SelectBoxDocs/>} />
           <Route path="settingscard" element={<SettingsCardDocs/>} />
+          <Route path="settingsexpander" element={<SettingsExpanderDocs/>} />
           <Route path="sliderbar" element={<SliderBarDocs/>} />
           <Route path="switch" element={<SwitchDocs/>} />
           <Route path="tableview" element={<TableViewDocs/>} />

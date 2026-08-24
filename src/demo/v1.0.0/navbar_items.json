@@ -161,6 +161,13 @@
     "showBadge": false
   },
   {
+    "to": "settingsexpander",
+    "exact": false,
+    "text": "SettingsExpander",
+    "icon": "icons10-settings",
+    "showBadge": false
+  },
+  {
     "to": "sliderbar",
     "exact": false,
     "text": "SliderBar",

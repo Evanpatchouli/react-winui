@@ -65,6 +65,7 @@ import {
   InputText,
   Popover,
   SettingsCard,
+  SettingsExpander,
   Tooltip
 } from "@evanpatchouli/react-winui";
 // Optional direct entry for smaller consumer graphs:
@@ -80,6 +81,13 @@ const App = () => (
     <SettingsCard title="Notifications" description="Allow desktop notifications">
       <Button value="Configure" />
     </SettingsCard>
+    <SettingsExpander
+      title="Advanced settings"
+      description="Show related configuration"
+      content={<Button value="Reset" />}
+    >
+      <SettingsCard title="Developer mode" />
+    </SettingsExpander>
     <AutoSuggestBox
       aria-label="Search Windows topics"
       suggestions={[{ value: "Windows 11" }, { value: "WinUI Gallery" }]}

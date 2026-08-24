@@ -26,6 +26,7 @@ import {
   ContextMenu,
   NumberBox,
   SettingsCard,
+  SettingsExpander,
   NavBar,
   NavBarLink,
   NavBarSubMenu,
@@ -125,6 +126,9 @@ import type {
   SettingsCardClickEvent,
   SettingsCardClickHandler,
   SettingsCardProps,
+  SettingsExpanderExpandedChangeEvent,
+  SettingsExpanderExpandedChangeHandler,
+  SettingsExpanderProps,
   NavBarComponent,
   NavBarLinkProps,
   NavBarProps,
@@ -214,6 +218,9 @@ import NumberBoxDirect, {
 import SettingsCardDirect, {
   type SettingsCardProps as SettingsCardDirectProps
 } from "@evanpatchouli/react-winui/settings-card";
+import SettingsExpanderDirect, {
+  type SettingsExpanderProps as SettingsExpanderDirectProps
+} from "@evanpatchouli/react-winui/settings-expander";
 import TreeViewDirect, {
   TreeItem as TreeItemDirect,
   type TreeItemProps as TreeItemDirectProps,
@@ -246,6 +253,7 @@ const typedProps: [
   MenuBarProps,
   ContextMenuProps,
   NumberBoxProps,
+  SettingsExpanderProps,
   NavBarProps,
   NavBarLinkProps,
   NavBarSubMenuProps,
@@ -293,6 +301,7 @@ const typedProps: [
     children: <button type="button">Target</button>
   },
   { defaultValue: 2, max: 10, min: 0 },
+  { header: "Advanced settings", itemsHeader: "Related options" },
   { shadowOnScroll: true, title: "Navigation" },
   { active: true, href: "/home", text: "Home" },
   { title: "Utilities" },
@@ -462,6 +471,21 @@ export const settingsCardDirectPropsTypeCheck: SettingsCardDirectProps = {
   href: "/settings/display",
   title: "Display"
 };
+export const settingsExpanderExpandedChangeEventTypeCheck = (
+  _event: SettingsExpanderExpandedChangeEvent
+) => {};
+export const settingsExpanderExpandedChangeTypeCheck: SettingsExpanderExpandedChangeHandler = (
+  _expanded,
+  event
+) => settingsExpanderExpandedChangeEventTypeCheck(event);
+export const settingsExpanderPropsTypeCheck: SettingsExpanderProps = {
+  header: "Advanced settings",
+  itemsHeader: "Related options",
+  onExpandedChange: settingsExpanderExpandedChangeTypeCheck
+};
+export const settingsExpanderDirectPropsTypeCheck: SettingsExpanderDirectProps = {
+  title: "Direct SettingsExpander"
+};
 export const infoBarSeverityTypeCheck: InfoBarSeverity = "warning";
 export const infoBarOpenChangeEventTypeCheck = (_event: InfoBarOpenChangeEvent) => {};
 export const infoBarOpenChangeTypeCheck: InfoBarOpenChangeHandler = (_open, event) =>
@@ -605,6 +629,12 @@ export const basicControls: ReactElement = (
     <SettingsCard {...settingsCardPropsTypeCheck}>
       <button type="button">Configure</button>
     </SettingsCard>
+    <SettingsExpander
+      {...settingsExpanderPropsTypeCheck}
+      content={<button type="button">Header control</button>}
+    >
+      <SettingsCard title="Nested setting" />
+    </SettingsExpander>
     <NavBar ref={navBarRef} shadowOnScroll title="Navigation">
       <NavBarLink href="/home" text="Home" />
       <NavBarSubMenu title="Utilities">
@@ -694,6 +724,11 @@ export const numberBoxSubpathImport: ReactElement = (
 );
 export const settingsCardSubpathImport: ReactElement = (
   <SettingsCardDirect {...settingsCardDirectPropsTypeCheck} />
+);
+export const settingsExpanderSubpathImport: ReactElement = (
+  <SettingsExpanderDirect {...settingsExpanderDirectPropsTypeCheck}>
+    Direct expanded content
+  </SettingsExpanderDirect>
 );
 export const treeViewSubpathImport: ReactElement = (
   <TreeViewDirect aria-label="Direct TreeView">

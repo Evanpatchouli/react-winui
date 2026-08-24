@@ -12,6 +12,7 @@ import {
   NumberBox,
   Popover,
   SettingsCard,
+  SettingsExpander,
   TreeItem,
   TreeView,
   Toast,
@@ -28,6 +29,7 @@ import InfoBarDirect from "@evanpatchouli/react-winui/info-bar";
 import NumberBoxDirect from "@evanpatchouli/react-winui/number-box";
 import PopoverDirect from "@evanpatchouli/react-winui/popover";
 import SettingsCardDirect from "@evanpatchouli/react-winui/settings-card";
+import SettingsExpanderDirect from "@evanpatchouli/react-winui/settings-expander";
 import TreeViewDirect, { TreeItem as TreeItemDirect } from "@evanpatchouli/react-winui/tree-view";
 import ToastDirect, { Toaster as ToasterDirect } from "@evanpatchouli/react-winui/toast";
 import { Shadows } from "@evanpatchouli/react-winui/theme";
@@ -104,6 +106,16 @@ const ConsumerApp = () => {
         <button type="button">Configure</button>
       </SettingsCard>
       <SettingsCardDirect href="#display" title="SettingsCard subpath" />
+      <SettingsExpander
+        content={<button type="button">Header control</button>}
+        defaultExpanded
+        title="Root SettingsExpander"
+      >
+        <SettingsCard title="Nested root setting" />
+      </SettingsExpander>
+      <SettingsExpanderDirect title="SettingsExpander subpath">
+        Direct expanded content
+      </SettingsExpanderDirect>
       <TreeView aria-label="Root TreeView" defaultExpandedItems={["root-folder"]}>
         <TreeItem label="Root folder" value="root-folder">
           <TreeItem label="Root file" value="root-file" />

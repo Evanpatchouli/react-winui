@@ -33,6 +33,7 @@ export { default as PopoverDocs } from "./Popover_docs";
 export { default as RadioButtonDocs } from "./RadioButton_docs";
 export { default as SelectBoxDocs } from "./SelectBox_docs";
 export { default as SettingsCardDocs } from "./SettingsCard_docs";
+export { default as SettingsExpanderDocs } from "./SettingsExpander_docs";
 export { default as SliderBarDocs } from "./SliderBar_docs";
 export { default as SwitchDocs } from "./Switch_docs";
 export { default as TableViewDocs } from "./TableView_docs";

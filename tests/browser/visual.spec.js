@@ -856,6 +856,98 @@ test.describe("Public component visual baselines", () => {
     });
   });
 
+  test.describe("SettingsExpander interaction and visual states", () => {
+    test("keeps header controls independent from native keyboard disclosure", async ({ page }) => {
+      const settingsPanel = panel(page, "settings-expander-panel");
+      const toggle = settingsPanel.getByRole("button", { name: "Advanced network settings" });
+
+      await expect(toggle).toHaveAttribute("aria-expanded", "true");
+      await page.getByTestId("settings-expander-action").click();
+      await expect(page.getByTestId("settings-expander-result")).toHaveText("action: reset");
+      await expect(toggle).toHaveAttribute("aria-expanded", "true");
+
+      await settingsPanel.getByRole("checkbox", { name: "Advanced network features" }).click();
+      await expect(page.getByTestId("settings-expander-result")).toHaveText("content: network");
+      await expect(toggle).toHaveAttribute("aria-expanded", "true");
+
+      await toggle.focus();
+      await page.keyboard.press("Enter");
+      await expect(toggle).toHaveAttribute("aria-expanded", "false");
+      await expect(page.getByTestId("settings-expander-result")).toHaveText("uncontrolled: false");
+    });
+
+    test("accepts controlled changes and restores focus when parent content closes", async ({
+      page
+    }) => {
+      const toggle = panel(page, "settings-expander-panel").getByRole("button", {
+        name: "Optional features"
+      });
+
+      await toggle.focus();
+      await page.keyboard.press("Space");
+      await expect(toggle).toHaveAttribute("aria-expanded", "true");
+      await expect(page.getByTestId("settings-expander-result")).toHaveText("controlled: true");
+
+      const nestedAction = page.getByTestId("settings-expander-nested-action");
+      await nestedAction.focus();
+      await expect(nestedAction).toBeFocused();
+      await toggle.evaluate((element) => element.click());
+      await expect(toggle).toHaveAttribute("aria-expanded", "false");
+      await expect(toggle).toBeFocused();
+    });
+
+    test("makes the disabled header and expanded descendants inert", async ({ page }) => {
+      const disabledExpander = page.getByTestId("settings-expander-disabled");
+      const disabledAction = page.getByTestId("settings-expander-disabled-action");
+      const disabledItem = page.getByTestId("settings-expander-disabled-item");
+
+      await expect(disabledExpander).toHaveAttribute("aria-disabled", "true");
+      await expect(disabledExpander).toHaveAttribute("inert", "");
+      await expect(
+        disabledExpander.getByRole("button", { name: "Optional diagnostics", hidden: true })
+      ).toBeDisabled();
+
+      await disabledAction.focus();
+      await expect(disabledAction).not.toBeFocused();
+      await disabledItem.focus();
+      await expect(disabledItem).not.toBeFocused();
+      await disabledAction.evaluate((element) => element.click());
+      await disabledItem.evaluate((element) => element.click());
+      await expect(page.getByTestId("settings-expander-result")).toHaveText("none");
+    });
+
+    test("captures expanded and collapsed groups in light and dark themes", async ({ page }) => {
+      const settingsPanel = panel(page, "settings-expander-panel");
+
+      await expect(settingsPanel).toHaveScreenshot(
+        "settings-expander-light.png",
+        screenshotOptions
+      );
+
+      await page.getByTestId("theme-dark").click();
+      await expect(settingsPanel).toHaveScreenshot("settings-expander-dark.png", screenshotOptions);
+    });
+
+    test("stacks header controls below labels at the responsive breakpoint", async ({ page }) => {
+      await page.setViewportSize({ width: 620, height: 900 });
+      await page.locator(".visual-fixture").evaluate((element) => {
+        element.style.width = "540px";
+      });
+
+      const expander = page.getByTestId("settings-expander-uncontrolled");
+      const mainBox = await expander.locator(".ui-settings-expander-main").boundingBox();
+      const trailingBox = await expander.locator(".ui-settings-expander-trailing").boundingBox();
+
+      expect(mainBox).not.toBeNull();
+      expect(trailingBox).not.toBeNull();
+      expect(trailingBox.y).toBeGreaterThan(mainBox.y);
+      await expect(expander).toHaveScreenshot(
+        "settings-expander-responsive.png",
+        screenshotOptions
+      );
+    });
+  });
+
   test.describe("Control and selection baselines", () => {
     test("captures the light form controls", async ({ page }) => {
       await expect(panel(page, "controls-panel")).toHaveScreenshot(

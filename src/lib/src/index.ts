@@ -138,6 +138,12 @@ export type {
   SettingsCardClickHandler,
   SettingsCardProps
 } from "./components/SettingsCard";
+export { default as SettingsExpander } from "./components/SettingsExpander";
+export type {
+  SettingsExpanderExpandedChangeEvent,
+  SettingsExpanderExpandedChangeHandler,
+  SettingsExpanderProps
+} from "./components/SettingsExpander";
 export {
   default as ContextMenu,
   ContextMenuDivider,

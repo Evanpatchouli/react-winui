@@ -77,6 +77,11 @@
       "import": "./dist/components/SettingsCard/index.js",
       "default": "./dist/components/SettingsCard/index.js"
     },
+    "./settings-expander": {
+      "types": "./dist/components/SettingsExpander/index.d.ts",
+      "import": "./dist/components/SettingsExpander/index.js",
+      "default": "./dist/components/SettingsExpander/index.js"
+    },
     "./tree-view": {
       "types": "./dist/components/TreeView/index.d.ts",
       "import": "./dist/components/TreeView/index.js",

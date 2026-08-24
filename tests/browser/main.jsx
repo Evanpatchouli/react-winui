@@ -38,6 +38,7 @@ import RadioButton from "../../src/lib/src/components/RadioButton/index.tsx";
 import Select from "../../src/lib/src/components/SelectMenus/Select/index.tsx";
 import SelectNative from "../../src/lib/src/components/SelectMenus/SelectNative/index.tsx";
 import SettingsCard from "../../src/lib/src/components/SettingsCard/index.tsx";
+import SettingsExpander from "../../src/lib/src/components/SettingsExpander/index.tsx";
 import SliderBar from "../../src/lib/src/components/SliderBar/index.tsx";
 import SplashScreen from "../../src/lib/src/components/SplashScreen/index.tsx";
 import Switch from "../../src/lib/src/components/Switch/index.tsx";
@@ -133,6 +134,8 @@ function VisualFixture() {
   const [infoBarResult, setInfoBarResult] = useState("none");
   const [numberBoxResult, setNumberBoxResult] = useState(4);
   const [settingsCardResult, setSettingsCardResult] = useState("none");
+  const [settingsExpanderControlled, setSettingsExpanderControlled] = useState(false);
+  const [settingsExpanderResult, setSettingsExpanderResult] = useState("none");
   const [toastResult, setToastResult] = useState("none");
   const [treeExpandedItems, setTreeExpandedItems] = useState(["workspace", "src"]);
   const [treeSelection, setTreeSelection] = useState("readme");
@@ -1077,6 +1080,105 @@ function VisualFixture() {
           </div>
           <p className="visual-fixture-status">
             Command action: <output data-testid="command-bar-result">{commandBarResult}</output>
+          </p>
+        </Section>
+
+        <Section
+          caption="header controls · grouped cards · controlled · disabled · responsive"
+          eyebrow="settings"
+          testId="settings-expander-panel"
+          title="SettingsExpander"
+        >
+          <div className="visual-fixture-settings-expanders">
+            <SettingsExpander
+              action={
+                <button
+                  className="ui-btn"
+                  data-testid="settings-expander-action"
+                  onClick={() => setSettingsExpanderResult("action: reset")}
+                  type="button"
+                >
+                  Reset
+                </button>
+              }
+              content={
+                <Switch
+                  aria-label="Advanced network features"
+                  defaultChecked
+                  label={false}
+                  onChange={() => setSettingsExpanderResult("content: network")}
+                />
+              }
+              data-testid="settings-expander-uncontrolled"
+              defaultExpanded
+              description="Manage discovery and sharing for this network"
+              header="Advanced network settings"
+              icon={<SettingsGlyph />}
+              itemsFooter="Changes apply to the current network profile."
+              itemsHeader="Related options"
+              onExpandedChange={(nextExpanded) =>
+                setSettingsExpanderResult(`uncontrolled: ${nextExpanded}`)
+              }
+            >
+              <SettingsCard description="Let this PC find other devices" title="Discovery">
+                <Switch aria-label="Network discovery" label={false} />
+              </SettingsCard>
+              <SettingsCard description="Share files with nearby devices" title="File sharing">
+                <Switch aria-label="File sharing" label={false} />
+              </SettingsCard>
+            </SettingsExpander>
+
+            <SettingsExpander
+              data-testid="settings-expander-controlled"
+              expanded={settingsExpanderControlled}
+              header="Optional features"
+              onExpandedChange={(nextExpanded) => {
+                setSettingsExpanderControlled(nextExpanded);
+                setSettingsExpanderResult(`controlled: ${nextExpanded}`);
+              }}
+            >
+              <SettingsCard title="Developer mode">
+                <button
+                  className="ui-btn"
+                  data-testid="settings-expander-nested-action"
+                  onClick={() => setSettingsExpanderResult("nested: developer")}
+                  type="button"
+                >
+                  Configure
+                </button>
+              </SettingsCard>
+            </SettingsExpander>
+
+            <SettingsExpander
+              action={
+                <button
+                  className="ui-btn"
+                  data-testid="settings-expander-disabled-action"
+                  onClick={() => setSettingsExpanderResult("unexpected")}
+                  type="button"
+                >
+                  Manage
+                </button>
+              }
+              data-testid="settings-expander-disabled"
+              defaultExpanded
+              disabled
+              description="Managed by your organization"
+              header="Optional diagnostics"
+            >
+              <button
+                className="ui-btn"
+                data-testid="settings-expander-disabled-item"
+                onClick={() => setSettingsExpanderResult("unexpected")}
+                type="button"
+              >
+                Unavailable action
+              </button>
+            </SettingsExpander>
+          </div>
+          <p className="visual-fixture-status">
+            SettingsExpander action:{" "}
+            <output data-testid="settings-expander-result">{settingsExpanderResult}</output>
           </p>
         </Section>
       </main>
