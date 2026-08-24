@@ -35,6 +35,13 @@
     "showBadge": false
   },
   {
+    "to": "combobox",
+    "exact": false,
+    "text": "ComboBox",
+    "icon": "icons10-database",
+    "showBadge": false
+  },
+  {
     "to": "dialogs",
     "exact": false,
     "text": "Dialogs",

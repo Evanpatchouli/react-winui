@@ -319,6 +319,107 @@ test.describe("Public component visual baselines", () => {
     });
   });
 
+  test.describe("ComboBox interaction and visual states", () => {
+    test("commits select-only keyboard navigation while skipping a disabled option", async ({
+      page
+    }) => {
+      await expect(page).toHaveTitle("React Windows UI visual regression fixture");
+      const combobox = page.getByTestId("combo-box-select-only");
+      await combobox.focus();
+      await page.keyboard.press("ArrowDown");
+
+      const listbox = page.getByRole("listbox", { name: "Platform options" });
+      await expect(listbox).toBeVisible();
+      await expect(listbox.getByRole("option", { name: "Linux unavailable" })).toHaveAttribute(
+        "aria-disabled",
+        "true"
+      );
+
+      await page.keyboard.press("ArrowDown");
+      await expect(combobox).toHaveAttribute(
+        "aria-activedescendant",
+        await listbox.getByRole("option", { name: "macOS" }).getAttribute("id")
+      );
+      await page.keyboard.press("Enter");
+
+      await expect(page.getByTestId("combo-box-result")).toHaveText("macos");
+      await expect(listbox).toHaveCount(0);
+    });
+
+    test("filters editable options and commits both an option and custom text", async ({
+      page
+    }) => {
+      const combobox = page.getByTestId("combo-box-editable");
+      await combobox.fill("Blu");
+
+      const listbox = page.getByRole("listbox", { name: "Editable color options" });
+      await expect(listbox.getByRole("option")).toHaveCount(1);
+      await expect(listbox.getByRole("option", { name: "Blue" })).toBeVisible();
+
+      await page.keyboard.press("ArrowDown");
+      await page.keyboard.press("Enter");
+      await expect(page.getByTestId("combo-box-editable-result")).toHaveText("option: blue");
+
+      await combobox.fill("Orchid");
+      await expect(listbox.getByRole("option")).toHaveCount(0);
+      await expect(listbox).toContainText("No options");
+      await page.keyboard.press("Enter");
+      await expect(page.getByTestId("combo-box-editable-result")).toHaveText("custom: Orchid");
+    });
+
+    test("closes with Escape and an outside pointer without changing the value", async ({
+      page
+    }) => {
+      const combobox = page.getByTestId("combo-box-select-only");
+      const listbox = page.getByRole("listbox", { name: "Platform options" });
+
+      await combobox.click();
+      await expect(listbox).toBeVisible();
+      await page.keyboard.press("Escape");
+      await expect(listbox).toHaveCount(0);
+
+      await combobox.click();
+      await page.getByTestId("combo-box-outside").click();
+      await expect(listbox).toHaveCount(0);
+      await expect(combobox).toHaveValue("Windows");
+    });
+
+    test("uses a real top fallback near the viewport edge", async ({ page }) => {
+      await page.setViewportSize({ width: 360, height: 480 });
+      const combobox = page.getByTestId("combo-box-viewport");
+      await combobox.evaluate((element) => {
+        const rect = element.getBoundingClientRect();
+        window.scrollBy(0, rect.bottom - window.innerHeight + 6);
+      });
+      await combobox.click();
+
+      const listbox = page.getByRole("listbox", { name: "Viewport options" });
+      await expect(listbox).toHaveAttribute("data-placement", "top");
+      const comboBoxBounds = await combobox.boundingBox();
+      const listboxBounds = await listbox.boundingBox();
+      expect(comboBoxBounds).not.toBeNull();
+      expect(listboxBounds).not.toBeNull();
+      expect(listboxBounds.y + listboxBounds.height).toBeLessThanOrEqual(comboBoxBounds.y);
+    });
+
+    test("captures the light listbox surface", async ({ page }) => {
+      await page.getByTestId("combo-box-select-only").click();
+      const listbox = page.getByRole("listbox", { name: "Platform options" });
+
+      await expect(listbox).toBeVisible();
+      await expect(listbox).toHaveScreenshot("combo-box-listbox-light.png", screenshotOptions);
+    });
+
+    test("captures the dark listbox surface", async ({ page }) => {
+      await page.getByTestId("theme-dark").click();
+      await page.getByTestId("combo-box-select-only").click();
+      const listbox = page.getByRole("listbox", { name: "Platform options" });
+
+      await expect(listbox).toBeVisible();
+      await expect(listbox).toHaveScreenshot("combo-box-listbox-dark.png", screenshotOptions);
+    });
+  });
+
   test.describe("Control and selection baselines", () => {
     test("captures the light form controls", async ({ page }) => {
       await expect(panel(page, "controls-panel")).toHaveScreenshot(

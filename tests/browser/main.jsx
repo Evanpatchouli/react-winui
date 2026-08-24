@@ -10,6 +10,7 @@ import ButtonGroup from "../../src/lib/src/components/ButtonGroup/index.tsx";
 import Checkbox from "../../src/lib/src/components/Checkbox/index.tsx";
 import ColorPickerItem from "../../src/lib/src/components/ColorPicker/ColorPickerItem/index.tsx";
 import ColorPickerPalette from "../../src/lib/src/components/ColorPicker/ColorPickerPalette/index.tsx";
+import ComboBox from "../../src/lib/src/components/ComboBox/index.tsx";
 import Dialog from "../../src/lib/src/components/Dialog/index.tsx";
 import ImageView from "../../src/lib/src/components/ImageView/index.tsx";
 import InfoBar from "../../src/lib/src/components/InfoBar/index.tsx";
@@ -49,6 +50,13 @@ const selectData = [
   { label: "macOS", value: "macos" }
 ];
 
+const comboBoxOptions = [
+  { label: "Windows", value: "windows" },
+  { disabled: true, label: "Linux unavailable", value: "linux" },
+  { label: "macOS", value: "macos" },
+  { label: "Blue", value: "blue" }
+];
+
 const searchSuggestions = [{ text: "Windows 11" }, { text: "Windows UI" }, { text: "Linux" }];
 
 const imageSrc =
@@ -71,6 +79,8 @@ function VisualFixture() {
   const [scheme, setScheme] = useState("light");
   const [activation, setActivation] = useState("none");
   const [contextMenuAction, setContextMenuAction] = useState("none");
+  const [comboBoxResult, setComboBoxResult] = useState("windows");
+  const [editableComboBoxResult, setEditableComboBoxResult] = useState("none");
   const [selection, setSelection] = useState("windows");
   const [searchBarValue, setSearchBarValue] = useState("Windows");
   const [searchResult, setSearchResult] = useState("none");
@@ -658,6 +668,58 @@ function VisualFixture() {
           </div>
           <p className="visual-fixture-status">
             InfoBar lifecycle: <output data-testid="info-bar-result">{infoBarResult}</output>
+          </p>
+        </Section>
+
+        <Section
+          caption="select-only · editable · disabled option · portal viewport fallback"
+          eyebrow="selection"
+          testId="combo-box-panel"
+          title="ComboBox"
+        >
+          <div className="visual-fixture-combo-boxes">
+            <div>
+              <span className="visual-fixture-label">Select-only</span>
+              <ComboBox
+                aria-label="Platform ComboBox"
+                data-testid="combo-box-select-only"
+                defaultValue="windows"
+                listboxAriaLabel="Platform options"
+                options={comboBoxOptions}
+                onValueChange={(value) => setComboBoxResult(String(value))}
+              />
+            </div>
+            <div>
+              <span className="visual-fixture-label">Editable</span>
+              <ComboBox
+                editable
+                aria-label="Editable color ComboBox"
+                data-testid="combo-box-editable"
+                listboxAriaLabel="Editable color options"
+                options={comboBoxOptions}
+                onValueChange={(value, option) =>
+                  setEditableComboBoxResult(`${option ? "option" : "custom"}: ${String(value)}`)
+                }
+              />
+            </div>
+            <div>
+              <span className="visual-fixture-label">Viewport fallback</span>
+              <ComboBox
+                aria-label="Viewport ComboBox"
+                data-testid="combo-box-viewport"
+                listboxAriaLabel="Viewport options"
+                options={comboBoxOptions}
+              />
+            </div>
+            <button className="ui-btn" data-testid="combo-box-outside" type="button">
+              Outside target
+            </button>
+          </div>
+          <p className="visual-fixture-status">
+            Select-only result: <output data-testid="combo-box-result">{comboBoxResult}</output>
+            {" · "}
+            Editable result:{" "}
+            <output data-testid="combo-box-editable-result">{editableComboBoxResult}</output>
           </p>
         </Section>
       </main>

@@ -111,3 +111,11 @@
 - `disabled` 根节点若要覆盖任意 ReactNode action，不能只禁用内建 close button；还需在 capture 阶段阻止 click 以及 Enter/Space 激活，同时保留消息可读性和 `aria-disabled`。
 - severity 不能只靠颜色表达；当现有 token 缺少 warning 色时，保留中性 token 并使用不同图标，比私自添加局部硬编码色更符合主题与 token 约束。
 - 默认关闭的 inline 组件在 docs、consumer 和 visual fixture 中都必须显式设置 `open` / `defaultOpen`；否则构建可能通过但实际没有验证 DOM、CSS 或发布运行时。
+
+## 2026-08-24：ComboBox 值、文本与 viewport 边界
+
+- editable ComboBox 的受控 `text` 是请求协议：输入事件可调用 `onTextChange`，但在父组件更新 prop 前，显示值必须保持不变；测试应通过 rerender 明确锁定这一点。
+- popup 样式不能用 `position.maxHeight || undefined`，否则真实的 0 可用高度会被误判为“尚未定位”；应使用独立 `positionReady` 状态决定是否写入 `maxHeight`。
+- 方向键移动 active option 与提交 value 是两件事；遵循 WinUI 的 select-only 行为可避免用户浏览选项时意外改变已提交值。
+- portaled listbox 的视觉快照应直接截 surface；顶部 fallback 应在真实小 viewport 中同时断言 listbox 与 trigger 的几何关系，不能只靠 mocked rect。
+- listbox 进入动画必须为 `prefers-reduced-motion: reduce` 提供无动画分支，避免只覆盖 trigger 的交互动画而遗漏 portal surface。

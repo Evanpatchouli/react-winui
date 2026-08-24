@@ -35,6 +35,17 @@ export { default as ColorPickerItem } from "./components/ColorPicker/ColorPicker
 export type { ColorPickerItemProps } from "./components/ColorPicker/ColorPickerItem";
 export { default as ColorPickerPalette } from "./components/ColorPicker/ColorPickerPalette";
 export type { ColorPickerPaletteProps } from "./components/ColorPicker/ColorPickerPalette";
+export { default as ComboBox } from "./components/ComboBox";
+export type {
+  ComboBoxOpenChangeEvent,
+  ComboBoxOpenChangeHandler,
+  ComboBoxOption,
+  ComboBoxProps,
+  ComboBoxTextSubmitHandler,
+  ComboBoxValue,
+  ComboBoxValueChangeEvent,
+  ComboBoxValueChangeHandler
+} from "./components/ComboBox";
 export { default as Dialog } from "./components/Dialog";
 export type {
   DialogComponent,

@@ -235,3 +235,12 @@
 - `disabled` 只阻止 close 与 action 的用户激活，消息继续可读且根节点标记 `aria-disabled`；受控 `open` 的程序化变化不受限制。
 - surface、文字、边框、焦点与 severity 图标只消费现有 `--rwu-*` token。当前没有 warning 专用 token，因此使用 `--rwu-color-text-primary` 与独立三角图标表达 warning，不引入硬编码色。
 - 参考 WinUI InfoBar、Fluent UI React v9 MessageBar 与 WAI-ARIA status/alert 的行为、API 和测试边界；未复制第三方源码、Griffel 或 Fluent 视觉 token。
+
+## 2026-08-24：阶段 7 P0 ComboBox
+
+- 保留旧 `Select`、`SelectNative` 和 `InputSearchBox` 的 API 与视觉不变，新增单选 `ComboBox`；新组件用 `options` 数据描述选项，避免把旧 `Select` 换名复制。
+- 将已提交的 `value` 与 editable 输入 `text` 分为两套受控/非受控状态；受控回调只发送变更请求，是否显示新值由父组件决定。
+- 焦点保留在 combobox input/button，通过 `aria-activedescendant` 关联 listbox option；方向键只移动 active option，Enter 才提交选择，disabled option 始终跳过且不可提交。
+- listbox 通过 portal 挂载，并在真实测量后完成上下 placement fallback、水平 clamp 与 viewport `max-height`；定位未就绪和可用高度确为 0 是两个不同状态。
+- editable 模式支持筛选、匹配项提交及自定义字符串提交；当前 API 明确保持单选，不提前引入 multiselect、虚拟化或远程数据框架。
+- 视觉只消费既有 `--rwu-*` token，并复用旧 Select 的 WinUI 视觉 DNA；仅参考 WinUI ComboBox、Fluent UI React v9 Combobox 与 WAI-ARIA APG 的行为/API/测试思路，未复制实际源码、Griffel 或 Fluent token。

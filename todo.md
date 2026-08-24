@@ -14,7 +14,7 @@
 - [x] `ContextMenu`：已复用 `MenuBar` surface / item 视觉骨架，并补齐上下文触发、ARIA、键盘、定位与焦点行为
 - [x] `Toast`：已新增轻量 Toast / Toaster、FIFO 队列、定时暂停、ARIA、发布入口、docs、consumer 与视觉回归
 - [x] `InfoBar`：已新增内联状态通知、四级 severity、受控/非受控关闭、ARIA live region、发布入口、docs、consumer 与视觉回归
-- [ ] `ComboBox`：先审计现有 `Select`、`SelectNative` 和 `InputSearchBox` 的能力边界
+- [x] `ComboBox`：已新增单选与可编辑模式、受控状态、ARIA、键盘/typeahead、viewport 定位、发布入口、docs、consumer 与视觉回归
 
 ## P1
 

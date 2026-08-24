@@ -339,3 +339,13 @@
 - 参考 WinUI InfoBar、Fluent UI React v9 MessageBar types/tests 与 WAI-ARIA status/alert；只借鉴行为、API 和测试边界，未复制源码、Griffel 或 Fluent token。
 - 验证通过：`pnpm format:check`、`pnpm lint`、`pnpm typecheck`、InfoBar RTL（10/10）、`pnpm test`（8 files / 108 tests）、`pnpm test:consumer`、`pnpm build`、`pnpm test:browser:update`（52/52）、`pnpm test:browser`（52/52）及 `pnpm --filter @evanpatchouli/react-winui pack --dry-run`；两张视觉基线已人工检查无裁切或布局异常。
 - 已知遗留：现有 Design Tokens 没有 warning 专用色，当前用 `--rwu-color-text-primary` 与三角图标传达 warning；未实现自定义 severity icon/background API。docs production build 仍有既有大 chunk warning。build 会为共享工作树中的未集成 ComboBox 生成孤立 dist declaration，本提交明确不暂存该文件。
+
+# 阶段 7 P0 ComboBox
+
+- 新增默认导出的单选 `ComboBox`，覆盖 option data、controlled/uncontrolled value/open、editable controlled/uncontrolled text、自定义字符串提交、disabled/option disabled、typeahead、Arrow/Home/End/Enter/Space/Escape/Alt+Arrow 键盘行为、ARIA combobox/listbox/option、portal 与 viewport 定位。
+- 审计确认旧 `Select` 仅支持默认值/点击，`SelectNative` 依赖浏览器原生 select，`InputSearchBox` 只提供搜索输入与 DOM class 筛选；三者都不具备新 ComboBox 的完整选择、editable、状态控制与无障碍边界，因此未改名复制或破坏旧 API。
+- root export、全部 public types、`./combo-box` package subpath、ESM、`.d.ts`、CSS dist、consumer root/subpath/types/runtime、真实 docs Demo/导航/路由与轻量 API 文档均已接入。
+- 新增 10 个 ComboBox Vitest/RTL tests；Playwright 新增 6 个浏览器用例，覆盖 select-only 键盘提交、disabled option、editable 筛选/选项/自定义提交、Escape/outside close、真实小 viewport 顶部 fallback 与 light/dark，并新增 2 张 Chromium Windows 视觉基线。
+- 参考 WinUI ComboBox、Fluent UI React v9 Combobox base types/tests 与 WAI-ARIA APG Combobox Pattern；只借鉴行为、API 和测试边界，未复制源码、Griffel 或 Fluent token。
+- 验证通过：`pnpm format:check`、`pnpm lint`、`pnpm typecheck`、`pnpm test`（8 files / 110 tests）、`pnpm test:consumer`、`pnpm build`、ComboBox 快照显式更新（6/6）、`pnpm test:browser`（58/58）及 `pnpm --filter @evanpatchouli/react-winui pack --dry-run`；两张视觉基线已人工检查无裁切、主题或 viewport 异常。首次全量浏览器运行仅遇到一次 Vite HMR WebSocket `ERR_NO_BUFFER_SPACE` 环境抖动，失败项单测与随后全量复验均通过。
+- 已知边界：当前为单选且不内建虚拟化/异步数据获取；大数据或远程数据由调用方控制 `options` 和 `text`。docs production build 仍有既有大 chunk warning。

@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { createRoot } from "react-dom/client";
 import {
   Button,
+  ComboBox,
   ContextMenu,
   Flyout,
   InfoBar,
@@ -10,6 +11,7 @@ import {
   Toaster
 } from "@evanpatchouli/react-winui";
 import ButtonDirect from "@evanpatchouli/react-winui/button";
+import ComboBoxDirect from "@evanpatchouli/react-winui/combo-box";
 import ContextMenuDirect from "@evanpatchouli/react-winui/context-menu";
 import FlyoutDirect from "@evanpatchouli/react-winui/flyout";
 import InfoBarDirect from "@evanpatchouli/react-winui/info-bar";
@@ -28,6 +30,16 @@ const ConsumerApp = () => {
     <main style={{ display: "flex", gap: "8px", padding: "24px", boxShadow: Shadows.shadow8 }}>
       <Button type="primary" value="Root export" />
       <ButtonDirect type="subtle" value="Button subpath" />
+      <ComboBox
+        aria-label="Root ComboBox"
+        defaultValue="one"
+        options={[{ label: "One", value: "one" }]}
+      />
+      <ComboBoxDirect
+        editable
+        aria-label="ComboBox subpath"
+        options={[{ label: "Two", value: "two" }]}
+      />
       <ContextMenu content={<ContextMenu.Item>Root command</ContextMenu.Item>}>
         <button type="button">Root ContextMenu</button>
       </ContextMenu>

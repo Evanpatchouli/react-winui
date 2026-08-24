@@ -10,6 +10,7 @@ import {
   Accordion,
   ColorPickerItem,
   ColorPickerPalette,
+  ComboBox,
   ImageView,
   InfoBar,
   InputSearchBar,
@@ -55,6 +56,14 @@ import type {
   AccordionSlotProps,
   ColorPickerItemProps,
   ColorPickerPaletteProps,
+  ComboBoxOpenChangeEvent,
+  ComboBoxOpenChangeHandler,
+  ComboBoxOption,
+  ComboBoxProps,
+  ComboBoxTextSubmitHandler,
+  ComboBoxValue,
+  ComboBoxValueChangeEvent,
+  ComboBoxValueChangeHandler,
   ImageViewProps,
   InfoBarOpenChangeEvent,
   InfoBarOpenChangeHandler,
@@ -123,6 +132,10 @@ import type {
   ToastProps
 } from "@evanpatchouli/react-winui";
 import ButtonDirect from "@evanpatchouli/react-winui/button";
+import ComboBoxDirect, {
+  type ComboBoxOption as ComboBoxDirectOption,
+  type ComboBoxProps as ComboBoxDirectProps
+} from "@evanpatchouli/react-winui/combo-box";
 import { Shadows } from "@evanpatchouli/react-winui/theme";
 import type { ShadowName, ShadowToken } from "@evanpatchouli/react-winui/theme";
 import TooltipDirect from "@evanpatchouli/react-winui/tooltip";
@@ -152,6 +165,7 @@ const typedProps: [
   AccordionProps,
   ColorPickerItemProps,
   ColorPickerPaletteProps,
+  ComboBoxProps,
   ImageViewProps,
   InfoBarProps,
   InputSearchBarProps,
@@ -190,6 +204,7 @@ const typedProps: [
   { headerTitle: "General", style: { gap: "8px" } },
   { color: "#ff0000", name: "accent" },
   { color: "#00ff00" },
+  { options: [{ label: "One", value: "one" }] },
   { alt: "Windows logo", src: "/windows.png", width: 128 },
   { defaultOpen: true, message: "Update available", severity: "informational" },
   { placeholder: "Search", width: 240 },
@@ -241,6 +256,26 @@ export const searchSuggestionTypeCheck: InputSearchSuggestion = { text: "Windows
 export const selectOptionTypeCheck: SelectOption = { label: "One", value: "one" };
 export const selectOptionValueTypeCheck: SelectOptionValue = 1;
 export const selectChangeTypeCheck: SelectChangeHandler = () => {};
+export const comboBoxOptionTypeCheck: ComboBoxOption = { label: "One", value: "one" };
+export const comboBoxValueTypeCheck: ComboBoxValue = "one";
+export const comboBoxOpenChangeEventTypeCheck = (_event: ComboBoxOpenChangeEvent) => {};
+export const comboBoxOpenChangeTypeCheck: ComboBoxOpenChangeHandler = (_open, event) => {
+  if (event) {
+    comboBoxOpenChangeEventTypeCheck(event);
+  }
+};
+export const comboBoxValueChangeEventTypeCheck = (_event: ComboBoxValueChangeEvent) => {};
+export const comboBoxValueChangeTypeCheck: ComboBoxValueChangeHandler = (_value, _option, event) =>
+  comboBoxValueChangeEventTypeCheck(event);
+export const comboBoxTextSubmitTypeCheck: ComboBoxTextSubmitHandler = () => {};
+export const comboBoxDirectOptionTypeCheck: ComboBoxDirectOption = {
+  label: "Direct",
+  value: "direct"
+};
+export const comboBoxDirectPropsTypeCheck: ComboBoxDirectProps = {
+  editable: true,
+  options: [comboBoxDirectOptionTypeCheck]
+};
 export const tooltipPlacementTypeCheck: TooltipPlacement = "top";
 export const tooltipRelationshipTypeCheck: TooltipRelationship = "description";
 export const popoverPropsTypeCheck: PopoverProps = {
@@ -336,6 +371,13 @@ export const basicControls: ReactElement = (
     </Accordion>
     <ColorPickerItem color="#ff0000" name="accent" />
     <ColorPickerPalette color="#00ff00" />
+    <ComboBox
+      aria-label="Consumer ComboBox"
+      defaultValue="one"
+      options={[comboBoxOptionTypeCheck]}
+      onOpenChange={comboBoxOpenChangeTypeCheck}
+      onValueChange={comboBoxValueChangeTypeCheck}
+    />
     <ImageView alt="Windows logo" src="/windows.png" />
     <InfoBar open closable={false} message="Root InfoBar" severity={infoBarSeverityTypeCheck} />
     <InputSearchBar placeholder="Search" />
@@ -403,6 +445,13 @@ export const flyoutSubpathImport: ReactElement = (
   <FlyoutDirect content="Flyout subpath">
     <button type="button">Flyout trigger</button>
   </FlyoutDirect>
+);
+export const comboBoxSubpathImport: ReactElement = (
+  <ComboBoxDirect
+    editable
+    aria-label="ComboBox subpath"
+    options={[comboBoxDirectOptionTypeCheck]}
+  />
 );
 export const contextMenuSubpathImport: ReactElement = (
   <ContextMenuDirect content={<ContextMenuDirect.Item>Copy</ContextMenuDirect.Item>}>
