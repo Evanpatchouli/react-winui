@@ -112,6 +112,12 @@ export type {
   NumberBoxValueChangeEvent,
   NumberBoxValueChangeHandler
 } from "./components/NumberBox";
+export { default as SettingsCard } from "./components/SettingsCard";
+export type {
+  SettingsCardClickEvent,
+  SettingsCardClickHandler,
+  SettingsCardProps
+} from "./components/SettingsCard";
 export {
   default as ContextMenu,
   ContextMenuDivider,

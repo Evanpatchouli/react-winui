@@ -140,6 +140,13 @@
     "showBadge": false
   },
   {
+    "to": "settingscard",
+    "exact": false,
+    "text": "SettingsCard",
+    "icon": "icons10-settings",
+    "showBadge": false
+  },
+  {
     "to": "sliderbar",
     "exact": false,
     "text": "SliderBar",

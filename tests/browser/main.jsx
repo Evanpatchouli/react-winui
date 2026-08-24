@@ -35,6 +35,7 @@ import Popover from "../../src/lib/src/components/Popover/index.tsx";
 import RadioButton from "../../src/lib/src/components/RadioButton/index.tsx";
 import Select from "../../src/lib/src/components/SelectMenus/Select/index.tsx";
 import SelectNative from "../../src/lib/src/components/SelectMenus/SelectNative/index.tsx";
+import SettingsCard from "../../src/lib/src/components/SettingsCard/index.tsx";
 import SliderBar from "../../src/lib/src/components/SliderBar/index.tsx";
 import SplashScreen from "../../src/lib/src/components/SplashScreen/index.tsx";
 import Switch from "../../src/lib/src/components/Switch/index.tsx";
@@ -85,6 +86,19 @@ const Section = ({ testId, eyebrow, title, caption, children, className = "" }) 
   </section>
 );
 
+const SettingsGlyph = () => (
+  <svg aria-hidden="true" focusable="false" viewBox="0 0 20 20">
+    <circle cx="10" cy="10" fill="none" r="3" stroke="currentColor" strokeWidth="1.5" />
+    <path
+      d="M10 2.5v2m0 11v2m7.5-7.5h-2m-11 0h-2m12.8-5.3-1.4 1.4M6.1 13.9l-1.4 1.4m10.6 0-1.4-1.4M6.1 6.1 4.7 4.7"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeWidth="1.5"
+    />
+  </svg>
+);
+
 function VisualFixture() {
   const [scheme, setScheme] = useState("light");
   const [activation, setActivation] = useState("none");
@@ -99,6 +113,7 @@ function VisualFixture() {
   const [infoBarInstance, setInfoBarInstance] = useState(0);
   const [infoBarResult, setInfoBarResult] = useState("none");
   const [numberBoxResult, setNumberBoxResult] = useState(4);
+  const [settingsCardResult, setSettingsCardResult] = useState("none");
   const [toastResult, setToastResult] = useState("none");
   const [treeExpandedItems, setTreeExpandedItems] = useState(["workspace", "src"]);
   const [treeSelection, setTreeSelection] = useState("readme");
@@ -802,6 +817,77 @@ function VisualFixture() {
           </div>
           <p className="visual-fixture-status">
             Selected item: <output data-testid="tree-view-result">{treeSelection}</output>
+          </p>
+        </Section>
+
+        <Section
+          caption="static controls · sibling trigger · link · disabled · responsive"
+          eyebrow="settings"
+          testId="settings-card-panel"
+          title="SettingsCard"
+        >
+          <div className="visual-fixture-settings-cards">
+            <SettingsCard
+              data-testid="settings-card-static"
+              description="Allow apps to show desktop notifications"
+              icon={<SettingsGlyph />}
+              title="Notifications"
+            >
+              <Switch
+                aria-label="Desktop notifications"
+                defaultChecked
+                label={false}
+                onChange={() => setSettingsCardResult("content: notifications")}
+              />
+            </SettingsCard>
+            <SettingsCard
+              data-testid="settings-card-interactive"
+              description="Brightness, night light, and display profile"
+              icon={<SettingsGlyph />}
+              onClick={() => setSettingsCardResult("card: display")}
+              title="Display"
+            />
+            <SettingsCard
+              action={
+                <button
+                  className="ui-btn"
+                  data-testid="settings-card-action"
+                  onClick={() => setSettingsCardResult("action: update")}
+                  type="button"
+                >
+                  Check now
+                </button>
+              }
+              description="Last checked a few minutes ago"
+              onClick={() => setSettingsCardResult("card: update")}
+              title="Windows Update"
+            />
+            <SettingsCard
+              data-testid="settings-card-link"
+              description="Camera, microphone, and account permissions"
+              href="#privacy"
+              onClick={(event) => {
+                event.preventDefault();
+                setSettingsCardResult("link: privacy");
+              }}
+              title="Privacy & security"
+            />
+            <SettingsCard
+              disabled
+              action={
+                <button disabled className="ui-btn" type="button">
+                  Manage
+                </button>
+              }
+              data-testid="settings-card-disabled"
+              description="Managed by your organization"
+              onClick={() => setSettingsCardResult("unexpected")}
+              title="Optional diagnostics"
+            />
+          </div>
+          <p className="visual-fixture-status">
+            Settings action:{" "}
+            <output data-testid="settings-card-result">{settingsCardResult}</output>
           </p>
         </Section>
 

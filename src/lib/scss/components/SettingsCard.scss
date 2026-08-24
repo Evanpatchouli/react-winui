@@ -1,0 +1,194 @@
+.ui-settings-card {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  width: 100%;
+  min-height: calc(var(--rwu-control-height) * 2);
+  box-sizing: border-box;
+  overflow: hidden;
+  border: 1px solid var(--rwu-color-border-divider);
+  border-radius: var(--rwu-radius-dialog);
+  color: var(--rwu-color-text-primary);
+  background: var(--rwu-color-surface-card);
+  box-shadow: var(--rwu-shadow-2);
+}
+
+.ui-settings-card-trigger,
+.ui-settings-card-backplate {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  border-radius: inherit;
+}
+
+.ui-settings-card-trigger {
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+  appearance: none;
+}
+
+.ui-settings-card-trigger:focus {
+  outline: none;
+}
+
+.ui-settings-card-backplate {
+  z-index: 0;
+  pointer-events: none;
+  background: var(--rwu-color-surface-card);
+  transition:
+    background var(--rwu-duration-fast) var(--rwu-ease-standard),
+    outline-color var(--rwu-duration-fast) var(--rwu-ease-standard);
+}
+
+.ui-settings-card-interactive:not(.ui-settings-card-disabled)
+  .ui-settings-card-trigger:hover
+  + .ui-settings-card-backplate {
+  background: var(--rwu-color-surface-control-hover);
+}
+
+.ui-settings-card-interactive:not(.ui-settings-card-disabled)
+  .ui-settings-card-trigger:active
+  + .ui-settings-card-backplate {
+  background: var(--rwu-color-surface-control-pressed);
+}
+
+.ui-settings-card-trigger:focus-visible + .ui-settings-card-backplate {
+  outline: 2px solid var(--rwu-color-accent);
+  outline-offset: -3px;
+}
+
+.ui-settings-card-main,
+.ui-settings-card-trailing {
+  position: relative;
+  z-index: 2;
+}
+
+.ui-settings-card-main {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  min-width: 0;
+  gap: var(--rwu-spacing-xl);
+  padding: var(--rwu-spacing-xl) var(--rwu-spacing-2xl);
+}
+
+.ui-settings-card-interactive .ui-settings-card-main {
+  pointer-events: none;
+}
+
+.ui-settings-card-interactive
+  .ui-settings-card-main
+  :where(a, button, input, select, textarea, [tabindex]) {
+  pointer-events: auto;
+}
+
+.ui-settings-card-text {
+  display: grid;
+  min-width: 0;
+  gap: var(--rwu-spacing-xs);
+}
+
+.ui-settings-card-header {
+  overflow-wrap: anywhere;
+  font-size: var(--rwu-font-size-label);
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.ui-settings-card-description {
+  overflow-wrap: anywhere;
+  color: var(--rwu-color-text-secondary);
+  font-size: var(--rwu-font-size-control);
+  line-height: 1.4;
+}
+
+.ui-settings-card-icon,
+.ui-settings-card-action-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  color: var(--rwu-color-text-secondary);
+}
+
+.ui-settings-card-icon {
+  width: var(--rwu-spacing-2xl);
+  height: var(--rwu-spacing-2xl);
+  font-size: var(--rwu-spacing-2xl);
+}
+
+.ui-settings-card-icon > svg,
+.ui-settings-card-action-icon > svg {
+  width: 100%;
+  height: 100%;
+}
+
+.ui-settings-card-trailing {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 0;
+  gap: var(--rwu-spacing-lg);
+  padding: var(--rwu-spacing-xl) var(--rwu-spacing-2xl) var(--rwu-spacing-xl) 0;
+  pointer-events: none;
+}
+
+.ui-settings-card-content,
+.ui-settings-card-action {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  pointer-events: auto;
+}
+
+.ui-settings-card-action-icon {
+  width: var(--rwu-spacing-xl);
+  height: var(--rwu-spacing-xl);
+}
+
+.ui-settings-card-disabled {
+  color: var(--rwu-color-text-disabled);
+  cursor: default;
+}
+
+.ui-settings-card-disabled .ui-settings-card-description,
+.ui-settings-card-disabled .ui-settings-card-icon,
+.ui-settings-card-disabled .ui-settings-card-action-icon {
+  color: var(--rwu-color-text-disabled);
+}
+
+.ui-settings-card-disabled .ui-settings-card-trailing {
+  opacity: 0.6;
+}
+
+@media (max-width: 640px) {
+  .ui-settings-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ui-settings-card-main {
+    padding-block-end: var(--rwu-spacing-md);
+  }
+
+  .ui-settings-card-trailing {
+    justify-content: flex-start;
+    padding-block-start: 0;
+    padding-inline-start: var(--rwu-spacing-2xl);
+  }
+
+  .ui-settings-card-with-icon .ui-settings-card-trailing {
+    padding-inline-start: calc(
+      var(--rwu-spacing-2xl) + var(--rwu-spacing-2xl) + var(--rwu-spacing-xl)
+    );
+  }
+}

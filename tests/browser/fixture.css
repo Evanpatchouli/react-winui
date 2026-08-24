@@ -144,6 +144,14 @@ body {
   margin-top: 24px;
 }
 
+.visual-fixture-settings-cards {
+  display: grid;
+  width: 680px;
+  max-width: 100%;
+  gap: 8px;
+  margin-top: 24px;
+}
+
 .visual-fixture-status,
 .visual-fixture-interaction-status {
   margin: 18px 0 0;

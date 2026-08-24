@@ -23,6 +23,7 @@ import {
   MenuBar,
   ContextMenu,
   NumberBox,
+  SettingsCard,
   NavBar,
   NavBarLink,
   NavBarSubMenu,
@@ -109,6 +110,9 @@ import type {
   NumberBoxValue,
   NumberBoxValueChangeEvent,
   NumberBoxValueChangeHandler,
+  SettingsCardClickEvent,
+  SettingsCardClickHandler,
+  SettingsCardProps,
   NavBarComponent,
   NavBarLinkProps,
   NavBarProps,
@@ -187,6 +191,9 @@ import ToastDirect, {
 import NumberBoxDirect, {
   type NumberBoxProps as NumberBoxDirectProps
 } from "@evanpatchouli/react-winui/number-box";
+import SettingsCardDirect, {
+  type SettingsCardProps as SettingsCardDirectProps
+} from "@evanpatchouli/react-winui/settings-card";
 import TreeViewDirect, {
   TreeItem as TreeItemDirect,
   type TreeItemProps as TreeItemDirectProps,
@@ -396,6 +403,18 @@ export const numberBoxDirectPropsTypeCheck: NumberBoxDirectProps = {
   defaultValue: numberBoxValueTypeCheck,
   onValueChange: numberBoxValueChangeTypeCheck
 };
+export const settingsCardClickEventTypeCheck = (_event: SettingsCardClickEvent) => {};
+export const settingsCardClickTypeCheck: SettingsCardClickHandler = (event) =>
+  settingsCardClickEventTypeCheck(event);
+export const settingsCardPropsTypeCheck: SettingsCardProps = {
+  description: "Allow desktop notifications",
+  onClick: settingsCardClickTypeCheck,
+  title: "Notifications"
+};
+export const settingsCardDirectPropsTypeCheck: SettingsCardDirectProps = {
+  href: "/settings/display",
+  title: "Display"
+};
 export const infoBarSeverityTypeCheck: InfoBarSeverity = "warning";
 export const infoBarOpenChangeEventTypeCheck = (_event: InfoBarOpenChangeEvent) => {};
 export const infoBarOpenChangeTypeCheck: InfoBarOpenChangeHandler = (_open, event) =>
@@ -520,6 +539,9 @@ export const basicControls: ReactElement = (
       defaultValue={numberBoxValueTypeCheck}
       onValueChange={numberBoxValueChangeTypeCheck}
     />
+    <SettingsCard {...settingsCardPropsTypeCheck}>
+      <button type="button">Configure</button>
+    </SettingsCard>
     <NavBar ref={navBarRef} shadowOnScroll title="Navigation">
       <NavBarLink href="/home" text="Home" />
       <NavBarSubMenu title="Utilities">
@@ -598,6 +620,9 @@ export const infoBarSubpathImport: ReactElement = (
 );
 export const numberBoxSubpathImport: ReactElement = (
   <NumberBoxDirect aria-label="NumberBox subpath" {...numberBoxDirectPropsTypeCheck} />
+);
+export const settingsCardSubpathImport: ReactElement = (
+  <SettingsCardDirect {...settingsCardDirectPropsTypeCheck} />
 );
 export const treeViewSubpathImport: ReactElement = (
   <TreeViewDirect aria-label="Direct TreeView">

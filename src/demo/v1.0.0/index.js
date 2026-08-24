@@ -36,6 +36,7 @@ import {
   ProgressBarDocs,
   RadioButtonDocs,
   SelectBoxDocs,
+  SettingsCardDocs,
   SliderBarDocs,
   SwitchDocs,
   TableViewDocs,
@@ -111,6 +112,7 @@ const AppFourTwoThree = () => {
             {text: "popover", link: 'popover'},
             {text: "flyout", link: 'popover'},
             {text: "select", link: 'selectbox'},
+            {text: "settingscard", link: 'settingscard'},
             {text: "tooltip", link: 'tooltip'},
             {text: "treeview", link: 'treeview'}
           ]}
@@ -206,6 +208,7 @@ const AppFourTwoThree = () => {
           <Route path="progressbar" element={<ProgressBarDocs/>} />
           <Route path="radio_button" element={<RadioButtonDocs/>} />
           <Route path="selectbox" element={<SelectBoxDocs/>} />
+          <Route path="settingscard" element={<SettingsCardDocs/>} />
           <Route path="sliderbar" element={<SliderBarDocs/>} />
           <Route path="switch" element={<SwitchDocs/>} />
           <Route path="tableview" element={<TableViewDocs/>} />

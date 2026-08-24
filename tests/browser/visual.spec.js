@@ -606,6 +606,68 @@ test.describe("Public component visual baselines", () => {
     });
   });
 
+  test.describe("SettingsCard interaction and visual states", () => {
+    test("keeps the card trigger and nested actions as independent interactions", async ({
+      page
+    }) => {
+      const settingsPanel = panel(page, "settings-card-panel");
+      const displayTrigger = settingsPanel.getByRole("button", { name: "Display" });
+
+      await displayTrigger.focus();
+      await expect(displayTrigger).toBeFocused();
+      await page.keyboard.press("Enter");
+      await expect(page.getByTestId("settings-card-result")).toHaveText("card: display");
+
+      await page.getByTestId("settings-card-action").click();
+      await expect(page.getByTestId("settings-card-result")).toHaveText("action: update");
+
+      await settingsPanel.getByRole("checkbox", { name: "Desktop notifications" }).click();
+      await expect(page.getByTestId("settings-card-result")).toHaveText("content: notifications");
+
+      const link = page.getByTestId("settings-card-link").getByRole("link", {
+        name: "Privacy & security"
+      });
+      await link.focus();
+      await page.keyboard.press("Enter");
+      await expect(page.getByTestId("settings-card-result")).toHaveText("link: privacy");
+      await expect(page).not.toHaveURL(/#privacy$/);
+    });
+
+    test("makes the disabled card and descendants inert", async ({ page }) => {
+      const disabledCard = page.getByTestId("settings-card-disabled");
+
+      await expect(disabledCard).toHaveAttribute("aria-disabled", "true");
+      await expect(disabledCard).toHaveAttribute("inert", "");
+      await expect(disabledCard.locator(".ui-settings-card-trigger")).toBeDisabled();
+      await expect(disabledCard.locator(".ui-settings-card-action button")).toBeDisabled();
+    });
+
+    test("captures the light and dark SettingsCard stack", async ({ page }) => {
+      const cards = page.locator(".visual-fixture-settings-cards");
+
+      await expect(cards).toHaveScreenshot("settings-card-light.png", screenshotOptions);
+
+      await page.getByTestId("theme-dark").click();
+      await expect(cards).toHaveScreenshot("settings-card-dark.png", screenshotOptions);
+    });
+
+    test("stacks content below the label at the responsive breakpoint", async ({ page }) => {
+      await page.setViewportSize({ width: 620, height: 900 });
+      await page.locator(".visual-fixture").evaluate((element) => {
+        element.style.width = "540px";
+      });
+
+      const card = page.getByTestId("settings-card-static");
+      const mainBox = await card.locator(".ui-settings-card-main").boundingBox();
+      const trailingBox = await card.locator(".ui-settings-card-trailing").boundingBox();
+
+      expect(mainBox).not.toBeNull();
+      expect(trailingBox).not.toBeNull();
+      expect(trailingBox.y).toBeGreaterThan(mainBox.y);
+      await expect(card).toHaveScreenshot("settings-card-responsive.png", screenshotOptions);
+    });
+  });
+
   test.describe("Control and selection baselines", () => {
     test("captures the light form controls", async ({ page }) => {
       await expect(panel(page, "controls-panel")).toHaveScreenshot(

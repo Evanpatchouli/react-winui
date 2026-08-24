@@ -9,6 +9,7 @@ import {
   InfoBar,
   NumberBox,
   Popover,
+  SettingsCard,
   TreeItem,
   TreeView,
   Toast,
@@ -22,6 +23,7 @@ import FlyoutDirect from "@evanpatchouli/react-winui/flyout";
 import InfoBarDirect from "@evanpatchouli/react-winui/info-bar";
 import NumberBoxDirect from "@evanpatchouli/react-winui/number-box";
 import PopoverDirect from "@evanpatchouli/react-winui/popover";
+import SettingsCardDirect from "@evanpatchouli/react-winui/settings-card";
 import TreeViewDirect, { TreeItem as TreeItemDirect } from "@evanpatchouli/react-winui/tree-view";
 import ToastDirect, { Toaster as ToasterDirect } from "@evanpatchouli/react-winui/toast";
 import { Shadows } from "@evanpatchouli/react-winui/theme";
@@ -79,6 +81,10 @@ const ConsumerApp = () => {
       <InfoBarDirect open closable={false} message="InfoBar subpath" severity="success" />
       <NumberBox aria-label="Root NumberBox" defaultValue={2} min={0} max={10} />
       <NumberBoxDirect aria-label="NumberBox subpath" defaultValue={4} step={2} />
+      <SettingsCard description="Root export" title="Notifications">
+        <button type="button">Configure</button>
+      </SettingsCard>
+      <SettingsCardDirect href="#display" title="SettingsCard subpath" />
       <TreeView aria-label="Root TreeView" defaultExpandedItems={["root-folder"]}>
         <TreeItem label="Root folder" value="root-folder">
           <TreeItem label="Root file" value="root-file" />

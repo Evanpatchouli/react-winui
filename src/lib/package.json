@@ -62,6 +62,11 @@
       "import": "./dist/components/NumberBox/index.js",
       "default": "./dist/components/NumberBox/index.js"
     },
+    "./settings-card": {
+      "types": "./dist/components/SettingsCard/index.d.ts",
+      "import": "./dist/components/SettingsCard/index.js",
+      "default": "./dist/components/SettingsCard/index.js"
+    },
     "./tree-view": {
       "types": "./dist/components/TreeView/index.d.ts",
       "import": "./dist/components/TreeView/index.js",

@@ -58,7 +58,14 @@ import "@evanpatchouli/react-winui/icons/winui-icons.min.css";
 # Usage
 
 ```js
-import { AutoSuggestBox, Button, InputText, Popover, Tooltip } from "@evanpatchouli/react-winui";
+import {
+  AutoSuggestBox,
+  Button,
+  InputText,
+  Popover,
+  SettingsCard,
+  Tooltip
+} from "@evanpatchouli/react-winui";
 // Optional direct entry for smaller consumer graphs:
 import ButtonDirect from "@evanpatchouli/react-winui/button";
 // CSS token references for JavaScript-facing style APIs:
@@ -69,6 +76,9 @@ const App = () => (
     <Button type="primary" value="Press Me" />
     <ButtonDirect type="subtle" value="Direct entry" />
     <InputText placeholder="Enter a text" />
+    <SettingsCard title="Notifications" description="Allow desktop notifications">
+      <Button value="Configure" />
+    </SettingsCard>
     <AutoSuggestBox
       aria-label="Search Windows topics"
       suggestions={[{ value: "Windows 11" }, { value: "WinUI Gallery" }]}
