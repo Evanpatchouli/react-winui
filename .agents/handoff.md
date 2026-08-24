@@ -349,3 +349,10 @@
 - 参考 WinUI ComboBox、Fluent UI React v9 Combobox base types/tests 与 WAI-ARIA APG Combobox Pattern；只借鉴行为、API 和测试边界，未复制源码、Griffel 或 Fluent token。
 - 验证通过：`pnpm format:check`、`pnpm lint`、`pnpm typecheck`、`pnpm test`（8 files / 110 tests）、`pnpm test:consumer`、`pnpm build`、ComboBox 快照显式更新（6/6）、`pnpm test:browser`（58/58）及 `pnpm --filter @evanpatchouli/react-winui pack --dry-run`；两张视觉基线已人工检查无裁切、主题或 viewport 异常。首次全量浏览器运行仅遇到一次 Vite HMR WebSocket `ERR_NO_BUFFER_SPACE` 环境抖动，失败项单测与随后全量复验均通过。
 - 已知边界：当前为单选且不内建虚拟化/异步数据获取；大数据或远程数据由调用方控制 `options` 和 `text`。docs production build 仍有既有大 chunk warning。
+
+# 2026-08-24：InfoBar 操作项图标对齐修复
+
+- 修复带 32px action 按钮时，20px severity 图标相对摘要行偏高 6px 的问题；普通 InfoBar、custom content、close button 和公共 API 均未改变。
+- 通过内部 `ui-info-bar-with-action` 状态类和现有尺寸 token 计算桌面端补偿；480px 以下 action 换行时恢复首行顶端对齐。
+- 新增 Playwright 几何回归断言，修复前稳定失败 6px，修复后文档页两个 action 示例中心偏差均为 0px。
+- 验证通过：`pnpm format:check`、`pnpm lint`、`pnpm typecheck`、`pnpm test`（110/110）、`pnpm build`、`pnpm test:browser`（59/59）；docs build 仅保留既有大 chunk warning。

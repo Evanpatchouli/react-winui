@@ -244,6 +244,18 @@ test.describe("Public component visual baselines", () => {
       await expect(infoBars).toHaveScreenshot("info-bar-severities-dark.png", screenshotOptions);
     });
 
+    test("vertically centers the severity icon when an action increases the summary height", async ({
+      page
+    }) => {
+      const infoBar = page.getByTestId("info-bar-warning");
+      const icon = await infoBar.locator(".ui-info-bar-icon").boundingBox();
+      const summary = await infoBar.locator(".ui-info-bar-summary").boundingBox();
+
+      expect(icon).not.toBeNull();
+      expect(summary).not.toBeNull();
+      expect(icon.y + icon.height / 2).toBeCloseTo(summary.y + summary.height / 2, 1);
+    });
+
     test("dismisses and resets an uncontrolled InfoBar", async ({ page }) => {
       await page.getByRole("button", { name: "Dismiss uncontrolled info bar" }).click();
 

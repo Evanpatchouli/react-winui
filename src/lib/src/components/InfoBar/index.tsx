@@ -139,6 +139,7 @@ const InfoBar = forwardRef<HTMLDivElement, InfoBarProps>(
     const isControlled = openProp !== undefined;
     const isOpen = isControlled ? openProp : uncontrolledOpen;
     const customContent = children ?? content;
+    const hasAction = action !== null && action !== undefined;
     const defaultRole = severity === "informational" ? "status" : "alert";
     const defaultLive = severity === "informational" ? "polite" : "assertive";
 
@@ -188,6 +189,7 @@ const InfoBar = forwardRef<HTMLDivElement, InfoBarProps>(
         className={[
           "ui-info-bar",
           `ui-info-bar-${severity}`,
+          hasAction ? "ui-info-bar-with-action" : "",
           disabled ? "ui-info-bar-disabled" : "",
           className
         ]
@@ -211,9 +213,7 @@ const InfoBar = forwardRef<HTMLDivElement, InfoBarProps>(
             {message !== null && message !== undefined && (
               <span className="ui-info-bar-message">{message}</span>
             )}
-            {action !== null && action !== undefined && (
-              <span className="ui-info-bar-action">{action}</span>
-            )}
+            {hasAction && <span className="ui-info-bar-action">{action}</span>}
           </div>
           {customContent !== null && customContent !== undefined && (
             <div className="ui-info-bar-content">{customContent}</div>

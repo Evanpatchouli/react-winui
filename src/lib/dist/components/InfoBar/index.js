@@ -107,15 +107,15 @@ var i = ({ severity: e }) => {
 		strokeWidth: "1.5"
 	})
 }), o = e(({ "aria-atomic": e, "aria-disabled": o, "aria-live": s, action: c, children: l, className: u, closable: d = !0, closeButtonAriaLabel: f = "Close", content: p, defaultOpen: m = !1, disabled: h = !1, message: g, onClickCapture: _, onKeyDownCapture: v, onOpenChange: y, open: b, role: x, severity: S = "informational", title: C, ...w }, T) => {
-	let [E, D] = t(m), O = b !== void 0, k = O ? b : E, A = l ?? p, j = S === "informational" ? "status" : "alert", M = S === "informational" ? "polite" : "assertive", N = (e) => {
+	let [E, D] = t(m), O = b !== void 0, k = O ? b : E, A = l ?? p, j = c != null, M = S === "informational" ? "status" : "alert", N = S === "informational" ? "polite" : "assertive", P = (e) => {
 		h || !k || (O || D(!1), y?.(!1, e));
-	}, P = (e) => {
+	}, F = (e) => {
 		if (h) {
 			e.preventDefault(), e.stopPropagation();
 			return;
 		}
 		_?.(e);
-	}, F = (e) => {
+	}, I = (e) => {
 		if (h && (e.key === "Enter" || e.key === " ")) {
 			e.preventDefault(), e.stopPropagation();
 			return;
@@ -127,18 +127,19 @@ var i = ({ severity: e }) => {
 		ref: T,
 		"aria-atomic": e ?? !0,
 		"aria-disabled": h || o || void 0,
-		"aria-live": s ?? M,
+		"aria-live": s ?? N,
 		className: [
 			"ui-info-bar",
 			`ui-info-bar-${S}`,
+			j ? "ui-info-bar-with-action" : "",
 			h ? "ui-info-bar-disabled" : "",
 			u
 		].filter(Boolean).join(" "),
 		"data-severity": S,
 		"data-state": "open",
-		role: x ?? j,
-		onClickCapture: P,
-		onKeyDownCapture: F,
+		role: x ?? M,
+		onClickCapture: F,
+		onKeyDownCapture: I,
 		children: [
 			/* @__PURE__ */ n("span", {
 				className: "ui-info-bar-icon",
@@ -157,7 +158,7 @@ var i = ({ severity: e }) => {
 							className: "ui-info-bar-message",
 							children: g
 						}),
-						c != null && /* @__PURE__ */ n("span", {
+						j && /* @__PURE__ */ n("span", {
 							className: "ui-info-bar-action",
 							children: c
 						})
@@ -172,7 +173,7 @@ var i = ({ severity: e }) => {
 				className: "ui-info-bar-close",
 				disabled: h,
 				type: "button",
-				onClick: N,
+				onClick: P,
 				children: /* @__PURE__ */ n(a, {})
 			})
 		]

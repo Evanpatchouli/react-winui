@@ -33,6 +33,10 @@
   display: block;
 }
 
+.ui-info-bar-with-action .ui-info-bar-icon {
+  margin-block-start: calc((var(--rwu-control-height) - var(--rwu-spacing-2xl)) / 2);
+}
+
 .ui-info-bar-success .ui-info-bar-icon {
   color: var(--rwu-color-success);
 }
@@ -124,6 +128,10 @@
 }
 
 @media (max-width: 480px) {
+  .ui-info-bar-with-action .ui-info-bar-icon {
+    margin-block-start: 0;
+  }
+
   .ui-info-bar-action {
     width: 100%;
     margin-inline-start: 0;

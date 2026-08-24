@@ -119,3 +119,8 @@
 - 方向键移动 active option 与提交 value 是两件事；遵循 WinUI 的 select-only 行为可避免用户浏览选项时意外改变已提交值。
 - portaled listbox 的视觉快照应直接截 surface；顶部 fallback 应在真实小 viewport 中同时断言 listbox 与 trigger 的几何关系，不能只靠 mocked rect。
 - listbox 进入动画必须为 `prefers-reduced-motion: reduce` 提供无动画分支，避免只覆盖 trigger 的交互动画而遗漏 portal surface。
+
+## 2026-08-24：InfoBar 操作项行高对齐
+
+- CSS Grid 根节点使用 `align-items: start` 时，某个相邻 flex 行被操作按钮撑高不会自动重排独立图标；应针对 action 状态按 control/icon token 的高度差补偿，并为窄屏换行单独复位。
+- 这类像素级错位应在真实浏览器中直接比较图标与目标行的 bounding-box 中心，而不能只依赖截图阈值。
