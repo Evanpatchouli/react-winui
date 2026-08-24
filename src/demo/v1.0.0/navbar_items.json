@@ -84,6 +84,13 @@
     "showBadge": false
   },
   {
+    "to": "contextmenu",
+    "exact": false,
+    "text": "ContextMenu",
+    "icon": "icons10-list",
+    "showBadge": false
+  },
+  {
     "to": "progressbar",
     "exact": false,
     "text": "ProgressBar",

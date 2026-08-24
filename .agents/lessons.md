@@ -88,3 +88,10 @@
 - compound public marker 与内部 DOM renderer 是不同组件；内部列表不能用 `child.type === internalRenderer` 判断 public children，应由父组件明确传入 marker 或先转换为内部数据。
 - 浮层测试只断言容器带 `show` class 会漏掉“容器打开但内容为空”；必须同时断言条目可见、点击回调和关闭状态。
 - 截取父 panel 可能裁掉绝对定位的二级浮层；应对二级浮层 locator 单独建立视觉基线，确认真实内容进入截图范围。
+
+## 2026-08-24：ContextMenu 焦点与坐标定位
+
+- Context menu 的触发目标不是 menu button：右键应以 pointer client coordinate 建立 virtual anchor，键盘触发则以目标边界建立 anchor；两种路径都必须在 surface 实际测量后做 viewport clamp。
+- Menu 的 Tab 与 Escape 关闭语义不同：Escape 应回到调用上下文，Tab 应让浏览器继续原生顺序；把两者复用同一个 focus-restore 分支会让键盘用户被送回触发器。
+- keyboard selection handler 若先调用内部 `preventDefault()`，再用 `event.defaultPrevented` 判断消费者是否取消关闭，会把所有 Enter/Space 选择误判为取消；应先执行 consumer `onSelect` 与 dismiss 决策，再阻止按键的浏览器默认动作。
+- Portaled context menu 的视觉快照应直接截 surface；父 fixture panel 不包含 portal，截图 panel 会漏掉菜单本体并产生虚假的基线覆盖。

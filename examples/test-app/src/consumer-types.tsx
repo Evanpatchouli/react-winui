@@ -18,6 +18,7 @@ import {
   LoaderBar,
   LoaderBusy,
   MenuBar,
+  ContextMenu,
   NavBar,
   NavBarLink,
   NavBarSubMenu,
@@ -67,6 +68,13 @@ import type {
   MenuBarItemProps,
   MenuBarProps,
   MenuBarSubMenuProps,
+  ContextMenuComponent,
+  ContextMenuDividerProps,
+  ContextMenuItemProps,
+  ContextMenuOpenChangeHandler,
+  ContextMenuProps,
+  ContextMenuSelectEvent,
+  ContextMenuSurfaceProps,
   NavBarComponent,
   NavBarLinkProps,
   NavBarProps,
@@ -100,6 +108,9 @@ import type { ShadowName, ShadowToken } from "@evanpatchouli/react-winui/theme";
 import TooltipDirect from "@evanpatchouli/react-winui/tooltip";
 import PopoverDirect from "@evanpatchouli/react-winui/popover";
 import FlyoutDirect from "@evanpatchouli/react-winui/flyout";
+import ContextMenuDirect, {
+  type ContextMenuProps as ContextMenuDirectProps
+} from "@evanpatchouli/react-winui/context-menu";
 
 const typedProps: [
   ButtonProps,
@@ -120,6 +131,7 @@ const typedProps: [
   LoaderBarProps,
   LoaderBusyProps,
   MenuBarProps,
+  ContextMenuProps,
   NavBarProps,
   NavBarLinkProps,
   NavBarSubMenuProps,
@@ -154,6 +166,10 @@ const typedProps: [
   { setTheme: "light" },
   { isLoading: true, size: "small" },
   { backdropBlur: true, menuDirection: "leftJustify" },
+  {
+    content: <ContextMenu.Item>Copy</ContextMenu.Item>,
+    children: <button type="button">Target</button>
+  },
   { shadowOnScroll: true, title: "Navigation" },
   { active: true, href: "/home", text: "Home" },
   { title: "Utilities" },
@@ -212,6 +228,18 @@ export const menuBarDividerTypeCheck: MenuBarDividerProps = {};
 export const menuBarItemTypeCheck: MenuBarItemProps = { label: "File" };
 export const menuBarSubMenuTypeCheck: MenuBarSubMenuProps = { label: "More" };
 export const menuBarClickTypeCheck: MenuBarItemClickHandler = () => {};
+export const contextMenuComponentTypeCheck: ContextMenuComponent | undefined = undefined;
+export const contextMenuItemTypeCheck: ContextMenuItemProps = { children: "Copy" };
+export const contextMenuDividerTypeCheck: ContextMenuDividerProps = {};
+export const contextMenuSurfaceTypeCheck: ContextMenuSurfaceProps = {
+  "aria-labelledby": "context-target"
+};
+export const contextMenuOpenChangeTypeCheck: ContextMenuOpenChangeHandler = () => {};
+export const contextMenuSelectTypeCheck = (_event: ContextMenuSelectEvent) => {};
+export const contextMenuDirectPropsTypeCheck: ContextMenuDirectProps = {
+  content: <ContextMenuDirect.Item>Copy</ContextMenuDirect.Item>,
+  children: <button type="button">Target</button>
+};
 export const navBarRef = createRef<HTMLElement>();
 export const navBarComponentTypeCheck: NavBarComponent | undefined = undefined;
 export const navBarLinkTypeCheck: NavBarLinkProps = { href: "/home", text: "Home" };
@@ -268,6 +296,9 @@ export const basicControls: ReactElement = (
         <MenuBar.Item label="Child" />
       </MenuBar.Item.SubMenu>
     </MenuBar>
+    <ContextMenu content={<ContextMenu.Item>Copy</ContextMenu.Item>}>
+      <button type="button">Context target</button>
+    </ContextMenu>
     <NavBar ref={navBarRef} shadowOnScroll title="Navigation">
       <NavBarLink href="/home" text="Home" />
       <NavBarSubMenu title="Utilities">
@@ -306,4 +337,9 @@ export const flyoutSubpathImport: ReactElement = (
   <FlyoutDirect content="Flyout subpath">
     <button type="button">Flyout trigger</button>
   </FlyoutDirect>
+);
+export const contextMenuSubpathImport: ReactElement = (
+  <ContextMenuDirect content={<ContextMenuDirect.Item>Copy</ContextMenuDirect.Item>}>
+    <button type="button">ContextMenu subpath target</button>
+  </ContextMenuDirect>
 );

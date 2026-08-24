@@ -19,6 +19,7 @@ import Link from "../../src/lib/src/components/Link/index.tsx";
 import LoaderBar from "../../src/lib/src/components/Loaders/LoaderBar/index.tsx";
 import LoaderBusy from "../../src/lib/src/components/Loaders/LoaderBusy/index.tsx";
 import MenuBar from "../../src/lib/src/components/MenuBar/index.tsx";
+import ContextMenu from "../../src/lib/src/components/ContextMenu/index.tsx";
 import NavBar from "../../src/lib/src/components/NavBar/NavBar/index.tsx";
 import NavBarLink from "../../src/lib/src/components/NavBar/NavBarLink/index.tsx";
 import NavBarSubMenu from "../../src/lib/src/components/NavBar/NavBarSubMenu/index.tsx";
@@ -67,6 +68,7 @@ const Section = ({ testId, eyebrow, title, caption, children, className = "" }) 
 function VisualFixture() {
   const [scheme, setScheme] = useState("light");
   const [activation, setActivation] = useState("none");
+  const [contextMenuAction, setContextMenuAction] = useState("none");
   const [selection, setSelection] = useState("windows");
   const [searchBarValue, setSearchBarValue] = useState("Windows");
   const [searchResult, setSearchResult] = useState("none");
@@ -417,6 +419,43 @@ function VisualFixture() {
           </MenuBar>
           <p className="visual-fixture-status">
             Menu action: <output data-testid="menu-result">{activation}</output>
+          </p>
+        </Section>
+
+        <Section
+          caption="right click · Shift+F10 · light dismiss · disabled"
+          eyebrow="menus"
+          testId="context-menu-panel"
+          title="ContextMenu"
+        >
+          <div className="visual-fixture-row">
+            <ContextMenu
+              content={
+                <>
+                  <ContextMenu.Item
+                    secondaryContent="Ctrl+C"
+                    onSelect={() => setContextMenuAction("Copy selected")}
+                  >
+                    Copy
+                  </ContextMenu.Item>
+                  <ContextMenu.Item onSelect={() => setContextMenuAction("Rename selected")}>
+                    Rename
+                  </ContextMenu.Item>
+                  <ContextMenu.Divider />
+                  <ContextMenu.Item disabled>Paste unavailable</ContextMenu.Item>
+                </>
+              }
+            >
+              <button className="ui-btn" data-testid="context-menu-trigger" type="button">
+                Project plan.txt
+              </button>
+            </ContextMenu>
+            <button className="ui-btn" data-testid="context-menu-after" type="button">
+              Next focus target
+            </button>
+          </div>
+          <p className="visual-fixture-status">
+            Context command: <output data-testid="context-menu-result">{contextMenuAction}</output>
           </p>
         </Section>
 

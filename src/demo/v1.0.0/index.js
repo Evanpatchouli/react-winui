@@ -21,6 +21,7 @@ import {
   ButtonsDocs,
   CheckboxDocs,
   ColorPickerDocs,
+  ContextMenuDocs,
   DialogDocs,
   Icons,
   ImageViewDocs,
@@ -92,6 +93,7 @@ const AppFourTwoThree = () => {
             {text: "buttons", link: 'buttons'},
             {text: "checkbox", link: 'checkbox'},
             {text: "commandbar", link: 'commandbar'},
+            {text: "contextmenu", link: 'contextmenu'},
             {text: "dialogs", link: 'dialogs'},
             {text: "icons", link: 'icons'},
             {text: "imageview", link: 'imageview'},
@@ -180,6 +182,7 @@ const AppFourTwoThree = () => {
           <Route path="buttons" element={<ButtonsDocs/>} />
           <Route path="checkbox" element={<CheckboxDocs/>} />
           <Route path="colorpicker" element={<ColorPickerDocs/>} />
+          <Route path="contextmenu" element={<ContextMenuDocs/>} />
           <Route path="dialogs" element={<DialogDocs/>} />
           <Route path="imageview" element={<ImageViewDocs/>} />
           <Route path="input_group" element={<InputGroupDocs/>} />

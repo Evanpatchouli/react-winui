@@ -32,6 +32,11 @@
       "import": "./dist/components/Flyout/index.js",
       "default": "./dist/components/Flyout/index.js"
     },
+    "./context-menu": {
+      "types": "./dist/components/ContextMenu/index.d.ts",
+      "import": "./dist/components/ContextMenu/index.js",
+      "default": "./dist/components/ContextMenu/index.js"
+    },
     "./theme": {
       "types": "./dist/theme/index.d.ts",
       "import": "./dist/theme/index.js",

@@ -74,6 +74,21 @@ export type {
   MenuBarProps,
   MenuBarSubMenuProps
 } from "./components/MenuBar";
+export {
+  default as ContextMenu,
+  ContextMenuDivider,
+  ContextMenuItem
+} from "./components/ContextMenu";
+export type {
+  ContextMenuComponent,
+  ContextMenuDividerProps,
+  ContextMenuItemProps,
+  ContextMenuOpenChangeEvent,
+  ContextMenuOpenChangeHandler,
+  ContextMenuProps,
+  ContextMenuSelectEvent,
+  ContextMenuSurfaceProps
+} from "./components/ContextMenu";
 export { default as ProgressBar } from "./components/ProgressBar";
 export type { ProgressBarProps, ProgressBarValue } from "./components/ProgressBar";
 export { default as Popover } from "./components/Popover";

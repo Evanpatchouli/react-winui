@@ -11,7 +11,7 @@
 - [x] `Tooltip`：阶段 6 已完成，作为后续组件模板
 - [x] `Popover` / `Flyout`：已完成
 - [x] `Menu`：取消新增重复的公共组件；保留并修复现有 `MenuBar`
-- [ ] `ContextMenu`：先审计与 `MenuBar`、`Popover` / `Flyout` 的重叠，优先复用内部菜单 surface 和条目行为
+- [x] `ContextMenu`：已复用 `MenuBar` surface / item 视觉骨架，并补齐上下文触发、ARIA、键盘、定位与焦点行为
 - [ ] `Toast`
 - [ ] `InfoBar`
 - [ ] `ComboBox`：先审计现有 `Select`、`SelectNative` 和 `InputSearchBox` 的能力边界

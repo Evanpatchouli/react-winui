@@ -309,3 +309,14 @@
 - 新增 RTL 回归覆盖多个二级项、目标项可见、回调与关闭行为；Playwright 覆盖打开主菜单、打开二级菜单、点击 Settings、状态更新和关闭，并新增精确的二级浮层视觉基线。
 - 验证通过：`pnpm lint`、`pnpm typecheck`、`pnpm test`（71 tests）、`pnpm build`、`pnpm test:consumer`、`pnpm test:browser`（39 tests）和本次触碰文件 Prettier check。
 - 已知遗留：全量 `pnpm format:check` 仍被 4 个本次未修改的既有文件阻断；docs build 仍有既有大 chunk warning。下一步需重新确认去重后的 P0 组件清单。
+
+# 阶段 7 P0 ContextMenu
+
+- 新增 `ContextMenu`、`ContextMenu.Item` 与 `ContextMenu.Divider`，支持右键、`Shift+F10`、Context Menu 键、controlled/uncontrolled open、portal、viewport clamp、outside/Escape/Tab light-dismiss、焦点恢复、disabled、方向键/Home/End/字符导航和 Enter/Space activation。
+- 复用 `MenuBar` 的 surface / item class 与 Sass 视觉骨架；新增 SCSS 只消费现有 `--rwu-*` token，没有复制 Fluent UI visual recipe，也没有修改旧组件颜色、圆角、阴影或 DOM。
+- root export、`./context-menu` package subpath、ESM、`.d.ts`、CSS dist、consumer root/subpath/types/runtime、docs Demo/导航/路由/API 说明均已接入；`pnpm pack --dry-run` 确认 ContextMenu JS、declaration 和 CSS 进入发布包，docs/tests 不进入包。
+- 新增 9 个 ContextMenu Vitest/RTL tests，覆盖 pointer/keyboard open、ARIA、portal、controlled state、disabled、menu navigation、selection、Escape/outside/Tab、focus restore 与 viewport clamp；Tab 回归明确断言关闭事件不被取消且不强制回焦 trigger。
+- Playwright 新增 5 个 ContextMenu 用例，实际覆盖右键、`Shift+F10`/Escape、命令选择、Tab 和 focus；新增 light/dark 2 张 Chromium Windows surface 快照，显式更新并人工审阅后以普通模式 44/44 复验。
+- 参考 WinUI MenuFlyout、Fluent UI React v9 Menu/MenuTrigger 与 WAI-ARIA APG Menu Pattern；仅借鉴行为、API 和测试边界，未复制实际源码、Griffel 或 Fluent token。
+- 验证通过：`pnpm format:check`、`pnpm lint`、`pnpm typecheck`、ContextMenu RTL（9/9）、`pnpm test`（共享工作树 106/106）、`pnpm test:consumer`、`pnpm build`、`pnpm test:browser:update`（44/44）、`pnpm test:browser`（44/44）、`pnpm --filter @evanpatchouli/react-winui pack --dry-run`、UTF-8 BOM 与 `git diff --check`。
+- 已知遗留：本批未实现 submenu、checkbox/radio menuitem；docs build 仍有既有大 chunk warning。P0 其余组件由各自独立提交处理。

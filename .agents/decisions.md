@@ -210,3 +210,11 @@
 - `Flyout` 采用 Popover 的语义别名实现，二者共享 portal、定位、light-dismiss、focus 和 token 逻辑；这样 WinUI 命名可以进入公共 API，但不会产生两套容易漂移的视觉/状态实现。
 - surface 使用既有 `--rwu-color-surface-flyout`、`--rwu-color-border-divider`、`--rwu-radius-flyout`、`--rwu-shadow-8` 和 spacing/motion token；未引入 Fluent UI 运行时、Griffel 或第三方定位依赖。
 - 采用模块级 active close 句柄，保证同一 document 中最后打开的 Popover/Flyout 关闭旧 surface；outside pointer、Escape、visibility、可选 scroll 和 focus restore 作为轻量 overlay 生命周期的一部分处理。
+
+## 2026-08-24：阶段 7 P0 ContextMenu
+
+- ContextMenu 复用 `MenuBar` 的 `.ui-menu-list-dialog` / `.ui-menu-list-item` DOM class 与 Sass surface，不新增第三套菜单颜色、圆角、阴影或 hover recipe；独立逻辑只负责鼠标坐标锚定、portal、viewport clamp、light-dismiss 与菜单焦点模型。
+- API 采用 `content` + 单一 `children` target，并通过 `ContextMenu.Item` / `ContextMenu.Divider` 提供 compound command 内容；`open`、`defaultOpen`、`onOpenChange` 支持 controlled/uncontrolled 使用。
+- 右键、`Shift+F10` 和 Context Menu 键打开菜单；Escape 与命令选择按 `restoreFocus` 恢复触发目标，outside pointer 不抢回焦点，Tab 关闭菜单但不阻止浏览器默认 Tab 顺序、也不强制恢复到触发目标。
+- disabled menuitem 保持可聚焦和 `aria-disabled` 可发现性但不可激活；方向键、Home、End、字符导航、Enter/Space 遵循 WAI-ARIA menu 模式。
+- 仅参考 WinUI MenuFlyout、Fluent UI React v9 Menu 和 WAI-ARIA APG 的行为/API/测试思路；未复制 Fluent UI 源码、Griffel 或视觉 token，因此不新增第三方源码声明。

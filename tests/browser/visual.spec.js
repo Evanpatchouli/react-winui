@@ -170,6 +170,62 @@ test.describe("Public component visual baselines", () => {
     });
   });
 
+  test.describe("ContextMenu interaction and visual states", () => {
+    test("opens from right click and captures the light surface", async ({ page }) => {
+      await page.getByTestId("context-menu-trigger").click({ button: "right" });
+
+      const contextMenu = page.locator(".ui-context-menu");
+      await expect(contextMenu).toBeVisible();
+      await expect(contextMenu.getByRole("menuitem")).toHaveCount(3);
+      await expect(
+        contextMenu.getByRole("menuitem", { name: "Paste unavailable" })
+      ).toHaveAttribute("aria-disabled", "true");
+      await expect(contextMenu).toHaveScreenshot("context-menu-light.png", screenshotOptions);
+    });
+
+    test("captures the dark surface", async ({ page }) => {
+      await page.getByTestId("theme-dark").click();
+      await page.getByTestId("context-menu-trigger").click({ button: "right" });
+
+      const contextMenu = page.locator(".ui-context-menu");
+      await expect(contextMenu).toBeVisible();
+      await expect(contextMenu).toHaveScreenshot("context-menu-dark.png", screenshotOptions);
+    });
+
+    test("opens with Shift+F10 and restores focus after Escape", async ({ page }) => {
+      const trigger = page.getByTestId("context-menu-trigger");
+      await trigger.focus();
+      await page.keyboard.press("Shift+F10");
+
+      const firstCommand = page.getByRole("menuitem", { name: "Copy" });
+      await expect(firstCommand).toBeFocused();
+      await page.keyboard.press("Escape");
+      await expect(page.locator(".ui-context-menu")).toHaveCount(0);
+      await expect(trigger).toBeFocused();
+    });
+
+    test("selects a command and restores focus", async ({ page }) => {
+      const trigger = page.getByTestId("context-menu-trigger");
+      await trigger.click({ button: "right" });
+      await page.getByRole("menuitem", { name: "Rename" }).click();
+
+      await expect(page.getByTestId("context-menu-result")).toHaveText("Rename selected");
+      await expect(page.locator(".ui-context-menu")).toHaveCount(0);
+      await expect(trigger).toBeFocused();
+    });
+
+    test("closes on Tab without forcing focus back to the trigger", async ({ page }) => {
+      const trigger = page.getByTestId("context-menu-trigger");
+      await trigger.focus();
+      await page.keyboard.press("Shift+F10");
+      await expect(page.getByRole("menuitem", { name: "Copy" })).toBeFocused();
+
+      await page.keyboard.press("Tab");
+      await expect(page.locator(".ui-context-menu")).toHaveCount(0);
+      await expect(trigger).not.toBeFocused();
+    });
+  });
+
   test.describe("Control and selection baselines", () => {
     test("captures the light form controls", async ({ page }) => {
       await expect(panel(page, "controls-panel")).toHaveScreenshot(
