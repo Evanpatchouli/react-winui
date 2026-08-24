@@ -31,6 +31,7 @@ import NavBarLink from "../../src/lib/src/components/NavBar/NavBarLink/index.tsx
 import NavBarSubMenu from "../../src/lib/src/components/NavBar/NavBarSubMenu/index.tsx";
 import NavBarThemeSwitch from "../../src/lib/src/components/NavBar/NavBarThemeSwitch/index.tsx";
 import NavPageContainer from "../../src/lib/src/components/NavBar/NavPageContainer/index.tsx";
+import NavigationView from "../../src/lib/src/components/NavigationView/index.tsx";
 import ProgressBar from "../../src/lib/src/components/ProgressBar/index.tsx";
 import Flyout from "../../src/lib/src/components/Flyout/index.tsx";
 import Popover from "../../src/lib/src/components/Popover/index.tsx";
@@ -133,6 +134,8 @@ function VisualFixture() {
   const [infoBarInstance, setInfoBarInstance] = useState(0);
   const [infoBarResult, setInfoBarResult] = useState("none");
   const [numberBoxResult, setNumberBoxResult] = useState(4);
+  const [navigationViewSelection, setNavigationViewSelection] = useState("reports");
+  const [compactNavigationOpen, setCompactNavigationOpen] = useState(false);
   const [settingsCardResult, setSettingsCardResult] = useState("none");
   const [settingsExpanderControlled, setSettingsExpanderControlled] = useState(false);
   const [settingsExpanderResult, setSettingsExpanderResult] = useState("none");
@@ -1179,6 +1182,72 @@ function VisualFixture() {
           <p className="visual-fixture-status">
             SettingsExpander action:{" "}
             <output data-testid="settings-expander-result">{settingsExpanderResult}</output>
+          </p>
+        </Section>
+
+        <Section
+          caption="auto breakpoints · compact rail · overlay · nested selection · footer · settings"
+          eyebrow="navigation"
+          testId="navigation-view-panel"
+          title="NavigationView"
+        >
+          <div className="visual-fixture-navigation-views">
+            <div
+              className="visual-fixture-navigation-view-host"
+              data-testid="navigation-view-auto-host"
+            >
+              <NavigationView
+                data-testid="navigation-view-auto"
+                defaultExpandedItems={[]}
+                footerItems={[{ icon: <span>?</span>, label: "Help", value: "help" }]}
+                header="Workspace"
+                onValueChange={(value) => setNavigationViewSelection(String(value))}
+                paneAriaLabel="Workspace navigation"
+                paneHeader="Contoso"
+                settingsItem={{ icon: <span>⚙</span>, label: "Settings", value: "settings" }}
+                value={navigationViewSelection}
+                content={
+                  <div className="visual-fixture-navigation-content">
+                    <strong>Workspace overview</strong>
+                    <span>Selected: {navigationViewSelection}</span>
+                  </div>
+                }
+              >
+                <NavigationView.Item icon={<span>⌂</span>} label="Home" value="home" />
+                <NavigationView.Item icon={<span>▣</span>} label="Library" value="library">
+                  <NavigationView.Item label="Reports" value="reports" />
+                  <NavigationView.Item label="Downloads" value="downloads" />
+                </NavigationView.Item>
+                <NavigationView.Item
+                  disabled
+                  icon={<span>×</span>}
+                  label="Managed"
+                  value="managed"
+                />
+              </NavigationView>
+            </div>
+
+            <div
+              className="visual-fixture-navigation-view-host compact"
+              data-testid="navigation-view-compact-host"
+            >
+              <NavigationView
+                data-testid="navigation-view-compact"
+                onPaneOpenChange={setCompactNavigationOpen}
+                paneAriaLabel="Compact navigation"
+                paneDisplayMode="compact"
+                paneHeader="Compact"
+                paneOpen={compactNavigationOpen}
+                content={<span>Compact pane content</span>}
+              >
+                <NavigationView.Item icon={<span>⌂</span>} label="Home" value="compact-home" />
+                <NavigationView.Item icon={<span>▣</span>} label="Files" value="compact-files" />
+              </NavigationView>
+            </div>
+          </div>
+          <p className="visual-fixture-status">
+            Navigation selection:{" "}
+            <output data-testid="navigation-view-result">{navigationViewSelection}</output>
           </p>
         </Section>
       </main>

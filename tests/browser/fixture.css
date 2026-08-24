@@ -149,6 +149,39 @@ body {
   width: 200px;
 }
 
+.visual-fixture-navigation-views {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.visual-fixture-navigation-view-host {
+  height: 400px;
+  overflow: hidden;
+  border: 1px solid var(--rwu-color-border-divider);
+  border-radius: var(--rwu-radius-dialog);
+}
+
+.visual-fixture-navigation-view-host.compact {
+  width: 420px;
+  max-width: 100%;
+  height: 260px;
+}
+
+.visual-fixture-navigation-view-host .ui-navigation-view {
+  min-height: 100%;
+  height: 100%;
+}
+
+.visual-fixture-navigation-content {
+  display: grid;
+  gap: var(--rwu-spacing-md);
+}
+
+.visual-fixture-navigation-content span {
+  color: var(--rwu-color-text-secondary);
+}
+
 .visual-fixture-tree-view {
   width: 340px;
   margin-top: 24px;

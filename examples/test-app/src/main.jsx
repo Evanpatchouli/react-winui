@@ -9,6 +9,7 @@ import {
   Expander,
   Flyout,
   InfoBar,
+  NavigationView,
   NumberBox,
   Popover,
   SettingsCard,
@@ -26,6 +27,7 @@ import ContextMenuDirect from "@evanpatchouli/react-winui/context-menu";
 import ExpanderDirect from "@evanpatchouli/react-winui/expander";
 import FlyoutDirect from "@evanpatchouli/react-winui/flyout";
 import InfoBarDirect from "@evanpatchouli/react-winui/info-bar";
+import NavigationViewDirect from "@evanpatchouli/react-winui/navigation-view";
 import NumberBoxDirect from "@evanpatchouli/react-winui/number-box";
 import PopoverDirect from "@evanpatchouli/react-winui/popover";
 import SettingsCardDirect from "@evanpatchouli/react-winui/settings-card";
@@ -116,6 +118,16 @@ const ConsumerApp = () => {
       <SettingsExpanderDirect title="SettingsExpander subpath">
         Direct expanded content
       </SettingsExpanderDirect>
+      <NavigationView
+        defaultValue="home"
+        paneDisplayMode="compact"
+        content={<span>Root NavigationView content</span>}
+      >
+        <NavigationView.Item label="Home" value="home" />
+      </NavigationView>
+      <NavigationViewDirect paneDisplayMode="minimal" content="Direct content">
+        <NavigationViewDirect.Item label="Direct navigation item" value="direct" />
+      </NavigationViewDirect>
       <TreeView aria-label="Root TreeView" defaultExpandedItems={["root-folder"]}>
         <TreeItem label="Root folder" value="root-folder">
           <TreeItem label="Root file" value="root-file" />

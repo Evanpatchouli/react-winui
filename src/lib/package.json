@@ -72,6 +72,11 @@
       "import": "./dist/components/NumberBox/index.js",
       "default": "./dist/components/NumberBox/index.js"
     },
+    "./navigation-view": {
+      "types": "./dist/components/NavigationView/index.d.ts",
+      "import": "./dist/components/NavigationView/index.js",
+      "default": "./dist/components/NavigationView/index.js"
+    },
     "./settings-card": {
       "types": "./dist/components/SettingsCard/index.d.ts",
       "import": "./dist/components/SettingsCard/index.js",

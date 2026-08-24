@@ -203,6 +203,100 @@ test.describe("Public component visual baselines", () => {
     });
   });
 
+  test.describe("NavigationView interaction and visual states", () => {
+    test("supports nested roving focus and shared menu selection", async ({ page }) => {
+      const host = page.getByTestId("navigation-view-auto-host");
+      const navigation = host.getByRole("navigation", { name: "Workspace navigation" });
+      const library = navigation.getByRole("button", { exact: true, name: "Library" });
+
+      await expect(page.getByTestId("navigation-view-auto")).toHaveAttribute(
+        "data-pane-display-mode",
+        "expanded"
+      );
+      await expect(library.locator("xpath=ancestor::li[1]")).toHaveAttribute(
+        "data-selected-descendant",
+        "true"
+      );
+      await expect(library).not.toHaveAttribute("aria-current");
+      await expect(host.locator('[data-rwu-navigation-key="string:reports"]')).toBeHidden();
+
+      await library.focus();
+      await page.keyboard.press("ArrowRight");
+      await expect(navigation.getByRole("button", { name: "Collapse Library" })).toHaveAttribute(
+        "aria-expanded",
+        "true"
+      );
+      await page.keyboard.press("ArrowRight");
+      await expect(navigation.getByRole("button", { name: "Reports" })).toBeFocused();
+      await page.keyboard.press("ArrowDown");
+      await page.keyboard.press("Space");
+      await expect(page.getByTestId("navigation-view-result")).toHaveText("downloads");
+
+      await navigation.getByRole("button", { name: "Settings" }).click();
+      await expect(page.getByTestId("navigation-view-result")).toHaveText("settings");
+      await expect(navigation.getByRole("button", { name: "Settings" })).toHaveAttribute(
+        "aria-current",
+        "page"
+      );
+    });
+
+    test("opens a compact overlay and restores focus after Escape", async ({ page }) => {
+      const host = page.getByTestId("navigation-view-compact-host");
+      const root = page.getByTestId("navigation-view-compact");
+      const toggle = host.getByRole("button", { name: "Toggle navigation pane" });
+
+      await expect(root).toHaveAttribute("data-pane-display-mode", "compact");
+      await expect(root).toHaveAttribute("data-pane-open", "false");
+      await toggle.click();
+      await expect(root).toHaveAttribute("data-pane-open", "true");
+      await expect(host.getByRole("navigation", { name: "Compact navigation" })).toBeVisible();
+      await page.keyboard.press("Escape");
+      await expect(root).toHaveAttribute("data-pane-open", "false");
+      await expect(toggle).toBeFocused();
+    });
+
+    test("uses the minimal auto mode and light-dismisses at the mobile breakpoint", async ({
+      page
+    }) => {
+      await page.setViewportSize({ height: 900, width: 600 });
+      const host = page.getByTestId("navigation-view-auto-host");
+      const root = page.getByTestId("navigation-view-auto");
+      const toggle = host.getByRole("button", { name: "Toggle navigation pane" });
+
+      await expect(root).toHaveAttribute("data-pane-display-mode", "minimal");
+      await expect(root).toHaveAttribute("data-pane-open", "false");
+      await toggle.click();
+      await expect(host.getByRole("navigation", { name: "Workspace navigation" })).toBeVisible();
+      await root.getByTestId("navigation-view-overlay").click({ position: { x: 400, y: 200 } });
+      await expect(root).toHaveAttribute("data-pane-open", "false");
+      await expect(host.getByRole("button", { name: "Toggle navigation pane" })).toBeFocused();
+    });
+
+    test("captures the expanded NavigationView in light and dark themes", async ({ page }) => {
+      const host = page.getByTestId("navigation-view-auto-host");
+      await expect(host.locator('[data-rwu-navigation-key="string:reports"]')).toBeHidden();
+      await expect(host).toHaveScreenshot("navigation-view-expanded-light.png", screenshotOptions);
+
+      await page.getByTestId("theme-dark").click();
+      await expect(host).toHaveScreenshot("navigation-view-expanded-dark.png", screenshotOptions);
+    });
+
+    test("captures the compact rail and its open overlay", async ({ page }) => {
+      const host = page.getByTestId("navigation-view-compact-host");
+      await expect(host).toHaveScreenshot("navigation-view-compact.png", screenshotOptions);
+
+      await host.getByRole("button", { name: "Toggle navigation pane" }).click();
+      await expect(host).toHaveScreenshot("navigation-view-compact-overlay.png", screenshotOptions);
+    });
+
+    test("captures the minimal mobile overlay", async ({ page }) => {
+      await page.setViewportSize({ height: 900, width: 600 });
+      const host = page.getByTestId("navigation-view-auto-host");
+      await host.getByRole("button", { name: "Toggle navigation pane" }).click();
+      await expect(host).toHaveScreenshot("navigation-view-minimal-overlay.png", screenshotOptions);
+    });
+  });
+
   test.describe("Tooltip visual states", () => {
     test("captures the light Tooltip surface", async ({ page }) => {
       const tooltip = page.locator(".ui-tooltip-open");

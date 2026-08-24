@@ -133,6 +133,13 @@
     "showBadge": false
   },
   {
+    "to": "navigationview",
+    "exact": false,
+    "text": "NavigationView",
+    "icon": "icons10-navigation",
+    "showBadge": false
+  },
+  {
     "to": "progressbar",
     "exact": false,
     "text": "ProgressBar",

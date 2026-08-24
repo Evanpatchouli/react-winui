@@ -193,6 +193,28 @@ export type {
   TableViewProps,
   TableViewRow
 } from "./components/TableView";
+export {
+  default as NavigationView,
+  NavigationViewItem,
+  NavigationViewSeparator
+} from "./components/NavigationView";
+export type {
+  NavigationViewComponent,
+  NavigationViewDisplayModeChangeHandler,
+  NavigationViewExpandedChangeHandler,
+  NavigationViewInteractionEvent,
+  NavigationViewItemComponent,
+  NavigationViewItemData,
+  NavigationViewItemProps,
+  NavigationViewItemValue,
+  NavigationViewPaneDisplayMode,
+  NavigationViewPaneOpenChangeHandler,
+  NavigationViewProps,
+  NavigationViewResolvedDisplayMode,
+  NavigationViewSeparatorComponent,
+  NavigationViewSeparatorProps,
+  NavigationViewValueChangeHandler
+} from "./components/NavigationView";
 export { default as TreeView, TreeItem } from "./components/TreeView";
 export type {
   TreeItemComponent,

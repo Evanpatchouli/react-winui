@@ -57,6 +57,7 @@ import "@evanpatchouli/react-winui/icons/winui-icons.min.css";
 import {
   Button,
   InputText,
+  NavigationView,
   SettingsCard,
   SettingsExpander,
   TreeItem,
@@ -70,6 +71,9 @@ const App = () => (
     <SettingsExpander title="Advanced settings">
       <SettingsCard title="Developer mode" />
     </SettingsExpander>
+    <NavigationView defaultValue="home" content={<main>Home page</main>}>
+      <NavigationView.Item label="Home" value="home" />
+    </NavigationView>
     <TreeView aria-label="Files" defaultExpandedItems={["documents"]}>
       <TreeItem label="Documents" value="documents">
         <TreeItem label="Readme" value="readme" />
@@ -79,12 +83,15 @@ const App = () => (
 );
 ```
 
-`@evanpatchouli/react-winui/button`, `@evanpatchouli/react-winui/settings-expander`, and `@evanpatchouli/react-winui/tree-view` are available as direct ESM entries when a consumer wants to avoid the package barrel. The legacy `@evanpatchouli/react-winui/dist/react-winui.min.css` path remains supported.
+`@evanpatchouli/react-winui/button`, `@evanpatchouli/react-winui/navigation-view`, `@evanpatchouli/react-winui/settings-expander`, and `@evanpatchouli/react-winui/tree-view` are available as direct ESM entries when a consumer wants to avoid the package barrel. The legacy `@evanpatchouli/react-winui/dist/react-winui.min.css` path remains supported.
 
 # Run Locally
 
-```html
-git clone https://github.com/Evanpatchouli/react-winui.git cd react-winui npm install npm start
+```bash
+git clone https://github.com/Evanpatchouli/react-winui.git
+cd react-winui
+pnpm install
+pnpm dev
 ```
 
 # Find this project useful? :heart:

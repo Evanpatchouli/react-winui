@@ -24,6 +24,7 @@ import {
   LoaderBusy,
   MenuBar,
   ContextMenu,
+  NavigationView,
   NumberBox,
   SettingsCard,
   SettingsExpander,
@@ -119,6 +120,19 @@ import type {
   ContextMenuProps,
   ContextMenuSelectEvent,
   ContextMenuSurfaceProps,
+  NavigationViewComponent,
+  NavigationViewDisplayModeChangeHandler,
+  NavigationViewExpandedChangeHandler,
+  NavigationViewInteractionEvent,
+  NavigationViewItemData,
+  NavigationViewItemProps,
+  NavigationViewItemValue,
+  NavigationViewPaneDisplayMode,
+  NavigationViewPaneOpenChangeHandler,
+  NavigationViewProps,
+  NavigationViewResolvedDisplayMode,
+  NavigationViewSeparatorProps,
+  NavigationViewValueChangeHandler,
   NumberBoxProps,
   NumberBoxValue,
   NumberBoxValueChangeEvent,
@@ -215,6 +229,10 @@ import ToastDirect, {
 import NumberBoxDirect, {
   type NumberBoxProps as NumberBoxDirectProps
 } from "@evanpatchouli/react-winui/number-box";
+import NavigationViewDirect, {
+  type NavigationViewItemProps as NavigationViewDirectItemProps,
+  type NavigationViewProps as NavigationViewDirectProps
+} from "@evanpatchouli/react-winui/navigation-view";
 import SettingsCardDirect, {
   type SettingsCardProps as SettingsCardDirectProps
 } from "@evanpatchouli/react-winui/settings-card";
@@ -524,6 +542,51 @@ export const navPageContainerTypeCheck: NavPageContainerProps = {
   hasPadding: true,
   style: { padding: "8px" }
 };
+export const navigationViewValueTypeCheck: NavigationViewItemValue = "home";
+export const navigationViewDisplayModeTypeCheck: NavigationViewPaneDisplayMode = "auto";
+export const navigationViewResolvedModeTypeCheck: NavigationViewResolvedDisplayMode = "compact";
+export const navigationViewInteractionEventTypeCheck = (_event: NavigationViewInteractionEvent) =>
+  undefined;
+export const navigationViewValueChangeTypeCheck: NavigationViewValueChangeHandler = (
+  _value,
+  event
+) => navigationViewInteractionEventTypeCheck(event);
+export const navigationViewPaneOpenChangeTypeCheck: NavigationViewPaneOpenChangeHandler = (
+  _open,
+  event
+) => (event ? navigationViewInteractionEventTypeCheck(event) : undefined);
+export const navigationViewExpandedChangeTypeCheck: NavigationViewExpandedChangeHandler = (
+  _expandedItems,
+  event
+) => navigationViewInteractionEventTypeCheck(event);
+export const navigationViewDisplayModeChangeTypeCheck: NavigationViewDisplayModeChangeHandler = (
+  _mode
+) => undefined;
+export const navigationViewItemDataTypeCheck: NavigationViewItemData = {
+  label: "Home",
+  value: navigationViewValueTypeCheck
+};
+export const navigationViewItemPropsTypeCheck: NavigationViewItemProps = {
+  label: "Documents",
+  value: "documents"
+};
+export const navigationViewSeparatorPropsTypeCheck: NavigationViewSeparatorProps = {};
+export const navigationViewPropsTypeCheck: NavigationViewProps = {
+  items: [navigationViewItemDataTypeCheck],
+  onDisplayModeChange: navigationViewDisplayModeChangeTypeCheck,
+  onExpandedItemsChange: navigationViewExpandedChangeTypeCheck,
+  onPaneOpenChange: navigationViewPaneOpenChangeTypeCheck,
+  onValueChange: navigationViewValueChangeTypeCheck,
+  paneDisplayMode: navigationViewDisplayModeTypeCheck
+};
+export const navigationViewComponentTypeCheck: NavigationViewComponent | undefined = undefined;
+export const navigationViewDirectPropsTypeCheck: NavigationViewDirectProps = {
+  paneDisplayMode: "minimal"
+};
+export const navigationViewDirectItemPropsTypeCheck: NavigationViewDirectItemProps = {
+  label: "Direct item",
+  value: "direct"
+};
 export const tableViewColumnTypeCheck: TableViewColumn = { title: "Name", sortable: true };
 export const tableViewRowTypeCheck: TableViewRow = ["Apple", 1];
 export const treeItemValueTypeCheck: TreeItemValue = "documents";
@@ -645,6 +708,16 @@ export const basicControls: ReactElement = (
     <NavPageContainer hasPadding>
       <span>Page content</span>
     </NavPageContainer>
+    <NavigationView
+      {...navigationViewPropsTypeCheck}
+      content={<span>Navigation content</span>}
+      settingsItem={{ label: "Settings", value: "settings" }}
+    >
+      <NavigationView.Item {...navigationViewItemPropsTypeCheck}>
+        <NavigationView.Item label="Reports" value="reports" />
+      </NavigationView.Item>
+      <NavigationView.Separator {...navigationViewSeparatorPropsTypeCheck} />
+    </NavigationView>
     <TableView
       columns={[{ title: "Name" }, { title: "Count", sortable: true }]}
       rows={[["Apple", 1]]}
@@ -729,6 +802,11 @@ export const settingsExpanderSubpathImport: ReactElement = (
   <SettingsExpanderDirect {...settingsExpanderDirectPropsTypeCheck}>
     Direct expanded content
   </SettingsExpanderDirect>
+);
+export const navigationViewSubpathImport: ReactElement = (
+  <NavigationViewDirect {...navigationViewDirectPropsTypeCheck}>
+    <NavigationViewDirect.Item {...navigationViewDirectItemPropsTypeCheck} />
+  </NavigationViewDirect>
 );
 export const treeViewSubpathImport: ReactElement = (
   <TreeViewDirect aria-label="Direct TreeView">

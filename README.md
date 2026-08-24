@@ -63,6 +63,7 @@ import {
   Button,
   CommandBar,
   InputText,
+  NavigationView,
   Popover,
   SettingsCard,
   SettingsExpander,
@@ -100,6 +101,15 @@ const App = () => (
       <CommandBar.Button label="Save" />
       <CommandBar.Button label="Copy" />
     </CommandBar>
+    <NavigationView
+      defaultValue="home"
+      paneHeader="Contoso"
+      settingsItem={{ label: "Settings", value: "settings" }}
+      content={<main>Home page</main>}
+    >
+      <NavigationView.Item label="Home" value="home" />
+      <NavigationView.Item label="Library" value="library" />
+    </NavigationView>
     <Tooltip content="Supplemental information">
       <Button value="Hover or focus" />
     </Tooltip>
