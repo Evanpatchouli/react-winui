@@ -148,6 +148,18 @@ export type {
   TableViewProps,
   TableViewRow
 } from "./components/TableView";
+export { default as TreeView, TreeItem } from "./components/TreeView";
+export type {
+  TreeItemComponent,
+  TreeItemProps,
+  TreeItemValue,
+  TreeViewComponent,
+  TreeViewExpandedChangeHandler,
+  TreeViewInteractionEvent,
+  TreeViewProps,
+  TreeViewSelectionMode,
+  TreeViewValueChangeHandler
+} from "./components/TreeView";
 export { default as TextArea } from "./components/TextArea";
 export type { TextAreaProps, TextAreaResize } from "./components/TextArea";
 export { default as Tooltip } from "./components/Tooltip";

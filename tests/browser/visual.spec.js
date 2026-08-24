@@ -478,6 +478,50 @@ test.describe("Public component visual baselines", () => {
     });
   });
 
+  test.describe("TreeView interaction and visual states", () => {
+    test("supports branch navigation, selection, and typeahead", async ({ page }) => {
+      const workspace = page.getByTestId("tree-workspace");
+
+      await workspace.focus();
+      await page.keyboard.press("ArrowLeft");
+      await expect(workspace).toHaveAttribute("aria-expanded", "false");
+      await expect(page.getByTestId("tree-src")).toHaveCount(0);
+
+      await page.keyboard.press("ArrowRight");
+      await expect(workspace).toHaveAttribute("aria-expanded", "true");
+      await page.keyboard.press("ArrowRight");
+      await expect(page.getByTestId("tree-src")).toBeFocused();
+
+      await page.keyboard.press("r");
+      await expect(page.getByTestId("tree-readme")).toBeFocused();
+      await page.keyboard.press("Space");
+      await expect(page.getByTestId("tree-readme")).toHaveAttribute("aria-selected", "true");
+      await expect(page.getByTestId("tree-view-result")).toHaveText("readme");
+    });
+
+    test("keeps disabled items out of pointer selection", async ({ page }) => {
+      await page.getByText("System files", { exact: true }).click();
+
+      await expect(page.getByText("System files", { exact: true })).toBeVisible();
+      await expect(page.getByTestId("tree-view-result")).toHaveText("readme");
+    });
+
+    test("captures the light TreeView", async ({ page }) => {
+      await expect(panel(page, "tree-view-panel")).toHaveScreenshot(
+        "tree-view-light.png",
+        screenshotOptions
+      );
+    });
+
+    test("captures the dark TreeView", async ({ page }) => {
+      await page.getByTestId("theme-dark").click();
+      await expect(panel(page, "tree-view-panel")).toHaveScreenshot(
+        "tree-view-dark.png",
+        screenshotOptions
+      );
+    });
+  });
+
   test.describe("Control and selection baselines", () => {
     test("captures the light form controls", async ({ page }) => {
       await expect(panel(page, "controls-panel")).toHaveScreenshot(

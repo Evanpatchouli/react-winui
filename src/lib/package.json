@@ -57,6 +57,11 @@
       "import": "./dist/components/NumberBox/index.js",
       "default": "./dist/components/NumberBox/index.js"
     },
+    "./tree-view": {
+      "types": "./dist/components/TreeView/index.d.ts",
+      "import": "./dist/components/TreeView/index.js",
+      "default": "./dist/components/TreeView/index.js"
+    },
     "./theme": {
       "types": "./dist/theme/index.d.ts",
       "import": "./dist/theme/index.js",

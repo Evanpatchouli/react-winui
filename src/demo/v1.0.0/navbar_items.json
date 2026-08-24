@@ -173,5 +173,12 @@
     "text": "Toast",
     "icon": "icons10-notification",
     "showBadge": false
+  },
+  {
+    "to": "treeview",
+    "exact": false,
+    "text": "TreeView",
+    "icon": "icons10-indent",
+    "showBadge": false
   }
 ]

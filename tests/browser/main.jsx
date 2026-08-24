@@ -41,6 +41,7 @@ import TableView from "../../src/lib/src/components/TableView/index.tsx";
 import TextArea from "../../src/lib/src/components/TextArea/index.tsx";
 import Tooltip from "../../src/lib/src/components/Tooltip/index.tsx";
 import Toast, { Toaster } from "../../src/lib/src/components/Toast/index.tsx";
+import TreeView, { TreeItem } from "../../src/lib/src/components/TreeView/index.tsx";
 import "../../src/lib/config/app-config.css";
 import "../../src/lib/scss/main.scss";
 import "./fixture.css";
@@ -89,6 +90,8 @@ function VisualFixture() {
   const [infoBarResult, setInfoBarResult] = useState("none");
   const [numberBoxResult, setNumberBoxResult] = useState(4);
   const [toastResult, setToastResult] = useState("none");
+  const [treeExpandedItems, setTreeExpandedItems] = useState(["workspace", "src"]);
+  const [treeSelection, setTreeSelection] = useState("readme");
   const [imageState, setImageState] = useState("loading");
   const [showSplash, setShowSplash] = useState(false);
   const alertRef = useRef(null);
@@ -754,6 +757,41 @@ function VisualFixture() {
           </div>
           <p className="visual-fixture-status">
             Committed quantity: <output data-testid="number-box-result">{numberBoxResult}</output>
+          </p>
+        </Section>
+
+        <Section
+          caption="nested · controlled state · disabled · roving focus · typeahead"
+          eyebrow="navigation"
+          testId="tree-view-panel"
+          title="TreeView"
+        >
+          <div className="visual-fixture-tree-view">
+            <TreeView
+              aria-label="Workspace files"
+              expandedItems={treeExpandedItems}
+              onExpandedItemsChange={setTreeExpandedItems}
+              onValueChange={(value) => setTreeSelection(String(value))}
+              value={treeSelection}
+            >
+              <TreeItem
+                data-testid="tree-workspace"
+                icon={<span>▣</span>}
+                label="Workspace"
+                value="workspace"
+              >
+                <TreeItem data-testid="tree-src" icon={<span>▣</span>} label="src" value="src">
+                  <TreeItem label="TreeView.tsx" value="tree-view" />
+                  <TreeItem label="tokens.scss" value="tokens" />
+                </TreeItem>
+                <TreeItem data-testid="tree-readme" label="README.md" value="readme" />
+                <TreeItem disabled label="System files" value="system" />
+              </TreeItem>
+              <TreeItem label="Archive" value="archive" />
+            </TreeView>
+          </div>
+          <p className="visual-fixture-status">
+            Selected item: <output data-testid="tree-view-result">{treeSelection}</output>
           </p>
         </Section>
       </main>

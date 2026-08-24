@@ -48,17 +48,22 @@ import "@evanpatchouli/react-winui/icons/winui-icons.min.css";
 # Usage
 
 ```js
-import { Button, InputText } from "@evanpatchouli/react-winui";
+import { Button, InputText, TreeItem, TreeView } from "@evanpatchouli/react-winui";
 
 const App = () => (
   <>
     <Button type="primary" value="Press Me" />
     <InputText placeholder="Enter a text" />
+    <TreeView aria-label="Files" defaultExpandedItems={["documents"]}>
+      <TreeItem label="Documents" value="documents">
+        <TreeItem label="Readme" value="readme" />
+      </TreeItem>
+    </TreeView>
   </>
 );
 ```
 
-`@evanpatchouli/react-winui/button` is available as a direct ESM entry when a consumer wants to import `Button` without the package barrel. The legacy `@evanpatchouli/react-winui/dist/react-winui.min.css` path remains supported.
+`@evanpatchouli/react-winui/button` and `@evanpatchouli/react-winui/tree-view` are available as direct ESM entries when a consumer wants to avoid the package barrel. The legacy `@evanpatchouli/react-winui/dist/react-winui.min.css` path remains supported.
 
 # Run Locally
 ```html

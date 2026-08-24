@@ -35,6 +35,8 @@ import {
   SelectNative,
   Switch,
   TableView,
+  TreeItem,
+  TreeView,
   TextArea,
   Tooltip,
   Popover,
@@ -116,6 +118,15 @@ import type {
   TableViewColumn,
   TableViewProps,
   TableViewRow,
+  TreeItemComponent,
+  TreeItemProps,
+  TreeItemValue,
+  TreeViewComponent,
+  TreeViewExpandedChangeHandler,
+  TreeViewInteractionEvent,
+  TreeViewProps,
+  TreeViewSelectionMode,
+  TreeViewValueChangeHandler,
   TextAreaProps,
   TooltipPlacement,
   TooltipProps,
@@ -161,6 +172,11 @@ import ToastDirect, {
 import NumberBoxDirect, {
   type NumberBoxProps as NumberBoxDirectProps
 } from "@evanpatchouli/react-winui/number-box";
+import TreeViewDirect, {
+  TreeItem as TreeItemDirect,
+  type TreeItemProps as TreeItemDirectProps,
+  type TreeViewProps as TreeViewDirectProps
+} from "@evanpatchouli/react-winui/tree-view";
 
 const typedProps: [
   ButtonProps,
@@ -198,6 +214,7 @@ const typedProps: [
   SelectProps,
   SwitchProps,
   TableViewProps,
+  TreeViewProps,
   TextAreaProps,
   TooltipProps,
   ToastProps,
@@ -244,6 +261,7 @@ const typedProps: [
     columns: [{ title: "Name" }],
     rows: [["Apple", 1]]
   },
+  { "aria-label": "Files", defaultExpandedItems: ["documents"] },
   { placeholder: "Text" },
   { content: "More information", children: <button type="button">Action</button> },
   { duration: 0, title: "Saved" },
@@ -368,6 +386,22 @@ export const navPageContainerTypeCheck: NavPageContainerProps = {
 };
 export const tableViewColumnTypeCheck: TableViewColumn = { title: "Name", sortable: true };
 export const tableViewRowTypeCheck: TableViewRow = ["Apple", 1];
+export const treeItemValueTypeCheck: TreeItemValue = "documents";
+export const treeViewSelectionModeTypeCheck: TreeViewSelectionMode = "single";
+export const treeViewExpandedChangeTypeCheck: TreeViewExpandedChangeHandler = (
+  _expandedItems,
+  event
+) => event;
+export const treeViewValueChangeTypeCheck: TreeViewValueChangeHandler = (_value, event) => event;
+export const treeViewInteractionEventTypeCheck = (_event: TreeViewInteractionEvent) => {};
+export const treeViewComponentTypeCheck: TreeViewComponent | undefined = undefined;
+export const treeItemComponentTypeCheck: TreeItemComponent | undefined = undefined;
+export const treeItemPropsTypeCheck: TreeItemProps = { label: "Documents", value: "documents" };
+export const treeViewDirectPropsTypeCheck: TreeViewDirectProps = { "aria-label": "Direct tree" };
+export const treeItemDirectPropsTypeCheck: TreeItemDirectProps = {
+  label: "Direct item",
+  value: "direct-item"
+};
 export const basicControls: ReactElement = (
   <>
     <Button>Children content</Button>
@@ -444,6 +478,16 @@ export const basicControls: ReactElement = (
       TableFooterComponent={<span>Footer</span>}
       TableHeaderComponent={<span>Header</span>}
     />
+    <TreeView
+      aria-label="Files"
+      defaultExpandedItems={["documents"]}
+      onExpandedItemsChange={treeViewExpandedChangeTypeCheck}
+      onValueChange={treeViewValueChangeTypeCheck}
+    >
+      <TreeItem icon={<span>Folder</span>} label="Documents" value="documents">
+        <TreeItem label="Readme" value="readme" />
+      </TreeItem>
+    </TreeView>
     <TextArea placeholder="Notes" onChange={(event) => event.currentTarget.value} />
     <Tooltip content="More information">
       <Button value="Tooltip" />
@@ -490,4 +534,9 @@ export const infoBarSubpathImport: ReactElement = (
 );
 export const numberBoxSubpathImport: ReactElement = (
   <NumberBoxDirect aria-label="NumberBox subpath" {...numberBoxDirectPropsTypeCheck} />
+);
+export const treeViewSubpathImport: ReactElement = (
+  <TreeViewDirect aria-label="Direct TreeView">
+    <TreeItemDirect label="Direct item" value="direct-item" />
+  </TreeViewDirect>
 );

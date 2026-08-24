@@ -1,0 +1,114 @@
+.ui-tree-view,
+.ui-tree-item,
+.ui-tree-item-group {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.ui-tree-view {
+  color: var(--rwu-color-text-primary);
+  font-size: var(--rwu-font-size-control);
+  user-select: none;
+}
+
+.ui-tree-item {
+  outline: none;
+}
+
+.ui-tree-item-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: var(--rwu-control-height);
+  padding-inline-start: calc(
+    var(--rwu-spacing-xs) + ((var(--rwu-tree-item-level) - 1) * var(--rwu-spacing-xl))
+  );
+  padding-inline-end: var(--rwu-spacing-lg);
+  border-radius: var(--rwu-radius-control);
+  cursor: default;
+  transition: background-color var(--rwu-duration-fast) var(--rwu-ease-standard);
+}
+
+.ui-tree-item-row:hover {
+  background: var(--rwu-color-surface-control-hover);
+}
+
+.ui-tree-item-row:active {
+  background: var(--rwu-color-surface-control-pressed);
+}
+
+.ui-tree-item:focus-visible > .ui-tree-item-row {
+  box-shadow: inset 0 0 0 1px var(--rwu-color-accent);
+}
+
+.ui-tree-item.selected > .ui-tree-item-row {
+  background: var(--rwu-color-surface-control-pressed);
+}
+
+.ui-tree-item.selected > .ui-tree-item-row::before {
+  position: absolute;
+  inset-inline-start: 0;
+  width: var(--rwu-spacing-xs);
+  height: var(--rwu-spacing-xl);
+  border-radius: var(--rwu-radius-pill);
+  background: var(--rwu-color-accent);
+  content: "";
+}
+
+.ui-tree-item.disabled > .ui-tree-item-row {
+  color: var(--rwu-color-text-disabled);
+  cursor: not-allowed;
+}
+
+.ui-tree-item.disabled > .ui-tree-item-row:hover,
+.ui-tree-item.disabled > .ui-tree-item-row:active {
+  background: transparent;
+}
+
+.ui-tree-item-toggle {
+  display: inline-flex;
+  flex: 0 0 var(--rwu-control-height);
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  border-radius: var(--rwu-radius-small);
+}
+
+.ui-tree-item-toggle:hover {
+  background: var(--rwu-color-hover-strong);
+}
+
+.ui-tree-item.disabled > .ui-tree-item-row .ui-tree-item-toggle:hover,
+.ui-tree-item-toggle-empty:hover {
+  background: transparent;
+}
+
+.ui-tree-item-toggle svg {
+  width: var(--rwu-spacing-lg);
+  height: var(--rwu-spacing-lg);
+  overflow: visible;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform var(--rwu-duration-control) var(--rwu-ease-standard);
+}
+
+.ui-tree-item-toggle[data-state="expanded"] svg {
+  transform: rotate(90deg);
+}
+
+.ui-tree-item-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  margin-inline-end: var(--rwu-spacing-md);
+}
+
+.ui-tree-item-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

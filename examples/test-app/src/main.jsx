@@ -8,6 +8,8 @@ import {
   InfoBar,
   NumberBox,
   Popover,
+  TreeItem,
+  TreeView,
   Toast,
   Toaster
 } from "@evanpatchouli/react-winui";
@@ -18,6 +20,7 @@ import FlyoutDirect from "@evanpatchouli/react-winui/flyout";
 import InfoBarDirect from "@evanpatchouli/react-winui/info-bar";
 import NumberBoxDirect from "@evanpatchouli/react-winui/number-box";
 import PopoverDirect from "@evanpatchouli/react-winui/popover";
+import TreeViewDirect, { TreeItem as TreeItemDirect } from "@evanpatchouli/react-winui/tree-view";
 import ToastDirect, { Toaster as ToasterDirect } from "@evanpatchouli/react-winui/toast";
 import { Shadows } from "@evanpatchouli/react-winui/theme";
 import "@evanpatchouli/react-winui/config/app-config.css";
@@ -64,6 +67,14 @@ const ConsumerApp = () => {
       <InfoBarDirect open closable={false} message="InfoBar subpath" severity="success" />
       <NumberBox aria-label="Root NumberBox" defaultValue={2} min={0} max={10} />
       <NumberBoxDirect aria-label="NumberBox subpath" defaultValue={4} step={2} />
+      <TreeView aria-label="Root TreeView" defaultExpandedItems={["root-folder"]}>
+        <TreeItem label="Root folder" value="root-folder">
+          <TreeItem label="Root file" value="root-file" />
+        </TreeItem>
+      </TreeView>
+      <TreeViewDirect aria-label="TreeView subpath">
+        <TreeItemDirect label="Direct item" value="direct-item" />
+      </TreeViewDirect>
       <Toast duration={0} title="Root Toast" />
       <ToastDirect duration={0} title="Toast subpath" />
       <button
