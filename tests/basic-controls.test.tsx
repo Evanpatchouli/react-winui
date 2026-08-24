@@ -640,6 +640,47 @@ describe("MenuBar", () => {
     expect(outerList).not.toHaveClass("show");
     expect(nestedList).not.toHaveClass("show");
   });
+
+  it("renders and selects public submenu items", () => {
+    const anchorRef = createRef<HTMLButtonElement>();
+    const menuRef = createRef<{
+      openDialog: () => void;
+      closeDialog: () => void;
+    }>();
+    const onChildClick = vi.fn();
+
+    const { container } = render(
+      <>
+        <button ref={anchorRef}>Anchor</button>
+        <MenuBar anchorRef={anchorRef} ref={menuRef}>
+          <MenuBar.Item.SubMenu label="More">
+            <MenuBar.Item label="First" />
+            <MenuBar.Item label="Child" onClick={onChildClick} />
+            <MenuBar.Item label="Last" />
+          </MenuBar.Item.SubMenu>
+        </MenuBar>
+      </>
+    );
+    const outerList = container.querySelectorAll(".ui-menu-list-dialog")[0] as HTMLUListElement;
+    const nestedList = container.querySelectorAll(".ui-menu-list-dialog")[1] as HTMLUListElement;
+
+    act(() => {
+      menuRef.current?.openDialog();
+    });
+    fireEvent.click(screen.getByText("More"));
+
+    expect(nestedList).toHaveClass("show");
+    expect(screen.getByText("First")).toBeVisible();
+    const child = screen.getByText("Child");
+    expect(child).toBeVisible();
+    expect(screen.getByText("Last")).toBeVisible();
+
+    fireEvent.click(child);
+
+    expect(onChildClick).toHaveBeenCalledTimes(1);
+    expect(outerList).not.toHaveClass("show");
+    expect(nestedList).not.toHaveClass("show");
+  });
 });
 
 describe("InputSearchBar", () => {

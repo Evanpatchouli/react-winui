@@ -172,6 +172,12 @@
 - Tooltip 内容通过 portal 渲染并根据 viewport 做 placement fallback；模块级关闭句柄保证同一时间只有最新 Tooltip 可见，避免多层悬浮内容相互遮挡。
 - 没有复制 Fluent UI 源码、Griffel 样式或 Fluent token，因此不新增 `THIRD_PARTY_NOTICES.md`；只记录行为/API 设计参考。
 
+## 2026-08-24：取消重复 Menu 并保留 MenuBar
+
+- 不新增与现有 `MenuBar` 高度重合的公共 `Menu`；现有 `MenuBar` 继续承担弹出命令菜单、Item、SubMenu 和 Divider 能力。
+- `MenuBar` 的后续改进采用兼容式增强，不删除旧 Props、不改变既有 DOM/className 或视觉 recipe。
+- 未来若实现 `ContextMenu`，应优先复用经验证的内部菜单 surface/条目行为，避免再建立第三套重复菜单实现；本次不提前抽象该能力。
+
 ## 2026-08-21：Tooltip 背景改为实心
 
 - Tooltip 与箭头改用 `--rwu-color-surface-flyout`，不再消费 `--rwu-color-surface-flyout-translucent`；Flyout/Select/MenuBar 的既有半透明行为保持不变。

@@ -300,3 +300,12 @@
 - 参考 WinUI Flyout 的 light-dismiss / Escape 行为，以及 Fluent UI React v9 Popover 的 controlled state、portal、定位与 focus 思路；没有复制实际 Fluent UI 源码、Griffel 样式或 Fluent token，因此无需 `THIRD_PARTY_NOTICES.md`。
 - 验证通过：`pnpm lint`、`pnpm typecheck`、`pnpm test`（69 tests）、`pnpm test:consumer`、`pnpm build:library`、`pnpm build:docs`、`pnpm build`、`pnpm test:browser`（39 tests）和新增文件 Prettier check。
 - 已知遗留：docs production build 仍有既有大 chunk warning；阶段 7 的 `Menu`、`ContextMenu`、`Toast`、`InfoBar` 等尚未开始，等待下一次明确指定。
+
+# 阶段 7 P0 去重与 MenuBar 二级菜单修复
+
+- 用户确认取消新增公共 `Menu`，避免与现有 `MenuBar` 的弹出命令、Item、SubMenu 和 Divider 能力重复；此前生成的新 Menu 源码、docs、exports、测试和快照均未提交并已清理。
+- `MenuList` 现在通过调用方传入的内部 public marker 精确识别 `MenuBar.Item`，不再错误地只接受内部 renderer；单个和多个直接二级项都能正常渲染。
+- 二级项的既有 `onClick` 会转发给内部 renderer，点击后回调触发一次，主菜单和二级菜单均关闭；未修改公共 Props、DOM/className、SCSS 或视觉 token。
+- 新增 RTL 回归覆盖多个二级项、目标项可见、回调与关闭行为；Playwright 覆盖打开主菜单、打开二级菜单、点击 Settings、状态更新和关闭，并新增精确的二级浮层视觉基线。
+- 验证通过：`pnpm lint`、`pnpm typecheck`、`pnpm test`（71 tests）、`pnpm build`、`pnpm test:consumer`、`pnpm test:browser`（39 tests）和本次触碰文件 Prettier check。
+- 已知遗留：全量 `pnpm format:check` 仍被 4 个本次未修改的既有文件阻断；docs build 仍有既有大 chunk warning。下一步需重新确认去重后的 P0 组件清单。

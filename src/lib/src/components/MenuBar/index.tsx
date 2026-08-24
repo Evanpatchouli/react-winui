@@ -181,6 +181,7 @@ const MenuBar: MenuBarComponent = Object.assign(
               onClick={() => openSubMenu(index)}
             >
               <MenuList
+                itemComponent={UiMenuItem}
                 listIndex={index - 1}
                 listData={child.props}
                 onItemClick={hideAllMenu}

@@ -1,6 +1,7 @@
 import { forwardRef, isValidElement, useImperativeHandle, useRef } from "react";
 import type {
   ForwardRefExoticComponent,
+  ElementType,
   MouseEventHandler,
   ReactElement,
   ReactNode,
@@ -21,16 +22,21 @@ export interface MenuListData {
 
 /** Props for an internal nested menu list. */
 export interface MenuListProps {
+  /** Internal marker for the public compound item component. */
+  itemComponent?: ElementType;
   listData?: MenuListData;
   listIndex?: number | MenuListData;
   onItemClick?: MouseEventHandler<HTMLUListElement>;
 }
 
-const isMenuItemElement = (child: ReactNode): child is ReactElement<MenuItemProps> =>
-  isValidElement<MenuItemProps>(child) && child.type === MenuItem;
+const isMenuItemElement = (
+  child: ReactNode,
+  itemComponent?: ElementType
+): child is ReactElement<MenuItemProps> =>
+  isValidElement<MenuItemProps>(child) && (child.type === MenuItem || child.type === itemComponent);
 
 const MenuList: ForwardRefExoticComponent<MenuListProps & RefAttributes<MenuListHandle>> =
-  forwardRef<MenuListHandle, MenuListProps>(({ listData, onItemClick }, ref) => {
+  forwardRef<MenuListHandle, MenuListProps>(({ itemComponent, listData, onItemClick }, ref) => {
     const inputRef = useRef<HTMLUListElement>(null);
 
     useImperativeHandle(ref, () => ({
@@ -41,11 +47,18 @@ const MenuList: ForwardRefExoticComponent<MenuListProps & RefAttributes<MenuList
 
     const children = listData?.children;
     const renderMenuItem = (child: ReactNode, key: string | number) => {
-      if (!isMenuItemElement(child)) {
+      if (!isMenuItemElement(child, itemComponent)) {
         return null;
       }
 
-      return <MenuItem key={key} icon={child.props.icon} label={child.props.label} />;
+      return (
+        <MenuItem
+          key={key}
+          icon={child.props.icon}
+          label={child.props.label}
+          onClick={child.props.onClick}
+        />
+      );
     };
 
     const renderedChildren = Array.isArray(children)

@@ -82,3 +82,9 @@
 - Portal overlay 的 `defaultOpen` 会污染完整页面截图（尤其是移动端全页基线）；视觉 fixture 应保持默认关闭，并在对应 Playwright 用例中显式打开目标 overlay。
 - Portal 容器在首次 effect 后才存在时，`autoFocus` effect 需要依赖 portal 容器或使用等价的挂载时机，否则 `defaultOpen + autoFocus` 会把焦点留在 body；这个边界必须由 RTL 测试锁定。
 - 新增组件的 consumer 验证必须在 library build 之后执行，才能同时覆盖 root export、subpath export、真实 dist declaration 和 ESM 产物。
+
+## 2026-08-24：MenuBar 二级菜单回归
+
+- compound public marker 与内部 DOM renderer 是不同组件；内部列表不能用 `child.type === internalRenderer` 判断 public children，应由父组件明确传入 marker 或先转换为内部数据。
+- 浮层测试只断言容器带 `show` class 会漏掉“容器打开但内容为空”；必须同时断言条目可见、点击回调和关闭状态。
+- 截取父 panel 可能裁掉绝对定位的二级浮层；应对二级浮层 locator 单独建立视觉基线，确认真实内容进入截图范围。

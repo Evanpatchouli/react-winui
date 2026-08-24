@@ -53,6 +53,7 @@ var m = (e, t) => o(e) && e.type === t, h = ({ children: e }) => /* @__PURE__ */
 			label: e.props.label,
 			onClick: () => N(t),
 			children: /* @__PURE__ */ p(r, {
+				itemComponent: h,
 				listIndex: t - 1,
 				listData: e.props,
 				onItemClick: M,

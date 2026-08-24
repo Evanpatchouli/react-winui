@@ -412,7 +412,7 @@ function VisualFixture() {
             <MenuBar.Item label="File" onClick={() => setActivation("File selected")} />
             <MenuBar.Item.Divider />
             <MenuBar.Item.SubMenu label="More">
-              <MenuBar.Item label="Settings" />
+              <MenuBar.Item label="Settings" onClick={() => setActivation("Settings selected")} />
             </MenuBar.Item.SubMenu>
           </MenuBar>
           <p className="visual-fixture-status">

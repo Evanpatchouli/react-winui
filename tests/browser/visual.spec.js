@@ -333,8 +333,17 @@ test.describe("Public component visual baselines", () => {
 
       await page.getByTestId("menu-anchor").click();
       await menuPanel.getByText("More", { exact: true }).click();
-      await expect(menuPanel.locator(".ui-menu-list-dialog").nth(1)).toHaveClass(/show/);
+      const nestedMenu = menuPanel.locator(".ui-menu-list-dialog").nth(1);
+
+      await expect(nestedMenu).toHaveClass(/show/);
+      await expect(menuPanel.getByText("Settings", { exact: true })).toBeVisible();
+      await expect(nestedMenu).toHaveScreenshot("menu-submenu-items.png", screenshotOptions);
       await expect(menuPanel).toHaveScreenshot("menu-submenu.png", screenshotOptions);
+
+      await menuPanel.getByText("Settings", { exact: true }).click();
+      await expect(menuPanel.getByTestId("menu-result")).toHaveText("Settings selected");
+      await expect(menuPanel.locator(".ui-menu-list-dialog").first()).not.toHaveClass(/show/);
+      await expect(menuPanel.locator(".ui-menu-list-dialog").nth(1)).not.toHaveClass(/show/);
     });
 
     test("captures the expanded navigation shell", async ({ page }) => {
