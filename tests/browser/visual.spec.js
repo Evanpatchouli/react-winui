@@ -217,6 +217,52 @@ test.describe("Public component visual baselines", () => {
     });
   });
 
+  test.describe("InfoBar interaction and visual states", () => {
+    test("maps all severities to live-region semantics and captures the light theme", async ({
+      page
+    }) => {
+      const infoBars = panel(page, "info-bar-panel").locator(".visual-fixture-info-bars");
+      const informational = page.getByTestId("info-bar-informational");
+
+      await expect(informational).toHaveAttribute("role", "status");
+      await expect(informational).toHaveAttribute("aria-live", "polite");
+
+      for (const severity of ["success", "warning", "error"]) {
+        const infoBar = page.getByTestId(`info-bar-${severity}`);
+        await expect(infoBar).toHaveAttribute("role", "alert");
+        await expect(infoBar).toHaveAttribute("aria-live", "assertive");
+        await expect(infoBar).toHaveAttribute("data-severity", severity);
+      }
+
+      await expect(infoBars).toHaveScreenshot("info-bar-severities-light.png", screenshotOptions);
+    });
+
+    test("captures all severities through dark theme tokens", async ({ page }) => {
+      await page.getByTestId("theme-dark").click();
+
+      const infoBars = panel(page, "info-bar-panel").locator(".visual-fixture-info-bars");
+      await expect(infoBars).toHaveScreenshot("info-bar-severities-dark.png", screenshotOptions);
+    });
+
+    test("dismisses and resets an uncontrolled InfoBar", async ({ page }) => {
+      await page.getByRole("button", { name: "Dismiss uncontrolled info bar" }).click();
+
+      await expect(page.getByTestId("info-bar-uncontrolled")).toHaveCount(0);
+      await expect(page.getByTestId("info-bar-result")).toHaveText("uncontrolled closed");
+
+      await page.getByRole("button", { name: "Reset uncontrolled InfoBar" }).click();
+      await expect(page.getByTestId("info-bar-uncontrolled")).toBeVisible();
+      await expect(page.getByTestId("info-bar-result")).toHaveText("uncontrolled reset");
+    });
+
+    test("emits a controlled close request without mutating visibility", async ({ page }) => {
+      await page.getByRole("button", { name: "Request controlled close" }).click();
+
+      await expect(page.getByTestId("info-bar-controlled")).toBeVisible();
+      await expect(page.getByTestId("info-bar-result")).toHaveText("controlled request: false");
+    });
+  });
+
   test.describe("ContextMenu interaction and visual states", () => {
     test("opens from right click and captures the light surface", async ({ page }) => {
       await page.getByTestId("context-menu-trigger").click({ button: "right" });

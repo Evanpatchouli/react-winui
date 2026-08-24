@@ -25,6 +25,7 @@ import {
   DialogDocs,
   Icons,
   ImageViewDocs,
+  InfoBarDocs,
   InputGroupDocs,
   LinkDocs,
   LoadersDocs,
@@ -98,6 +99,7 @@ const AppFourTwoThree = () => {
             {text: "dialogs", link: 'dialogs'},
             {text: "icons", link: 'icons'},
             {text: "imageview", link: 'imageview'},
+            {text: "infobar", link: 'infobar'},
             {text: "inputtext", link: 'input_group'},
             {text: "menubar", link: 'menubar'},
             {text: "popover", link: 'popover'},
@@ -186,6 +188,7 @@ const AppFourTwoThree = () => {
           <Route path="contextmenu" element={<ContextMenuDocs/>} />
           <Route path="dialogs" element={<DialogDocs/>} />
           <Route path="imageview" element={<ImageViewDocs/>} />
+          <Route path="infobar" element={<InfoBarDocs/>} />
           <Route path="input_group" element={<InputGroupDocs/>} />
           <Route path="links" element={<LinkDocs/>} />
           <Route path="loaders" element={<LoadersDocs/>} />

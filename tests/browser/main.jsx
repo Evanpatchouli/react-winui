@@ -12,6 +12,7 @@ import ColorPickerItem from "../../src/lib/src/components/ColorPicker/ColorPicke
 import ColorPickerPalette from "../../src/lib/src/components/ColorPicker/ColorPickerPalette/index.tsx";
 import Dialog from "../../src/lib/src/components/Dialog/index.tsx";
 import ImageView from "../../src/lib/src/components/ImageView/index.tsx";
+import InfoBar from "../../src/lib/src/components/InfoBar/index.tsx";
 import InputSearchBar from "../../src/lib/src/components/InputSearch/InputSearchBar/index.tsx";
 import InputSearchBox from "../../src/lib/src/components/InputSearch/InputSearchBox/index.tsx";
 import InputText from "../../src/lib/src/components/InputText/index.tsx";
@@ -73,6 +74,8 @@ function VisualFixture() {
   const [selection, setSelection] = useState("windows");
   const [searchBarValue, setSearchBarValue] = useState("Windows");
   const [searchResult, setSearchResult] = useState("none");
+  const [infoBarInstance, setInfoBarInstance] = useState(0);
+  const [infoBarResult, setInfoBarResult] = useState("none");
   const [toastResult, setToastResult] = useState("none");
   const [imageState, setImageState] = useState("loading");
   const [showSplash, setShowSplash] = useState(false);
@@ -582,6 +585,80 @@ function VisualFixture() {
             title="Inline example"
           />
           <Toaster label="Visual fixture notifications" maxVisible={3} ref={toasterRef} />
+        </Section>
+
+        <Section
+          caption="four severities · inline layout · controlled and uncontrolled close"
+          eyebrow="feedback"
+          testId="info-bar-panel"
+          title="InfoBar"
+        >
+          <div className="visual-fixture-info-bars">
+            <InfoBar
+              open
+              closable={false}
+              data-testid="info-bar-informational"
+              message="Restart the app to install it."
+              severity="informational"
+              title="Update available"
+            />
+            <InfoBar
+              open
+              closable={false}
+              data-testid="info-bar-success"
+              message="All documents were uploaded."
+              severity="success"
+              title="Backup complete"
+            />
+            <InfoBar
+              open
+              action={<Button value="Network settings" />}
+              closable={false}
+              data-testid="info-bar-warning"
+              message="Changes will sync when the network returns."
+              severity="warning"
+              title="Connection interrupted"
+            />
+            <InfoBar
+              open
+              closable={false}
+              content={<span>Check the file permissions before retrying.</span>}
+              data-testid="info-bar-error"
+              message="The document could not be saved."
+              severity="error"
+              title="Saving failed"
+            />
+            <InfoBar
+              key={infoBarInstance}
+              defaultOpen
+              closeButtonAriaLabel="Dismiss uncontrolled info bar"
+              data-testid="info-bar-uncontrolled"
+              message="This instance manages its own visibility."
+              onOpenChange={() => setInfoBarResult("uncontrolled closed")}
+              title="Uncontrolled example"
+            />
+            <InfoBar
+              open
+              closeButtonAriaLabel="Request controlled close"
+              data-testid="info-bar-controlled"
+              message="The parent intentionally keeps this message open."
+              onOpenChange={(nextOpen) => setInfoBarResult(`controlled request: ${nextOpen}`)}
+              severity="warning"
+              title="Controlled example"
+            />
+          </div>
+          <div className="visual-fixture-row">
+            <Button
+              onClick={() => {
+                setInfoBarInstance((instance) => instance + 1);
+                setInfoBarResult("uncontrolled reset");
+              }}
+              value="Reset uncontrolled InfoBar"
+            />
+          </div>
+          <p className="visual-fixture-status">
+            InfoBar lifecycle: <output data-testid="info-bar-result">{infoBarResult}</output>
+          </p>
         </Section>
       </main>
     </MemoryRouter>

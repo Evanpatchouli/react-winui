@@ -42,6 +42,11 @@
       "import": "./dist/components/Toast/index.js",
       "default": "./dist/components/Toast/index.js"
     },
+    "./info-bar": {
+      "types": "./dist/components/InfoBar/index.d.ts",
+      "import": "./dist/components/InfoBar/index.js",
+      "default": "./dist/components/InfoBar/index.js"
+    },
     "./theme": {
       "types": "./dist/theme/index.d.ts",
       "import": "./dist/theme/index.js",

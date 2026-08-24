@@ -329,3 +329,13 @@
 - 参考 Windows notification UX、Windows dialogs/flyouts boundary、Fluent UI React v9 Toast guidance/custom timeout/pause/limit 与 WAI-ARIA live region；只借鉴行为、API 和测试边界，未复制源码、Griffel 或 Fluent token。
 - 验证通过：`pnpm format:check`、`pnpm lint`、`pnpm typecheck`、Toast RTL（10/10）、`pnpm test`（共享工作树 108/108）、`pnpm test:consumer`、`pnpm build`、`pnpm test:browser:update`（Toast 4/4，首次全量 48/48）、`pnpm test:browser`（48/48）及 `pnpm --filter @evanpatchouli/react-winui pack --dry-run`。
 - 已知遗留：当前没有 Provider/global dispatch、跨 Toaster 通知中心或系统级 Windows toast bridge；这些不属于应用内 Toast 的最小完整边界。docs production build 仍有既有大 chunk warning。
+
+# 阶段 7 P0 InfoBar
+
+- 新增默认导出的 `InfoBar`：支持 informational/success/warning/error、title/message、action、custom content、受控/非受控 open、可关闭/不可关闭、disabled、原生 div props、DOM ref 与可本地化 close label；`displayName` 已设置为 `InfoBar`。
+- InfoBar 保持文档流内联 live region，与旧 Alert 的 modal overlay、scroll lock、imperative API 边界明确；informational 默认 status/polite，其余 severity 默认 alert/assertive，ARIA 默认值均可由 root props 覆盖。
+- root export、全部 public types、`./info-bar` package subpath、ESM、`.d.ts`、CSS dist、consumer root/subpath/types/runtime、真实 docs Demo/导航/路由与轻量 API 文档均已接入。
+- 新增 10 个 InfoBar Vitest/RTL tests；Playwright 新增 4 个浏览器用例，覆盖四 severity 与 status/alert 语义、非受控关闭/重建、受控关闭请求、light/dark，并新增 2 张 Chromium Windows 视觉基线。
+- 参考 WinUI InfoBar、Fluent UI React v9 MessageBar types/tests 与 WAI-ARIA status/alert；只借鉴行为、API 和测试边界，未复制源码、Griffel 或 Fluent token。
+- 验证通过：`pnpm format:check`、`pnpm lint`、`pnpm typecheck`、InfoBar RTL（10/10）、`pnpm test`（8 files / 108 tests）、`pnpm test:consumer`、`pnpm build`、`pnpm test:browser:update`（52/52）、`pnpm test:browser`（52/52）及 `pnpm --filter @evanpatchouli/react-winui pack --dry-run`；两张视觉基线已人工检查无裁切或布局异常。
+- 已知遗留：现有 Design Tokens 没有 warning 专用色，当前用 `--rwu-color-text-primary` 与三角图标传达 warning；未实现自定义 severity icon/background API。docs production build 仍有既有大 chunk warning。build 会为共享工作树中的未集成 ComboBox 生成孤立 dist declaration，本提交明确不暂存该文件。

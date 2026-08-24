@@ -1,9 +1,18 @@
 import { useRef } from "react";
 import { createRoot } from "react-dom/client";
-import { Button, ContextMenu, Flyout, Popover, Toast, Toaster } from "@evanpatchouli/react-winui";
+import {
+  Button,
+  ContextMenu,
+  Flyout,
+  InfoBar,
+  Popover,
+  Toast,
+  Toaster
+} from "@evanpatchouli/react-winui";
 import ButtonDirect from "@evanpatchouli/react-winui/button";
 import ContextMenuDirect from "@evanpatchouli/react-winui/context-menu";
 import FlyoutDirect from "@evanpatchouli/react-winui/flyout";
+import InfoBarDirect from "@evanpatchouli/react-winui/info-bar";
 import PopoverDirect from "@evanpatchouli/react-winui/popover";
 import ToastDirect, { Toaster as ToasterDirect } from "@evanpatchouli/react-winui/toast";
 import { Shadows } from "@evanpatchouli/react-winui/theme";
@@ -37,6 +46,8 @@ const ConsumerApp = () => {
       <FlyoutDirect content="Direct Flyout">
         <Button value="Direct Flyout" />
       </FlyoutDirect>
+      <InfoBar open closable={false} message="Root InfoBar" />
+      <InfoBarDirect open closable={false} message="InfoBar subpath" severity="success" />
       <Toast duration={0} title="Root Toast" />
       <ToastDirect duration={0} title="Toast subpath" />
       <button

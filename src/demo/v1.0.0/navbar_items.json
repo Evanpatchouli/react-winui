@@ -56,6 +56,13 @@
     "showBadge": false
   },
   {
+    "to": "infobar",
+    "exact": false,
+    "text": "InfoBar",
+    "icon": "icons10-notification",
+    "showBadge": false
+  },
+  {
     "to": "input_group",
     "exact": false,
     "text": "InputText",

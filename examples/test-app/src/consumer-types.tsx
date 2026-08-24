@@ -11,6 +11,7 @@ import {
   ColorPickerItem,
   ColorPickerPalette,
   ImageView,
+  InfoBar,
   InputSearchBar,
   InputSearchBox,
   InputText,
@@ -55,6 +56,10 @@ import type {
   ColorPickerItemProps,
   ColorPickerPaletteProps,
   ImageViewProps,
+  InfoBarOpenChangeEvent,
+  InfoBarOpenChangeHandler,
+  InfoBarProps,
+  InfoBarSeverity,
   InputSearchBarProps,
   InputSearchBoxProps,
   InputSearchSuggestion,
@@ -123,6 +128,10 @@ import type { ShadowName, ShadowToken } from "@evanpatchouli/react-winui/theme";
 import TooltipDirect from "@evanpatchouli/react-winui/tooltip";
 import PopoverDirect from "@evanpatchouli/react-winui/popover";
 import FlyoutDirect from "@evanpatchouli/react-winui/flyout";
+import InfoBarDirect, {
+  type InfoBarProps as InfoBarDirectProps,
+  type InfoBarSeverity as InfoBarDirectSeverity
+} from "@evanpatchouli/react-winui/info-bar";
 import ContextMenuDirect, {
   type ContextMenuProps as ContextMenuDirectProps
 } from "@evanpatchouli/react-winui/context-menu";
@@ -144,6 +153,7 @@ const typedProps: [
   ColorPickerItemProps,
   ColorPickerPaletteProps,
   ImageViewProps,
+  InfoBarProps,
   InputSearchBarProps,
   InputSearchBoxProps,
   InputTextProps,
@@ -181,6 +191,7 @@ const typedProps: [
   { color: "#ff0000", name: "accent" },
   { color: "#00ff00" },
   { alt: "Windows logo", src: "/windows.png", width: 128 },
+  { defaultOpen: true, message: "Update available", severity: "informational" },
   { placeholder: "Search", width: 240 },
   { suggest: [{ text: "Windows" }], width: 240 },
   { label: "Input" },
@@ -264,6 +275,16 @@ export const contextMenuDirectPropsTypeCheck: ContextMenuDirectProps = {
   content: <ContextMenuDirect.Item>Copy</ContextMenuDirect.Item>,
   children: <button type="button">Target</button>
 };
+export const infoBarSeverityTypeCheck: InfoBarSeverity = "warning";
+export const infoBarOpenChangeEventTypeCheck = (_event: InfoBarOpenChangeEvent) => {};
+export const infoBarOpenChangeTypeCheck: InfoBarOpenChangeHandler = (_open, event) =>
+  infoBarOpenChangeEventTypeCheck(event);
+export const infoBarDirectSeverityTypeCheck: InfoBarDirectSeverity = "success";
+export const infoBarDirectPropsTypeCheck: InfoBarDirectProps = {
+  open: true,
+  message: "Direct InfoBar",
+  severity: infoBarDirectSeverityTypeCheck
+};
 export const toasterRef = createRef<ToasterHandle>();
 export const toastActionTypeCheck: ToastAction = { label: "Undo", onClick: () => {} };
 export const toastContentTypeCheck: ToastContentProps = { message: "Saved", title: "Complete" };
@@ -316,6 +337,7 @@ export const basicControls: ReactElement = (
     <ColorPickerItem color="#ff0000" name="accent" />
     <ColorPickerPalette color="#00ff00" />
     <ImageView alt="Windows logo" src="/windows.png" />
+    <InfoBar open closable={false} message="Root InfoBar" severity={infoBarSeverityTypeCheck} />
     <InputSearchBar placeholder="Search" />
     <InputSearchBox suggest={[{ text: "Windows" }]} />
     <InputText label="Name" onChange={(event) => event.currentTarget.value} />
@@ -390,4 +412,7 @@ export const contextMenuSubpathImport: ReactElement = (
 export const toastSubpathImport: ReactElement = <ToastDirect duration={0} title="Toast subpath" />;
 export const toasterSubpathImport: ReactElement = (
   <ToasterDirect label="Subpath notifications" maxVisible={2} />
+);
+export const infoBarSubpathImport: ReactElement = (
+  <InfoBarDirect open closable={false} message="InfoBar subpath" severity="success" />
 );

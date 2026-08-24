@@ -44,6 +44,13 @@ export type {
 } from "./components/Dialog";
 export { default as ImageView } from "./components/ImageView";
 export type { ImageViewProps } from "./components/ImageView";
+export { default as InfoBar } from "./components/InfoBar";
+export type {
+  InfoBarOpenChangeEvent,
+  InfoBarOpenChangeHandler,
+  InfoBarProps,
+  InfoBarSeverity
+} from "./components/InfoBar";
 export { default as InputText } from "./components/InputText";
 export type { InputTextProps, InputTextStatus } from "./components/InputText";
 export { default as InputSearchBar } from "./components/InputSearch/InputSearchBar";

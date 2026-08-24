@@ -103,3 +103,11 @@
 - pointer/focus pause 需要记录剩余时长，而不只是 clear 后重新使用完整 duration；这样短暂交互不会无意延长通知寿命。
 - 命令式 `show` 若收到已有 id，应更新原条目并保持堆栈数量与顺序；这一行为必须由 RTL 数量断言和更新后内容断言共同锁定。
 - 在长页面视觉 fixture 中新增 Section 会改变后续元素相对固定背景的位置；把新 Section 追加到末尾，可避免无关旧组件快照产生噪声。
+
+## 2026-08-24：InfoBar 内联状态与关闭边界
+
+- React 的 `HTMLAttributes` 已定义 microdata `content?: string`；组件把 `content` 用作 ReactNode slot 时必须在继承类型中显式 `Omit<..., "content">`，否则实现与声明都会冲突。
+- 受控 InfoBar 的关闭按钮只应触发 `onOpenChange(false, event)`，不能同步复制或修改受控状态；浏览器测试应同时断言 callback 结果与 surface 仍然可见。
+- `disabled` 根节点若要覆盖任意 ReactNode action，不能只禁用内建 close button；还需在 capture 阶段阻止 click 以及 Enter/Space 激活，同时保留消息可读性和 `aria-disabled`。
+- severity 不能只靠颜色表达；当现有 token 缺少 warning 色时，保留中性 token 并使用不同图标，比私自添加局部硬编码色更符合主题与 token 约束。
+- 默认关闭的 inline 组件在 docs、consumer 和 visual fixture 中都必须显式设置 `open` / `defaultOpen`；否则构建可能通过但实际没有验证 DOM、CSS 或发布运行时。

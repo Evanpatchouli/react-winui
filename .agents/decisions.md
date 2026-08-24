@@ -226,3 +226,12 @@
 - 默认 polite 通知使用 `role="status"`，assertive 通知使用 `role="alert"`；交互时暂停剩余计时，焦点位于 Toast 内时 Escape 关闭，persistent / `duration={0}` 不启动自动关闭。
 - 受控 Toast 的 timeout 或关闭操作只发出一次 `onOpenChange(false, data)` 请求；若父级保持 `open=true`，组件不会因重新渲染重复启动同一轮 timeout。
 - surface、intent 指示、焦点、间距、阴影与动画只消费已有 `--rwu-*` token；参考 Windows notification、Fluent UI React v9 Toast 与 WAI-ARIA live region 的行为/API/测试边界，未复制第三方源码、Griffel 或视觉 token。
+
+## 2026-08-24：阶段 7 P0 InfoBar
+
+- InfoBar 是占据正常文档流的持久状态消息，不复用也不替代旧 Alert；Alert 继续保持 modal overlay、scroll lock 与 imperative ref API。
+- API 采用 `open` / `defaultOpen` / `onOpenChange` 受控与非受控模型，默认关闭、默认可关闭；受控关闭只发送请求，父组件保留最终可见性决定权。
+- informational 默认使用 `role="status"` / polite，success、warning、error 默认使用 `role="alert"` / assertive，根 div 的原生 ARIA props 可显式覆盖默认值；组件出现或关闭时不移动焦点。
+- `disabled` 只阻止 close 与 action 的用户激活，消息继续可读且根节点标记 `aria-disabled`；受控 `open` 的程序化变化不受限制。
+- surface、文字、边框、焦点与 severity 图标只消费现有 `--rwu-*` token。当前没有 warning 专用 token，因此使用 `--rwu-color-text-primary` 与独立三角图标表达 warning，不引入硬编码色。
+- 参考 WinUI InfoBar、Fluent UI React v9 MessageBar 与 WAI-ARIA status/alert 的行为、API 和测试边界；未复制第三方源码、Griffel 或 Fluent 视觉 token。
