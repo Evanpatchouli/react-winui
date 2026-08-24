@@ -356,3 +356,12 @@
 - 通过内部 `ui-info-bar-with-action` 状态类和现有尺寸 token 计算桌面端补偿；480px 以下 action 换行时恢复首行顶端对齐。
 - 新增 Playwright 几何回归断言，修复前稳定失败 6px，修复后文档页两个 action 示例中心偏差均为 0px。
 - 验证通过：`pnpm format:check`、`pnpm lint`、`pnpm typecheck`、`pnpm test`（110/110）、`pnpm build`、`pnpm test:browser`（59/59）；docs build 仅保留既有大 chunk warning。
+
+# 阶段 7 P1 八组件
+
+- `NumberBox`、`AutoSuggestBox`、`TreeView`、`Expander`、`SettingsCard`、`SettingsExpander`、`CommandBar`、`NavigationView` 已完成并合入主线；每个组件均由独立 worktree 子智能体实施并单独提交。
+- 新组件均补齐 TypeScript 实现/声明、root/subpath export、Sass、docs Demo、consumer 类型/构建样例、RTL 测试与 Playwright 视觉回归；旧 `InputSearchBox`、`Accordion`、`ButtonGroup`、`MenuBar`、`NavBar` 系列保持兼容。
+- `SettingsExpander` 采用 header 行右侧 `content`/`action` 与展开区 `children`、`itemsHeader`/`itemsFooter` 分离的交互层级；collapsed/disabled 状态覆盖 inert、焦点回收和键盘边界。
+- `NavigationView` 支持 WinUI 左侧 `expanded`、`compact`、`minimal`、`auto` pane、共享选择模型、nested items、footer/settings、overlay/light-dismiss、Back 与键盘焦点；当前不实现 Top pane 模式，详见 `docs/navigation-view.md`。
+- 最终主线验证：`pnpm lint`、`pnpm typecheck`、`pnpm test`（16 files / 175 tests）、`pnpm build`、`pnpm test:consumer`、`pnpm test:browser`（98/98）和 `pnpm --dir src/lib pack --dry-run` 全部通过。
+- 归档详见 `.agents/archive/2026-08-24-phase7-p1.md`；已知遗留为历史 Windows CRLF 导致全仓 format check 噪声与 docs 大 chunk warning，均不影响构建/测试/发布包。

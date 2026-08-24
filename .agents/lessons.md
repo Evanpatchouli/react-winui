@@ -83,6 +83,16 @@
 - Portal 容器在首次 effect 后才存在时，`autoFocus` effect 需要依赖 portal 容器或使用等价的挂载时机，否则 `defaultOpen + autoFocus` 会把焦点留在 body；这个边界必须由 RTL 测试锁定。
 - 新增组件的 consumer 验证必须在 library build 之后执行，才能同时覆盖 root export、subpath export、真实 dist declaration 和 ESM 产物。
 
+## 2026-08-24：P1 并行移植与主线集成
+
+- 多组件并行时必须为每个组件建立独立 worktree、分支和 commit；共享 package/export、Demo、fixture、dist 冲突应由主线程按组件逐项合并，不能让子智能体直接改 main。
+- 多个 Playwright/Vite 构建若同时清理同一 `dist`，Windows 可能出现 `EPERM rmdir`；构建和 consumer 验证应串行执行，浏览器开发服务器使用独立临时端口并在提交前恢复默认端口。
+- 长页面 fixture 中新增 Section 会改变后续测试元素的物理位置；依赖“页面底部”验证 viewport fallback 的测试应显式把目标控件定位到 fixed viewport，而不是追加不可见 spacer 并滚动页面。
+- 视觉快照出现 1px 高度差时，先比较实际/期望图像与 diff，确认是稳定的字体/布局结果后再显式更新目标快照；不可借助放宽像素阈值隐藏真实变化。
+- `SettingsExpander`/`SettingsCard` 这类“整卡可点击 + 右侧控件”组件必须使用 sibling overlay 或同级触发层，不能把 button、link、input 嵌套进 disclosure/native trigger。
+- `NavigationView` 的 auto 断点、pane overlay 和 selection indicator 必须由同一状态模型驱动；关闭 pane 时隐藏内容要同时从 Tab/ARIA/focus 恢复路径中移除，避免焦点落到 hidden duplicate toggle。
+- 组件独立验证通过不等于主线验证通过；合并共享 fixture 后至少重跑完整 lint、typecheck、unit、build、consumer、pack 和 browser suite。
+
 ## 2026-08-24：MenuBar 二级菜单回归
 
 - compound public marker 与内部 DOM renderer 是不同组件；内部列表不能用 `child.type === internalRenderer` 判断 public children，应由父组件明确传入 marker 或先转换为内部数据。

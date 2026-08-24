@@ -18,14 +18,14 @@
 
 ## P1
 
-- [ ] `NumberBox`
-- [ ] `AutoSuggestBox`：先审计现有 `InputSearchBox`
-- [ ] `TreeView`
-- [ ] `Expander`：先审计现有 `Accordion`
-- [ ] `SettingsCard`
-- [ ] `SettingsExpander`
-- [ ] `CommandBar`：先审计现有 `ButtonGroup` 和 `MenuBar`
-- [ ] `NavigationView`：先审计现有 `NavBar` 系列，禁止再实现普通 Web Sidebar
+- [x] `NumberBox`
+- [x] `AutoSuggestBox`：已审计现有 `InputSearchBox`，新增独立能力
+- [x] `TreeView`
+- [x] `Expander`：已审计现有 `Accordion`，保留旧组件并新增独立能力
+- [x] `SettingsCard`
+- [x] `SettingsExpander`
+- [x] `CommandBar`：已审计现有 `ButtonGroup` 和 `MenuBar`，新增独立能力
+- [x] `NavigationView`：已审计现有 `NavBar` 系列，新增 WinUI pane 导航而非普通 Web Sidebar
 
 ## P2
 
@@ -66,9 +66,8 @@
 
 ## 推荐的下一步顺序
 
-1. `ContextMenu` 去重审计与实现决策
-2. `Toast`
-3. `InfoBar`
-4. `ComboBox`
+1. P1 八个组件已完成并归档；下一步等待明确指定 P2 组件
+2. `DatePicker`：先审计现有 date input 样式与 Demo
+3. `Calendar` / `DataGrid`：先审计现有 `TableView`
 
 一次只处理一个组件；完成并提交后再进入下一项。

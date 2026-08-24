@@ -244,3 +244,12 @@
 - listbox 通过 portal 挂载，并在真实测量后完成上下 placement fallback、水平 clamp 与 viewport `max-height`；定位未就绪和可用高度确为 0 是两个不同状态。
 - editable 模式支持筛选、匹配项提交及自定义字符串提交；当前 API 明确保持单选，不提前引入 multiselect、虚拟化或远程数据框架。
 - 视觉只消费既有 `--rwu-*` token，并复用旧 Select 的 WinUI 视觉 DNA；仅参考 WinUI ComboBox、Fluent UI React v9 Combobox 与 WAI-ARIA APG 的行为/API/测试思路，未复制实际源码、Griffel 或 Fluent token。
+
+## 2026-08-24：阶段 7 P1 组件边界
+
+- `NumberBox`、`AutoSuggestBox`、`TreeView`、`Expander`、`SettingsCard`、`SettingsExpander`、`CommandBar`、`NavigationView` 作为独立公共组件加入；旧重叠组件不改名、不删除、不做 breaking rewrite。
+- `Expander` 不替换旧 `Accordion`；`SettingsExpander` 组合 SettingsCard 的信息层级，但使用自己的 disclosure 状态和 inert/焦点边界。
+- `AutoSuggestBox` 不把旧 `InputSearchBox` 改造成新 API；两者分别保留搜索输入兼容能力与建议选择能力。
+- `CommandBar` 不复用 `ButtonGroup`/`MenuBar` 的公共 API；仅借鉴经过验证的菜单 portal、light-dismiss 和焦点边界。
+- `NavigationView` 不修改旧 `NavBar` 系列；新增组件遵循 WinUI 左侧 pane 的 expanded/compact/minimal/auto 模式，Top 模式留待后续明确需求。
+- P1 组件继续只使用 react-winui 自有 `--rwu-*` tokens；仅借鉴 WinUI/Windows 11 行为与 Fluent UI v9 的状态、无障碍和测试思路，不复制第三方实现源码。
