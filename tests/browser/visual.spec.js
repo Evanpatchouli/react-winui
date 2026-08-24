@@ -432,6 +432,52 @@ test.describe("Public component visual baselines", () => {
     });
   });
 
+  test.describe("NumberBox interaction and visual states", () => {
+    test("commits keyboard and direct text input while respecting bounds", async ({ page }) => {
+      const numberBox = page.getByTestId("number-box-default");
+      await numberBox.focus();
+      await page.keyboard.press("ArrowUp");
+      await expect(numberBox).toHaveValue("5");
+      await expect(page.getByTestId("number-box-result")).toHaveText("5");
+
+      await numberBox.fill("14");
+      await expect(numberBox).toHaveAttribute("aria-invalid", "true");
+      await page.keyboard.press("Enter");
+      await expect(numberBox).toHaveValue("10");
+      await expect(numberBox).toHaveAttribute("aria-valuenow", "10");
+      await expect(page.getByTestId("number-box-result")).toHaveText("10");
+      await expect(page.getByRole("button", { name: "Increment" }).first()).toBeDisabled();
+    });
+
+    test("keeps input focus when an inline spin button is clicked", async ({ page }) => {
+      const numberBox = page.getByTestId("number-box-decimal");
+      await numberBox.focus();
+      await page
+        .getByTestId("number-box-panel")
+        .getByRole("button", { name: "Increment" })
+        .nth(1)
+        .click();
+
+      await expect(numberBox).toBeFocused();
+      await expect(numberBox).toHaveValue("0.6");
+    });
+
+    test("captures the light NumberBox states", async ({ page }) => {
+      await expect(panel(page, "number-box-panel")).toHaveScreenshot(
+        "number-box-light.png",
+        screenshotOptions
+      );
+    });
+
+    test("captures the dark NumberBox states", async ({ page }) => {
+      await page.getByTestId("theme-dark").click();
+      await expect(panel(page, "number-box-panel")).toHaveScreenshot(
+        "number-box-dark.png",
+        screenshotOptions
+      );
+    });
+  });
+
   test.describe("Control and selection baselines", () => {
     test("captures the light form controls", async ({ page }) => {
       await expect(panel(page, "controls-panel")).toHaveScreenshot(

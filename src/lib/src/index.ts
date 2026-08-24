@@ -92,6 +92,13 @@ export type {
   MenuBarProps,
   MenuBarSubMenuProps
 } from "./components/MenuBar";
+export { default as NumberBox } from "./components/NumberBox";
+export type {
+  NumberBoxProps,
+  NumberBoxValue,
+  NumberBoxValueChangeEvent,
+  NumberBoxValueChangeHandler
+} from "./components/NumberBox";
 export {
   default as ContextMenu,
   ContextMenuDivider,

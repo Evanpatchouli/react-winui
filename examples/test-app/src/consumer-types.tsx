@@ -21,6 +21,7 @@ import {
   LoaderBusy,
   MenuBar,
   ContextMenu,
+  NumberBox,
   NavBar,
   NavBarLink,
   NavBarSubMenu,
@@ -91,6 +92,10 @@ import type {
   ContextMenuProps,
   ContextMenuSelectEvent,
   ContextMenuSurfaceProps,
+  NumberBoxProps,
+  NumberBoxValue,
+  NumberBoxValueChangeEvent,
+  NumberBoxValueChangeHandler,
   NavBarComponent,
   NavBarLinkProps,
   NavBarProps,
@@ -153,6 +158,9 @@ import ToastDirect, {
   type ToasterProps as ToasterDirectProps,
   type ToastProps as ToastDirectProps
 } from "@evanpatchouli/react-winui/toast";
+import NumberBoxDirect, {
+  type NumberBoxProps as NumberBoxDirectProps
+} from "@evanpatchouli/react-winui/number-box";
 
 const typedProps: [
   ButtonProps,
@@ -176,6 +184,7 @@ const typedProps: [
   LoaderBusyProps,
   MenuBarProps,
   ContextMenuProps,
+  NumberBoxProps,
   NavBarProps,
   NavBarLinkProps,
   NavBarSubMenuProps,
@@ -218,6 +227,7 @@ const typedProps: [
     content: <ContextMenu.Item>Copy</ContextMenu.Item>,
     children: <button type="button">Target</button>
   },
+  { defaultValue: 2, max: 10, min: 0 },
   { shadowOnScroll: true, title: "Navigation" },
   { active: true, href: "/home", text: "Home" },
   { title: "Utilities" },
@@ -309,6 +319,14 @@ export const contextMenuSelectTypeCheck = (_event: ContextMenuSelectEvent) => {}
 export const contextMenuDirectPropsTypeCheck: ContextMenuDirectProps = {
   content: <ContextMenuDirect.Item>Copy</ContextMenuDirect.Item>,
   children: <button type="button">Target</button>
+};
+export const numberBoxValueTypeCheck: NumberBoxValue = 4;
+export const numberBoxValueChangeEventTypeCheck = (_event: NumberBoxValueChangeEvent) => {};
+export const numberBoxValueChangeTypeCheck: NumberBoxValueChangeHandler = (_value, event) =>
+  numberBoxValueChangeEventTypeCheck(event);
+export const numberBoxDirectPropsTypeCheck: NumberBoxDirectProps = {
+  defaultValue: numberBoxValueTypeCheck,
+  onValueChange: numberBoxValueChangeTypeCheck
 };
 export const infoBarSeverityTypeCheck: InfoBarSeverity = "warning";
 export const infoBarOpenChangeEventTypeCheck = (_event: InfoBarOpenChangeEvent) => {};
@@ -405,6 +423,11 @@ export const basicControls: ReactElement = (
     <ContextMenu content={<ContextMenu.Item>Copy</ContextMenu.Item>}>
       <button type="button">Context target</button>
     </ContextMenu>
+    <NumberBox
+      aria-label="Quantity"
+      defaultValue={numberBoxValueTypeCheck}
+      onValueChange={numberBoxValueChangeTypeCheck}
+    />
     <NavBar ref={navBarRef} shadowOnScroll title="Navigation">
       <NavBarLink href="/home" text="Home" />
       <NavBarSubMenu title="Utilities">
@@ -464,4 +487,7 @@ export const toasterSubpathImport: ReactElement = (
 );
 export const infoBarSubpathImport: ReactElement = (
   <InfoBarDirect open closable={false} message="InfoBar subpath" severity="success" />
+);
+export const numberBoxSubpathImport: ReactElement = (
+  <NumberBoxDirect aria-label="NumberBox subpath" {...numberBoxDirectPropsTypeCheck} />
 );

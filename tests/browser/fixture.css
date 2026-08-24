@@ -129,6 +129,14 @@ body {
   gap: 8px;
 }
 
+.visual-fixture-number-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 16px;
+  margin-top: 24px;
+}
+
 .visual-fixture-status,
 .visual-fixture-interaction-status {
   margin: 18px 0 0;

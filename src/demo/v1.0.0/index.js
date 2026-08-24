@@ -31,6 +31,7 @@ import {
   LinkDocs,
   LoadersDocs,
   MenuBarDocs,
+  NumberBoxDocs,
   ProgressBarDocs,
   RadioButtonDocs,
   SelectBoxDocs,
@@ -104,6 +105,7 @@ const AppFourTwoThree = () => {
             {text: "infobar", link: 'infobar'},
             {text: "inputtext", link: 'input_group'},
             {text: "menubar", link: 'menubar'},
+            {text: "numberbox", link: 'numberbox'},
             {text: "popover", link: 'popover'},
             {text: "flyout", link: 'popover'},
             {text: "select", link: 'selectbox'},
@@ -196,6 +198,7 @@ const AppFourTwoThree = () => {
           <Route path="links" element={<LinkDocs/>} />
           <Route path="loaders" element={<LoadersDocs/>} />
           <Route path="menubar" element={<MenuBarDocs/>} />
+          <Route path="numberbox" element={<NumberBoxDocs/>} />
           <Route path="progressbar" element={<ProgressBarDocs/>} />
           <Route path="radio_button" element={<RadioButtonDocs/>} />
           <Route path="selectbox" element={<SelectBoxDocs/>} />

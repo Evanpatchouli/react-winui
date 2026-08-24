@@ -6,6 +6,7 @@ import {
   ContextMenu,
   Flyout,
   InfoBar,
+  NumberBox,
   Popover,
   Toast,
   Toaster
@@ -15,6 +16,7 @@ import ComboBoxDirect from "@evanpatchouli/react-winui/combo-box";
 import ContextMenuDirect from "@evanpatchouli/react-winui/context-menu";
 import FlyoutDirect from "@evanpatchouli/react-winui/flyout";
 import InfoBarDirect from "@evanpatchouli/react-winui/info-bar";
+import NumberBoxDirect from "@evanpatchouli/react-winui/number-box";
 import PopoverDirect from "@evanpatchouli/react-winui/popover";
 import ToastDirect, { Toaster as ToasterDirect } from "@evanpatchouli/react-winui/toast";
 import { Shadows } from "@evanpatchouli/react-winui/theme";
@@ -60,6 +62,8 @@ const ConsumerApp = () => {
       </FlyoutDirect>
       <InfoBar open closable={false} message="Root InfoBar" />
       <InfoBarDirect open closable={false} message="InfoBar subpath" severity="success" />
+      <NumberBox aria-label="Root NumberBox" defaultValue={2} min={0} max={10} />
+      <NumberBoxDirect aria-label="NumberBox subpath" defaultValue={4} step={2} />
       <Toast duration={0} title="Root Toast" />
       <ToastDirect duration={0} title="Toast subpath" />
       <button

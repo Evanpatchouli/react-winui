@@ -22,6 +22,7 @@ import LoaderBar from "../../src/lib/src/components/Loaders/LoaderBar/index.tsx"
 import LoaderBusy from "../../src/lib/src/components/Loaders/LoaderBusy/index.tsx";
 import MenuBar from "../../src/lib/src/components/MenuBar/index.tsx";
 import ContextMenu from "../../src/lib/src/components/ContextMenu/index.tsx";
+import NumberBox from "../../src/lib/src/components/NumberBox/index.tsx";
 import NavBar from "../../src/lib/src/components/NavBar/NavBar/index.tsx";
 import NavBarLink from "../../src/lib/src/components/NavBar/NavBarLink/index.tsx";
 import NavBarSubMenu from "../../src/lib/src/components/NavBar/NavBarSubMenu/index.tsx";
@@ -86,6 +87,7 @@ function VisualFixture() {
   const [searchResult, setSearchResult] = useState("none");
   const [infoBarInstance, setInfoBarInstance] = useState(0);
   const [infoBarResult, setInfoBarResult] = useState("none");
+  const [numberBoxResult, setNumberBoxResult] = useState(4);
   const [toastResult, setToastResult] = useState("none");
   const [imageState, setImageState] = useState("loading");
   const [showSplash, setShowSplash] = useState(false);
@@ -720,6 +722,38 @@ function VisualFixture() {
             {" · "}
             Editable result:{" "}
             <output data-testid="combo-box-editable-result">{editableComboBoxResult}</output>
+          </p>
+        </Section>
+
+        <Section
+          caption="direct input · inline stepping · bounded values · light/dark"
+          eyebrow="numeric input"
+          testId="number-box-panel"
+          title="NumberBox"
+        >
+          <div className="visual-fixture-number-boxes">
+            <NumberBox
+              data-testid="number-box-default"
+              defaultValue={4}
+              label="Quantity"
+              max={10}
+              min={0}
+              onValueChange={(value) => setNumberBoxResult(value)}
+            />
+            <NumberBox
+              data-testid="number-box-decimal"
+              defaultValue={0.5}
+              label="Opacity"
+              max={1}
+              min={0}
+              precision={1}
+              step={0.1}
+            />
+            <NumberBox readOnly defaultValue={8} label="Read only" />
+            <NumberBox disabled defaultValue={12} label="Disabled" />
+          </div>
+          <p className="visual-fixture-status">
+            Committed quantity: <output data-testid="number-box-result">{numberBoxResult}</output>
           </p>
         </Section>
       </main>

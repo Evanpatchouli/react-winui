@@ -19,6 +19,7 @@ export { default as InputGroupDocs } from "./InputGroup_docs";
 export { default as LinkDocs } from "./Link_docs";
 export { default as LoadersDocs } from "./LoadersDocs";
 export { default as MenuBarDocs } from "./MenuBar_docs";
+export { default as NumberBoxDocs } from "./NumberBox_docs";
 export { default as NavBarDocs } from "./Navigation_docs/NavBar_docs";
 export { default as NavBarLinkDocs } from "./Navigation_docs/NavBarLink_docs";
 export { default as NavBarSubMenuDocs } from "./Navigation_docs/NavBarSubMenu_docs";

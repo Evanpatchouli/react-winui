@@ -105,6 +105,13 @@
     "showBadge": false
   },
   {
+    "to": "numberbox",
+    "exact": false,
+    "text": "NumberBox",
+    "icon": "icons10-calculator",
+    "showBadge": false
+  },
+  {
     "to": "progressbar",
     "exact": false,
     "text": "ProgressBar",
