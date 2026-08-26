@@ -128,8 +128,7 @@
 }
 
 .ui-navigation-view-control-button:hover,
-.ui-navigation-view-item-button:hover,
-.ui-navigation-view-item-disclosure:hover {
+.ui-navigation-view-item-row:hover {
   background: var(--rwu-color-surface-control-hover);
 }
 
@@ -317,7 +316,8 @@
 .ui-navigation-view-item.disabled .ui-navigation-view-item-button:hover,
 .ui-navigation-view-item.disabled .ui-navigation-view-item-button:active,
 .ui-navigation-view-item.disabled .ui-navigation-view-item-disclosure:hover,
-.ui-navigation-view-item.disabled .ui-navigation-view-item-disclosure:active {
+.ui-navigation-view-item.disabled .ui-navigation-view-item-disclosure:active,
+.ui-navigation-view-item.disabled > .ui-navigation-view-item-row:hover {
   background: transparent;
 }
 

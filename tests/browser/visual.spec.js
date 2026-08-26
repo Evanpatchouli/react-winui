@@ -8,6 +8,35 @@ const screenshotOptions = {
 
 const panel = (page, testId) => page.getByTestId(testId);
 
+const expectFloatingSurfaceScreenshot = async (page, locator, name, padding = 16) => {
+  await locator.evaluate((element) => {
+    for (const animation of element.getAnimations({ subtree: true })) {
+      animation.finish();
+    }
+  });
+
+  const bounds = await locator.boundingBox();
+  const viewport = page.viewportSize();
+
+  expect(bounds).not.toBeNull();
+  expect(viewport).not.toBeNull();
+
+  const left = Math.max(0, bounds.x - padding);
+  const top = Math.max(0, bounds.y - padding);
+  const right = Math.min(viewport.width, bounds.x + bounds.width + padding);
+  const bottom = Math.min(viewport.height, bounds.y + bounds.height + padding);
+
+  await expect(page).toHaveScreenshot(name, {
+    ...screenshotOptions,
+    clip: {
+      x: left,
+      y: top,
+      width: right - left,
+      height: bottom - top
+    }
+  });
+};
+
 test.beforeEach(async ({ page }) => {
   const defaultPropsWarnings = [];
   const consoleErrors = [];
@@ -188,7 +217,7 @@ test.describe("Public component visual baselines", () => {
         .getByRole("button", { name: "More commands" })
         .click();
       const lightMenu = page.getByRole("menu", { name: "More commands" });
-      await expect(lightMenu).toHaveScreenshot("command-bar-menu-light.png", screenshotOptions);
+      await expectFloatingSurfaceScreenshot(page, lightMenu, "command-bar-menu-light.png");
 
       await page.keyboard.press("Escape");
       await page.getByTestId("theme-dark").click();
@@ -196,9 +225,10 @@ test.describe("Public component visual baselines", () => {
         .getByRole("toolbar", { name: "Editor commands" })
         .getByRole("button", { name: "More commands" })
         .click();
-      await expect(page.getByRole("menu", { name: "More commands" })).toHaveScreenshot(
-        "command-bar-menu-dark.png",
-        screenshotOptions
+      await expectFloatingSurfaceScreenshot(
+        page,
+        page.getByRole("menu", { name: "More commands" }),
+        "command-bar-menu-dark.png"
       );
     });
   });
@@ -255,6 +285,25 @@ test.describe("Public component visual baselines", () => {
       await expect(toggle).toBeFocused();
     });
 
+    test("highlights the complete item row on hover", async ({ page }) => {
+      const navigation = page
+        .getByTestId("navigation-view-auto-host")
+        .getByRole("navigation", { name: "Workspace navigation" });
+      const itemButton = navigation.getByRole("button", { name: "Home" });
+      const itemRow = itemButton.locator("xpath=..");
+
+      await itemButton.hover();
+
+      const backgrounds = await itemRow.evaluate((element) => ({
+        row: getComputedStyle(element).backgroundColor,
+        button: getComputedStyle(element.querySelector(".ui-navigation-view-item-button"))
+          .backgroundColor
+      }));
+
+      expect(backgrounds.row).not.toBe("rgba(0, 0, 0, 0)");
+      expect(backgrounds.button).toBe("rgba(0, 0, 0, 0)");
+    });
+
     test("uses the minimal auto mode and light-dismisses at the mobile breakpoint", async ({
       page
     }) => {
@@ -303,7 +352,7 @@ test.describe("Public component visual baselines", () => {
 
       await expect(tooltip).toBeVisible();
       await expect(tooltip).toHaveText("Create a new document");
-      await expect(tooltip).toHaveScreenshot("tooltip-light.png", screenshotOptions);
+      await expectFloatingSurfaceScreenshot(page, tooltip, "tooltip-light.png");
     });
 
     test("captures the hover Tooltip surface in dark theme", async ({ page }) => {
@@ -313,7 +362,7 @@ test.describe("Public component visual baselines", () => {
       const tooltip = page.locator(".ui-tooltip-open");
       await expect(tooltip).toBeVisible();
       await expect(tooltip).toHaveText("Supplemental information");
-      await expect(tooltip).toHaveScreenshot("tooltip-dark.png", screenshotOptions);
+      await expectFloatingSurfaceScreenshot(page, tooltip, "tooltip-dark.png");
     });
 
     test("opens the Tooltip from keyboard focus", async ({ page }) => {
@@ -329,7 +378,7 @@ test.describe("Public component visual baselines", () => {
 
       await expect(popover).toBeVisible();
       await expect(popover).toHaveText(/Quick actions/);
-      await expect(popover).toHaveScreenshot("popover-light.png", screenshotOptions);
+      await expectFloatingSurfaceScreenshot(page, popover, "popover-light.png");
     });
 
     test("captures the dark Popover surface", async ({ page }) => {
@@ -338,7 +387,7 @@ test.describe("Public component visual baselines", () => {
 
       const popover = page.locator(".ui-popover-open").first();
       await expect(popover).toBeVisible();
-      await expect(popover).toHaveScreenshot("popover-dark.png", screenshotOptions);
+      await expectFloatingSurfaceScreenshot(page, popover, "popover-dark.png");
     });
 
     test("opens and dismisses the Flyout with click and Escape", async ({ page }) => {
@@ -348,7 +397,7 @@ test.describe("Public component visual baselines", () => {
 
       await page.getByRole("button", { name: "Flyout preview" }).click();
       await expect(flyout).toBeVisible();
-      await expect(flyout).toHaveScreenshot("flyout-open.png", screenshotOptions);
+      await expectFloatingSurfaceScreenshot(page, flyout, "flyout-open.png");
 
       await page.keyboard.press("Escape");
       await expect(flyout).toHaveCount(0);
@@ -360,9 +409,22 @@ test.describe("Public component visual baselines", () => {
       await page.getByRole("button", { name: "Show toast stack" }).click();
 
       const toaster = page.getByRole("region", { name: "Visual fixture notifications" });
-      await expect(toaster.getByRole("status")).toHaveCount(3);
+      const toasts = toaster.getByRole("status");
+      await expect(toasts).toHaveCount(3);
+      await expect(toasts.nth(0)).toHaveAttribute("data-stack-level", "2");
+      await expect(toasts.nth(1)).toHaveAttribute("data-stack-level", "1");
+      await expect(toasts.nth(2)).toHaveAttribute("data-stack-level", "0");
+
+      const toastBounds = await Promise.all(
+        [0, 1, 2].map((index) => toasts.nth(index).boundingBox())
+      );
+      expect(toastBounds.every(Boolean)).toBe(true);
+      expect(toastBounds[0].x).toBeLessThan(toastBounds[1].x);
+      expect(toastBounds[1].x).toBeLessThan(toastBounds[2].x);
+      expect(toastBounds[0].y).toBeLessThan(toastBounds[1].y);
+      expect(toastBounds[1].y).toBeLessThan(toastBounds[2].y);
       await expect(toaster.getByText("Queued notification")).toHaveCount(0);
-      await expect(toaster).toHaveScreenshot("toast-stack-light.png", screenshotOptions);
+      await expectFloatingSurfaceScreenshot(page, toaster, "toast-stack-light.png", 32);
     });
 
     test("captures the same stack through dark theme tokens", async ({ page }) => {
@@ -370,8 +432,12 @@ test.describe("Public component visual baselines", () => {
       await page.getByRole("button", { name: "Show toast stack" }).click();
 
       const toaster = page.getByRole("region", { name: "Visual fixture notifications" });
-      await expect(toaster.getByRole("status")).toHaveCount(3);
-      await expect(toaster).toHaveScreenshot("toast-stack-dark.png", screenshotOptions);
+      const toasts = toaster.getByRole("status");
+      await expect(toasts).toHaveCount(3);
+      await expect(toasts.nth(0)).toHaveAttribute("data-stack-level", "2");
+      await expect(toasts.nth(1)).toHaveAttribute("data-stack-level", "1");
+      await expect(toasts.nth(2)).toHaveAttribute("data-stack-level", "0");
+      await expectFloatingSurfaceScreenshot(page, toaster, "toast-stack-dark.png", 32);
     });
 
     test("dismisses the focused Toast with Escape and promotes the queue", async ({ page }) => {
@@ -563,7 +629,7 @@ test.describe("Public component visual baselines", () => {
       await expect(
         contextMenu.getByRole("menuitem", { name: "Paste unavailable" })
       ).toHaveAttribute("aria-disabled", "true");
-      await expect(contextMenu).toHaveScreenshot("context-menu-light.png", screenshotOptions);
+      await expectFloatingSurfaceScreenshot(page, contextMenu, "context-menu-light.png");
     });
 
     test("captures the dark surface", async ({ page }) => {
@@ -572,7 +638,7 @@ test.describe("Public component visual baselines", () => {
 
       const contextMenu = page.locator(".ui-context-menu");
       await expect(contextMenu).toBeVisible();
-      await expect(contextMenu).toHaveScreenshot("context-menu-dark.png", screenshotOptions);
+      await expectFloatingSurfaceScreenshot(page, contextMenu, "context-menu-dark.png");
     });
 
     test("opens with Shift+F10 and restores focus after Escape", async ({ page }) => {
@@ -648,6 +714,117 @@ test.describe("Public component visual baselines", () => {
       );
     });
 
+    test("keeps the input stable and signals action hover without a hand cursor", async ({ page }) => {
+      const autoSuggestBox = page.getByTestId("auto-suggest-box-interactive");
+      const before = await autoSuggestBox.evaluate((element) => {
+        const style = getComputedStyle(element);
+        return {
+          backgroundColor: style.backgroundColor,
+          filter: style.filter,
+          opacity: style.opacity,
+          cursor: style.cursor
+        };
+      });
+
+      await autoSuggestBox.hover();
+
+      const after = await autoSuggestBox.evaluate((element) => {
+        const style = getComputedStyle(element);
+        return {
+          backgroundColor: style.backgroundColor,
+          filter: style.filter,
+          opacity: style.opacity,
+          cursor: style.cursor
+        };
+      });
+
+      expect(after).toEqual(before);
+
+      await autoSuggestBox.focus();
+
+      const focused = await autoSuggestBox.evaluate((element) => {
+        const style = getComputedStyle(element);
+        return {
+          backgroundColor: style.backgroundColor,
+          filter: style.filter,
+          opacity: style.opacity,
+          cursor: style.cursor
+        };
+      });
+
+      await autoSuggestBox.hover();
+
+      const focusedAfterHover = await autoSuggestBox.evaluate((element) => {
+        const style = getComputedStyle(element);
+        return {
+          backgroundColor: style.backgroundColor,
+          filter: style.filter,
+          opacity: style.opacity,
+          cursor: style.cursor
+        };
+      });
+
+      expect(focusedAfterHover).toEqual(focused);
+
+      const control = autoSuggestBox.locator("xpath=..");
+      for (const action of [
+        control.getByRole("button", { name: "Clear text" }),
+        control.getByRole("button", { name: "Submit query" })
+      ]) {
+        const actionBefore = await action.evaluate((element) => {
+          const style = getComputedStyle(element);
+          return {
+            backgroundColor: style.backgroundColor,
+            filter: style.filter,
+            opacity: style.opacity,
+            cursor: style.cursor
+          };
+        });
+
+        await action.hover();
+
+        const actionAfter = await action.evaluate((element) => {
+          const style = getComputedStyle(element);
+          return {
+            backgroundColor: style.backgroundColor,
+            filter: style.filter,
+            opacity: style.opacity,
+            cursor: style.cursor
+          };
+        });
+
+        expect(actionAfter.backgroundColor).not.toBe(actionBefore.backgroundColor);
+        expect(actionAfter.filter).toBe("none");
+        expect(actionAfter.opacity).toBe("1");
+        expect(actionBefore.cursor).toBe("default");
+        expect(actionAfter.cursor).toBe("default");
+      }
+    });
+
+    test("matches InputText focus underline treatment", async ({ page }) => {
+      const autoSuggestBox = page.getByTestId("auto-suggest-box-interactive");
+      const inputText = page.getByTestId("input-text-loading");
+
+      const readUnderlineStyle = async (locator) =>
+        locator.evaluate((element) => {
+          const style = getComputedStyle(element);
+          return {
+            backgroundImage: style.backgroundImage,
+            backgroundPositionY: style.backgroundPositionY,
+            backgroundRepeat: style.backgroundRepeat,
+            backgroundSize: style.backgroundSize
+          };
+        });
+
+      await autoSuggestBox.focus();
+      const autoSuggestUnderline = await readUnderlineStyle(autoSuggestBox);
+
+      await inputText.focus();
+      const inputTextUnderline = await readUnderlineStyle(inputText);
+
+      expect(autoSuggestUnderline).toEqual(inputTextUnderline);
+    });
+
     test("uses a real top fallback near the viewport edge", async ({ page }) => {
       await page.setViewportSize({ width: 360, height: 480 });
       const autoSuggestBox = page.getByTestId("auto-suggest-box-viewport");
@@ -678,10 +855,7 @@ test.describe("Public component visual baselines", () => {
       const listbox = page.getByRole("listbox", { name: "Topic suggestions" });
 
       await expect(listbox).toBeVisible();
-      await expect(listbox).toHaveScreenshot(
-        "auto-suggest-box-listbox-light.png",
-        screenshotOptions
-      );
+      await expectFloatingSurfaceScreenshot(page, listbox, "auto-suggest-box-listbox-light.png");
     });
 
     test("captures the dark suggestion surface", async ({ page }) => {
@@ -690,10 +864,7 @@ test.describe("Public component visual baselines", () => {
       const listbox = page.getByRole("listbox", { name: "Topic suggestions" });
 
       await expect(listbox).toBeVisible();
-      await expect(listbox).toHaveScreenshot(
-        "auto-suggest-box-listbox-dark.png",
-        screenshotOptions
-      );
+      await expectFloatingSurfaceScreenshot(page, listbox, "auto-suggest-box-listbox-dark.png");
     });
   });
 
@@ -769,7 +940,7 @@ test.describe("Public component visual baselines", () => {
         const rect = element.getBoundingClientRect();
         window.scrollBy(0, rect.bottom - window.innerHeight + 6);
       });
-      await combobox.click();
+      await combobox.evaluate((element) => element.click());
 
       const listbox = page.getByRole("listbox", { name: "Viewport options" });
       await expect(listbox).toHaveAttribute("data-placement", "top");
@@ -780,12 +951,41 @@ test.describe("Public component visual baselines", () => {
       expect(listboxBounds.y + listboxBounds.height).toBeLessThanOrEqual(comboBoxBounds.y);
     });
 
+    test("reuses the Select chevron geometry", async ({ page }) => {
+      const selectChevron = page.getByTestId("select-control").locator(".ui-menu-title");
+      const chevrons = page.locator(".ui-combobox-chevron, .ui-number-box-chevron");
+
+      await expect(chevrons).not.toHaveCount(0);
+
+      const selectStyle = await selectChevron.evaluate((element) => {
+        const style = getComputedStyle(element);
+        return {
+          backgroundImage: style.backgroundImage,
+          backgroundRepeat: style.backgroundRepeat,
+          backgroundSize: style.backgroundSize
+        };
+      });
+
+      const chevronStyles = await chevrons.evaluateAll((elements) =>
+        elements.map((element) => {
+          const style = getComputedStyle(element);
+          return {
+            backgroundImage: style.backgroundImage,
+            backgroundRepeat: style.backgroundRepeat,
+            backgroundSize: style.backgroundSize
+          };
+        })
+      );
+
+      expect(chevronStyles).toEqual(chevronStyles.map(() => selectStyle));
+    });
+
     test("captures the light listbox surface", async ({ page }) => {
       await page.getByTestId("combo-box-select-only").click();
       const listbox = page.getByRole("listbox", { name: "Platform options" });
 
       await expect(listbox).toBeVisible();
-      await expect(listbox).toHaveScreenshot("combo-box-listbox-light.png", screenshotOptions);
+      await expectFloatingSurfaceScreenshot(page, listbox, "combo-box-listbox-light.png");
     });
 
     test("captures the dark listbox surface", async ({ page }) => {
@@ -794,7 +994,7 @@ test.describe("Public component visual baselines", () => {
       const listbox = page.getByRole("listbox", { name: "Platform options" });
 
       await expect(listbox).toBeVisible();
-      await expect(listbox).toHaveScreenshot("combo-box-listbox-dark.png", screenshotOptions);
+      await expectFloatingSurfaceScreenshot(page, listbox, "combo-box-listbox-dark.png");
     });
   });
 
@@ -922,6 +1122,36 @@ test.describe("Public component visual baselines", () => {
       await expect(disabledCard).toHaveAttribute("inert", "");
       await expect(disabledCard.locator(".ui-settings-card-trigger")).toBeDisabled();
       await expect(disabledCard.locator(".ui-settings-card-action button")).toBeDisabled();
+    });
+
+    test("uses the quiet card elevation token", async ({ page }) => {
+      const card = page.getByTestId("settings-card-static");
+      const shadow = await card.evaluate((element) => ({
+        computed: getComputedStyle(element).boxShadow,
+        token: getComputedStyle(document.documentElement)
+          .getPropertyValue("--rwu-shadow-card")
+          .trim()
+      }));
+
+      expect(shadow.token).toBe("0 1px 2px rgba(0, 0, 0, 0.06), 0 4px 8px rgba(0, 0, 0, 0.04)");
+      expect(shadow.computed).toContain("0px 4px 8px");
+    });
+
+    test("shares the card elevation with InfoBar and SettingsExpander", async ({ page }) => {
+      const surfaces = [
+        page.getByTestId("settings-card-static"),
+        page.getByTestId("info-bar-informational"),
+        page.getByTestId("settings-expander-uncontrolled")
+      ];
+      const readShadows = () =>
+        Promise.all(surfaces.map((surface) => surface.evaluate((element) => getComputedStyle(element).boxShadow)));
+
+      const lightShadows = await readShadows();
+      expect(new Set(lightShadows).size).toBe(1);
+
+      await page.getByTestId("theme-dark").click();
+      const darkShadows = await readShadows();
+      expect(new Set(darkShadows).size).toBe(1);
     });
 
     test("captures the light and dark SettingsCard stack", async ({ page }) => {

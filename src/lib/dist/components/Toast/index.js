@@ -2,7 +2,7 @@ import { createElement as e, forwardRef as t, useCallback as n, useEffect as r, 
 import { jsx as s, jsxs as c } from "react/jsx-runtime";
 import { createPortal as l } from "react-dom";
 //#region src/components/Toast/index.tsx
-var u = 5e3, d = 0, f = () => (d += 1, `rwu-toast-${d}`), p = t(({ action: e, className: t, closable: n = !0, closeLabel: i = "Dismiss notification", defaultOpen: l = !0, duration: d = u, icon: f, intent: p = "info", message: m, onBlur: h, onFocus: g, onKeyDown: _, onOpenChange: v, onPointerEnter: y, onPointerLeave: b, open: x, pauseOnInteraction: S = !0, persistent: C = !1, politeness: w = "polite", title: T, ...E }, D) => {
+var u = 5e3, d = 8, f = 0, p = () => (f += 1, `rwu-toast-${f}`), m = t(({ action: e, className: t, closable: n = !0, closeLabel: i = "Dismiss notification", defaultOpen: l = !0, duration: d = u, icon: f, intent: p = "info", message: m, onBlur: h, onFocus: g, onKeyDown: _, onOpenChange: v, onPointerEnter: y, onPointerLeave: b, open: x, pauseOnInteraction: S = !0, persistent: C = !1, politeness: w = "polite", title: T, ...E }, D) => {
 	let [O, k] = o(l), A = a(null), j = a(0), M = a(Math.max(0, d)), N = a(!1), P = a(!1), F = a(() => void 0), I = x !== void 0, L = I ? x : O, R = () => {
 		A.current !== null && (clearTimeout(A.current), A.current = null);
 	}, z = (e, t) => {
@@ -102,60 +102,65 @@ var u = 5e3, d = 0, f = () => (d += 1, `rwu-toast-${d}`), p = t(({ action: e, cl
 		}) : null]
 	});
 });
-p.displayName = "Toast";
-var m = t(({ className: t, defaultDuration: c = u, label: d = "Notifications", maxVisible: m = 3, mountNode: h, pauseOnInteraction: g = !0, position: _ = "bottom-end", ...v }, y) => {
-	let [b, x] = o([]), [S, C] = o(null), w = a([]), T = n((e) => {
-		w.current = e, x(e);
-	}, []), E = n((e) => {
-		let t = e.id ?? f(), n = {
+m.displayName = "Toast";
+var h = t(({ className: t, defaultDuration: c = u, label: f = "Notifications", maxVisible: h = 3, mountNode: g, pauseOnInteraction: _ = !0, position: v = "bottom-end", ...y }, b) => {
+	let [x, S] = o([]), [C, w] = o(null), T = a([]), E = n((e) => {
+		T.current = e, S(e);
+	}, []), D = n((e) => {
+		let t = e.id ?? p(), n = {
 			...e,
 			id: t
-		}, r = w.current.findIndex((e) => e.id === t), i = [...w.current];
-		return r >= 0 ? i[r] = n : i.push(n), T(i), t;
-	}, [T]), D = n((e) => {
-		let t = w.current.find((t) => t.id === e);
-		if (t) return T(w.current.filter((t) => t.id !== e)), t;
-	}, [T]), O = n((e) => {
-		D(e)?.onOpenChange?.(!1, { reason: "programmatic" });
-	}, [D]), k = n(() => {
-		let e = w.current;
-		e.length !== 0 && (T([]), e.forEach((e) => {
+		}, r = T.current.findIndex((e) => e.id === t), i = [...T.current];
+		return r >= 0 ? i[r] = n : i.push(n), E(i), t;
+	}, [E]), O = n((e) => {
+		let t = T.current.find((t) => t.id === e);
+		if (t) return E(T.current.filter((t) => t.id !== e)), t;
+	}, [E]), k = n((e) => {
+		O(e)?.onOpenChange?.(!1, { reason: "programmatic" });
+	}, [O]), A = n(() => {
+		let e = T.current;
+		e.length !== 0 && (E([]), e.forEach((e) => {
 			e.onOpenChange?.(!1, { reason: "programmatic" });
 		}));
-	}, [T]);
-	i(y, () => ({
-		dismiss: O,
-		dismissAll: k,
-		show: E
+	}, [E]);
+	i(b, () => ({
+		dismiss: k,
+		dismissAll: A,
+		show: D
 	}), [
-		O,
 		k,
-		E
+		A,
+		D
 	]), r(() => {
-		C(typeof document > "u" ? null : document.body);
+		w(typeof document > "u" ? null : document.body);
 	}, []);
-	let A = Number.isFinite(m) ? Math.max(1, Math.floor(m)) : 3, j = b.slice(0, A), M = ["ui-toaster", t].filter(Boolean).join(" "), N = /* @__PURE__ */ s("div", {
-		...v,
-		"aria-label": d,
-		className: M,
-		"data-position": _,
+	let j = Number.isFinite(h) ? Math.max(1, Math.floor(h)) : 3, M = x.slice(0, j), N = ["ui-toaster", t].filter(Boolean).join(" "), P = /* @__PURE__ */ s("div", {
+		...y,
+		"aria-label": f,
+		className: N,
+		"data-position": v,
 		role: "region",
-		children: j.map((t) => {
-			let { id: n, onOpenChange: r, ...i } = t;
-			return /* @__PURE__ */ e(p, {
-				...i,
-				key: n,
-				"data-toast-id": n,
+		children: M.map((t, n) => {
+			let { id: r, onOpenChange: i, ...a } = t, o = M.length - 1 - n, s = {
+				...t.style,
+				"--ui-toast-stack-offset": `${o * d}px`
+			};
+			return /* @__PURE__ */ e(m, {
+				...a,
+				key: r,
+				"data-toast-id": r,
+				"data-stack-level": o,
 				duration: t.duration ?? c,
 				onOpenChange: (e, t) => {
-					e || D(n), r?.(e, t);
+					e || O(r), i?.(e, t);
 				},
-				pauseOnInteraction: t.pauseOnInteraction ?? g
+				pauseOnInteraction: t.pauseOnInteraction ?? _,
+				style: s
 			});
 		})
-	}), P = h ?? S;
-	return P ? l(N, P) : null;
+	}), F = g ?? C;
+	return F ? l(P, F) : null;
 });
-m.displayName = "Toaster";
+h.displayName = "Toaster";
 //#endregion
-export { p as Toast, p as default, m as Toaster };
+export { m as Toast, m as default, h as Toaster };

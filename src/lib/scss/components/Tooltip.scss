@@ -11,11 +11,11 @@
   padding: var(--rwu-spacing-sm) var(--rwu-spacing-lg);
   position: fixed;
   z-index: 1000;
-  border: 1px solid var(--rwu-color-border-divider);
+  border: 1px solid var(--rwu-color-border-flyout);
   border-radius: var(--rwu-radius-small);
   color: var(--rwu-color-text-primary);
   background: var(--rwu-color-surface-flyout);
-  box-shadow: var(--rwu-shadow-8);
+  box-shadow: var(--rwu-shadow-overlay);
   font: inherit;
   font-size: var(--rwu-font-size-control);
   line-height: 1.35;
@@ -40,7 +40,7 @@
   width: 8px;
   height: 8px;
   position: absolute;
-  border: 1px solid var(--rwu-color-border-divider);
+  border: 1px solid var(--rwu-color-border-flyout);
   background: var(--rwu-color-surface-flyout);
   transform: rotate(45deg);
 }

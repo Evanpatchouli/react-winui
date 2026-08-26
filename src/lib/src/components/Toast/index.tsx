@@ -153,6 +153,7 @@ export interface ToasterProps extends Omit<
 }
 
 const DEFAULT_DURATION = 5000;
+const TOAST_STACK_OFFSET = 8;
 
 let toastIdSequence = 0;
 
@@ -487,14 +488,20 @@ export const Toaster = forwardRef<ToasterHandle, ToasterProps>(
         data-position={position}
         role="region"
       >
-        {visibleToasts.map((toast) => {
+        {visibleToasts.map((toast, index) => {
           const { id, onOpenChange: onToastOpenChange, ...toastProps } = toast;
+          const stackLevel = visibleToasts.length - 1 - index;
+          const toastStyle = {
+            ...toast.style,
+            "--ui-toast-stack-offset": `${stackLevel * TOAST_STACK_OFFSET}px`
+          } as CSSProperties;
 
           return (
             <Toast
               {...toastProps}
               key={id}
               data-toast-id={id}
+              data-stack-level={stackLevel}
               duration={toast.duration ?? defaultDuration}
               onOpenChange={(open, data) => {
                 if (!open) {
@@ -503,6 +510,7 @@ export const Toaster = forwardRef<ToasterHandle, ToasterProps>(
                 onToastOpenChange?.(open, data);
               }}
               pauseOnInteraction={toast.pauseOnInteraction ?? pauseOnInteraction}
+              style={toastStyle}
             />
           );
         })}

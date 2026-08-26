@@ -365,3 +365,93 @@
 - `NavigationView` 支持 WinUI 左侧 `expanded`、`compact`、`minimal`、`auto` pane、共享选择模型、nested items、footer/settings、overlay/light-dismiss、Back 与键盘焦点；当前不实现 Top pane 模式，详见 `docs/navigation-view.md`。
 - 最终主线验证：`pnpm lint`、`pnpm typecheck`、`pnpm test`（16 files / 175 tests）、`pnpm build`、`pnpm test:consumer`、`pnpm test:browser`（98/98）和 `pnpm --dir src/lib pack --dry-run` 全部通过。
 - 归档详见 `.agents/archive/2026-08-24-phase7-p1.md`；已知遗留为历史 Windows CRLF 导致全仓 format check 噪声与 docs 大 chunk warning，均不影响构建/测试/发布包。
+
+# 2026-08-24：P0/P1 浮层视觉收敛
+
+- 用户确认以 `C:\Users\31250\Pictures\pop-layer.png` 的 Windows 11 浮层质感为参考；已完成 Tooltip、Popover、Flyout、ContextMenu，以及 CommandBar 溢出菜单、ComboBox/AutoSuggestBox 列表、Toast 的独立浮层阴影接入。
+- 新增 `--rwu-color-border-flyout`、`--rwu-shadow-overlay`、`--rwu-shadow-overlay-nested` 及 `Shadows.overlay/overlayNested`；旧 `--rwu-shadow-flyout` 保持不变以保护旧 MenuBar/Select。
+- 更新 `docs/design-system.md`、Sass CSS dist、theme dist 与相关 overlay snapshots；浮层截图 helper 保留外侧阴影并结束入口动画。P1 visual fixture 改用已有 icon font，更新真实受影响的 NavBar 基线。
+- ComboBox 顶部 fallback 测试改用 DOM click，避免 Playwright 自动滚动破坏预设边缘几何；这是测试稳定性修正，不是组件 API 变更。
+- 验证通过：`pnpm lint`、`pnpm typecheck`、`pnpm test`（16 files / 175 tests）、`pnpm build`、`pnpm test:browser`（98/98）；docs build 仍有既有大 chunk warning。
+- 当前任务已完成；后续等待用户指定是否继续做具体 P0/P1 组件的逐项视觉校正，不自动进入新组件或大规模重设计。
+
+# 2026-08-24：P1 控件 hover/箭头微调
+
+- `src/lib/scss/components/ComboBox.scss` 与 `NumberBox.scss` 的 CSS chevron 改为 1px 细描边，视觉上与 `Select` 对齐。
+- `src/lib/scss/components/NavigationView.scss` 将普通 item hover 背景提升至整行；selected/indicated 和 disabled item 的优先级保持不变。
+- `tests/browser/visual.spec.js` 新增整行 hover 与 chevron stroke 回归断言；NumberBox light/dark 快照已更新。
+- `AutoSuggestBox` 的 hover 不变灰约束保持有效。
+- 验证通过：`pnpm lint`、`pnpm typecheck`、`pnpm test`（16 files / 175 tests）、`pnpm build`、`pnpm test:browser`（101/101）。docs build 仅保留既有大 chunk warning。
+- 当前任务已完成，等待用户下一项具体视觉校正。
+
+# 2026-08-26：Toast 多条通知窗口式叠放
+
+- `src/lib/src/components/Toast/index.tsx` 为可见 Toast 计算 stack level，最新条目为前景；`src/lib/scss/components/Toast.scss` 将 Toaster 改为共享网格层叠，并按四种 position 镜像 8px 偏移。
+- `tests/browser/visual.spec.js` 新增层级与 bounding-box 顺序断言；`toast-stack-light/dark` 快照已更新，截图留白扩展到 32px 以保护后层边缘与阴影。
+- 验证：`pnpm lint`、`pnpm typecheck`、`pnpm test`（16 files / 175 tests）、`pnpm build`、完整 `pnpm test:browser`（104/104）。docs build 仍有既有大 chunk warning。
+- 未解决事项：无；等待下一项用户指定的视觉校正。
+
+# 2026-08-26：InfoBar / SettingsExpander 阴影样式
+
+- `src/lib/scss/components/InfoBar.scss:13` 与 `src/lib/scss/components/SettingsExpander.scss:9` 现在使用 `var(--rwu-shadow-card)`，与 `SettingsCard` 根容器一致。
+- `tests/browser/visual.spec.js` 新增 Light/Dark computed shadow 一致性回归；InfoBar、SettingsExpander 的既有 Light/Dark/响应式快照通过显式更新流程检查，无需产生快照变更。
+- 验证：`pnpm lint`、`pnpm typecheck`、`pnpm test`（16 files / 175 tests）、`pnpm build`、`pnpm test:browser`（104/104）。docs build 仍有既有大 chunk warning。
+- 未解决事项：无；等待下一项用户指定的视觉校正。
+
+# 2026-08-26：ComboBox / NumberBox 箭头样式
+
+- 新增 `src/lib/scss/components/_base/_select-chevron.scss`，集中维护 Select 的 14px Light/Dark SVG 箭头资源。
+- `src/lib/scss/components/Select.scss`、`ComboBox.scss`、`NumberBox.scss` 均接入共享 mixin；ComboBox 展开态、NumberBox 增量态用 `rotate(180deg)` 切换方向，移除旧的 CSS border chevron 描边规则。
+- `tests/browser/visual.spec.js` 将旧的 border 宽度断言替换为 Select/ComboBox/NumberBox 实际背景资源一致性断言；NumberBox Light/Dark 快照保持不变。
+- 验证：`pnpm lint`、`pnpm typecheck`、`pnpm test`（16 files / 175 tests）、`pnpm build`、`pnpm test:browser`（103/103）。docs build 仍有既有大 chunk warning。
+- 未解决事项：无；等待下一项用户指定的视觉校正。
+
+# 2026-08-24：SettingsCard 阴影与 AutoSuggestBox hover 修正
+
+- `SettingsCard` 改用新增的 `--rwu-shadow-card`，light/dark theme 均有对应的柔和阴影；新增 `Shadows.card` 导出和设计系统 token 文档。
+- `AutoSuggestBox` 输入框、Clear、Submit hover 均保持原 surface，不再受到全局按钮 `brightness/opacity` 灰化；active 状态未移除。
+- `tests/browser/visual.spec.js` 扩展 hover 与 card shadow 回归，覆盖 input、两个内部动作按钮和 `--rwu-shadow-card` 计算值；SettingsCard light/dark 快照已复核，像素差低于更新阈值因此保持原基线字节。
+- 验证通过：`pnpm lint`、`pnpm typecheck`、`pnpm test`（16 files / 175 tests）、`pnpm build`、`pnpm test:browser`（101/101）。docs build 仅保留既有大 chunk warning。
+- 当前任务已完成，等待用户下一项具体视觉校正。
+
+# 2026-08-26：AutoSuggestBox 聚焦 Hover 修正
+
+- `src/lib/scss/components/AutoSuggestBox.scss` 将输入框 Hover 选择器从排除 `:focus` 改为仅排除 `:disabled`，修复已聚焦输入框在鼠标 Hover 时仍被 `.input-btn-default:hover` 的 `brightness/opacity` 灰化的问题；没有改变 DOM、Props 或 active 状态。
+- `tests/browser/visual.spec.js` 在现有 AutoSuggestBox hover 回归中增加 focus 后再次 Hover 的 computed-style 对比，锁定背景、滤镜与透明度保持不变。
+- 验证通过：`pnpm lint`、`pnpm typecheck`、`pnpm test`（16 files / 175 tests）、`pnpm build`、AutoSuggestBox 浏览器用例（6/6）与完整 `pnpm test:browser`（102/102）。docs build 仅保留既有大 chunk warning；首次完整回归的一次 `gallery-ready` 初始化超时已通过单测重跑及随后完整复验排除为代码问题。
+- 当前任务已完成，等待用户下一项具体视觉校正。
+
+# 2026-08-26：AutoSuggestBox cursor 语义修正
+
+- `src/lib/scss/components/AutoSuggestBox.scss` 为输入框增加 `cursor: text`，覆盖 `.input-btn-default` 的默认手型；Clear / Submit 继续使用 `cursor: pointer`，disabled 仍为 `not-allowed`。
+- `tests/browser/visual.spec.js` 扩展 AutoSuggestBox hover 回归，断言输入框及两个内部按钮的 computed cursor，同时继续覆盖未聚焦/聚焦 Hover 的 surface 状态。
+- 验证通过：`pnpm lint`、`pnpm typecheck`、`pnpm test`（16 files / 175 tests）、`pnpm build`、AutoSuggestBox 浏览器用例（6/6）。docs build 仅保留既有大 chunk warning。
+- 当前任务已完成，等待用户下一项具体视觉校正。
+
+# 2026-08-26：AutoSuggestBox focus underline 对齐
+
+- `src/lib/scss/components/AutoSuggestBox.scss` 的 `:focus-visible` 现在同时绘制 InputText 同款 accent border 与 1px bottom background gradient，修复聚焦时底部蓝线偏细；不改变控件高度、DOM、Props 或 API。
+- `tests/browser/main.jsx` 为现有 Loading InputText fixture 增加测试定位属性；`tests/browser/visual.spec.js` 新增 computed underline style 对比，覆盖 AutoSuggestBox 与 InputText。
+- 验证通过：`pnpm lint`、`pnpm typecheck`、`pnpm test`（16 files / 175 tests）、`pnpm build`、AutoSuggestBox 浏览器用例（7/7）与完整 `pnpm test:browser`（103/103）。docs build 仅保留既有大 chunk warning。
+- 当前任务已完成，等待用户下一项具体视觉校正。
+
+# 2026-08-26：文档导航图标语义校正
+
+- `src/demo/v1.0.0/navbar_items.json` 已完成四项映射：NumberBox → `icons10-unfold`，Popover / Flyout → `icons10-chat`，Tooltip → `icons10-info`，Toast → `icons10-bell`。
+- 已在本地文档站实际截图确认：NumberBox 不再使用不明确的计算器字形，三个浮层条目不再共用同一通知气泡；四个新 class 均来自现有 `winui-icons.min.css`，没有新增 Google Font 依赖。
+- 验证：`pnpm lint`、`pnpm typecheck`、`pnpm test`（16 files / 175 tests）、`pnpm build`、完整 `pnpm test:browser`（104/104）。docs build 仍有既有大 chunk warning。
+- 未解决事项：无；等待下一项用户指定的视觉校正。
+
+# 2026-08-26：AutoSuggestBox 内部按钮 cursor 修正
+
+- `src/lib/scss/components/AutoSuggestBox.scss` 将 Clear / Submit 内部按钮启用状态从 `cursor: pointer` 调整为 `cursor: default`；输入框仍为 `cursor: text`，disabled 仍为 `not-allowed`。
+- `tests/browser/visual.spec.js` 将两个内部按钮的 computed cursor 回归断言更新为 `default`，其他 hover、focus underline、点击和提交行为保持不变。
+- 验证通过：`pnpm lint`、`pnpm typecheck`、`pnpm test`（16 files / 175 tests）、`pnpm build`、AutoSuggestBox 浏览器用例（7/7）与完整 `pnpm test:browser`（103/103）。docs build 仅保留既有大 chunk warning。
+- 当前任务已完成，等待用户下一项具体视觉校正。
+
+# 2026-08-26：AutoSuggestBox 内部按钮 Hover feedback
+
+- `src/lib/scss/components/AutoSuggestBox.scss` 为 Clear / Submit 的启用 Hover 使用 `var(--rwu-color-surface-control-hover)`；默认透明、pressed surface 和 disabled `not-allowed` 保持不变，cursor 仍为 `default`。
+- `tests/browser/visual.spec.js` 将动作按钮回归更新为断言 Hover 背景发生变化，同时保持普通箭头、无滤镜和完整不透明度；输入框 Hover 继续保持稳定。
+- 验证通过：`pnpm lint`、`pnpm typecheck`、`pnpm test`（16 files / 175 tests）、`pnpm build`、AutoSuggestBox 浏览器用例（7/7）与完整 `pnpm test:browser`（103/103）。docs build 仅保留既有大 chunk warning。
+- 当前任务已完成，等待用户下一项具体视觉校正。

@@ -48,6 +48,7 @@
     --rwu-color-border-input-strong: var(--color-input-border-strong);
     --rwu-color-border-dialog: var(--color-foreground-dark);
     --rwu-color-border-divider: var(--color-ui-border-default);
+    --rwu-color-border-flyout: var(--color-ui-border-default);
     --rwu-color-shadow-ambient: rgba(0, 0, 0, 0.12);
     --rwu-color-shadow-key: rgba(0, 0, 0, 0.14);
     --rwu-color-hover-strong: var(--color-ui-hover-strong);
@@ -78,24 +79,21 @@
 
     // Elevation: Fluent UI-style semantic shadow scale
     --rwu-shadow-none: none;
-    --rwu-shadow-2:
-      0 0 2px var(--rwu-color-shadow-ambient),
-      0 1px 2px var(--rwu-color-shadow-key);
-    --rwu-shadow-4:
-      0 0 2px var(--rwu-color-shadow-ambient),
-      0 2px 4px var(--rwu-color-shadow-key);
-    --rwu-shadow-8:
-      0 0 2px var(--rwu-color-shadow-ambient),
-      0 4px 8px var(--rwu-color-shadow-key);
+    --rwu-shadow-2: 0 0 2px var(--rwu-color-shadow-ambient), 0 1px 2px var(--rwu-color-shadow-key);
+    --rwu-shadow-4: 0 0 2px var(--rwu-color-shadow-ambient), 0 2px 4px var(--rwu-color-shadow-key);
+    --rwu-shadow-8: 0 0 2px var(--rwu-color-shadow-ambient), 0 4px 8px var(--rwu-color-shadow-key);
     --rwu-shadow-16:
-      0 0 2px var(--rwu-color-shadow-ambient),
-      0 8px 16px var(--rwu-color-shadow-key);
+      0 0 2px var(--rwu-color-shadow-ambient), 0 8px 16px var(--rwu-color-shadow-key);
     --rwu-shadow-28:
-      0 0 8px var(--rwu-color-shadow-ambient),
-      0 14px 28px var(--rwu-color-shadow-key);
+      0 0 8px var(--rwu-color-shadow-ambient), 0 14px 28px var(--rwu-color-shadow-key);
     --rwu-shadow-64:
-      0 0 8px var(--rwu-color-shadow-ambient),
-      0 32px 64px var(--rwu-color-shadow-key);
+      0 0 8px var(--rwu-color-shadow-ambient), 0 32px 64px var(--rwu-color-shadow-key);
+    // Floating surfaces use a broad, low-contrast ambient shadow with a
+    // smaller contact shadow. Keep this separate from the legacy flyout
+    // shadow so existing MenuBar and Select visuals remain unchanged.
+    --rwu-shadow-overlay: 0 1px 2px rgba(0, 0, 0, 0.08), 0 8px 24px rgba(0, 0, 0, 0.1);
+    --rwu-shadow-overlay-nested: 0 1px 2px rgba(0, 0, 0, 0.08), 0 4px 14px rgba(0, 0, 0, 0.1);
+    --rwu-shadow-card: 0 1px 2px rgba(0, 0, 0, 0.06), 0 4px 8px rgba(0, 0, 0, 0.04);
     --rwu-shadow-flyout: 0 2px 5px #22222244;
     --rwu-shadow-flyout-nested: 2px 2px 5px #22222244;
     --rwu-shadow-dialog: 0 0 7vh rgba(0, 0, 0, 0.25);
@@ -109,5 +107,11 @@
     --rwu-duration-slow: 0.4s;
     --rwu-duration-dropdown: 0.367s;
     --rwu-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  [data-theme="dark"] {
+    --rwu-shadow-overlay: 0 1px 2px rgba(0, 0, 0, 0.24), 0 8px 24px rgba(0, 0, 0, 0.34);
+    --rwu-shadow-overlay-nested: 0 1px 2px rgba(0, 0, 0, 0.24), 0 4px 14px rgba(0, 0, 0, 0.3);
+    --rwu-shadow-card: 0 1px 2px rgba(0, 0, 0, 0.24), 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 }

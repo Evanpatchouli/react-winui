@@ -253,3 +253,77 @@
 - `CommandBar` 不复用 `ButtonGroup`/`MenuBar` 的公共 API；仅借鉴经过验证的菜单 portal、light-dismiss 和焦点边界。
 - `NavigationView` 不修改旧 `NavBar` 系列；新增组件遵循 WinUI 左侧 pane 的 expanded/compact/minimal/auto 模式，Top 模式留待后续明确需求。
 - P1 组件继续只使用 react-winui 自有 `--rwu-*` tokens；仅借鉴 WinUI/Windows 11 行为与 Fluent UI v9 的状态、无障碍和测试思路，不复制第三方实现源码。
+
+## 2026-08-24：浮层阴影向 Windows 11 参考图收敛
+
+- Tooltip、Popover、Flyout、ContextMenu 及 P1 的 portal 列表/菜单表面统一使用新 `--rwu-shadow-overlay`：低对比度接触阴影叠加宽范围环境阴影；dark theme 使用更强但仍克制的同构 token。
+- 新增 `--rwu-color-border-flyout`，并保留旧 `--rwu-shadow-flyout` 不动，避免 MenuBar、Select 等旧组件因浮层修正发生视觉漂移。
+- 浮层截图统一在 surface 外保留 16px 取景边距，并在截图前结束入口动画；这样视觉回归真实保护阴影，也不会因 portal/动画的 1px 裁剪漂移产生噪声。
+- P1 fixture 的 unicode 占位图标改为已有 WinUI icon font 类；这是测试样例质量修正，未改变公共组件 API 或旧组件视觉 recipe。
+
+## 2026-08-24：P1 控件箭头与 NavigationView hover 微调
+
+- `ComboBox` 和 `NumberBox` 继续复用现有 CSS chevron，只将两条边的描边从半个 spacing token 调整为四分之一 spacing token，即约 1px，以匹配 `Select` 的细箭头；未引入新图标、未改变布局或公共 API。
+- `NavigationView` 的 hover 背景绑定到完整 `ui-navigation-view-item-row`，而不是内部按钮或 disclosure；selected/indicated 和 disabled 规则保留更高优先级，避免 hover 覆盖语义状态。
+- `AutoSuggestBox` 的输入框 hover 保持基础 surface，不回退为灰色 hover surface；该约束继续由浏览器测试保护。
+
+## 2026-08-24：SettingsCard 阴影与 AutoSuggestBox hover 收敛
+
+- `SettingsCard` 不再直接复用通用 `--rwu-shadow-2`；新增 `--rwu-shadow-card`，以更低对比度的接触阴影叠加短范围环境阴影，避免卡片堆叠出现生硬的深色底线。
+- `AutoSuggestBox` 的 input、Clear、Submit 三个 surface 都显式清除全局 `button:hover` 带来的 `brightness` / `opacity`，hover 保持透明动作层；active pressed 反馈继续保留。
+- `Shadows.card` 与设计系统文档同步暴露该语义 token；未改变 SettingsCard DOM、Props 或交互 API。
+
+## 2026-08-26：AutoSuggestBox 聚焦 Hover 修正
+
+- 用户截图中的 caret 表明问题状态是“输入框已聚焦 + 鼠标 Hover”；此前 `:hover:not(:focus, :disabled)` 有意外排除 `:focus`，因此 `@extend .input-btn-default` 带来的全局 hover `brightness/opacity` 仍会把输入框变灰。
+- 输入框 hover 规则改为 `:hover:not(:disabled)`，在普通和聚焦 Hover 下都清除灰度滤镜与透明度；`&:focus-visible` 仍按原顺序提供焦点 surface，disabled 状态不受影响。
+- 新增浏览器回归，分别比较未聚焦 Hover 与聚焦后 Hover 的 `backgroundColor`、`filter` 和 `opacity`；未改变 DOM、Props 或 active pressed 反馈。
+
+## 2026-08-26：AutoSuggestBox cursor 语义修正
+
+- `.ui-auto-suggest-box-input` 继续复用通用输入视觉，但覆盖其继承的 `cursor: pointer` 为 `cursor: text`，让输入区域呈现文本编辑光标。
+- `.ui-auto-suggest-box-clear` 与 `.ui-auto-suggest-box-query` 保持 `cursor: pointer`；disabled 分支继续覆盖为 `not-allowed`。
+- 浏览器回归同时断言输入框 cursor 和两个内部按钮 cursor，未改变 DOM、Props 或交互行为。
+
+## 2026-08-26：AutoSuggestBox focus underline 对齐
+
+- 用户截图显示 AutoSuggestBox 聚焦时底部 accent 线比 InputText 少一层；InputText 的既有实现由底部 accent border 与 1px accent background gradient 共同形成。
+- AutoSuggestBox 的 `:focus-visible` 复用同一 gradient、repeat、bottom position 与 `100% 1px` size，保持控件高度、border width、DOM 和 API 不变。
+- 浏览器回归将 AutoSuggestBox 与测试 fixture 中的 InputText 聚焦 computed underline style 逐项比较；新增的 fixture `data-testid` 仅用于测试定位。
+
+## 2026-08-26：AutoSuggestBox 内部按钮 cursor 修正
+
+- 根据用户反馈，AutoSuggestBox 的 Clear / Submit 内部动作按钮启用状态使用 `cursor: default` 普通箭头，不使用手型；输入区域仍为 `cursor: text`。
+- disabled 按钮继续使用 `cursor: not-allowed`，保留不可用状态的系统语义提示。
+- 浏览器回归将两个内部按钮的 computed cursor 断言为 `default`，未改变点击行为、DOM 结构或公共 API。
+
+## 2026-08-26：AutoSuggestBox 内部按钮 Hover feedback
+
+- 为补偿普通箭头 cursor 缺少手型提示，Clear / Submit 启用状态 Hover 使用现有 `--rwu-color-surface-control-hover`，默认仍保持透明，pressed 继续使用 `--rwu-color-surface-control-pressed`。
+- Hover 只改变动作按钮 surface，不改变输入框背景、cursor、filter 或 opacity；disabled 不参与 Hover 覆盖。
+- 浏览器回归断言动作按钮 Hover 背景确实变化，同时 cursor 保持 `default`、filter 为 `none`、opacity 为 `1`。
+
+## 2026-08-26：ComboBox / NumberBox 复用 Select 箭头
+
+- 用户确认 ComboBox 与 NumberBox 的箭头理论上可以复用 Select；因此抽取 `_base/_select-chevron.scss`，由三个组件共享同一份 14px SVG 资源及 Light/Dark 主题定义。
+- ComboBox 和 NumberBox 不再使用 CSS border 旋转绘制，改为背景 SVG；方向只通过 180° transform 切换，避免继续维护不同的描边宽度、位移和旋转角度。
+- Select 保留原有定位（右侧 10px、垂直居中）和视觉 API，仅接入共享 mixin；未改动组件 DOM、Props、控件尺寸或按钮交互。
+- 回归以 computed `backgroundImage`、`backgroundRepeat`、`backgroundSize` 对比实际资源，不再只断言 border 宽度。
+
+## 2026-08-26：InfoBar / SettingsExpander 复用 SettingsCard 阴影
+
+- 用户要求两类 settings surface 与 SettingsCard 统一，因此直接复用现有语义 token `--rwu-shadow-card`，不新增第三套阴影值。
+- 只修改 InfoBar、SettingsExpander 的根容器；SettingsExpander 内部嵌套 SettingsCard 继续使用 `--rwu-shadow-none`，避免卡片嵌套时重复叠加阴影。
+- 通过 Light/Dark computed `boxShadow` 对三个组件做集合一致性断言；未把视觉一致性退化为只检查源码字符串。
+
+## 2026-08-26：文档导航图标语义校正
+
+- 导航图标优先复用现有 `icons10` 字体，保持与现有 Fluent/WinUI 线性字形、尺寸和基线一致；只有字库缺少合适语义时才考虑引入 Google Font Icon。
+- `NumberBox` 使用 `icons10-unfold`；`Popover / Flyout`、`Tooltip`、`Toast` 分别使用 `icons10-chat`、`icons10-info`、`icons10-bell`，让四个组件条目具有可区分的语义图形。
+- 本次只修改 `src/demo/v1.0.0/navbar_items.json` 的导航映射，不改图标字体、公共组件 API 或组件视觉样式。
+
+## 2026-08-26：Toast 多条通知窗口式叠放
+
+- 多条 Toast 不再使用完整纵向间距，而是共享一个网格单元并按层级错位；这样只露出后层 Toast 的边缘和意图色条，前层最新通知保持清晰可读，视觉上接近 Windows 多窗口叠放。
+- 叠放偏移使用 8px，并根据 `top/bottom` 与 `start/end` 锚点方向镜像；通过 CSS `translate` 与入场 `transform` 分离，保留现有入场动画和调用方自定义 transform 兼容性。
+- 层级由可见队列顺序计算，最新 Toast 为前景；没有改变 FIFO 移除、队列补位、暂停计时或无障碍 live region 行为。

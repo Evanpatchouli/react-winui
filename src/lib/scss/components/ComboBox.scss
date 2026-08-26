@@ -1,4 +1,5 @@
 @use "./_base/parents" as *;
+@use "./_base/select-chevron" as *;
 
 .ui-combobox {
   position: relative;
@@ -73,17 +74,18 @@
 }
 
 .ui-combobox-chevron {
+  @include select-chevron-image;
   display: block;
-  width: var(--rwu-spacing-md);
-  height: var(--rwu-spacing-md);
-  border-inline-end: calc(var(--rwu-spacing-xs) / 2) solid currentColor;
-  border-block-end: calc(var(--rwu-spacing-xs) / 2) solid currentColor;
-  transform: translateY(calc(var(--rwu-spacing-xs) / -2)) rotate(45deg);
+  width: 14px;
+  height: 14px;
+  border: 0;
+  background-position: center;
+  transform: none;
   transition: transform var(--rwu-duration-fast) var(--rwu-ease-standard);
 }
 
 .ui-combobox-open .ui-combobox-chevron {
-  transform: translateY(calc(var(--rwu-spacing-xs) / 2)) rotate(225deg);
+  transform: rotate(180deg);
 }
 
 .ui-combobox-listbox {
@@ -96,11 +98,11 @@
   overflow-x: hidden;
   overflow-y: auto;
   list-style: none;
-  border: 1px solid var(--rwu-color-border-divider);
+  border: 1px solid var(--rwu-color-border-flyout);
   border-radius: var(--rwu-radius-flyout);
   color: var(--rwu-color-text-primary);
   background: var(--rwu-color-surface-flyout);
-  box-shadow: var(--rwu-shadow-flyout);
+  box-shadow: var(--rwu-shadow-overlay);
   animation: rwu-combobox-enter var(--rwu-duration-fast) var(--rwu-ease-standard) both;
 }
 

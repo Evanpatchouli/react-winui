@@ -1,4 +1,5 @@
 @use "./_base/parents" as *;
+@use "./_base/select-chevron" as *;
 
 .ui-number-box-field {
   display: inline-grid;
@@ -72,19 +73,20 @@
 }
 
 .ui-number-box-chevron {
+  @include select-chevron-image;
   display: block;
-  width: var(--rwu-spacing-md);
-  height: var(--rwu-spacing-md);
-  border-inline-end: calc(var(--rwu-spacing-xs) / 2) solid currentColor;
-  border-block-end: calc(var(--rwu-spacing-xs) / 2) solid currentColor;
+  width: 14px;
+  height: 14px;
+  border: 0;
+  background-position: center;
 }
 
 .ui-number-box-increment .ui-number-box-chevron {
-  transform: translateY(calc(var(--rwu-spacing-xs) / 2)) rotate(225deg);
+  transform: rotate(180deg);
 }
 
 .ui-number-box-decrement .ui-number-box-chevron {
-  transform: translateY(calc(var(--rwu-spacing-xs) / -2)) rotate(45deg);
+  transform: none;
 }
 
 .ui-number-box-invalid .ui-number-box-input:not(:focus) {

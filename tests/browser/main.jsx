@@ -49,6 +49,7 @@ import Tooltip from "../../src/lib/src/components/Tooltip/index.tsx";
 import Toast, { Toaster } from "../../src/lib/src/components/Toast/index.tsx";
 import TreeView, { TreeItem } from "../../src/lib/src/components/TreeView/index.tsx";
 import "../../src/lib/config/app-config.css";
+import "../../src/lib/icons/winui-icons.slim.css";
 import "../../src/lib/scss/main.scss";
 import "./fixture.css";
 
@@ -342,7 +343,12 @@ function VisualFixture() {
               setStatus="danger"
               width="170px"
             />
-            <InputText label="Loading" setStatus="loading" width="150px" />
+            <InputText
+              data-testid="input-text-loading"
+              label="Loading"
+              setStatus="loading"
+              width="150px"
+            />
             <Checkbox defaultChecked label="Remember me" />
             <Checkbox disabled label="Disabled" />
             <RadioButton defaultChecked label="Windows" name="gallery-platform" />
@@ -826,11 +832,16 @@ function VisualFixture() {
             >
               <TreeItem
                 data-testid="tree-workspace"
-                icon={<span>▣</span>}
+                icon={<i aria-hidden="true" className="icons10-database" />}
                 label="Workspace"
                 value="workspace"
               >
-                <TreeItem data-testid="tree-src" icon={<span>▣</span>} label="src" value="src">
+                <TreeItem
+                  data-testid="tree-src"
+                  icon={<i aria-hidden="true" className="icons10-hdd" />}
+                  label="src"
+                  value="src"
+                >
                   <TreeItem label="TreeView.tsx" value="tree-view" />
                   <TreeItem label="tokens.scss" value="tokens" />
                 </TreeItem>
@@ -1044,13 +1055,13 @@ function VisualFixture() {
               secondaryCommands={
                 <>
                   <CommandBar.Button
-                    icon={<span>✎</span>}
+                    icon={<i aria-hidden="true" className="icons10-pencil" />}
                     label="Rename"
                     onClick={() => setCommandBarResult("Rename selected")}
                   />
                   <CommandBar.Separator />
                   <CommandBar.Button
-                    icon={<span>⚙</span>}
+                    icon={<i aria-hidden="true" className="icons10-settings" />}
                     label="Properties"
                     onClick={() => setCommandBarResult("Properties selected")}
                   />
@@ -1058,14 +1069,24 @@ function VisualFixture() {
               }
             >
               <CommandBar.Button
-                icon={<span>↓</span>}
+                icon={<i aria-hidden="true" className="icons10-save" />}
                 label="Save"
                 onClick={() => setCommandBarResult("Save selected")}
               />
-              <CommandBar.Button icon={<span>▣</span>} label="Copy" />
+              <CommandBar.Button
+                icon={<i aria-hidden="true" className="icons10-copy" />}
+                label="Copy"
+              />
               <CommandBar.Separator />
-              <CommandBar.Button disabled icon={<span>▧</span>} label="Paste" />
-              <CommandBar.Button icon={<span>↗</span>} label="Share" />
+              <CommandBar.Button
+                disabled
+                icon={<i aria-hidden="true" className="icons10-paste" />}
+                label="Paste"
+              />
+              <CommandBar.Button
+                icon={<i aria-hidden="true" className="icons10-upload" />}
+                label="Share"
+              />
             </CommandBar>
 
             <div className="visual-fixture-command-bar-narrow">
@@ -1074,10 +1095,22 @@ function VisualFixture() {
                 minimumPrimaryCommands={1}
                 overflowLabel="More responsive commands"
               >
-                <CommandBar.Button icon={<span>↓</span>} label="Save" />
-                <CommandBar.Button icon={<span>▣</span>} label="Copy" />
-                <CommandBar.Button icon={<span>↗</span>} label="Share" />
-                <CommandBar.Button icon={<span>↻</span>} label="Refresh" />
+                <CommandBar.Button
+                  icon={<i aria-hidden="true" className="icons10-save" />}
+                  label="Save"
+                />
+                <CommandBar.Button
+                  icon={<i aria-hidden="true" className="icons10-copy" />}
+                  label="Copy"
+                />
+                <CommandBar.Button
+                  icon={<i aria-hidden="true" className="icons10-upload" />}
+                  label="Share"
+                />
+                <CommandBar.Button
+                  icon={<i aria-hidden="true" className="icons10-refresh" />}
+                  label="Refresh"
+                />
               </CommandBar>
             </div>
           </div>
@@ -1199,12 +1232,22 @@ function VisualFixture() {
               <NavigationView
                 data-testid="navigation-view-auto"
                 defaultExpandedItems={[]}
-                footerItems={[{ icon: <span>?</span>, label: "Help", value: "help" }]}
+                footerItems={[
+                  {
+                    icon: <i aria-hidden="true" className="icons10-question-mark" />,
+                    label: "Help",
+                    value: "help"
+                  }
+                ]}
                 header="Workspace"
                 onValueChange={(value) => setNavigationViewSelection(String(value))}
                 paneAriaLabel="Workspace navigation"
                 paneHeader="Contoso"
-                settingsItem={{ icon: <span>⚙</span>, label: "Settings", value: "settings" }}
+                settingsItem={{
+                  icon: <i aria-hidden="true" className="icons10-settings" />,
+                  label: "Settings",
+                  value: "settings"
+                }}
                 value={navigationViewSelection}
                 content={
                   <div className="visual-fixture-navigation-content">
@@ -1213,14 +1256,22 @@ function VisualFixture() {
                   </div>
                 }
               >
-                <NavigationView.Item icon={<span>⌂</span>} label="Home" value="home" />
-                <NavigationView.Item icon={<span>▣</span>} label="Library" value="library">
+                <NavigationView.Item
+                  icon={<i aria-hidden="true" className="icons10-home" />}
+                  label="Home"
+                  value="home"
+                />
+                <NavigationView.Item
+                  icon={<i aria-hidden="true" className="icons10-database" />}
+                  label="Library"
+                  value="library"
+                >
                   <NavigationView.Item label="Reports" value="reports" />
                   <NavigationView.Item label="Downloads" value="downloads" />
                 </NavigationView.Item>
                 <NavigationView.Item
                   disabled
-                  icon={<span>×</span>}
+                  icon={<i aria-hidden="true" className="icons10-security-issue" />}
                   label="Managed"
                   value="managed"
                 />
@@ -1240,8 +1291,16 @@ function VisualFixture() {
                 paneOpen={compactNavigationOpen}
                 content={<span>Compact pane content</span>}
               >
-                <NavigationView.Item icon={<span>⌂</span>} label="Home" value="compact-home" />
-                <NavigationView.Item icon={<span>▣</span>} label="Files" value="compact-files" />
+                <NavigationView.Item
+                  icon={<i aria-hidden="true" className="icons10-home" />}
+                  label="Home"
+                  value="compact-home"
+                />
+                <NavigationView.Item
+                  icon={<i aria-hidden="true" className="icons10-database" />}
+                  label="Files"
+                  value="compact-files"
+                />
               </NavigationView>
             </div>
           </div>

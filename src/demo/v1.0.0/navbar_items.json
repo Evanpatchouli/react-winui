@@ -129,7 +129,7 @@
     "to": "numberbox",
     "exact": false,
     "text": "NumberBox",
-    "icon": "icons10-calculator",
+    "icon": "icons10-unfold",
     "showBadge": false
   },
   {
@@ -199,21 +199,21 @@
     "to": "popover",
     "exact": false,
     "text": "Popover / Flyout",
-    "icon": "icons10-notification",
+    "icon": "icons10-chat",
     "showBadge": false
   },
   {
     "to": "tooltip",
     "exact": false,
     "text": "Tooltip",
-    "icon": "icons10-notification",
+    "icon": "icons10-info",
     "showBadge": false
   },
   {
     "to": "toast",
     "exact": false,
     "text": "Toast",
-    "icon": "icons10-notification",
+    "icon": "icons10-bell",
     "showBadge": false
   },
   {

@@ -134,3 +134,75 @@
 
 - CSS Grid 根节点使用 `align-items: start` 时，某个相邻 flex 行被操作按钮撑高不会自动重排独立图标；应针对 action 状态按 control/icon token 的高度差补偿，并为窄屏换行单独复位。
 - 这类像素级错位应在真实浏览器中直接比较图标与目标行的 bounding-box 中心，而不能只依赖截图阈值。
+
+## 2026-08-24：浮层截图与阴影基线
+
+- 浮层的 element-only screenshot 会截掉 box-shadow；应以 locator bounding box 外扩固定留白截取 viewport 区域，并在截图前结束 surface 及子节点入口动画。
+- 视觉基线更新必须逐个限定到受影响的 overlay 用例；本次 icon fixture 修正只更新了发生真实 glyph 变化的移动 NavBar 基线。
+- 依赖页面滚动到边缘的 portaled popup 测试不能直接使用会自动滚动目标的物理 `locator.click()`；需要用 DOM click 保持预设 viewport 几何，再断言真实 placement。
+
+# 2026-08-24：P1 控件细节视觉校正
+
+- 需要整行 hover 的导航项，应把背景状态放在 row 容器而非内部 button/disclosure；同时必须单独覆盖 disabled row，selected/indicated 状态则继续使用更具体的选择器维持 pressed surface。
+- 与已有 `Select` 对齐箭头时，优先复用组件当前的 chevron 结构，仅校准 border stroke；这样能降低字体/图标资源差异，也不会引入新的 DOM 或公共 API。
+- 验证通过：`pnpm lint`、`pnpm typecheck`、`pnpm test`（16 files / 175 tests）、`pnpm build`、`pnpm test:browser`（101/101）；docs build 仍有既有大 chunk warning。
+
+# 2026-08-24：SettingsCard 与 AutoSuggestBox 视觉细节
+
+- 复合控件的 hover 视觉不能只检查主 input；`@extend` 产生的全局 `button:hover` 规则也会影响内部 action button，必须分别验证 input、Clear 和 Submit。
+- 内容卡片不宜直接套用通用 elevation scale；当 `shadow-2` 造成硬边线时，应为卡片建立独立、低对比度的语义 token，避免牵动其他组件的层级。
+- 验证通过：`pnpm lint`、`pnpm typecheck`、`pnpm test`（16 files / 175 tests）、`pnpm build`、`pnpm test:browser`（101/101）；docs build 仍有既有大 chunk warning。
+
+# 2026-08-26：AutoSuggestBox 聚焦 Hover 状态
+
+- 复合输入控件的 Hover 回归必须覆盖“未聚焦 + Hover”和“已聚焦 + Hover”；只覆盖前者会漏掉焦点伪类与继承的全局 `@extend` 规则叠加后的问题。
+- 当控件通过 `@extend` 复用通用按钮/输入样式时，局部 Hover 规则不应为了保护 focus surface 而排除 `:focus`；应保留 focus 专属背景的层叠顺序，同时在 Hover 层清除不需要的滤镜和透明度。
+- 验证通过：`pnpm lint`、`pnpm typecheck`、`pnpm test`（16 files / 175 tests）、`pnpm build`、AutoSuggestBox 浏览器用例（6/6）和完整 Playwright（102/102）。
+
+# 2026-08-26：AutoSuggestBox cursor 语义
+
+- 复用按钮基础类的输入控件会继承 `cursor: pointer`；输入区域和动作区域的交互语义不同，不能只依赖基础类默认值，应在组件边界显式覆盖为 `text`。
+- cursor 回归应同时检查主输入和内部动作按钮，并保留 disabled 的 `not-allowed` 例外，避免只看截图无法区分光标语义。
+- 验证通过：`pnpm lint`、`pnpm typecheck`、`pnpm test`（16 files / 175 tests）、`pnpm build` 和 AutoSuggestBox 浏览器用例（6/6）。
+
+# 2026-08-26：AutoSuggestBox focus underline
+
+- 比较输入控件的 focus 底线时不能只看 `border-bottom-color`；InputText 通过 border 加 background gradient 叠出两层可见 accent，单独设置 border 会显得更细。
+- 对齐已有组件质感时，应复用其现有 gradient 的 repeat、position 和 size，而不是增加 border width 造成控件几何尺寸变化。
+- 验证通过：`pnpm lint`、`pnpm typecheck`、`pnpm test`（16 files / 175 tests）、`pnpm build`、AutoSuggestBox 浏览器用例（7/7）和完整 Playwright（103/103）。
+
+# 2026-08-26：相关 settings surface 的阴影一致性
+
+- 同一视觉层级的组件应共享语义阴影 token；直接复用 `--rwu-shadow-card` 比分别复制阴影 literal 更能防止 Light/Dark 主题漂移。
+- 组合容器的根阴影与内部子卡片阴影要分开处理；SettingsExpander 的子 SettingsCard 保持 `shadow-none`，避免出现双层或过重的内嵌阴影。
+- 验证通过：`pnpm lint`、`pnpm typecheck`、`pnpm test`（16 files / 175 tests）、`pnpm build` 和完整 Playwright（104/104）。
+
+# 2026-08-26：共享控件箭头几何
+
+- 当多个控件需要与 Select 视觉一致时，优先复用 Select 的实际绘制资源，而不是继续微调各自的 border 宽度、尺寸和旋转位移；这样可以避免“数值相近但视觉仍不一致”。
+- 对旋转箭头的回归应比较实际绘制资源和画布尺寸，方向只验证对应的 transform；截图基线则用来确认主题和布局没有副作用。
+- 验证通过：`pnpm lint`、`pnpm typecheck`、`pnpm test`（16 files / 175 tests）、`pnpm build` 和完整 Playwright（103/103）。
+
+# 2026-08-26：AutoSuggestBox 内部按钮 cursor
+
+- 输入框内的动作按钮不一定需要 Web 常见的手型反馈；当整体控件遵循桌面 Windows 交互质感时，启用按钮可使用系统普通箭头，输入区域与 disabled 状态仍分别保留 `text` 与 `not-allowed` 语义。
+- cursor 语义应单独对主输入、启用动作按钮和 disabled 动作按钮断言，避免通过父级或浏览器默认样式产生漂移。
+- 验证通过：`pnpm lint`、`pnpm typecheck`、`pnpm test`（16 files / 175 tests）、`pnpm build`、AutoSuggestBox 浏览器用例（7/7）和完整 Playwright（103/103）。
+
+# 2026-08-26：AutoSuggestBox 内部按钮 Hover feedback
+
+- 普通箭头 cursor 与无反馈的透明动作层组合会削弱可点击性；桌面风格控件应使用已有 control-hover surface 补充状态提示，而不必退回手型 cursor。
+- 回归测试应同时确认主输入 Hover 不变、内部动作按钮 Hover 背景变化，以及 cursor/filter/opacity 没有被通用按钮规则意外修改。
+- 验证通过：`pnpm lint`、`pnpm typecheck`、`pnpm test`（16 files / 175 tests）、`pnpm build`、AutoSuggestBox 浏览器用例（7/7）和完整 Playwright（103/103）。
+
+# 2026-08-26：文档导航图标选择
+
+- 组件导航图标应先按实际渲染尺寸核对，而不是只按 class 名称判断；复杂或重复字形在 16px 左右很容易失去语义。
+- 对浮层类组件，使用 `chat`、`info`、`bell` 分别表达气泡上下文、提示信息和通知到达，比让 Popover、Tooltip、Toast 共用同一通知图标更容易扫描。
+- 只要现有 `icons10` 字库已经提供合适字形，就不应为了单个导航项混入外部 Google Font，以免产生额外加载、授权和视觉基线差异。
+
+# 2026-08-26：Toast 多条通知叠放
+
+- 窗口式叠放应让最新 Toast 位于锚点前景，旧 Toast 沿远离锚点的方向错开；这样四个 viewport 位置都能保持同一层级语义。
+- 使用 CSS `translate` 承担堆叠偏移、保留 `transform` 给入场动画，可以避免新增层叠视觉时覆盖原有动效或调用方的 transform 样式。
+- 视觉回归截图的取景范围必须覆盖变换后的后层元素和阴影；对 Toast 单独增加外扩留白，比修改所有浮层的全局截图规则更稳妥。

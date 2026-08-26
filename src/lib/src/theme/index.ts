@@ -19,6 +19,12 @@ export const Shadows = {
   shadow28: "var(--rwu-shadow-28)",
   /** CSS reference to the largest elevation shadow. */
   shadow64: "var(--rwu-shadow-64)",
+  /** CSS reference to the soft layered shadow used by floating surfaces. */
+  overlay: "var(--rwu-shadow-overlay)",
+  /** CSS reference to the nested floating-surface shadow. */
+  overlayNested: "var(--rwu-shadow-overlay-nested)",
+  /** CSS reference to the quiet elevation shadow used by SettingsCard surfaces. */
+  card: "var(--rwu-shadow-card)",
   /** CSS reference to the existing Flyout shadow. */
   flyout: "var(--rwu-shadow-flyout)",
   /** CSS reference to the existing nested Flyout shadow. */

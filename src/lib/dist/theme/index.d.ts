@@ -10,6 +10,9 @@ export declare const Shadows: {
   readonly shadow16: "var(--rwu-shadow-16)";
   readonly shadow28: "var(--rwu-shadow-28)";
   readonly shadow64: "var(--rwu-shadow-64)";
+  readonly overlay: "var(--rwu-shadow-overlay)";
+  readonly overlayNested: "var(--rwu-shadow-overlay-nested)";
+  readonly card: "var(--rwu-shadow-card)";
   readonly flyout: "var(--rwu-shadow-flyout)";
   readonly flyoutNested: "var(--rwu-shadow-flyout-nested)";
   readonly dialog: "var(--rwu-shadow-dialog)";

@@ -35,16 +35,16 @@ const style = { boxShadow: Shadows.shadow8 };
 
 ## Token 分类
 
-| 分类           | 示例                                                                                                      | 用途                                                           |
-| -------------- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
-| 颜色 / 文字    | `--rwu-color-accent`、`--rwu-color-text-primary`、`--rwu-color-text-secondary`                            | 主色、正文和弱化文字                                           |
-| 颜色 / surface | `--rwu-color-surface-canvas`、`--rwu-color-surface-control`、`--rwu-color-surface-dialog`                 | 页面、控件和弹窗表面                                           |
-| 颜色 / 状态    | `--rwu-color-surface-control-hover`、`--rwu-color-surface-control-pressed`、`--rwu-color-danger`          | hover、pressed 与状态色                                        |
-| 颜色 / border  | `--rwu-color-border-control`、`--rwu-color-border-input`、`--rwu-color-border-divider`                    | 控件、输入框和分隔线                                           |
-| 圆角           | `--rwu-radius-small`、`--rwu-radius-control`、`--rwu-radius-dialog`                                       | 保留现有 4px、5px、8.6px 等圆角                                |
-| 间距           | `--rwu-spacing-xs` 至 `--rwu-spacing-3xl`                                                                 | 复用现有 4/5/8/10/15/20/30px 间距                              |
-| 阴影           | `--rwu-shadow-2` 至 `--rwu-shadow-64`、`--rwu-shadow-flyout`、`--rwu-shadow-dialog`、`--rwu-shadow-alert` | Fluent UI 风格层级阴影，以及现有下拉菜单、Dialog 和 Alert 阴影 |
-| 动效           | `--rwu-duration-fast`、`--rwu-duration-control`、`--rwu-duration-dropdown`                                | 复用现有 transition/animation 时长                             |
+| 分类           | 示例                                                                                                                                                                                  | 用途                                                                           |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| 颜色 / 文字    | `--rwu-color-accent`、`--rwu-color-text-primary`、`--rwu-color-text-secondary`                                                                                                        | 主色、正文和弱化文字                                                           |
+| 颜色 / surface | `--rwu-color-surface-canvas`、`--rwu-color-surface-control`、`--rwu-color-surface-dialog`                                                                                             | 页面、控件和弹窗表面                                                           |
+| 颜色 / 状态    | `--rwu-color-surface-control-hover`、`--rwu-color-surface-control-pressed`、`--rwu-color-danger`                                                                                      | hover、pressed 与状态色                                                        |
+| 颜色 / border  | `--rwu-color-border-control`、`--rwu-color-border-input`、`--rwu-color-border-divider`、`--rwu-color-border-flyout`                                                                   | 控件、输入框、分隔线和浮层边缘                                                 |
+| 圆角           | `--rwu-radius-small`、`--rwu-radius-control`、`--rwu-radius-dialog`                                                                                                                   | 保留现有 4px、5px、8.6px 等圆角                                                |
+| 间距           | `--rwu-spacing-xs` 至 `--rwu-spacing-3xl`                                                                                                                                             | 复用现有 4/5/8/10/15/20/30px 间距                                              |
+| 阴影           | `--rwu-shadow-2` 至 `--rwu-shadow-64`、`--rwu-shadow-card`、`--rwu-shadow-overlay`、`--rwu-shadow-overlay-nested`、`--rwu-shadow-flyout`、`--rwu-shadow-dialog`、`--rwu-shadow-alert` | 设置卡片的柔和层次、WinUI 风格浮层阴影，以及现有下拉菜单、Dialog 和 Alert 阴影 |
+| 动效           | `--rwu-duration-fast`、`--rwu-duration-control`、`--rwu-duration-dropdown`                                                                                                            | 复用现有 transition/animation 时长                                             |
 
 完整 token 列表以 `src/lib/scss/themes/tokens.scss` 为准。
 
@@ -71,14 +71,15 @@ const style = { boxShadow: Shadows.shadow8 };
 
 ## Tooltip
 
-Tooltip 的浮层使用实心 `--rwu-color-surface-flyout`、`--rwu-color-border-divider`、
-`--rwu-radius-small` 和 `--rwu-shadow-8`，不引入 Fluent UI 依赖或默认组件外观。浮层默认通过
+Tooltip 的浮层使用实心 `--rwu-color-surface-flyout`、`--rwu-color-border-flyout`、
+`--rwu-radius-small` 和 `--rwu-shadow-overlay`，阴影采用低对比度的接触阴影与宽范围环境阴影，
+不引入 Fluent UI 依赖或默认组件外观。浮层默认通过
 `aria-describedby` 与 trigger 关联；只有非必要的补充信息才适合放入 Tooltip，交互式内容应使用
 Popover 或其他可持续交互的组件。
 
 ## Popover / Flyout
 
-Popover / Flyout 使用 `--rwu-color-surface-flyout`、`--rwu-color-border-divider`、
-`--rwu-radius-flyout` 和 `--rwu-shadow-8`。它们面向可包含交互控件的 contextual surface，
+Popover / Flyout 使用 `--rwu-color-surface-flyout`、`--rwu-color-border-flyout`、
+`--rwu-radius-flyout` 和 `--rwu-shadow-overlay`。它们面向可包含交互控件的 contextual surface，
 默认通过 portal 渲染并支持 outside click、Escape 和 viewport placement fallback；不引入 Fluent UI
 视觉 token 或运行时依赖。
