@@ -1,5 +1,6 @@
 import React from 'react'
-import { NavPageContainer, ColorPickerItem, AppTheme } from '@evanpatchouli/react-winui'
+import { NavPageContainer, ColorPickerItem, AppTheme, Select } from '@evanpatchouli/react-winui'
+import { useNavigate } from 'react-router-dom'
 import { Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import ReactIcon from '../../assets/static/ReactIcon'
@@ -7,6 +8,24 @@ import WinIcon from '../../assets/static/WinIcon'
 import GithubIcon from "../../assets/static/GithubIcon"
 import './css/home.css'
 import { lib_version } from '../values'
+
+const VERSION_OPTIONS = [
+  { value: '1.0.0', label: '1.0.0' },
+  { value: '1.1.0', label: '1.1.0' }
+]
+
+const VersionSelect = () => {
+  const navigate = useNavigate()
+
+  return (
+    <Select
+      data={VERSION_OPTIONS}
+      defaultValue={lib_version}
+      tooltip="Documentation version"
+      onChange={(value) => navigate(`/v${value}/home`)}
+    />
+  )
+}
 
 
 class Home extends React.Component {
@@ -70,9 +89,7 @@ class Home extends React.Component {
 
       <div className="home-title-container">
         <h1 className="home-title">react-winui
-          <span className="home-card-version">
-            <span>{lib_version}</span>
-          </span>
+          <VersionSelect />
         </h1>
         <span className="home-subtitle">Build Windows fluent UI apps using ReactJS. <br/>Provides a set of accessible, reusable, and composable React components.</span>
       </div>

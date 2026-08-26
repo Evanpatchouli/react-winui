@@ -42,16 +42,25 @@
   font-size: 26px;
 }
 
-.home-card-version {
+.home-title > .ui-menu-select {
   left: 25px;
   bottom: 25px;
+}
+
+.home-title > .ui-menu-select .ui-menu-title {
   cursor: pointer;
   font-size: 16px;
-  padding: 4px 8px;
+  min-width: 72px;
+  padding: 4px 30px 4px 8px;
   position: relative;
   border-radius: 28px;
   color: var(--color-primary-adaptive);
-  background: var(--color-card-bg-default);
+  background-color: var(--color-card-bg-default);
+}
+
+.home-title > .ui-menu-select .ui-menu-title:focus-visible {
+  outline: 2px solid var(--rwu-color-accent);
+  outline-offset: 2px;
 }
 
 .home-color-picker-grid {

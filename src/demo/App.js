@@ -1,7 +1,10 @@
 import React from "react";
 import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 
-const AppCurrent = React.lazy(() => import("./v1.0.0"));
+const DOCS_VERSION = "1.1.0";
+const DOCS_PATH = `/v${DOCS_VERSION}`;
+const AppCurrent = React.lazy(() => import("./v1.1.0"));
+const AppPrevious = React.lazy(() => import("./v1.0.0"));
 
 const Splash = () => {
   return <div style={{
@@ -21,10 +24,14 @@ class App extends React.Component {
   return (
     <HashRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/v1.0.0/home" />}/>
+        <Route path="/" element={<Navigate to={`${DOCS_PATH}/home`} />}/>
+        <Route
+          path={`${DOCS_PATH}/*`}
+          element={<React.Suspense fallback={<Splash/>}><AppCurrent/></React.Suspense>}
+        />
         <Route
           path="/v1.0.0/*"
-          element={<React.Suspense fallback={<Splash/>}><AppCurrent/></React.Suspense>}
+          element={<React.Suspense fallback={<Splash/>}><AppPrevious/></React.Suspense>}
         />
       </Routes>
     </HashRouter>
