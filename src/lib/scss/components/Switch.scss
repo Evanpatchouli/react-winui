@@ -64,6 +64,30 @@
         content: attr(data-on) !important;
       }
     }
+
+    &:disabled {
+      cursor: default;
+      filter: grayscale(1);
+      opacity: 0.5;
+
+      &:hover,
+      &:active {
+        &:before {
+          block-size: 12px;
+          inline-size: 12px;
+        }
+      }
+
+      &:not(:checked):hover {
+        background-color: transparent;
+      }
+
+      &:checked:active {
+        &::before {
+          margin-inline-start: 0;
+        }
+      }
+    }
   }
 
   >span::before {
@@ -75,5 +99,13 @@
   .ui-switch-label:last-child  {
     padding-inline-end: 0;
     padding-inline-start: var(--rwu-spacing-md);
+  }
+
+  &.ui-switch-container-disabled {
+    cursor: default;
+
+    .ui-switch-label {
+      color: var(--rwu-color-text-disabled);
+    }
   }
 }

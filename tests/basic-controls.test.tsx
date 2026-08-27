@@ -109,10 +109,20 @@ describe("Switch", () => {
     expect(onChange).toHaveBeenCalledTimes(1);
   });
 
-  it("renders the disabled state", () => {
-    render(<Switch disabled />);
+  it("renders the disabled state and stays inert", () => {
+    const onChange = vi.fn();
 
-    expect(screen.getByRole("checkbox")).toBeDisabled();
+    render(<Switch defaultChecked disabled onChange={onChange} />);
+
+    const switchInput = screen.getByRole("checkbox");
+    expect(switchInput).toBeDisabled();
+    expect(switchInput).toBeChecked();
+    expect(switchInput.closest(".ui-switch-container")).toHaveClass("ui-switch-container-disabled");
+
+    switchInput.click();
+
+    expect(switchInput).toBeChecked();
+    expect(onChange).not.toHaveBeenCalled();
   });
 });
 

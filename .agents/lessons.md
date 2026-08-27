@@ -206,3 +206,9 @@
 - 窗口式叠放应让最新 Toast 位于锚点前景，旧 Toast 沿远离锚点的方向错开；这样四个 viewport 位置都能保持同一层级语义。
 - 使用 CSS `translate` 承担堆叠偏移、保留 `transform` 给入场动画，可以避免新增层叠视觉时覆盖原有动效或调用方的 transform 样式。
 - 视觉回归截图的取景范围必须覆盖变换后的后层元素和阴影；对 Toast 单独增加外扩留白，比修改所有浮层的全局截图规则更稳妥。
+
+## 2026-08-26：Switch disabled 状态
+
+- 原生 disabled checkbox 已经阻止真实浏览器交互，但缺少独立样式时仍会保留普通 Switch 的颜色和 hover/pressed 反馈；应保留启用态规则，并在 disabled 分支单独覆盖这些反馈。
+- `jsdom` 的 `fireEvent.click()` 会绕过 disabled 控件的原生激活限制并修改 `checked`，测试原生不可点击语义应使用元素的 `.click()`，再由 Playwright 覆盖真实浏览器行为。
+- Switch 的标签由伪元素生成文本，禁用态要同时给控件和外层容器设置状态样式，才能覆盖 `labelPosition="start"` 与 `"end"` 两种布局。

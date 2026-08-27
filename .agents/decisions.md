@@ -327,3 +327,9 @@
 - 多条 Toast 不再使用完整纵向间距，而是共享一个网格单元并按层级错位；这样只露出后层 Toast 的边缘和意图色条，前层最新通知保持清晰可读，视觉上接近 Windows 多窗口叠放。
 - 叠放偏移使用 8px，并根据 `top/bottom` 与 `start/end` 锚点方向镜像；通过 CSS `translate` 与入场 `transform` 分离，保留现有入场动画和调用方自定义 transform 兼容性。
 - 层级由可见队列顺序计算，最新 Toast 为前景；没有改变 FIFO 移除、队列补位、暂停计时或无障碍 live region 行为。
+
+## 2026-08-26：Switch disabled 状态
+
+- `Switch` 继续使用原生 `<input type="checkbox" disabled>` 作为不可交互语义来源，不引入额外事件拦截或新的 Props API。
+- 禁用态视觉采用现有 `--rwu-color-text-disabled` 加 `grayscale(1)` / `opacity: 0.5`；保留原有启用态 hover/pressed 规则，并在 disabled 分支复位其反馈；光标按用户确认使用普通 `default` 箭头。
+- 通过容器状态 class 给内置 On/Off 标签同步置灰，避免依赖相邻兄弟选择器而遗漏 `labelPosition="start"`。

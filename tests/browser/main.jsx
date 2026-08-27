@@ -354,6 +354,7 @@ function VisualFixture() {
             <RadioButton defaultChecked label="Windows" name="gallery-platform" />
             <RadioButton label="Linux" name="gallery-platform" />
             <Switch defaultChecked labelOff="Off" labelOn="On" />
+            <Switch data-testid="switch-disabled" disabled labelOff="Disabled" />
             <TextArea defaultValue="A multiline value" resizer={false} rows={2} />
             <SelectNative data={selectData} defaultValue="windows" tooltip="Native select" />
           </div>

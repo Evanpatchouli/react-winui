@@ -455,3 +455,12 @@
 - `tests/browser/visual.spec.js` 将动作按钮回归更新为断言 Hover 背景发生变化，同时保持普通箭头、无滤镜和完整不透明度；输入框 Hover 继续保持稳定。
 - 验证通过：`pnpm lint`、`pnpm typecheck`、`pnpm test`（16 files / 175 tests）、`pnpm build`、AutoSuggestBox 浏览器用例（7/7）与完整 `pnpm test:browser`（103/103）。docs build 仅保留既有大 chunk warning。
 - 当前任务已完成，等待用户下一项具体视觉校正。
+
+# 2026-08-26：Switch disabled 状态修复
+
+- `src/lib/src/components/Switch/index.tsx` 在 disabled 时增加容器状态 class；不改变 Props、DOM 层级或原生 checkbox 的 disabled 语义。
+- `src/lib/scss/components/Switch.scss` 排除 disabled 的 hover/pressed 反馈，使用 `filter: grayscale(1)` 与 `opacity: 0.5` 灰化控件，容器和标签使用普通箭头光标；disabled 标签同步使用 `--rwu-color-text-disabled`。
+- `tests/basic-controls.test.tsx` 验证 disabled Switch 保持 checked 状态且不会触发 `onChange`；`tests/browser/visual.spec.js` 增加交互、computed style 和 Light/Dark 局部截图回归。
+- 已同步 `src/lib/dist` 的 Switch JS/CSS 发布产物；新增两张视觉基线。
+- 验证通过：`pnpm lint`、`pnpm typecheck`、`pnpm test`（16 files / 175 tests）、`pnpm build`、完整 `pnpm test:browser`（105/105）。docs build 仍有既有大 chunk warning。
+- 未解决事项：无；等待下一项用户指定的修改。

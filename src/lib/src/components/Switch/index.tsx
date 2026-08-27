@@ -40,7 +40,10 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>(
     ref
   ) => {
     return (
-      <label className="ui-switch-container" title={tooltip}>
+      <label
+        className={`ui-switch-container${disabled ? " ui-switch-container-disabled" : ""}`}
+        title={tooltip}
+      >
         {label && labelPosition === "start" && (
           <span
             className="ui-switch-label"
