@@ -10,7 +10,7 @@
 
 <p>
   <a href="https://Evanpatchouli.github.io/react-winui/">
-    <img src="https://img.shields.io/circleci/build/github/Evanpatchouli/react-winui?style=flat-square&logo=circleci&token=6fe7637a17a269e8b002b11474d70c9d25c71f30" alt="Build" />
+    <img src="https://img.shields.io/badge/github-react_winui-blue?logo=github" alt="Github Repo" />
   </a>
   <a href="https://github.com/Evanpatchouli/react-winui/blob/main/LICENSE">
     <img src="https://img.shields.io/badge/License-MIT-darklime.svg?style=flat-square&color=blue" alt="License: MIT" />

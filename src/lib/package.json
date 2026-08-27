@@ -140,10 +140,10 @@
   "publishConfig": {
     "access": "public"
   },
-  "homepage": "https://virtualvivek.github.io/react-winui/",
+  "homepage": "https://evanpatchouli.github.io/react-winui/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/virtualvivek/react-winui.git"
+    "url": "git+https://github.com/Evanpatchouli/react-winui.git"
   },
   "keywords": [
     "react",
@@ -162,8 +162,8 @@
     "web-app"
   ],
   "author": {
-    "name": "Vivek Verma",
-    "email": "virtualvivek7@gmail.com"
+    "name": "Evanpatchouli",
+    "email": "evanpatchouli@foxmail.com"
   },
   "license": "MIT"
 }
