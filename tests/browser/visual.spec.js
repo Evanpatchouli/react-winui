@@ -1297,20 +1297,14 @@ test.describe("Public component visual baselines", () => {
       await expect(disabledSwitch).toHaveCSS("filter", "grayscale(1)");
       await expect(disabledSwitch).toHaveCSS("opacity", "0.5");
       await expect(disabledSwitch.locator("..")).toHaveClass(/ui-switch-container-disabled/);
-      await expect(disabledSwitch.locator("..")).toHaveScreenshot(
-        "switch-disabled-light.png",
-        screenshotOptions
-      );
+      await expect(disabledSwitch).toHaveScreenshot("switch-disabled-light.png", screenshotOptions);
 
       await disabledSwitch.click({ force: true });
 
       await expect(disabledSwitch).not.toBeChecked();
 
       await page.getByTestId("theme-dark").click();
-      await expect(disabledSwitch.locator("..")).toHaveScreenshot(
-        "switch-disabled-dark.png",
-        screenshotOptions
-      );
+      await expect(disabledSwitch).toHaveScreenshot("switch-disabled-dark.png", screenshotOptions);
     });
 
     test("captures selection controls in both themes", async ({ page }) => {

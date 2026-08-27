@@ -464,3 +464,8 @@
 - 已同步 `src/lib/dist` 的 Switch JS/CSS 发布产物；新增两张视觉基线。
 - 验证通过：`pnpm lint`、`pnpm typecheck`、`pnpm test`（16 files / 175 tests）、`pnpm build`、完整 `pnpm test:browser`（105/105）。docs build 仍有既有大 chunk warning。
 - 未解决事项：无；等待下一项用户指定的修改。
+
+# 2026-08-27：Switch 视觉基线 CI 稳定性
+
+- 聚合 `controls-light/dark` 基线已覆盖禁用 Switch 与标签；专属 `switch-disabled-light/dark` 基线改为只截图控件本体，避免 CI Windows Chromium 在小尺寸文字裁剪上的 32 像素差异。
+- 本地 CI 模式定向测试通过；此前完整 `pnpm test:browser` 已通过 105/105。当前变更尚未提交，等待推送后确认远端 CI。

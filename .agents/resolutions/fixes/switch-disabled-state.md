@@ -17,4 +17,4 @@
 
 ## 验证
 
-`pnpm lint`、`pnpm typecheck`、`pnpm test`（175/175）、`pnpm build` 和 `pnpm test:browser`（105/105）均通过。
+`pnpm lint`、`pnpm typecheck`、`pnpm test`（175/175）、`pnpm build` 和 `pnpm test:browser`（105/105）均通过。为适配 CI Windows Chromium 的小尺寸文字裁剪差异，Switch 专属视觉基线只捕获控件本体，标签仍由 controls 聚合基线覆盖。

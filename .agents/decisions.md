@@ -333,3 +333,8 @@
 - `Switch` 继续使用原生 `<input type="checkbox" disabled>` 作为不可交互语义来源，不引入额外事件拦截或新的 Props API。
 - 禁用态视觉采用现有 `--rwu-color-text-disabled` 加 `grayscale(1)` / `opacity: 0.5`；保留原有启用态 hover/pressed 规则，并在 disabled 分支复位其反馈；光标按用户确认使用普通 `default` 箭头。
 - 通过容器状态 class 给内置 On/Off 标签同步置灰，避免依赖相邻兄弟选择器而遗漏 `labelPosition="start"`。
+
+## 2026-08-27：Switch 专属视觉基线取景
+
+- Switch 专属 Light/Dark 截图只捕获原生控件本体；禁用标签继续由 `controls-light/dark` 聚合基线覆盖。
+- 不放宽全局 `maxDiffPixelRatio`，以避免掩盖真实控件视觉回归；这样可规避 Windows Chromium 在极小文字裁剪上的固定像素差异，同时保留 Switch 几何与灰化效果的专属回归。

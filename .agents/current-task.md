@@ -6,6 +6,7 @@
 
 - 保持原有 Props、DOM 结构和交互 API；禁用态使用普通箭头光标，排除 hover/pressed 反馈并灰化 Switch 与标签。
 - 新增单元和 Light/Dark 浏览器回归；验证通过 lint、typecheck、175 个单测、production build 和 105 个 Playwright 用例。
+- 为解决 CI Windows Chromium 在 110x21 小截图中文字裁剪上的固定像素差异，Switch 专属 Light/Dark 基线改为只捕获控件本体；聚合 `controls-light/dark` 基线继续覆盖禁用标签视觉，未放宽全局差异阈值。
 
 最近完成：按用户提供的 Windows 11 浮层参考图，统一 P0/P1 浮层组件的阴影质感，并完成 ComboBox / NumberBox 箭头、NavigationView 整行 hover、SettingsCard 阴影与 AutoSuggestBox（含聚焦 + Hover、文本/箭头 cursor、focus underline、动作按钮 Hover feedback）视觉微调。
 
