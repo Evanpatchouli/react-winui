@@ -62,6 +62,7 @@ import {
   AutoSuggestBox,
   Button,
   CommandBar,
+  DatePicker,
   InputText,
   NavigationView,
   Popover,

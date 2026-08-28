@@ -79,6 +79,16 @@ export type {
   DialogProps,
   DialogSlotProps
 } from "./components/Dialog";
+export { default as DatePicker } from "./components/DatePicker";
+export type {
+  DatePickerOpenChangeEvent,
+  DatePickerOpenChangeHandler,
+  DatePickerProps,
+  DatePickerValidationError,
+  DatePickerValue,
+  DatePickerValueChangeEvent,
+  DatePickerValueChangeHandler
+} from "./components/DatePicker";
 export { default as Expander } from "./components/Expander";
 export type {
   ExpanderDirection,

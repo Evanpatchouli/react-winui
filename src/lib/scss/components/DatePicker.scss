@@ -1,0 +1,258 @@
+@use "./_base/parents" as *;
+
+.ui-date-picker {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  width: fit-content;
+  color: var(--rwu-color-text-primary);
+}
+
+.ui-date-picker-label {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--rwu-control-height);
+  padding: 0 var(--rwu-spacing-lg);
+  color: var(--rwu-color-text-primary);
+  font-size: var(--rwu-font-size-label);
+}
+
+.ui-date-picker-field {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.ui-date-picker-input {
+  @extend .input-field-default;
+  min-width: calc((var(--rwu-control-height) * 5) + var(--rwu-spacing-2xl));
+  padding-right: calc(var(--rwu-control-height) + var(--rwu-spacing-lg));
+}
+
+.ui-date-picker-field:focus-within .ui-date-picker-input {
+  @extend .input-field-focused;
+}
+
+.ui-date-picker-calendar-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: var(--rwu-control-height);
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: var(--rwu-radius-control);
+  color: var(--rwu-color-text-primary);
+  background: transparent;
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    background: var(--rwu-color-surface-control-hover);
+  }
+
+  &:active:not(:disabled) {
+    background: var(--rwu-color-surface-control-pressed);
+  }
+
+  &:focus-visible {
+    z-index: 1;
+    outline: 1px solid var(--rwu-color-accent);
+    outline-offset: -2px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.ui-date-picker-calendar-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--rwu-control-height);
+  height: var(--rwu-control-height);
+  pointer-events: none;
+
+  &::before {
+    content: "\f1cb";
+    font-family: icons10;
+    font-size: var(--rwu-font-size-control);
+    line-height: 1;
+  }
+}
+
+.ui-date-picker-popup {
+  position: fixed;
+  z-index: 1000;
+  box-sizing: border-box;
+  width: calc(
+    (var(--rwu-control-height) * 7) + (var(--rwu-spacing-xs) * 6) + (var(--rwu-spacing-lg) * 2)
+  );
+  padding: var(--rwu-spacing-lg);
+  border: 1px solid var(--rwu-color-border-flyout);
+  border-radius: var(--rwu-radius-flyout);
+  color: var(--rwu-color-text-primary);
+  background: var(--rwu-color-surface-flyout);
+  box-shadow: var(--rwu-shadow-overlay);
+}
+
+.ui-date-picker-header {
+  display: grid;
+  grid-template-columns: var(--rwu-control-height) 1fr var(--rwu-control-height);
+  align-items: center;
+  gap: var(--rwu-spacing-md);
+  margin-bottom: var(--rwu-spacing-md);
+}
+
+.ui-date-picker-month {
+  margin: 0;
+  font-size: var(--rwu-font-size-control);
+  font-weight: 600;
+  line-height: var(--rwu-control-height);
+  text-align: center;
+}
+
+.ui-date-picker-nav-button,
+.ui-date-picker-today-button {
+  min-width: var(--rwu-control-height);
+  min-height: var(--rwu-control-height);
+  border: 1px solid transparent;
+  border-radius: var(--rwu-radius-small);
+  color: var(--rwu-color-text-primary);
+  background: transparent;
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    background: var(--rwu-color-surface-control-hover);
+  }
+
+  &:active:not(:disabled) {
+    background: var(--rwu-color-surface-control-pressed);
+  }
+
+  &:focus-visible {
+    outline: 1px solid var(--rwu-color-accent);
+    outline-offset: -1px;
+  }
+
+  &:disabled {
+    color: var(--rwu-color-text-disabled);
+    cursor: not-allowed;
+  }
+}
+
+.ui-date-picker-nav-icon {
+  display: inline-block;
+  width: var(--rwu-spacing-sm);
+  height: var(--rwu-spacing-sm);
+  border-top: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+}
+
+.ui-date-picker-nav-previous {
+  transform: rotate(-135deg);
+}
+
+.ui-date-picker-nav-next {
+  transform: rotate(45deg);
+}
+
+.ui-date-picker-grid {
+  display: grid;
+  gap: var(--rwu-spacing-xs);
+}
+
+.ui-date-picker-weekdays,
+.ui-date-picker-days {
+  display: grid;
+  grid-template-columns: repeat(7, var(--rwu-control-height));
+  gap: var(--rwu-spacing-xs);
+}
+
+.ui-date-picker-weekdays {
+  margin-bottom: var(--rwu-spacing-xs);
+}
+
+.ui-date-picker-weekday {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--rwu-control-height);
+  color: var(--rwu-color-text-secondary);
+  font-size: var(--rwu-font-size-control);
+  line-height: 1;
+}
+
+.ui-date-picker-day {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--rwu-control-height);
+  height: var(--rwu-control-height);
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--rwu-radius-small);
+  color: var(--rwu-color-text-primary);
+  background: transparent;
+  cursor: pointer;
+  font-size: var(--rwu-font-size-control);
+  line-height: 1;
+
+  &:hover:not(:disabled) {
+    background: var(--rwu-color-surface-control-hover);
+  }
+
+  &:active:not(:disabled) {
+    background: var(--rwu-color-surface-control-pressed);
+  }
+
+  &:focus-visible {
+    z-index: 1;
+    outline: 1px solid var(--rwu-color-accent);
+    outline-offset: -1px;
+  }
+
+  &:disabled {
+    color: var(--rwu-color-text-disabled);
+    cursor: not-allowed;
+  }
+}
+
+.ui-date-picker-day-outside {
+  color: var(--rwu-color-text-secondary);
+}
+
+.ui-date-picker-day-selected {
+  border-color: var(--rwu-color-border-control-on-accent);
+  color: var(--rwu-color-text-on-accent);
+  background: var(--rwu-color-accent);
+
+  &:hover:not(:disabled) {
+    background: var(--rwu-color-accent);
+    filter: brightness(0.9);
+  }
+}
+
+.ui-date-picker-day-today:not(.ui-date-picker-day-selected) {
+  box-shadow: inset 0 -2px 0 var(--rwu-color-accent);
+}
+
+.ui-date-picker-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--rwu-spacing-md);
+  padding-top: var(--rwu-spacing-md);
+  border-top: 1px solid var(--rwu-color-border-divider);
+}
+
+.ui-date-picker-today-button {
+  padding: 0 var(--rwu-spacing-md);
+  color: var(--rwu-color-accent);
+}
+
+@media (max-width: 480px) {
+  .ui-date-picker-popup {
+    max-width: calc(100vw - (var(--rwu-spacing-md) * 2));
+    overflow-x: auto;
+  }
+}

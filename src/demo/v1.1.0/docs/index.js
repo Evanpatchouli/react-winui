@@ -15,6 +15,7 @@ export { default as ComboBoxDocs } from "./ComboBox_docs";
 export { default as CommandBarDocs } from "./CommandBar_docs";
 export { default as ContextMenuDocs } from "./ContextMenu_docs";
 export { default as DialogDocs } from "./Dialog_docs";
+export { default as DatePickerDocs } from "./DatePicker_docs";
 export { default as ExpanderDocs } from "./Expander_docs";
 export { default as ImageViewDocs } from "./ImageView_docs";
 export { default as InfoBarDocs } from "./InfoBar_docs";
