@@ -156,21 +156,10 @@
 }
 
 .ui-data-grid-selection-control {
-  width: var(--rwu-spacing-lg);
-  height: var(--rwu-spacing-lg);
+  width: var(--rwu-selection-control-size);
+  height: var(--rwu-selection-control-size);
   margin: 0;
-  accent-color: var(--rwu-color-accent);
-  cursor: pointer;
   vertical-align: middle;
-
-  &:disabled {
-    cursor: not-allowed;
-  }
-
-  &:focus-visible {
-    outline: 1px solid var(--rwu-color-accent);
-    outline-offset: 2px;
-  }
 }
 
 .ui-data-grid-empty-row {

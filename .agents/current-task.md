@@ -1,5 +1,19 @@
 # 当前任务
 
+## 2026-08-28：DataGrid/Checkbox 共享 SelectionControl 重构
+
+目标：在已提交的 DataGrid 基础上抽取内部共享 `SelectionControl`，让 `Checkbox` 与 DataGrid 复用 checkbox/radio/indeterminate 的输入状态和视觉基础，同时保持现有 `Checkbox` 公共 API、DOM 语义与 DataGrid 行为兼容。
+
+约束：这是 DataGrid 交付后的架构修正，不新增公开 `SelectionControl` 导出；不修改 Checkbox 的现有调用方式，不把任意 input type 扩展成 Checkbox 公共能力，不引入 Fluent 视觉 token；完成后必须复验 Checkbox、DataGrid、consumer、Light/Dark 浏览器回归和完整质量检查。
+
+当前状态：已提交 DataGrid 基线（`6031edd`），共享 `SelectionControl` 已实现并完成交付验证。
+
+预定边界：`SelectionControl` 仅作为内部低层 input primitive，支持 `checkbox` / `radio`、controlled/uncontrolled checked、`indeterminate`、原生 input 属性、forwarded ref 与 change 事件；Checkbox 继续负责 label wrapper 和 legacy props，DataGrid 继续负责表格选择模型、行标签与批量选择逻辑。
+
+验证摘要：`pnpm lint`、`pnpm typecheck`、`pnpm test`（19 files / 199 tests）、`pnpm build`、`pnpm test:consumer`、`pnpm --filter @evanpatchouli/react-winui pack --dry-run`、定向格式检查、DataGrid/Control 定向 Playwright 与完整 Playwright（119/119）均通过；只保留既有 docs 大 chunk warning。
+
+---
+
 ## 2026-08-28：阶段 7 P2 DataGrid
 
 目标：在 Calendar 完成后新增独立 `DataGrid`，完成 root/subpath exports、Sass、TypeScript 声明、consumer、RTL、Playwright 交互/Light-Dark 视觉回归、docs Demo 与阶段交接记录。

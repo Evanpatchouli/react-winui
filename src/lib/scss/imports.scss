@@ -1,6 +1,7 @@
 @use "./themes/main" as themes;
 @use "./components/_base/parents";
 @use "./components/_base/utils";
+@use "./components/_base/selection-control";
 
 @use "./components/AppContainer";
 @use "./components/Body";

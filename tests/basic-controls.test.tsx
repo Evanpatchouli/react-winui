@@ -68,6 +68,21 @@ describe("Checkbox", () => {
     expect(onChange).toHaveBeenCalledTimes(1);
   });
 
+  it("uses the shared selection control for indeterminate state and refs", () => {
+    const ref = createRef<HTMLInputElement>();
+
+    render(<Checkbox aria-label="Partial selection" indeterminate ref={ref} />);
+
+    const checkbox = screen.getByRole("checkbox", { name: "Partial selection" });
+    expect(checkbox).toHaveClass(
+      "ui-selection-control",
+      "ui-selection-control-checkbox",
+      "ui-checkbox"
+    );
+    expect(checkbox).toHaveProperty("indeterminate", true);
+    expect(ref.current).toBe(checkbox);
+  });
+
   it("renders the disabled state", () => {
     render(<Checkbox label="Remember me" disabled />);
 

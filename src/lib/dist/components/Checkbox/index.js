@@ -1,17 +1,17 @@
-import { forwardRef as e } from "react";
-import { jsx as t, jsxs as n } from "react/jsx-runtime";
+import e from "../_common/SelectionControl.js";
+import { forwardRef as t } from "react";
+import { jsx as n, jsxs as r } from "react/jsx-runtime";
 //#region src/components/Checkbox/index.tsx
-var r = e((e, r) => /* @__PURE__ */ n("label", { children: [/* @__PURE__ */ t("input", {
-	ref: r,
-	className: "ui-checkbox",
-	...e,
-	type: "checkbox",
-	name: e.name,
-	value: e.value,
-	title: e.tooltip,
-	disabled: e.disabled,
-	onChange: e.onChange,
-	defaultChecked: e.defaultChecked
-}), e.label && /* @__PURE__ */ n("span", { children: [" ", e.label] })] }));
+var i = t((t, i) => {
+	let { className: a, indeterminate: o, label: s, title: c, tooltip: l, type: u, ...d } = t;
+	return /* @__PURE__ */ r("label", { children: [/* @__PURE__ */ n(e, {
+		...d,
+		className: a ? `ui-checkbox ${a}` : "ui-checkbox",
+		indeterminate: o,
+		ref: i,
+		type: "checkbox",
+		title: l ?? c
+	}), s && /* @__PURE__ */ r("span", { children: [" ", s] })] });
+});
 //#endregion
-export { r as default };
+export { i as default };

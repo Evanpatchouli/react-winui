@@ -12,6 +12,7 @@ export interface RadioButtonProps extends Omit<
   InputHTMLAttributes<HTMLInputElement>,
   "type" | "value" | "onChange"
 > {
+  /** @deprecated RadioButton always renders an input with type="radio". */
   type?: HTMLInputTypeAttribute;
   value?: InputHTMLAttributes<HTMLInputElement>["value"];
   label?: ReactNode;

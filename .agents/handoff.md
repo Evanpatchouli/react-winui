@@ -501,3 +501,14 @@
 - 新增 `docs/data-grid.md`、README 示例、v1.0.0/v1.1.0 docs Demo、路由/搜索/导航入口；新增 `tests/data-grid.test.tsx`（9 tests）及 DataGrid 浏览器交互和 Light/Dark 视觉基线。
 - 验证通过：`pnpm lint`、`pnpm typecheck`、`pnpm test`（19 files / 198 tests）、`pnpm build`、`pnpm test:consumer`、`pnpm --filter @evanpatchouli/react-winui pack --dry-run`、`pnpm format:check:data-grid`、定向 Playwright（5/5）和完整 Playwright（119/119）。docs build 仅保留既有大 chunk warning。
 - 当前任务已完成；P2 下一项为 `TeachingTip`，本批未提交 Git commit，等待后续任务指示。
+
+# 2026-08-28：DataGrid/Checkbox 共享 SelectionControl 重构
+
+- 已先将 DataGrid 基线独立提交为 `6031edd`（`feat(data-grid): 添加 DataGrid 组件`），后续共享控件重构保持在未提交工作树中，便于继续审阅和单独提交。
+- 新增内部 `src/lib/src/components/_common/SelectionControl.tsx`，统一 checkbox/radio 的原生 input 属性转发、forwarded ref、controlled/uncontrolled checked 和 `indeterminate` DOM 状态；不新增公开 `SelectionControl` 导出。
+- `Checkbox` 保留原有 label wrapper、`ui-checkbox` class、tooltip/value/onChange 等公共 API，并新增可选 `indeterminate`；legacy `type` 继续接受但明确标记 deprecated，因为语义仍固定为 checkbox。
+- `RadioButton` 复用 radio 变体，DataGrid 的多选/全选和单选行均改用 SelectionControl；DataGrid 负责选择模型和行语义，SelectionControl 负责输入状态与视觉。
+- 共享样式抽到 `src/lib/scss/components/_base/_selection-control.scss`，Checkbox/RadioButton 原 class 作为兼容标记保留；普通 Checkbox 不强加新的行盒尺寸，DataGrid 通过局部 class 处理单元格尺寸，避免影响旧 Accordion/Controls 取景。
+- 新增 Checkbox indeterminate/ref、DataGrid shared class/indeterminate、RadioButton shared radio variant 单测；受影响的 controls、selection、DataGrid Light/Dark 基线已显式更新并检查。
+- 验证通过：`pnpm lint`、`pnpm typecheck`、`pnpm test`（19 files / 199 tests）、`pnpm build`、`pnpm test:consumer`、`pnpm --filter @evanpatchouli/react-winui pack --dry-run`、定向格式检查、完整 Playwright（119/119）。docs build 仅保留既有大 chunk warning。
+- 当前重构已完成；本次提交后进入阶段 7 P2 下一项 `TeachingTip`。

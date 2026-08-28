@@ -21,6 +21,7 @@ import type {
   RefAttributes,
   SyntheticEvent
 } from "react";
+import SelectionControl from "../_common/SelectionControl";
 
 /** A stable identifier for a DataGrid row. */
 export type DataGridRowId = string | number;
@@ -340,7 +341,6 @@ const DataGridInner = <T,>(
 ) => {
   const rootRef = useRef<HTMLDivElement>(null);
   const labelId = useId();
-  const selectAllCheckboxRef = useRef<HTMLInputElement>(null);
   const resolvedItems = items ?? [];
   const resolvedColumns = columns ?? [];
   const [uncontrolledSortState, setUncontrolledSortState] = useState<DataGridSortState | null>(
@@ -404,15 +404,6 @@ const DataGridInner = <T,>(
   const allSelectableRowsSelected =
     selectableRowIds.length > 0 && selectableRowIds.every((rowId) => selectedRowIdSet.has(rowId));
   const someSelectableRowsSelected = selectableRowIds.some((rowId) => selectedRowIdSet.has(rowId));
-
-  useEffect(() => {
-    if (!selectAllCheckboxRef.current) {
-      return;
-    }
-
-    selectAllCheckboxRef.current.indeterminate =
-      someSelectableRowsSelected && !allSelectableRowsSelected;
-  }, [allSelectableRowsSelected, someSelectableRowsSelected]);
 
   useEffect(() => {
     setFocusedCell((previous) => {
@@ -743,12 +734,12 @@ const DataGridInner = <T,>(
                   scope="col"
                 >
                   {selectionMode === "multiple" ? (
-                    <input
-                      ref={selectAllCheckboxRef}
+                    <SelectionControl
                       aria-label={selectAllAriaLabel}
                       checked={allSelectableRowsSelected}
                       className="ui-data-grid-selection-control"
                       disabled={disabled || selectableRows.length === 0}
+                      indeterminate={someSelectableRowsSelected && !allSelectableRowsSelected}
                       type="checkbox"
                       onChange={toggleSelectAll}
                     />
@@ -850,7 +841,7 @@ const DataGridInner = <T,>(
                   >
                     {selectionMode !== "none" ? (
                       <td aria-colindex={1} className="ui-data-grid-selection-cell" role="gridcell">
-                        <input
+                        <SelectionControl
                           aria-label={`${selectionAriaLabel}: ${rowLabel}`}
                           checked={rowSelected}
                           className="ui-data-grid-selection-control"

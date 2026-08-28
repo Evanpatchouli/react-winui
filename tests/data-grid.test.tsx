@@ -157,6 +157,7 @@ describe("DataGrid", () => {
     );
 
     const appleRadio = screen.getByRole("radio", { name: "Select row: Apple" });
+    expect(appleRadio).toHaveClass("ui-selection-control", "ui-selection-control-radio");
     fireEvent.click(appleRadio);
 
     expect(appleRadio).toBeChecked();
@@ -183,9 +184,17 @@ describe("DataGrid", () => {
     );
 
     const selectAll = screen.getByRole("checkbox", { name: "Select all rows" });
+    const bananaCheckbox = screen.getByRole("checkbox", { name: "Select row: Banana" });
+    expect(selectAll).toHaveClass(
+      "ui-selection-control",
+      "ui-selection-control-checkbox",
+      "ui-data-grid-selection-control"
+    );
+    fireEvent.click(bananaCheckbox);
+    expect(selectAll).toHaveProperty("indeterminate", true);
     fireEvent.click(selectAll);
     expect(onSelectionChange).toHaveBeenLastCalledWith(["banana", "carrot"], expect.anything());
-    expect(screen.getByRole("checkbox", { name: "Select row: Banana" })).toBeChecked();
+    expect(bananaCheckbox).toBeChecked();
     expect(screen.getByRole("checkbox", { name: "Select row: Apple" })).not.toBeChecked();
     expect(screen.getByRole("checkbox", { name: "Select row: Apple" })).toBeDisabled();
 

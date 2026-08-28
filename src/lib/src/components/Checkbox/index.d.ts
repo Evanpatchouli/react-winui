@@ -12,10 +12,12 @@ export interface CheckboxProps extends Omit<
   InputHTMLAttributes<HTMLInputElement>,
   "type" | "value" | "onChange"
 > {
+  /** @deprecated Checkbox always renders an input with type="checkbox". */
   type?: HTMLInputTypeAttribute;
   value?: InputHTMLAttributes<HTMLInputElement>["value"];
   label?: ReactNode;
   tooltip?: string;
+  indeterminate?: boolean;
   onChange?: ChangeEventHandler<HTMLInputElement>;
 }
 

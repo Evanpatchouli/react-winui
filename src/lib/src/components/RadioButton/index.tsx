@@ -5,12 +5,14 @@ import type {
   InputHTMLAttributes,
   ReactNode
 } from "react";
+import SelectionControl from "../_common/SelectionControl";
 
 /** Props for the Windows-styled radio button component. */
 export interface RadioButtonProps extends Omit<
   InputHTMLAttributes<HTMLInputElement>,
   "type" | "value" | "onChange"
 > {
+  /** @deprecated RadioButton always renders an input with type="radio". */
   type?: HTMLInputTypeAttribute;
   value?: InputHTMLAttributes<HTMLInputElement>["value"];
   label?: ReactNode;
@@ -19,20 +21,33 @@ export interface RadioButtonProps extends Omit<
 }
 
 const RadioButton = forwardRef<HTMLInputElement, RadioButtonProps>((props, ref) => {
-  const { name, value, label, tooltip, disabled, onChange, defaultChecked, ...otherProps } = props;
+  const {
+    className,
+    defaultChecked,
+    disabled,
+    label,
+    name,
+    onChange,
+    title,
+    tooltip,
+    type: _legacyType,
+    value,
+    ...otherProps
+  } = props;
 
   return (
     <label title={tooltip}>
-      <input
-        ref={ref}
+      <SelectionControl
         {...otherProps}
-        className="ui-radio-btn"
+        className={className ? `ui-radio-btn ${className}` : "ui-radio-btn"}
+        defaultChecked={defaultChecked}
+        disabled={disabled}
+        ref={ref}
         type="radio"
         name={name}
         value={value}
-        disabled={disabled}
         onChange={onChange}
-        defaultChecked={defaultChecked}
+        title={title}
       />
       {label && <span> {label}</span>}
     </label>

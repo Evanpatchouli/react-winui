@@ -234,6 +234,15 @@
 - 对根节点上的键盘处理要保留原生 `onKeyDown` 属性转发能力，并通过 root handler 统一处理 grid 内 bubbling 事件；这样不会限制消费者把 handler 绑定到日期按钮之外的 Calendar surface。
 - 本批验证通过：Calendar 单元 7/7、定向 Playwright 4/4、完整 Playwright 114/114、lint、typecheck、build、consumer build 与 pack dry-run；全量格式检查仍受历史 P1 差异影响。
 
+# 2026-08-28：共享 SelectionControl 的兼容性回归
+
+- JSX 中 `{...props}` 后面的显式 `type` 会覆盖调用方传入的 `type`；固定语义组件应在类型和实现中明确说明，而不是暴露一个运行时无效的通用 type 参数。
+- `indeterminate` 不是普通 React input attribute，必须通过 ref 设置 DOM property；共享 primitive 集中处理该 effect 后，DataGrid 不再重复维护同一状态。
+- 抽取公共样式时不能给 legacy wrapper 统一施加宽高或 vertical-align；Checkbox 的伪元素尺寸与 label 行盒耦合，尺寸应留在 radio/DataGrid 的局部场景，避免影响 Accordion 等既有截图。
+- DataGrid selection control 同时需要 checkbox 和 radio，复用 Checkbox 组件本身不足以覆盖 single mode；低层 type variant 比在 DataGrid 里硬编码另一份 input 更适合长期维护。
+- 共享控件重构后必须同时检查普通 Checkbox、RadioButton、DataGrid 多选/半选/单选，以及 controls/selection/DataGrid Light/Dark 截图；只看 DataGrid 自己的截图会遗漏旧组件布局回归。
+- 本批验证通过：单测 199/199、consumer build、pack dry-run、lint、typecheck、library/docs build、完整 Playwright 119/119；一次受 Checkbox 行盒影响的 Accordion 3px 高度差异已通过收回基类尺寸约束解决，未更新无关基线。
+
 # 2026-08-28：DataGrid 的网格交互与交付回归
 
 - 原生 table 与 ARIA grid 组合时，列标题中的排序 button 需要拥有独立可读名称；测试应分别限定 `columnheader`、排序 button、`row` 与 `gridcell`，避免页面级 locator 因语义嵌套产生歧义。

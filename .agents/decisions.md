@@ -364,3 +364,12 @@
 - selection control 的点击属于 interactive target，不触发行级 `onRowClick`；select-all 只处理当前可选行，disabled row 永远不被批量选中。
 - DataGrid 视觉只使用现有 `--rwu-*` token 和既有 WinUI 风格表面，不复制 Fluent UI/WinUI 实现代码，也不引入 Fluent visual token；因此不新增第三方源码声明。
 - 浏览器 fixture 放在 gallery 末尾，避免新增 panel 改变既有全页与浮层截图取景；Light/Dark DataGrid 基线独立显式维护。
+
+## 2026-08-28：SelectionControl 共享控件边界
+
+- 采用内部 `SelectionControl` 而不是公开新组件：它是 Checkbox、RadioButton 和 DataGrid 之间的低层 input primitive，不承担 label、行选择模型或表格业务语义。
+- `SelectionControl` 的 `type` 限定为 `checkbox` / `radio`，并将 `indeterminate` 转换为原生 input DOM 属性；Checkbox 的历史 `type` 参数继续兼容但标记 deprecated，避免把“固定 checkbox”误解成通用 input。
+- 共享视觉集中在 `.ui-selection-control`、checkbox/radio 变体和现有 `--rwu-*` token；保留 `.ui-checkbox` / `.ui-radio-btn` class 作为兼容标记，DataGrid 只增加局部布局 class，不复制状态样式。
+- 普通 Checkbox 不由共享基类强加宽高和 vertical-align，避免改变 legacy label 行盒；radio 与 DataGrid selection control 在各自需要的场景声明尺寸，保持旧组件布局稳定。
+- DataGrid 的 select-all 半选状态由 SelectionControl 统一维护，移除 DataGrid 自己重复设置 `input.indeterminate` 的 effect；选择列仍使用原生 checkbox/radio 语义。
+- 这次重构不改变 Checkbox/RadioButton 的公开调用方式，不新增 package export，不引入 Fluent visual recipe；新增 Checkbox `indeterminate` 仅为向后兼容的 additive API。

@@ -1,22 +1,24 @@
-import { forwardRef as e } from "react";
-import { jsx as t, jsxs as n } from "react/jsx-runtime";
+import e from "../_common/SelectionControl.js";
+import { forwardRef as t } from "react";
+import { jsx as n, jsxs as r } from "react/jsx-runtime";
 //#region src/components/RadioButton/index.tsx
-var r = e((e, r) => {
-	let { name: i, value: a, label: o, tooltip: s, disabled: c, onChange: l, defaultChecked: u, ...d } = e;
-	return /* @__PURE__ */ n("label", {
-		title: s,
-		children: [/* @__PURE__ */ t("input", {
-			ref: r,
-			...d,
-			className: "ui-radio-btn",
+var i = t((t, i) => {
+	let { className: a, defaultChecked: o, disabled: s, label: c, name: l, onChange: u, title: d, tooltip: f, type: p, value: m, ...h } = t;
+	return /* @__PURE__ */ r("label", {
+		title: f,
+		children: [/* @__PURE__ */ n(e, {
+			...h,
+			className: a ? `ui-radio-btn ${a}` : "ui-radio-btn",
+			defaultChecked: o,
+			disabled: s,
+			ref: i,
 			type: "radio",
-			name: i,
-			value: a,
-			disabled: c,
-			onChange: l,
-			defaultChecked: u
-		}), o && /* @__PURE__ */ n("span", { children: [" ", o] })]
+			name: l,
+			value: m,
+			onChange: u,
+			title: d
+		}), c && /* @__PURE__ */ r("span", { children: [" ", c] })]
 	});
 });
 //#endregion
-export { r as default };
+export { i as default };
