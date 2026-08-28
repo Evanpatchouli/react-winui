@@ -44,3 +44,4 @@ export { default as TableViewDocs } from "./TableView_docs";
 export { default as TooltipDocs } from "./Tooltip_docs";
 export { default as ToastDocs } from "./Toast_docs";
 export { default as TreeViewDocs } from "./TreeView_docs";
+export { default as TeachingTipDocs } from "./TeachingTip_docs";

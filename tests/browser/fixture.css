@@ -153,6 +153,25 @@ body {
   margin-top: 24px;
 }
 
+.visual-fixture-teaching-tips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.visual-fixture-teaching-tip-hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 72px;
+  color: var(--rwu-color-accent);
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
 .visual-fixture-command-bars {
   display: grid;
   gap: 16px;

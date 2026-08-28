@@ -20,7 +20,8 @@ import {
   TreeItem,
   TreeView,
   Toast,
-  Toaster
+  Toaster,
+  TeachingTip
 } from "@evanpatchouli/react-winui";
 import ButtonDirect from "@evanpatchouli/react-winui/button";
 import AutoSuggestBoxDirect from "@evanpatchouli/react-winui/auto-suggest-box";
@@ -40,6 +41,7 @@ import SettingsCardDirect from "@evanpatchouli/react-winui/settings-card";
 import SettingsExpanderDirect from "@evanpatchouli/react-winui/settings-expander";
 import TreeViewDirect, { TreeItem as TreeItemDirect } from "@evanpatchouli/react-winui/tree-view";
 import ToastDirect, { Toaster as ToasterDirect } from "@evanpatchouli/react-winui/toast";
+import TeachingTipDirect from "@evanpatchouli/react-winui/teaching-tip";
 import { Shadows } from "@evanpatchouli/react-winui/theme";
 import "@evanpatchouli/react-winui/config/app-config.css";
 import "@evanpatchouli/react-winui/styles.css";
@@ -143,6 +145,12 @@ const ConsumerApp = () => {
       <FlyoutDirect content="Direct Flyout">
         <Button value="Direct Flyout" />
       </FlyoutDirect>
+      <TeachingTip content="Root teaching tip" defaultOpen title="Root TeachingTip">
+        <Button value="Root TeachingTip target" />
+      </TeachingTip>
+      <TeachingTipDirect content="Direct teaching tip" title="Direct TeachingTip">
+        <Button value="Direct TeachingTip target" />
+      </TeachingTipDirect>
       <InfoBar open closable={false} message="Root InfoBar" />
       <InfoBarDirect open closable={false} message="InfoBar subpath" severity="success" />
       <NumberBox aria-label="Root NumberBox" defaultValue={2} min={0} max={10} />

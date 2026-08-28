@@ -373,3 +373,12 @@
 - 普通 Checkbox 不由共享基类强加宽高和 vertical-align，避免改变 legacy label 行盒；radio 与 DataGrid selection control 在各自需要的场景声明尺寸，保持旧组件布局稳定。
 - DataGrid 的 select-all 半选状态由 SelectionControl 统一维护，移除 DataGrid 自己重复设置 `input.indeterminate` 的 effect；选择列仍使用原生 checkbox/radio 语义。
 - 这次重构不改变 Checkbox/RadioButton 的公开调用方式，不新增 package export，不引入 Fluent visual recipe；新增 Checkbox `indeterminate` 仅为向后兼容的 additive API。
+
+## 2026-08-28：TeachingTip API 与行为边界
+
+- `TeachingTip` 作为独立的内容型目标浮层，不把现有 `Popover` 的通用 API 直接暴露成 TeachingTip；它保留 `children` target，增加 title/subtitle/content/icon/hero/action 等 WinUI TeachingTip 概念，并支持 controlled/uncontrolled visibility。
+- 默认使用显式关闭：目标点击打开，close button、action 或 Escape 关闭，outside pointer 保持打开；`isLightDismiss` 隐藏 close button 并启用 outside pointer 关闭。为此在 Popover 增加 `closeOnOutsideClick`，默认 `true`，不改变既有 Popover / Flyout 行为。
+- TeachingTip 只支持当前 Popover 已有的 `top` / `bottom` / `left` / `right` 四侧 placement；WinUI 更完整的 placement 矩阵、非目标根边缘、持久化提示队列和 carousel 留在后续范围。
+- 目标使用 `aria-controls`、`aria-expanded`、`aria-haspopup="dialog"`，浮层使用自动标题/副标题关系；interactive content 由 Popover trap focus 处理，TeachingTip 在显式模式补充 controlled click 后的 close-button focus 和 close 后 target restore。
+- WinUI 参考目标定位、显式/light-dismiss、title/subtitle/action/hero/icon；Fluent UI React v9 仅参考 TeachingPopover 对 Popover、箭头默认值、focus trap 和受控状态的组合方式；没有复制源码、Griffel 或 Fluent token。
+- 视觉 fixture 继续追加到 gallery 末尾，TeachingTip Light/Dark 基线独立维护；视觉样式只消费现有 `--rwu-*` token。

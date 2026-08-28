@@ -50,7 +50,8 @@ import {
   TooltipDocs,
   PopoverDocs,
   ToastDocs,
-  TreeViewDocs
+  TreeViewDocs,
+  TeachingTipDocs
 } from "./docs";
 
 import { lib_version } from "./values";
@@ -128,6 +129,7 @@ const AppFourTwoThree = () => {
             {text: "settingsexpander", link: 'settingsexpander'},
             {text: "tooltip", link: 'tooltip'},
             {text: "treeview", link: 'treeview'}
+            ,{text: "teachingtip", link: 'teachingtip'}
           ]}
         />
 
@@ -236,6 +238,7 @@ const AppFourTwoThree = () => {
           <Route path="tooltip" element={<TooltipDocs/>} />
           <Route path="toast" element={<ToastDocs/>} />
           <Route path="treeview" element={<TreeViewDocs/>} />
+          <Route path="teachingtip" element={<TeachingTipDocs/>} />
 
           <Route path="icons" element={<Icons/>} />
         </Routes>

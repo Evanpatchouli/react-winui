@@ -164,3 +164,12 @@ Popover / Flyout 是阶段 7 的首个组件组，当前约定如下：
 - 已覆盖 unit、RTL、controlled/uncontrolled、hover delay、outside click、Escape、focus trap、consumer、docs 和 light / dark visual regression。
 
 后续组件应沿用本规范，但只实现当前组件实际需要的能力，不提前扩展通用抽象。
+
+## 13. TeachingTip 模板
+
+TeachingTip 复用 Popover 的 portal、定位、箭头、焦点陷阱和 Escape 行为，但通过自己的内容布局表达 Windows 引导提示，而不是引入新的浮层视觉 recipe。
+
+- API 支持单一目标、受控/非受控可见性、标题、副标题、主体内容、icon、hero、action、四侧定位、显式关闭和 `isLightDismiss`。
+- 默认显式关闭模式保留 close button，并忽略 outside pointer；`isLightDismiss` 隐藏 close button，仅启用 outside pointer 关闭。
+- 目标与浮层通过 `aria-controls`、`aria-expanded`、`aria-haspopup`、`aria-labelledby` 和 `aria-describedby` 连接；action 的 `preventDefault()` 可以保留提示打开。
+- 视觉只消费现有 `--rwu-*` token；当前不扩展 WinUI 完整 placement 矩阵、持久化提示队列、轮播内容或非目标根边缘定位。

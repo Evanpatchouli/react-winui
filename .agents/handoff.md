@@ -512,3 +512,13 @@
 - 新增 Checkbox indeterminate/ref、DataGrid shared class/indeterminate、RadioButton shared radio variant 单测；受影响的 controls、selection、DataGrid Light/Dark 基线已显式更新并检查。
 - 验证通过：`pnpm lint`、`pnpm typecheck`、`pnpm test`（19 files / 199 tests）、`pnpm build`、`pnpm test:consumer`、`pnpm --filter @evanpatchouli/react-winui pack --dry-run`、定向格式检查、完整 Playwright（119/119）。docs build 仅保留既有大 chunk warning。
 - 当前重构已完成；本次提交后进入阶段 7 P2 下一项 `TeachingTip`。
+
+# 2026-08-28：阶段 7 P2 TeachingTip
+
+- 新增 `TeachingTip`，以单一目标元素为锚点，支持 `title`、`subtitle`、`content`、`icon`、top/bottom `heroContent`、`action`、受控/非受控可见性、四侧 placement、显式 close、`isLightDismiss`、disabled 和 surface customization。
+- 复用 `Popover` 的 portal、定位 fallback、箭头、focus trap、Escape 和 ARIA trigger 连接；Popover 新增 `closeOnOutsideClick` additive prop，默认值为 `true`，既有调用行为保持不变，TeachingTip 显式模式可忽略 outside pointer。
+- explicit / light-dismiss 行为、焦点首选项与恢复、action cancel、标题关系和 disabled controlled state 已由 RTL/Playwright 覆盖；没有复制 Fluent UI 或 WinUI 实际源码，因此不新增 `THIRD_PARTY_NOTICES.md` 条目。
+- 新增 root `docs/teaching-tip.md`、迁移规范段落、README 示例、v1.0.0/v1.1.0 docs Demo、导航/路由/search entry、root/subpath consumer 类型覆盖、Sass 与 `src/lib/dist` 发布产物。
+- 新增 `tests/teaching-tip.test.tsx`（5 tests），Playwright 新增 4 个交互/Light-Dark 场景与 `teaching-tip-light/dark` 两张显式基线；已使用 `view_image` 检查基线取景与主题表面。
+- 验证：`pnpm lint`、`pnpm typecheck`、`pnpm test`（20 files / 204 tests）、`pnpm build`、`pnpm test:consumer`、`pnpm --filter @evanpatchouli/react-winui pack --dry-run`、`pnpm format:check`、定向焦点回归（20/20）与完整 Playwright（123/123）。
+- 当前任务已完成；P2 下一项等待明确指定 `Breadcrumb`、`Tag` 或 `Badge`，本批不继续扩展组件。

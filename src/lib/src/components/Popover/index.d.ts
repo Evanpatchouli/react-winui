@@ -44,6 +44,7 @@ export interface PopoverProps {
   showDelay?: number;
   hideDelay?: number;
   closeOnScroll?: boolean;
+  closeOnOutsideClick?: boolean;
   closeOnFocusOut?: boolean;
   trapFocus?: boolean;
   autoFocus?: boolean;

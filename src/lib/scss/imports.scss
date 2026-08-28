@@ -51,6 +51,7 @@
 @use "./components/Tooltip";
 @use "./components/Toast";
 @use "./components/TreeView";
+@use "./components/TeachingTip";
 
 @use "./browsers/webkit/main" as webkit;
 @use "./browsers/mozilla/main" as mozilla;

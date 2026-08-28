@@ -1,5 +1,19 @@
 # 当前任务
 
+## 2026-08-28：阶段 7 P2 TeachingTip
+
+目标：新增一个面向功能发现与上下文指导的 Windows 风格 `TeachingTip`，完成 Popover 复用、TypeScript 公共类型、root/subpath exports、Sass、consumer、RTL、Playwright 交互与 Light/Dark 视觉回归、docs Demo 和阶段交接记录。
+
+当前状态：TeachingTip 已实现并完成交付验证；本批没有复制 Fluent UI / WinUI 源码，也没有引入 Fluent visual token。
+
+预定边界：支持单一目标元素、受控/非受控 open、title/subtitle/content、icon、top/bottom hero、action、四侧 placement、显式 close、`isLightDismiss`、ARIA 关系、focus trap、Escape 和 focus restore；不扩展 WinUI 完整 placement 矩阵、非目标根边缘定位、持久化提示队列或 carousel。
+
+实现要点：TeachingTip 复用 Popover 的 portal、定位、箭头、outside pointer 基础和键盘处理；Popover 增加保持默认行为不变的 additive `closeOnOutsideClick` 开关，以区分显式关闭与 light-dismiss。为适配真实浏览器 controlled click 的焦点时序，显式模式在浮层挂载后聚焦 close button。
+
+验证摘要：`pnpm lint`、`pnpm typecheck`、`pnpm test`（20 files / 204 tests）、`pnpm build`、`pnpm test:consumer`、`pnpm --filter @evanpatchouli/react-winui pack --dry-run`、`pnpm format:check`、TeachingTip 专项格式检查、`git diff --check`、UTF-8 无 BOM 检查和完整 Playwright（123/123）均通过；TeachingTip 定向 4/4，焦点场景重复 20/20。docs build 仅保留既有大 chunk warning。
+
+---
+
 ## 2026-08-28：DataGrid/Checkbox 共享 SelectionControl 重构
 
 目标：在已提交的 DataGrid 基础上抽取内部共享 `SelectionControl`，让 `Checkbox` 与 DataGrid 复用 checkbox/radio/indeterminate 的输入状态和视觉基础，同时保持现有 `Checkbox` 公共 API、DOM 语义与 DataGrid 行为兼容。

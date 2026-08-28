@@ -57,6 +57,7 @@ import "@evanpatchouli/react-winui/icons/winui-icons.min.css";
 DatePicker API 与交互边界见 [`docs/date-picker.md`](docs/date-picker.md)。
 Calendar API 与交互边界见 [`docs/calendar.md`](docs/calendar.md)。
 DataGrid API 与交互边界见 [`docs/data-grid.md`](docs/data-grid.md)。
+TeachingTip API 与交互边界见 [`docs/teaching-tip.md`](docs/teaching-tip.md)。
 
 # Usage
 
@@ -73,6 +74,7 @@ import {
   Popover,
   SettingsCard,
   SettingsExpander,
+  TeachingTip,
   Tooltip
 } from "@evanpatchouli/react-winui";
 // Optional direct entry for smaller consumer graphs:
@@ -130,6 +132,13 @@ const App = () => (
     <Tooltip content="Supplemental information">
       <Button value="Hover or focus" />
     </Tooltip>
+    <TeachingTip
+      action={{ label: "Got it" }}
+      content="We will keep your changes synchronized on this device."
+      title="Sync is ready"
+    >
+      <Button value="Show teaching tip" />
+    </TeachingTip>
     <Popover content={<strong>Contextual actions</strong>}>
       <Button value="Open actions" />
     </Popover>

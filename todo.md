@@ -29,10 +29,10 @@
 
 ## P2
 
-- [ ] `DatePicker`：先审计现有 date input 样式与 Demo
-- [ ] `Calendar`
-- [ ] `DataGrid`：先审计现有 `TableView`
-- [ ] `TeachingTip`：优先复用 `Popover` / `Flyout` 的定位与焦点能力
+- [x] `DatePicker`：先审计现有 date input 样式与 Demo
+- [x] `Calendar`
+- [x] `DataGrid`：先审计现有 `TableView`
+- [x] `TeachingTip`：优先复用 `Popover` / `Flyout` 的定位与焦点能力
 - [ ] `Breadcrumb`
 - [ ] `Tag`
 - [ ] `Badge`：现有 `NavBarLink` 只有内部 badge 能力，需评估独立公共组件 API
@@ -66,8 +66,7 @@
 
 ## 推荐的下一步顺序
 
-1. P1 八个组件已完成并归档；下一步等待明确指定 P2 组件
-2. `DatePicker`：先审计现有 date input 样式与 Demo
-3. `Calendar` / `DataGrid`：先审计现有 `TableView`
+1. P1 八个组件与 P2 DatePicker、Calendar、DataGrid、TeachingTip 已完成并归档
+2. 下一项等待明确指定 P2 `Breadcrumb`、`Tag` 或 `Badge`
 
 一次只处理一个组件；完成并提交后再进入下一项。

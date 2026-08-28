@@ -57,6 +57,11 @@
       "import": "./dist/components/Flyout/index.js",
       "default": "./dist/components/Flyout/index.js"
     },
+    "./teaching-tip": {
+      "types": "./dist/components/TeachingTip/index.d.ts",
+      "import": "./dist/components/TeachingTip/index.js",
+      "default": "./dist/components/TeachingTip/index.js"
+    },
     "./context-menu": {
       "types": "./dist/components/ContextMenu/index.d.ts",
       "import": "./dist/components/ContextMenu/index.js",

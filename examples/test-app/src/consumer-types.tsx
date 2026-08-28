@@ -51,7 +51,8 @@ import {
   Popover,
   Flyout,
   Toast,
-  Toaster
+  Toaster,
+  TeachingTip
 } from "@evanpatchouli/react-winui";
 import type {
   ButtonProps,
@@ -214,7 +215,13 @@ import type {
   ToastOptions,
   ToastPoliteness,
   ToastPosition,
-  ToastProps
+  ToastProps,
+  TeachingTipAction,
+  TeachingTipHeroContentPlacement,
+  TeachingTipOpenChangeEvent,
+  TeachingTipOpenChangeHandler,
+  TeachingTipPlacement,
+  TeachingTipProps
 } from "@evanpatchouli/react-winui";
 import ButtonDirect from "@evanpatchouli/react-winui/button";
 import AutoSuggestBoxDirect, {
@@ -261,6 +268,9 @@ import ToastDirect, {
   type ToasterProps as ToasterDirectProps,
   type ToastProps as ToastDirectProps
 } from "@evanpatchouli/react-winui/toast";
+import TeachingTipDirect, {
+  type TeachingTipProps as TeachingTipDirectProps
+} from "@evanpatchouli/react-winui/teaching-tip";
 import NumberBoxDirect, {
   type NumberBoxProps as NumberBoxDirectProps
 } from "@evanpatchouli/react-winui/number-box";
@@ -595,6 +605,28 @@ export const flyoutPropsTypeCheck: FlyoutProps = {
   content: "Flyout content",
   children: <button type="button">Trigger</button>
 };
+export const teachingTipActionTypeCheck: TeachingTipAction = { label: "Got it" };
+export const teachingTipHeroPlacementTypeCheck: TeachingTipHeroContentPlacement = "bottom";
+export const teachingTipOpenChangeEventTypeCheck = (_event: TeachingTipOpenChangeEvent) => {};
+export const teachingTipOpenChangeTypeCheck: TeachingTipOpenChangeHandler = (_open, event) => {
+  if (event) {
+    teachingTipOpenChangeEventTypeCheck(event);
+  }
+};
+export const teachingTipPlacementTypeCheck: TeachingTipPlacement = "top";
+export const teachingTipPropsTypeCheck: TeachingTipProps = {
+  action: teachingTipActionTypeCheck,
+  content: "Tip content",
+  onOpenChange: teachingTipOpenChangeTypeCheck,
+  placement: teachingTipPlacementTypeCheck,
+  title: "Tip title",
+  children: <button type="button">Target</button>
+};
+export const teachingTipDirectPropsTypeCheck: TeachingTipDirectProps = {
+  content: "Direct tip content",
+  title: "Direct tip",
+  children: <button type="button">Direct target</button>
+};
 export const shadowNameTypeCheck: ShadowName = "shadow8";
 export const shadowTokenTypeCheck: ShadowToken = Shadows.shadow8;
 export const shadowStyleTypeCheck: CSSProperties = { boxShadow: Shadows.shadow8 };
@@ -898,6 +930,7 @@ export const basicControls: ReactElement = (
     <Flyout content="More details">
       <Button value="Flyout" />
     </Flyout>
+    <TeachingTip {...teachingTipPropsTypeCheck} />
   </>
 );
 
@@ -973,4 +1006,7 @@ export const calendarSubpathImport: ReactElement = (
 );
 export const dataGridSubpathImport: ReactElement = (
   <DataGridDirect {...dataGridDirectPropsTypeCheck} />
+);
+export const teachingTipSubpathImport: ReactElement = (
+  <TeachingTipDirect {...teachingTipDirectPropsTypeCheck} />
 );

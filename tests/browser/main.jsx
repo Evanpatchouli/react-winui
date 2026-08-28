@@ -50,6 +50,7 @@ import TableView from "../../src/lib/src/components/TableView/index.tsx";
 import TextArea from "../../src/lib/src/components/TextArea/index.tsx";
 import Tooltip from "../../src/lib/src/components/Tooltip/index.tsx";
 import Toast, { Toaster } from "../../src/lib/src/components/Toast/index.tsx";
+import TeachingTip from "../../src/lib/src/components/TeachingTip/index.tsx";
 import TreeView, { TreeItem } from "../../src/lib/src/components/TreeView/index.tsx";
 import "../../src/lib/config/app-config.css";
 import "../../src/lib/icons/winui-icons.slim.css";
@@ -164,6 +165,9 @@ function VisualFixture() {
   const [calendarResult, setCalendarResult] = useState("none");
   const [dataGridSortState, setDataGridSortState] = useState(null);
   const [dataGridSelectedRowIds, setDataGridSelectedRowIds] = useState(["alpha"]);
+  const [teachingTipOpen, setTeachingTipOpen] = useState(false);
+  const [teachingTipLightDismissOpen, setTeachingTipLightDismissOpen] = useState(false);
+  const [teachingTipResult, setTeachingTipResult] = useState("none");
   const [datePickerResult, setDatePickerResult] = useState(
     formatDatePickerFixtureDate(datePickerDefaultDate)
   );
@@ -1491,6 +1495,61 @@ function VisualFixture() {
             <output data-testid="data-grid-result">
               {dataGridSelectedRowIds.join(", ") || "none"}
             </output>
+          </p>
+        </Section>
+
+        <Section
+          caption="targeted · explicit/light dismiss · focus trap · action · light/dark"
+          eyebrow="guidance"
+          testId="teaching-tip-panel"
+          title="TeachingTip"
+        >
+          <div className="visual-fixture-teaching-tips">
+            <TeachingTip
+              action={{
+                label: "Got it",
+                onClick: () => setTeachingTipResult("action selected")
+              }}
+              content="We will keep your changes synchronized on this device."
+              heroContent={
+                <div className="visual-fixture-teaching-tip-hero">
+                  <span aria-hidden="true">SYNC</span>
+                </div>
+              }
+              icon={<i aria-hidden="true" className="icons10-idea" />}
+              id="visual-teaching-tip"
+              onOpenChange={(open) => {
+                setTeachingTipOpen(open);
+                setTeachingTipResult(open ? "opened" : "closed");
+              }}
+              open={teachingTipOpen}
+              subtitle="No extra setup is required."
+              title="Sync is ready"
+            >
+              <Button data-testid="teaching-tip-trigger" value="Show teaching tip" />
+            </TeachingTip>
+            <TeachingTip
+              content="This tip closes when you interact with another control."
+              id="visual-teaching-tip-light"
+              isLightDismiss
+              onOpenChange={(open) => {
+                setTeachingTipLightDismissOpen(open);
+                setTeachingTipResult(open ? "light opened" : "light dismissed");
+              }}
+              open={teachingTipLightDismissOpen}
+              title="A quick reminder"
+            >
+              <Button data-testid="teaching-tip-light-trigger" value="Show light tip" />
+            </TeachingTip>
+            <Button
+              data-testid="teaching-tip-outside"
+              onClick={() => setTeachingTipResult("outside selected")}
+              value="Outside target"
+            />
+          </div>
+          <p className="visual-fixture-status">
+            TeachingTip lifecycle:{" "}
+            <output data-testid="teaching-tip-result">{teachingTipResult}</output>
           </p>
         </Section>
       </main>

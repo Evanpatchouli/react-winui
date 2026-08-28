@@ -67,6 +67,8 @@ export interface PopoverProps {
   hideDelay?: number;
   /** Close when the document scrolls outside the Popover. @default false */
   closeOnScroll?: boolean;
+  /** Close when a pointer is pressed outside the trigger and surface. @default true */
+  closeOnOutsideClick?: boolean;
   /** Close when focus leaves both the trigger and surface. @default true */
   closeOnFocusOut?: boolean;
   /** Keep keyboard focus inside the surface while it is open. @default false */
@@ -194,6 +196,7 @@ const Popover = ({
   children,
   className,
   closeOnFocusOut = true,
+  closeOnOutsideClick = true,
   closeOnScroll = false,
   content,
   contentClassName,
@@ -390,6 +393,10 @@ const Popover = ({
       return;
     }
 
+    if (isInside(surfaceRef.current, event.target)) {
+      return;
+    }
+
     requestVisibility(!isOpen, event, isOpen);
   };
 
@@ -566,7 +573,9 @@ const Popover = ({
       }
     };
 
-    ownerDocument.addEventListener("pointerdown", handlePointerDown);
+    if (closeOnOutsideClick) {
+      ownerDocument.addEventListener("pointerdown", handlePointerDown);
+    }
     ownerDocument.addEventListener("keydown", handleKeyDown);
     ownerDocument.addEventListener("visibilitychange", handleVisibilityChange);
 
@@ -576,12 +585,14 @@ const Popover = ({
     }
 
     return () => {
-      ownerDocument.removeEventListener("pointerdown", handlePointerDown);
+      if (closeOnOutsideClick) {
+        ownerDocument.removeEventListener("pointerdown", handlePointerDown);
+      }
       ownerDocument.removeEventListener("keydown", handleKeyDown);
       ownerDocument.removeEventListener("visibilitychange", handleVisibilityChange);
       ownerWindow?.removeEventListener("scroll", handleScroll, true);
     };
-  }, [closeOnScroll, isOpen]);
+  }, [closeOnOutsideClick, closeOnScroll, isOpen]);
 
   useEffect(() => {
     if (isOpen || !restoreOnCloseRef.current) {

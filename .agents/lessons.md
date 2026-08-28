@@ -251,3 +251,12 @@
 - 新增浏览器 gallery panel 应继续放在末尾，以免改变历史 Tooltip、浮层、导航和全页截图上下文；DataGrid Light/Dark 基线需用实际图片检查取景与 token 表面。
 - Windows 环境下 `pnpm build` 与 `pnpm test:consumer` 并行清理同一 `src/lib/dist` 可能产生临时 EPERM；涉及共享 dist 的验证应串行执行，串行复验通过后再判断结果。
 - 本批验证通过：DataGrid 单元 9/9、全量单测 19 files / 198 tests、定向 Playwright 5/5、完整 Playwright 119/119、lint、typecheck、build、consumer build、pack dry-run 与定向格式检查。
+
+# 2026-08-28：TeachingTip 的浮层复用与浏览器焦点回归
+
+- 需要区分显式 TeachingTip 与 light-dismiss TeachingTip 的 outside pointer 语义时，应在 Popover 增加独立的 `closeOnOutsideClick` 开关；只复用 `closeOnFocusOut` 无法表达“显式关闭但仍允许 Escape”的行为。
+- 真实浏览器的 controlled button click 可能在 React effect 后才完成原生焦点落点；TeachingTip 的显式 close button 需要在浮层挂载后异步聚焦，并在 `focus()` 中使用 `preventScroll`，避免目标位于视口边缘时滚动触发误关闭。
+- portal 内的 action click 会沿 React 树回到 Popover trigger wrapper；Popover trigger handler 需要识别 surface 内部事件并忽略，否则 action 的 `preventDefault()` 之后仍可能被当成 trigger click 而关闭，同时会阻断 surface 自己的事件属性。
+- `Button` 保留 legacy Props 但不透传未知 DOM 属性；浏览器 fixture 应用 panel `data-testid` 限定范围，再按可访问名称定位 Button，不能假设 `data-testid` 会到达原生按钮。
+- TeachingTip 视觉基线需分别检查 light/dark surface、hero、arrow、close/action 状态；新增 fixture 放在 gallery 末尾，避免改动历史截图取景。
+- 本批验证通过：TeachingTip 单元 5/5（全量 20 files / 204 tests）、定向 Playwright 4/4、焦点场景重复 20/20、完整 Playwright 123/123、lint、typecheck、build、consumer build、pack dry-run、format check 与无 BOM 检查。

@@ -12,6 +12,7 @@ const rows = [
   ["trapFocus", "boolean", "false", "Cycles Tab focus inside the surface."],
   ["autoFocus", "boolean", "false", "Focuses the first surface control on open."],
   ["closeOnScroll", "boolean", "false", "Closes when the document scrolls outside the surface."],
+  ["closeOnOutsideClick", "boolean", "true", "Closes when a pointer is pressed outside the surface."],
   ["disabled", "boolean", "false", "Prevents opening while preserving the trigger."]
 ];
 

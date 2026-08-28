@@ -243,5 +243,12 @@
     "text": "TreeView",
     "icon": "icons10-indent",
     "showBadge": false
+  },
+  {
+    "to": "teachingtip",
+    "exact": false,
+    "text": "TeachingTip",
+    "icon": "icons10-idea",
+    "showBadge": false
   }
 ]

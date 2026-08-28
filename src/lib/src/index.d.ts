@@ -290,3 +290,12 @@ export type {
 } from "./components/Toast";
 export { default as Flyout } from "./components/Flyout";
 export type { FlyoutProps } from "./components/Flyout";
+export { default as TeachingTip } from "./components/TeachingTip";
+export type {
+  TeachingTipAction,
+  TeachingTipHeroContentPlacement,
+  TeachingTipOpenChangeEvent,
+  TeachingTipOpenChangeHandler,
+  TeachingTipPlacement,
+  TeachingTipProps
+} from "./components/TeachingTip";

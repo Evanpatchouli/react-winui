@@ -1,0 +1,157 @@
+.ui-popover.ui-teaching-tip {
+  width: min(380px, calc(100vw - var(--rwu-spacing-3xl)));
+  max-width: 100%;
+  padding: 0;
+  overflow: hidden;
+}
+
+.ui-popover.ui-teaching-tip > .ui-popover-content {
+  display: block;
+}
+
+.ui-teaching-tip-layout {
+  display: flex;
+  flex-direction: column;
+}
+
+.ui-teaching-tip-body {
+  padding: var(--rwu-spacing-2xl);
+}
+
+.ui-teaching-tip-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--rwu-spacing-lg);
+  align-items: start;
+}
+
+.ui-teaching-tip-header-with-icon {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+}
+
+.ui-teaching-tip-heading {
+  min-width: 0;
+}
+
+.ui-teaching-tip-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--rwu-control-height);
+  min-height: var(--rwu-control-height);
+  color: var(--rwu-color-accent);
+  font-size: var(--rwu-font-size-label);
+  line-height: 1;
+}
+
+.ui-teaching-tip-title {
+  margin: 0;
+  color: var(--rwu-color-text-primary);
+  font-size: var(--rwu-font-size-label);
+  font-weight: 600;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.ui-teaching-tip-subtitle {
+  margin-block-start: var(--rwu-spacing-xs);
+  color: var(--rwu-color-text-secondary);
+  font-size: var(--rwu-font-size-control);
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.ui-teaching-tip-close {
+  width: var(--rwu-control-height);
+  height: var(--rwu-control-height);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--rwu-radius-control);
+  color: var(--rwu-color-text-primary);
+  background: transparent;
+  font: inherit;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.ui-teaching-tip-close:hover {
+  background: var(--rwu-color-surface-control-hover);
+}
+
+.ui-teaching-tip-close:active {
+  background: var(--rwu-color-surface-control-pressed);
+}
+
+.ui-teaching-tip-close:focus-visible,
+.ui-teaching-tip-action:focus-visible {
+  outline: 2px solid var(--rwu-color-accent);
+  outline-offset: var(--rwu-spacing-xs);
+}
+
+.ui-teaching-tip-close:disabled {
+  color: var(--rwu-color-text-disabled);
+  cursor: default;
+}
+
+.ui-teaching-tip-content {
+  margin-block-start: var(--rwu-spacing-lg);
+  color: var(--rwu-color-text-primary);
+  font-size: var(--rwu-font-size-control);
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.ui-teaching-tip-footer {
+  display: flex;
+  justify-content: flex-start;
+  margin-block-start: var(--rwu-spacing-xl);
+}
+
+.ui-teaching-tip-action {
+  min-height: var(--rwu-control-height);
+  padding: 0 var(--rwu-spacing-lg);
+  border: 1px solid var(--rwu-color-border-control);
+  border-radius: var(--rwu-radius-control);
+  color: var(--rwu-color-text-primary);
+  background: var(--rwu-color-surface-control);
+  font: inherit;
+  font-size: var(--rwu-font-size-control);
+  cursor: pointer;
+}
+
+.ui-teaching-tip-action:hover {
+  background: var(--rwu-color-surface-control-hover);
+}
+
+.ui-teaching-tip-action:active {
+  background: var(--rwu-color-surface-control-pressed);
+}
+
+.ui-teaching-tip-action:disabled {
+  color: var(--rwu-color-text-disabled);
+  cursor: default;
+}
+
+.ui-teaching-tip-hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--rwu-color-surface-card);
+}
+
+.ui-teaching-tip-hero > img,
+.ui-teaching-tip-hero > video,
+.ui-teaching-tip-hero > picture {
+  display: block;
+  max-width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-popover.ui-teaching-tip {
+    transition: none;
+  }
+}

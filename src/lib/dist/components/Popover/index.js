@@ -45,12 +45,12 @@ var u = 8, d = 8, f = "button:not([disabled]), [href], input:not([disabled]), se
 		top: Math.min(Math.max(s.top, d), l),
 		placement: o
 	};
-}, h = (e) => Array.from(e.querySelectorAll(f)).filter((e) => e.getAttribute("aria-disabled") !== "true"), g = (e, t) => !!(e && t instanceof Node && e.contains(t)), _ = ({ autoFocus: e = !1, children: i, className: u, closeOnFocusOut: d = !0, closeOnScroll: m = !1, content: _, contentClassName: re, contentProps: v, contentStyle: ie, defaultOpen: ae = !1, disabled: y = !1, hideDelay: b = 120, id: oe, onOpenChange: x, open: S, openOnHover: C = !1, placement: w = "bottom", restoreFocus: T = !0, showDelay: se = 250, trapFocus: E = !1, withArrow: D = !1 }) => {
-	let O = a(null), k = a(null), A = a(null), j = a(null), M = a(!1), N = a(!1), P = a(!1), F = a(null), I = a(!1), [ce, L] = o(ae), [R, le] = o(null), [ue, z] = o(!1), [B, de] = o({
+}, h = (e) => Array.from(e.querySelectorAll(f)).filter((e) => e.getAttribute("aria-disabled") !== "true"), g = (e, t) => !!(e && t instanceof Node && e.contains(t)), _ = ({ autoFocus: e = !1, children: i, className: u, closeOnFocusOut: d = !0, closeOnOutsideClick: m = !0, closeOnScroll: _ = !1, content: v, contentClassName: re, contentProps: y, contentStyle: ie, defaultOpen: ae = !1, disabled: b = !1, hideDelay: x = 120, id: oe, onOpenChange: se, open: S, openOnHover: C = !1, placement: w = "bottom", restoreFocus: T = !0, showDelay: ce = 250, trapFocus: E = !1, withArrow: D = !1 }) => {
+	let O = a(null), k = a(null), A = a(null), j = a(null), M = a(!1), N = a(!1), P = a(!1), F = a(null), I = a(!1), [le, L] = o(ae), [R, ue] = o(null), [de, z] = o(!1), [B, fe] = o({
 		top: 0,
 		left: 0,
 		placement: w
-	}), fe = r(), V = S !== void 0, H = te(_), U = H && !y && (V ? S : ce), W = oe ?? `rwu-popover-${fe.replace(/:/g, "")}`, G = i, pe = G.props, K = () => {
+	}), pe = r(), V = S !== void 0, H = te(v), U = H && !b && (V ? S : le), W = oe ?? `rwu-popover-${pe.replace(/:/g, "")}`, G = i, me = G.props, K = () => {
 		A.current !== null && (clearTimeout(A.current), A.current = null), j.current !== null && (clearTimeout(j.current), j.current = null);
 	}, q = () => {
 		let e = O.current;
@@ -58,16 +58,16 @@ var u = 8, d = 8, f = "button:not([disabled]), [href], input:not([disabled]), se
 		let t = e.ownerDocument.activeElement;
 		return t instanceof HTMLElement && e.contains(t) ? t : e.querySelector(f);
 	}, J = (e, t, n = !1) => {
-		if (!(e && (!H || y)) && (K(), e !== U)) {
+		if (!(e && (!H || b)) && (K(), e !== U)) {
 			if (e) {
 				let e = O.current?.ownerDocument.activeElement;
 				F.current = e instanceof HTMLElement && g(O.current, e) ? e : q(), p?.();
 			} else T && n && (I.current = !0);
-			V || L(e), x?.(e, t);
+			V || L(e), se?.(e, t);
 		}
 	}, Y = (e) => {
-		if (j.current !== null && (clearTimeout(j.current), j.current = null), y || !H || U || !C || A.current !== null) return;
-		let t = Math.max(0, se);
+		if (j.current !== null && (clearTimeout(j.current), j.current = null), b || !H || U || !C || A.current !== null) return;
+		let t = Math.max(0, ce);
 		if (t === 0) {
 			J(!0, e);
 			return;
@@ -80,29 +80,29 @@ var u = 8, d = 8, f = "button:not([disabled]), [href], input:not([disabled]), se
 			K();
 			return;
 		}
-		if (j.current !== null && (clearTimeout(j.current), j.current = null), t || b <= 0) {
+		if (j.current !== null && (clearTimeout(j.current), j.current = null), t || x <= 0) {
 			J(!1, e);
 			return;
 		}
 		j.current = setTimeout(() => {
 			j.current = null, !M.current && !N.current && J(!1, e);
-		}, b);
-	}, me = (e) => {
-		M.current = !0, Y(e);
+		}, x);
 	}, he = (e) => {
-		M.current = !1, C && !N.current && !P.current && X(e);
+		M.current = !0, Y(e);
 	}, ge = (e) => {
-		P.current = !0, Y(e);
+		M.current = !1, C && !N.current && !P.current && X(e);
 	}, _e = (e) => {
+		P.current = !0, Y(e);
+	}, ve = (e) => {
 		let t = e.relatedTarget;
 		g(O.current, t) || g(k.current, t) || (P.current = !1, U && d && !E ? J(!1, e) : C && !M.current && !N.current && X(e));
-	}, ve = (e) => {
-		y || !H || J(!U, e, U);
 	}, ye = (e) => {
+		b || !H || g(k.current, e.target) || J(!U, e, U);
+	}, be = (e) => {
 		if (e.key !== "Enter" && e.key !== " ") return;
 		let t = e.target;
 		!(t instanceof HTMLElement) || t.matches("button, a, input, select, textarea") || t.isContentEditable || (e.preventDefault(), J(!U, e, U));
-	}, be = () => {
+	}, Z = () => {
 		N.current = !0, j.current !== null && (clearTimeout(j.current), j.current = null);
 	}, xe = (e) => {
 		N.current = !1, C && !M.current && !P.current && X(e);
@@ -111,7 +111,7 @@ var u = 8, d = 8, f = "button:not([disabled]), [href], input:not([disabled]), se
 	}, Ce = (e) => {
 		let t = e.relatedTarget;
 		g(O.current, t) || g(k.current, t) || (P.current = !1, U && d && !E && J(!1, e));
-	}, Z = (e) => {
+	}, we = (e) => {
 		if (e.key === "Escape" && U) {
 			e.preventDefault(), e.stopPropagation(), J(!1, e, !0);
 			return;
@@ -127,10 +127,10 @@ var u = 8, d = 8, f = "button:not([disabled]), [href], input:not([disabled]), se
 	};
 	n(() => {
 		let e = O.current?.ownerDocument?.body ?? (typeof document < "u" ? document.body : null);
-		le(e);
+		ue(e);
 	}, []), n(() => {
-		!y || V || L(!1);
-	}, [y, V]), n(() => {
+		!b || V || L(!1);
+	}, [b, V]), n(() => {
 		if (!U) return;
 		let e = () => J(!1);
 		return p?.(), p = e, () => {
@@ -148,12 +148,16 @@ var u = 8, d = 8, f = "button:not([disabled]), [href], input:not([disabled]), se
 		}, i = () => {
 			e.visibilityState === "hidden" && J(!1);
 		};
-		e.addEventListener("pointerdown", t), e.addEventListener("keydown", n), e.addEventListener("visibilitychange", i);
+		m && e.addEventListener("pointerdown", t), e.addEventListener("keydown", n), e.addEventListener("visibilitychange", i);
 		let a = e.defaultView;
-		return m && a && a.addEventListener("scroll", r, !0), () => {
-			e.removeEventListener("pointerdown", t), e.removeEventListener("keydown", n), e.removeEventListener("visibilitychange", i), a?.removeEventListener("scroll", r, !0);
+		return _ && a && a.addEventListener("scroll", r, !0), () => {
+			m && e.removeEventListener("pointerdown", t), e.removeEventListener("keydown", n), e.removeEventListener("visibilitychange", i), a?.removeEventListener("scroll", r, !0);
 		};
-	}, [m, U]), n(() => {
+	}, [
+		m,
+		_,
+		U
+	]), n(() => {
 		if (U || !I.current) return;
 		I.current = !1;
 		let e = F.current ?? q();
@@ -176,63 +180,63 @@ var u = 8, d = 8, f = "button:not([disabled]), [href], input:not([disabled]), se
 		}
 		let r = () => {
 			let r = ne(e.getBoundingClientRect(), t.getBoundingClientRect(), w, n.innerWidth, n.innerHeight);
-			de(r), z(!0);
+			fe(r), z(!0);
 		};
 		return r(), n.addEventListener("resize", r), n.addEventListener("scroll", r, !0), () => {
 			n.removeEventListener("resize", r), n.removeEventListener("scroll", r, !0);
 		};
 	}, [
-		_,
+		v,
 		U,
 		w,
 		R,
 		D
 	]);
 	let Q = {};
-	H && (Q["aria-controls"] = W, Q["aria-expanded"] = U, Q["aria-haspopup"] = pe["aria-haspopup"] ?? "dialog");
-	let we = t(G, Q), Te = [
+	H && (Q["aria-controls"] = W, Q["aria-expanded"] = U, Q["aria-haspopup"] = me["aria-haspopup"] ?? "dialog");
+	let Te = t(G, Q), Ee = [
 		"ui-popover",
 		U ? "ui-popover-open" : "",
 		re
-	].filter(Boolean).join(" "), Ee = {
+	].filter(Boolean).join(" "), De = {
 		...ie,
 		left: B.left,
 		top: B.top,
-		visibility: ue ? "visible" : "hidden"
+		visibility: de ? "visible" : "hidden"
 	}, $ = U ? /* @__PURE__ */ c("div", {
-		...v,
+		...y,
 		ref: k,
 		id: W,
 		"aria-modal": "false",
-		className: Te,
+		className: Ee,
 		"data-placement": B.placement,
 		"data-state": "open",
-		role: v?.role ?? "dialog",
-		style: Ee,
-		tabIndex: v?.tabIndex ?? (e || E ? -1 : void 0),
+		role: y?.role ?? "dialog",
+		style: De,
+		tabIndex: y?.tabIndex ?? (e || E ? -1 : void 0),
 		onBlurCapture: Ce,
 		onFocusCapture: Se,
-		onKeyDown: Z,
-		onPointerEnter: be,
+		onKeyDown: we,
+		onPointerEnter: Z,
 		onPointerLeave: xe,
 		children: [D && /* @__PURE__ */ s("span", {
 			"aria-hidden": "true",
 			className: "ui-popover-arrow"
 		}), /* @__PURE__ */ s("div", {
 			className: "ui-popover-content",
-			children: _
+			children: v
 		})]
 	}) : null;
 	return /* @__PURE__ */ c("span", {
 		ref: O,
 		className: ["ui-popover-trigger", u].filter(Boolean).join(" "),
-		onBlurCapture: _e,
-		onClick: ve,
-		onFocusCapture: ge,
-		onKeyDownCapture: ye,
-		onPointerEnter: me,
-		onPointerLeave: he,
-		children: [we, R && $ ? l($, R) : null]
+		onBlurCapture: ve,
+		onClick: ye,
+		onFocusCapture: _e,
+		onKeyDownCapture: be,
+		onPointerEnter: he,
+		onPointerLeave: ge,
+		children: [Te, R && $ ? l($, R) : null]
 	});
 };
 //#endregion

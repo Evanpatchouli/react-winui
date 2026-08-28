@@ -1259,6 +1259,64 @@ test.describe("Public component visual baselines", () => {
     });
   });
 
+  test.describe("TeachingTip interaction and visual states", () => {
+    test("opens a targeted explicit tip with focusable action content", async ({ page }) => {
+      const teachingTipPanel = panel(page, "teaching-tip-panel");
+      const trigger = teachingTipPanel.getByRole("button", { name: "Show teaching tip" });
+      await trigger.click();
+
+      const tip = page.locator(".ui-popover-open.ui-teaching-tip");
+      await expect(tip).toBeVisible();
+      await expect(tip).toHaveAttribute("role", "dialog");
+      await expect(tip).toHaveAttribute("aria-labelledby", "visual-teaching-tip-title");
+      await expect(tip).toHaveAttribute("aria-describedby", "visual-teaching-tip-subtitle");
+      await expect
+        .poll(() => page.evaluate(() => document.activeElement?.getAttribute("aria-label")))
+        .toBe("Close teaching tip");
+      await expect(tip.getByRole("button", { name: "Got it" })).toBeVisible();
+      await expect(tip).toContainText("Sync is ready");
+      await expectFloatingSurfaceScreenshot(page, tip, "teaching-tip-light.png");
+    });
+
+    test("captures the targeted tip through dark theme tokens", async ({ page }) => {
+      await page.getByTestId("theme-dark").click();
+      await panel(page, "teaching-tip-panel")
+        .getByRole("button", { name: "Show teaching tip" })
+        .click();
+
+      const tip = page.locator(".ui-popover-open.ui-teaching-tip");
+      await expect(tip).toBeVisible();
+      await expectFloatingSurfaceScreenshot(page, tip, "teaching-tip-dark.png");
+    });
+
+    test("light-dismisses outside the target and omits the close button", async ({ page }) => {
+      const teachingTipPanel = panel(page, "teaching-tip-panel");
+      await teachingTipPanel.getByRole("button", { name: "Show light tip" }).click();
+
+      const tip = page.locator(".ui-popover-open.ui-teaching-tip");
+      await expect(tip).toBeVisible();
+      await expect(tip).toHaveClass(/ui-teaching-tip-light-dismiss/);
+      await expect(tip.getByRole("button", { name: "Close teaching tip" })).toHaveCount(0);
+
+      await teachingTipPanel.getByRole("button", { name: "Outside target" }).click();
+      await expect(tip).toHaveCount(0);
+      await expect(page.getByTestId("teaching-tip-result")).toHaveText("outside selected");
+    });
+
+    test("closes on Escape and restores focus to the target", async ({ page }) => {
+      const trigger = panel(page, "teaching-tip-panel").getByRole("button", {
+        name: "Show teaching tip"
+      });
+      await trigger.click();
+      await expect(page.locator(".ui-popover-open.ui-teaching-tip")).toBeVisible();
+
+      await page.keyboard.press("Escape");
+
+      await expect(page.locator(".ui-popover-open.ui-teaching-tip")).toHaveCount(0);
+      await expect(trigger).toBeFocused();
+    });
+  });
+
   test.describe("NumberBox interaction and visual states", () => {
     test("commits keyboard and direct text input while respecting bounds", async ({ page }) => {
       const numberBox = page.getByTestId("number-box-default");
