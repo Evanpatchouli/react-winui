@@ -6,6 +6,8 @@ import {
   ComboBox,
   CommandBar,
   ContextMenu,
+  DatePicker,
+  Calendar,
   Expander,
   Flyout,
   InfoBar,
@@ -24,6 +26,8 @@ import AutoSuggestBoxDirect from "@evanpatchouli/react-winui/auto-suggest-box";
 import ComboBoxDirect from "@evanpatchouli/react-winui/combo-box";
 import CommandBarDirect from "@evanpatchouli/react-winui/command-bar";
 import ContextMenuDirect from "@evanpatchouli/react-winui/context-menu";
+import DatePickerDirect from "@evanpatchouli/react-winui/date-picker";
+import CalendarDirect from "@evanpatchouli/react-winui/calendar";
 import ExpanderDirect from "@evanpatchouli/react-winui/expander";
 import FlyoutDirect from "@evanpatchouli/react-winui/flyout";
 import InfoBarDirect from "@evanpatchouli/react-winui/info-bar";
@@ -82,6 +86,24 @@ const ConsumerApp = () => {
       <ContextMenuDirect content={<ContextMenuDirect.Item>Direct command</ContextMenuDirect.Item>}>
         <button type="button">ContextMenu subpath</button>
       </ContextMenuDirect>
+      <DatePicker defaultValue={new Date(2024, 0, 15)} label="Root DatePicker" locale="en-US" />
+      <DatePickerDirect
+        defaultValue={new Date(2024, 0, 20)}
+        label="DatePicker subpath"
+        locale="en-US"
+      />
+      <Calendar
+        defaultPickerDate={new Date(2024, 0, 15)}
+        label="Root Calendar"
+        locale="en-US"
+        today={new Date(2024, 0, 20)}
+      />
+      <CalendarDirect
+        defaultPickerDate={new Date(2024, 0, 15)}
+        label="Calendar subpath"
+        locale="en-US"
+        today={new Date(2024, 0, 20)}
+      />
       <Expander defaultExpanded header="Root Expander">
         Root content
       </Expander>

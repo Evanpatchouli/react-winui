@@ -338,3 +338,20 @@
 
 - Switch 专属 Light/Dark 截图只捕获原生控件本体；禁用标签继续由 `controls-light/dark` 聚合基线覆盖。
 - 不放宽全局 `maxDiffPixelRatio`，以避免掩盖真实控件视觉回归；这样可规避 Windows Chromium 在极小文字裁剪上的固定像素差异，同时保留 Switch 几何与灰化效果的专属回归。
+
+## 2026-08-28：阶段 7 P2 DatePicker 边界
+
+- P2 首个组件选择 `DatePicker`，建立单日期输入与日历 popup 的完整闭环；独立常驻 `Calendar`、日期范围、多选和时区转换保留给后续组件，不把两个 API 提前耦合。
+- `DatePicker` 采用 `Date | null` value、`open`/`defaultOpen`、`onValueChange`/`onOpenChange` 和可选 `allowTextInput`，保留原生 input 属性与 forwarded ref；默认文本格式跟随 Intl，业务格式由 `formatDate`/`parseDate` 明确提供。
+- popup 使用 dialog + grid + roving gridcell focus；输入框通过 `aria-haspopup`、`aria-expanded`、`aria-controls` 连接 popup，选择/Escape 后焦点回到输入框；dialog 使用可本地化 `aria-label`，月份标题单独提供 polite live region。
+- 样式只消费现有 `--rwu-*` token，日历按钮使用项目已有 `icons10-calendar`；不引入 Fluent UI 视觉 recipe、Griffel 或第三方运行时依赖。
+- 日期 fixture 放在浏览器 gallery 末尾，避免新增 panel 改变现有 Tooltip、导航全页和 floating-surface 截图的取景上下文；DatePicker 自己维护 4 张 Light/Dark panel/popup 基线。
+
+## 2026-08-28：Calendar API 与行为边界
+
+- `Calendar` 保持为独立常驻控件，不把 DatePicker 的 popup、文本输入、parse/format 或 outside pointer 行为耦合进来；本批只实现单日期选择和固定六周月份网格。
+- 将已选值、键盘焦点日期和当前可见月份分成三种状态：选中值负责 `value` / `onValueChange`，焦点日期负责 roving grid focus，picker 月份负责导航与 `onPickerDateChange`；controlled value 更新只同步真正发生变化的日期 key，避免每次 render 抢回键盘焦点。
+- 无 value 时默认使用当前本地日期作为焦点与可见月份，但默认不产生选中值；`today` 明确归一化为本地日期，Today 操作沿用 DatePicker 的选择语义并触发 value change。
+- 日期边界和 `restrictedDates` 同时约束导航可达性与选择动作；当前批不增加多选/范围选择、月份/年份选择器、周数、popup、文本输入、时区转换或异步日期源。
+- 使用 ARIA grid、每行 weekday header、每个日期的 `aria-selected` / `aria-current` 与单一 tab stop 表达桌面日历键盘模型；根节点保留 group 语义、可本地化 label 和 forwarded ref。
+- Calendar surface 复用现有 card shadow 与 control/text/background token，不新增颜色、圆角、阴影或 Fluent UI visual recipe；Calendar fixture 放在浏览器 gallery 末尾以保持既有全页基线取景稳定。

@@ -1,6 +1,22 @@
 # 当前任务
 
-当前无进行中的实现任务。
+## 2026-08-28：阶段 7 P2 Calendar
+
+目标：在 DatePicker 完成后新增独立常驻 `Calendar`，完成 root/subpath exports、Sass、TypeScript 声明、consumer、RTL、Playwright 交互/Light-Dark 视觉回归、docs Demo 与阶段交接记录。
+
+约束：本批只实现 `Calendar` 一个组件；不重构 DatePicker，不复制 Fluent UI/WinUI 源码，不引入 Fluent 视觉 token；日历表面和状态使用现有 `--rwu-*` token。
+
+当前状态：Calendar 已完成实现、导出、token 样式、consumer、RTL、docs Demo、单元测试与 Playwright Light/Dark 视觉回归；当前任务已完成，等待下一项任务。
+
+预定 API：`value` / `defaultValue`、`onValueChange`、`pickerDate` / `defaultPickerDate`、`onPickerDateChange`、`minDate` / `maxDate`、`restrictedDates`、`today`、`firstDayOfWeek`、`showTodayButton`、`label`、`calendarAriaLabel`、`disabled`、`rootClassName` 与原生 div 属性。
+
+已知边界：本批只支持单日期、固定六周网格和月份导航；不实现多选/范围选择、月份/年份选择器、周数显示、popup、文本输入、时区转换和异步日期数据源。
+
+---
+
+当前无其他进行中的实现任务。
+
+验证摘要：`pnpm lint`、`pnpm typecheck`、`pnpm test`（18 files / 189 tests）、`pnpm build`、`pnpm test:consumer`、`pnpm --filter @evanpatchouli/react-winui pack --dry-run`、Calendar 定向 Playwright（4/4）与完整 Playwright（114/114）均已通过。Calendar 相关新增/修改文件已通过定向 Prettier 检查；`pnpm format:check` 仍被仓库既有 P1 文件与 `tests/browser/visual.spec.js` 的格式差异阻塞。
 
 最近完成：修复 `Switch` 设置 `disabled={true}` 后未灰化的问题。
 
@@ -26,7 +42,7 @@
 
 归档记录：`.agents/archive/2026-08-24-phase7-p1.md`。
 
-下一步：等待用户明确指定 P2 组件，不自动继续扩展。
+下一步：`Calendar` 已完成；P2 下一项为 `DataGrid`，按阶段 7 的单组件节奏等待下一次任务指示。
 
 ---
 

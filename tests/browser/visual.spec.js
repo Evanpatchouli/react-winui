@@ -998,6 +998,181 @@ test.describe("Public component visual baselines", () => {
     });
   });
 
+  test.describe("DatePicker interaction and visual states", () => {
+    test("opens the calendar, exposes date semantics, and commits a selected day", async ({
+      page
+    }) => {
+      const input = page.getByTestId("date-picker-default");
+
+      await input.click();
+      const dialog = page.getByRole("dialog", { name: "Calendar" });
+
+      await expect(dialog).toBeVisible();
+      await expect(input).toHaveAttribute("aria-expanded", "true");
+      await expect(dialog.locator('[data-date="2024-05-20"]')).toHaveAttribute(
+        "aria-current",
+        "date"
+      );
+      await expect(dialog.locator('[data-date="2024-05-15"]')).toHaveAttribute(
+        "aria-selected",
+        "true"
+      );
+
+      await dialog.locator('[data-date="2024-05-18"]').click();
+      await expect(input).toHaveValue("2024-05-18");
+      await expect(page.getByTestId("date-picker-result")).toHaveText("2024-05-18");
+      await expect(dialog).toHaveCount(0);
+      await expect(input).toBeFocused();
+    });
+
+    test("supports keyboard calendar navigation and restores input focus", async ({ page }) => {
+      const input = page.getByTestId("date-picker-default");
+
+      await input.press("Enter");
+      const dialog = page.getByRole("dialog", { name: "Calendar" });
+      const selectedDay = dialog.locator('[data-date="2024-05-15"]');
+
+      await expect(selectedDay).toBeFocused();
+      await page.keyboard.press("ArrowRight");
+      await expect(dialog.locator('[data-date="2024-05-16"]')).toBeFocused();
+      await page.keyboard.press("Enter");
+
+      await expect(input).toHaveValue("2024-05-16");
+      await expect(page.getByTestId("date-picker-result")).toHaveText("2024-05-16");
+      await expect(input).toBeFocused();
+    });
+
+    test("enforces date bounds, supports Today, and keeps disabled input inert", async ({
+      page
+    }) => {
+      const boundedInput = page.getByTestId("date-picker-bounded");
+
+      await boundedInput.click();
+      const dialog = page.getByRole("dialog", { name: "Calendar" });
+
+      await expect(dialog.locator('[data-date="2024-05-01"]')).toBeDisabled();
+      await expect(dialog.getByRole("button", { name: "Previous month" })).toBeDisabled();
+      await expect(dialog.getByRole("button", { name: "Today" })).toBeEnabled();
+      await dialog.getByRole("button", { name: "Today" }).click();
+      await expect(boundedInput).toHaveValue("05/20/2024");
+
+      const disabledInput = page.getByTestId("date-picker-disabled");
+      await expect(disabledInput).toBeDisabled();
+      await disabledInput.click({ force: true });
+      await expect(page.getByRole("dialog", { name: "Calendar" })).toHaveCount(0);
+    });
+
+    test("captures the DatePicker panel in light and dark themes", async ({ page }) => {
+      await expect(panel(page, "date-picker-panel")).toHaveScreenshot(
+        "date-picker-light.png",
+        screenshotOptions
+      );
+
+      await page.getByTestId("theme-dark").click();
+      await expect(panel(page, "date-picker-panel")).toHaveScreenshot(
+        "date-picker-dark.png",
+        screenshotOptions
+      );
+    });
+
+    test("captures the open calendar surface in light and dark themes", async ({ page }) => {
+      const input = page.getByTestId("date-picker-default");
+
+      await input.click();
+      await expectFloatingSurfaceScreenshot(
+        page,
+        page.getByRole("dialog", { name: "Calendar" }),
+        "date-picker-calendar-light.png"
+      );
+
+      await page
+        .getByRole("dialog", { name: "Calendar" })
+        .getByRole("button", { name: "Previous month" })
+        .click();
+      await page.getByTestId("theme-dark").click();
+      await input.click();
+      await expectFloatingSurfaceScreenshot(
+        page,
+        page.getByRole("dialog", { name: "Calendar" }),
+        "date-picker-calendar-dark.png"
+      );
+    });
+  });
+
+  test.describe("Calendar interaction and visual states", () => {
+    test("renders a six-week grid and commits a selected day", async ({ page }) => {
+      const calendar = page.getByTestId("calendar-default");
+
+      await expect(calendar.getByRole("grid")).toHaveAttribute("aria-rowcount", "7");
+      await expect(calendar.getByRole("gridcell")).toHaveCount(42);
+      await expect(
+        calendar.getByRole("gridcell", { name: "Wednesday, May 15, 2024" })
+      ).toHaveAttribute("aria-selected", "true");
+
+      await calendar.getByRole("gridcell", { name: "Saturday, May 18, 2024" }).click();
+      await expect(page.getByTestId("calendar-result")).toHaveText("2024-05-18");
+      await expect(
+        calendar.getByRole("gridcell", { name: "Saturday, May 18, 2024" })
+      ).toHaveAttribute("aria-selected", "true");
+    });
+
+    test("supports roving keyboard focus, month navigation, and Enter selection", async ({
+      page
+    }) => {
+      const calendar = page.getByTestId("calendar-default");
+      const selectedDay = calendar.getByRole("gridcell", { name: "Wednesday, May 15, 2024" });
+
+      await selectedDay.focus();
+      await page.keyboard.press("ArrowRight");
+      await expect(
+        calendar.getByRole("gridcell", { name: "Thursday, May 16, 2024" })
+      ).toBeFocused();
+      await page.keyboard.press("PageDown");
+      await expect(calendar.getByRole("heading", { name: "June 2024" })).toBeVisible();
+      const nextMonthDay = calendar.getByRole("gridcell", { name: "Sunday, June 16, 2024" });
+      await expect(nextMonthDay).toBeFocused();
+
+      await page.keyboard.press("Enter");
+      await expect(page.getByTestId("calendar-result")).toHaveText("2024-06-16");
+    });
+
+    test("enforces bounds, restricted dates, Today, and disabled behavior", async ({ page }) => {
+      const bounded = page.getByTestId("calendar-bounded");
+
+      await expect(
+        bounded.getByRole("gridcell", { name: "Wednesday, May 1, 2024" })
+      ).toBeDisabled();
+      await expect(
+        bounded.getByRole("gridcell", { name: "Sunday, May 12, 2024" })
+      ).toBeDisabled();
+      await expect(bounded.getByRole("button", { name: "Previous month" })).toBeDisabled();
+      await expect(bounded.getByRole("button", { name: "Next month" })).toBeDisabled();
+
+      await bounded.getByRole("button", { name: "Today" }).click();
+      await expect(
+        bounded.getByRole("gridcell", { name: "Monday, May 20, 2024" })
+      ).toHaveAttribute("aria-selected", "true");
+
+      const disabled = page.getByTestId("calendar-disabled");
+      await expect(disabled).toHaveAttribute("aria-disabled", "true");
+      await expect(disabled.getByRole("gridcell").first()).toBeDisabled();
+      await expect(disabled.getByRole("button", { name: "Today" })).toBeDisabled();
+    });
+
+    test("captures Calendar light and dark visual states", async ({ page }) => {
+      await expect(panel(page, "calendar-panel")).toHaveScreenshot(
+        "calendar-light.png",
+        screenshotOptions
+      );
+
+      await page.getByTestId("theme-dark").click();
+      await expect(panel(page, "calendar-panel")).toHaveScreenshot(
+        "calendar-dark.png",
+        screenshotOptions
+      );
+    });
+  });
+
   test.describe("NumberBox interaction and visual states", () => {
     test("commits keyboard and direct text input while respecting bounds", async ({ page }) => {
       const numberBox = page.getByTestId("number-box-default");

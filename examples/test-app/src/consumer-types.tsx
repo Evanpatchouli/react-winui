@@ -8,6 +8,8 @@ import {
   Alert,
   AutoSuggestBox,
   Dialog,
+  DatePicker,
+  Calendar,
   Accordion,
   Expander,
   ColorPickerItem,
@@ -71,6 +73,19 @@ import type {
   AutoSuggestBoxTextChangeReason,
   DialogProps,
   DialogHandle,
+  DatePickerOpenChangeEvent,
+  DatePickerOpenChangeHandler,
+  DatePickerProps,
+  DatePickerValidationError,
+  DatePickerValue,
+  DatePickerValueChangeEvent,
+  DatePickerValueChangeHandler,
+  CalendarFirstDayOfWeek,
+  CalendarInteractionEvent,
+  CalendarPickerDateChangeHandler,
+  CalendarProps,
+  CalendarValue,
+  CalendarValueChangeHandler,
   AccordionProps,
   AccordionSlotProps,
   ExpanderDirection,
@@ -205,6 +220,14 @@ import CommandBarDirect, {
   type CommandBarButtonProps as CommandBarDirectButtonProps,
   type CommandBarProps as CommandBarDirectProps
 } from "@evanpatchouli/react-winui/command-bar";
+import DatePickerDirect, {
+  type DatePickerProps as DatePickerDirectProps,
+  type DatePickerValue as DatePickerDirectValue
+} from "@evanpatchouli/react-winui/date-picker";
+import CalendarDirect, {
+  type CalendarProps as CalendarDirectProps,
+  type CalendarValue as CalendarDirectValue
+} from "@evanpatchouli/react-winui/calendar";
 import { Shadows } from "@evanpatchouli/react-winui/theme";
 import type { ShadowName, ShadowToken } from "@evanpatchouli/react-winui/theme";
 import TooltipDirect from "@evanpatchouli/react-winui/tooltip";
@@ -254,6 +277,8 @@ const typedProps: [
   AlertProps,
   AutoSuggestBoxProps,
   DialogProps,
+  DatePickerProps,
+  CalendarProps,
   AccordionProps,
   ExpanderProps,
   ColorPickerItemProps,
@@ -299,6 +324,8 @@ const typedProps: [
   { message: "Please confirm", title: "Notice" },
   { suggestions: [{ value: "Windows" }] },
   { backdropBlur: true, isVisible: true, style: { width: "320px" } },
+  { defaultValue: new Date(2024, 0, 15), label: "Release date", locale: "en-US" },
+  { defaultPickerDate: new Date(2024, 0, 15), label: "Release calendar", locale: "en-US" },
   { headerTitle: "General", style: { gap: "8px" } },
   { header: "Advanced settings", direction: "down" },
   { color: "#ff0000", name: "accent" },
@@ -354,6 +381,52 @@ export const propsTypeCheck = typedProps;
 export const schemeTypeCheck: AppThemeScheme = "system";
 export const alertHandleTypeCheck: AlertHandle | undefined = undefined;
 export const dialogHandleTypeCheck: DialogHandle | undefined = undefined;
+export const datePickerValueTypeCheck: DatePickerValue = new Date(2024, 0, 15);
+export const datePickerValidationErrorTypeCheck: DatePickerValidationError = "invalid-input";
+export const datePickerOpenChangeEventTypeCheck = (_event: DatePickerOpenChangeEvent) => {};
+export const datePickerOpenChangeTypeCheck: DatePickerOpenChangeHandler = (_open, event) => {
+  if (event) {
+    datePickerOpenChangeEventTypeCheck(event);
+  }
+};
+export const datePickerValueChangeEventTypeCheck = (_event: DatePickerValueChangeEvent) => {};
+export const datePickerValueChangeTypeCheck: DatePickerValueChangeHandler = (_value, event) =>
+  datePickerValueChangeEventTypeCheck(event);
+export const datePickerPropsTypeCheck: DatePickerProps = {
+  defaultValue: datePickerValueTypeCheck,
+  label: "Release date",
+  locale: "en-US",
+  onOpenChange: datePickerOpenChangeTypeCheck,
+  onValueChange: datePickerValueChangeTypeCheck
+};
+export const datePickerDirectValueTypeCheck: DatePickerDirectValue = null;
+export const datePickerDirectPropsTypeCheck: DatePickerDirectProps = {
+  defaultValue: datePickerDirectValueTypeCheck,
+  label: "Direct DatePicker",
+  locale: "en-US"
+};
+export const calendarValueTypeCheck: CalendarValue = new Date(2024, 4, 15);
+export const calendarDirectValueTypeCheck: CalendarDirectValue = null;
+export const calendarFirstDayOfWeekTypeCheck: CalendarFirstDayOfWeek = 1;
+export const calendarInteractionEventTypeCheck = (_event: CalendarInteractionEvent) => {};
+export const calendarValueChangeTypeCheck: CalendarValueChangeHandler = (_value, event) =>
+  calendarInteractionEventTypeCheck(event);
+export const calendarPickerDateChangeTypeCheck: CalendarPickerDateChangeHandler = (_value, event) =>
+  calendarInteractionEventTypeCheck(event);
+export const calendarPropsTypeCheck: CalendarProps = {
+  defaultPickerDate: calendarValueTypeCheck,
+  defaultValue: calendarValueTypeCheck,
+  firstDayOfWeek: calendarFirstDayOfWeekTypeCheck,
+  label: "Release calendar",
+  locale: "en-US",
+  onPickerDateChange: calendarPickerDateChangeTypeCheck,
+  onValueChange: calendarValueChangeTypeCheck
+};
+export const calendarDirectPropsTypeCheck: CalendarDirectProps = {
+  defaultValue: calendarDirectValueTypeCheck,
+  label: "Direct Calendar",
+  locale: "en-US"
+};
 export const accordionSlotTypeCheck: AccordionSlotProps = { children: "Content" };
 export const expanderDirectionTypeCheck: ExpanderDirection = "up";
 export const expanderExpandedChangeEventTypeCheck = (_event: ExpanderExpandedChangeEvent) => {};
@@ -620,6 +693,8 @@ export const basicControls: ReactElement = (
       <Dialog.Body>Body</Dialog.Body>
       <Dialog.Footer>Footer</Dialog.Footer>
     </Dialog>
+    <DatePicker {...datePickerPropsTypeCheck} />
+    <Calendar {...calendarPropsTypeCheck} />
     <Accordion headerTitle="General">
       <Accordion.Trigger>Options</Accordion.Trigger>
       <Accordion.Body>Content</Accordion.Body>
@@ -812,4 +887,10 @@ export const treeViewSubpathImport: ReactElement = (
   <TreeViewDirect aria-label="Direct TreeView">
     <TreeItemDirect label="Direct item" value="direct-item" />
   </TreeViewDirect>
+);
+export const datePickerSubpathImport: ReactElement = (
+  <DatePickerDirect {...datePickerDirectPropsTypeCheck} />
+);
+export const calendarSubpathImport: ReactElement = (
+  <CalendarDirect {...calendarDirectPropsTypeCheck} />
 );

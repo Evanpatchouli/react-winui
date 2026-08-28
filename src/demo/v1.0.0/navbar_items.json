@@ -63,6 +63,20 @@
     "showBadge": false
   },
   {
+    "to": "calendar",
+    "exact": false,
+    "text": "Calendar",
+    "icon": "icons10-calendar",
+    "showBadge": false
+  },
+  {
+    "to": "datepicker",
+    "exact": false,
+    "text": "DatePicker",
+    "icon": "icons10-calendar",
+    "showBadge": false
+  },
+  {
     "to": "expander",
     "exact": false,
     "text": "Expander",

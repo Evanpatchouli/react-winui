@@ -217,3 +217,19 @@
 
 - 组合控件的“元素 + 文字”独立截图容易受到文字抗锯齿和 fractional clip 影响；应让聚合截图覆盖文字，让专属截图聚焦控件几何与状态。
 - CI 出现少量稳定像素差异时，先定位截图取景和渲染边界，再调整测试范围，不应直接放宽全局视觉差异阈值。
+
+## 2026-08-28：DatePicker 的日期与视觉回归
+
+- 日历控件应在组件内部把外部 `Date` 归一化为本地年月日，再用零填充日期 key 比较范围和 selection，避免调用方传入的时间部分或时区偏移改变单日选择语义。
+- 默认 Intl 文案会随运行环境 locale 变化；行为测试和视觉 fixture 需要显式传入 `locale="en-US"`，业务仍可省略 locale 以跟随浏览器。
+- portaled 日历 popup 的视觉回归应同时覆盖 panel 本体和外扩留白的浮层截图；fixture 新增组件放在 gallery 末尾可避免改变既有浮层/移动全页截图的上下文。
+- 验证通过：DatePicker 单元 7/7、定向 Playwright 5/5、完整 Playwright 110/110；构建仍保留仓库既有 Sass 与 docs warning。
+
+# 2026-08-28：Calendar 的状态与回归
+
+- 自定义 `Calendar` 的 `value` 类型与原生 `HTMLAttributes<HTMLDivElement>` 的 `defaultValue` 存在命名冲突；公共 Props 需要显式 `Omit<..., "defaultValue">`，再声明 `Date | null` 版本，避免 TypeScript consumer 类型退化。
+- controlled value 的同步 effect 不能把 `focusedDate` 或每次 render 新建的 Date 对象当成“外部值变化”；使用归一化日期 key 记录最后一次 controlled value，才能保留键盘导航后的焦点。
+- Calendar 静态月份按钮会与 portaled DatePicker popup 的全局 locator 重名；浏览器测试必须按 `dialog` 或组件容器限定查询范围，不能依赖页面级按钮名称。
+- 浏览器 fixture 新增 Calendar panel 时放在 gallery 末尾，可避免改变既有浮层、导航和全页截图的上下文；新增 Light/Dark 基线必须显式更新并用 `view_image` 检查视觉取景。
+- 对根节点上的键盘处理要保留原生 `onKeyDown` 属性转发能力，并通过 root handler 统一处理 grid 内 bubbling 事件；这样不会限制消费者把 handler 绑定到日期按钮之外的 Calendar surface。
+- 本批验证通过：Calendar 单元 7/7、定向 Playwright 4/4、完整 Playwright 114/114、lint、typecheck、build、consumer build 与 pack dry-run；全量格式检查仍受历史 P1 差异影响。

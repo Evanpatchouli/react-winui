@@ -139,6 +139,14 @@ body {
   margin-top: 24px;
 }
 
+.visual-fixture-calendars {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 16px;
+  margin-top: 24px;
+}
+
 .visual-fixture-command-bars {
   display: grid;
   gap: 16px;
@@ -303,6 +311,19 @@ body {
   display: flex !important;
   align-items: center;
   gap: 12px;
+}
+
+.visual-fixture-date-pickers {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.visual-fixture-date-pickers > div {
+  display: grid;
+  gap: 8px;
 }
 
 .visual-fixture-inline-status {

@@ -13,6 +13,8 @@ import ColorPickerItem from "../../src/lib/src/components/ColorPicker/ColorPicke
 import ColorPickerPalette from "../../src/lib/src/components/ColorPicker/ColorPickerPalette/index.tsx";
 import ComboBox from "../../src/lib/src/components/ComboBox/index.tsx";
 import CommandBar from "../../src/lib/src/components/CommandBar/index.tsx";
+import Calendar from "../../src/lib/src/components/Calendar/index.tsx";
+import DatePicker from "../../src/lib/src/components/DatePicker/index.tsx";
 import Dialog from "../../src/lib/src/components/Dialog/index.tsx";
 import Expander from "../../src/lib/src/components/Expander/index.tsx";
 import ImageView from "../../src/lib/src/components/ImageView/index.tsx";
@@ -75,6 +77,15 @@ const autoSuggestBoxSuggestions = [
 
 const searchSuggestions = [{ text: "Windows 11" }, { text: "Windows UI" }, { text: "Linux" }];
 
+const datePickerDefaultDate = new Date(2024, 4, 15);
+const datePickerToday = new Date(2024, 4, 20);
+const datePickerMinDate = new Date(2024, 4, 10);
+const datePickerMaxDate = new Date(2024, 4, 30);
+const formatDatePickerFixtureDate = (date) =>
+  `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(
+    date.getDate()
+  ).padStart(2, "0")}`;
+
 const imageSrc =
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='96' viewBox='0 0 160 96'%3E%3Crect width='160' height='96' fill='%230078D7'/%3E%3Ccircle cx='80' cy='48' r='24' fill='%2360CDFF'/%3E%3C/svg%3E";
 
@@ -130,6 +141,10 @@ function VisualFixture() {
   const [expanderDetails, setExpanderDetails] = useState(["Network discovery"]);
   const [expanderResult, setExpanderResult] = useState("none");
   const [selection, setSelection] = useState("windows");
+  const [calendarResult, setCalendarResult] = useState("none");
+  const [datePickerResult, setDatePickerResult] = useState(
+    formatDatePickerFixtureDate(datePickerDefaultDate)
+  );
   const [searchBarValue, setSearchBarValue] = useState("Windows");
   const [searchResult, setSearchResult] = useState("none");
   const [infoBarInstance, setInfoBarInstance] = useState(0);
@@ -1308,6 +1323,106 @@ function VisualFixture() {
           <p className="visual-fixture-status">
             Navigation selection:{" "}
             <output data-testid="navigation-view-result">{navigationViewSelection}</output>
+          </p>
+        </Section>
+
+        <Section
+          caption="calendar overlay · keyboard · range · light/dark"
+          eyebrow="date input"
+          testId="date-picker-panel"
+          title="DatePicker"
+        >
+          <div className="visual-fixture-date-pickers">
+            <div>
+              <DatePicker
+                data-testid="date-picker-default"
+                defaultValue={datePickerDefaultDate}
+                formatDate={formatDatePickerFixtureDate}
+                initialPickerDate={datePickerDefaultDate}
+                label="Release date"
+                locale="en-US"
+                onValueChange={(value) =>
+                  setDatePickerResult(value ? formatDatePickerFixtureDate(value) : "empty")
+                }
+                today={datePickerToday}
+              />
+            </div>
+            <div>
+              <DatePicker
+                data-testid="date-picker-bounded"
+                firstDayOfWeek={1}
+                initialPickerDate={datePickerDefaultDate}
+                label="Maintenance window"
+                locale="en-US"
+                maxDate={datePickerMaxDate}
+                minDate={datePickerMinDate}
+                showTodayButton
+                today={datePickerToday}
+              />
+            </div>
+            <div>
+              <DatePicker
+                data-testid="date-picker-disabled"
+                defaultValue={datePickerDefaultDate}
+                disabled
+                label="Disabled"
+                locale="en-US"
+              />
+            </div>
+          </div>
+          <p className="visual-fixture-status">
+            Selected date: <output data-testid="date-picker-result">{datePickerResult}</output>
+          </p>
+        </Section>
+
+        <Section
+          caption="standalone grid · keyboard · range · light/dark"
+          eyebrow="date surface"
+          testId="calendar-panel"
+          title="Calendar"
+        >
+          <div className="visual-fixture-calendars">
+            <div>
+              <Calendar
+                data-testid="calendar-default"
+                defaultPickerDate={datePickerDefaultDate}
+                defaultValue={datePickerDefaultDate}
+                label="Release calendar"
+                locale="en-US"
+                onValueChange={(value) =>
+                  setCalendarResult(value ? formatDatePickerFixtureDate(value) : "empty")
+                }
+                today={datePickerToday}
+              />
+            </div>
+            <div>
+              <Calendar
+                data-testid="calendar-bounded"
+                defaultPickerDate={datePickerDefaultDate}
+                firstDayOfWeek={1}
+                label="Maintenance window"
+                locale="en-US"
+                maxDate={datePickerMaxDate}
+                minDate={datePickerMinDate}
+                restrictedDates={[new Date(2024, 4, 12)]}
+                showTodayButton
+                today={datePickerToday}
+              />
+            </div>
+            <div>
+              <Calendar
+                data-testid="calendar-disabled"
+                defaultPickerDate={datePickerDefaultDate}
+                defaultValue={datePickerDefaultDate}
+                disabled
+                label="Disabled calendar"
+                locale="en-US"
+                today={datePickerToday}
+              />
+            </div>
+          </div>
+          <p className="visual-fixture-status">
+            Selected calendar date: <output data-testid="calendar-result">{calendarResult}</output>
           </p>
         </Section>
       </main>

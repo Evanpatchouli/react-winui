@@ -469,3 +469,25 @@
 
 - 聚合 `controls-light/dark` 基线已覆盖禁用 Switch 与标签；专属 `switch-disabled-light/dark` 基线改为只截图控件本体，避免 CI Windows Chromium 在小尺寸文字裁剪上的 32 像素差异。
 - 本地 CI 模式定向测试通过；此前完整 `pnpm test:browser` 已通过 105/105。当前变更尚未提交，等待推送后确认远端 CI。
+
+# 2026-08-28：阶段 7 P2 DatePicker
+
+- 新增单日期 `DatePicker`，实现受控/非受控 value 与 popup、可选文本编辑与 parse/format、min/max 边界、Today、首个星期设置、月份导航、outside pointer、Escape 和 viewport fallback；没有修改既有组件的 Props、DOM 或样式。
+- 新组件使用 `--rwu-*` token 和现有 `icons10-calendar` 字形；新增 `@evanpatchouli/react-winui/date-picker` 直接入口，并同步 root exports、public `.d.ts`、Sass aggregate 和 `src/lib/dist` ESM/CSS/声明产物。
+- WinUI 参考输入框 + CalendarDatePicker popup、日期边界和 Today 行为；Fluent UI v9 只参考 controlled/uncontrolled、parse/format、ARIA、键盘和测试边界；没有复制第三方实现源码，因此不新增 `THIRD_PARTY_NOTICES.md` 条目。
+- 新增 `tests/datepicker.test.tsx`（7 tests），覆盖 render/ref、open/select、controlled value/open、editable validation、min/max/Today、Escape/outside pointer、disabled；Playwright 新增 5 个场景与 4 张显式 Light/Dark 基线。
+- 新增 root `docs/date-picker.md`、v1.0.0/v1.1.0 docs Demo、导航/路由/search entry、README 示例，以及 consumer root/subpath/typecheck 覆盖。
+- 验证：`pnpm lint`、`pnpm typecheck`、`pnpm test`（17 files / 182 tests）、`pnpm build`、`pnpm test:consumer`、`pnpm --filter @evanpatchouli/react-winui pack --dry-run`、DatePicker 定向 Playwright（5/5）与完整 Playwright（110/110）。
+- `pnpm format:check` 仍报告历史 P1 文件的既有格式差异；DatePicker、本批次 consumer/fixture/入口文件已单独通过 Prettier 检查。构建仍保留既有 Dart Sass deprecation 与 docs 大 chunk warning。
+- 当前任务已完成；P2 下一项为 `Calendar`，等待下一次任务指示。
+
+# 2026-08-28：阶段 7 P2 Calendar
+
+- 新增独立常驻单日期 `Calendar`，支持受控/非受控 `value`、可控/非控可见月份、`onValueChange`、`onPickerDateChange`、`minDate` / `maxDate`、`restrictedDates`、`today`、`firstDayOfWeek`、`locale`、Today 操作、disabled、原生 div 属性与 forwarded ref。
+- Calendar 使用固定六周、单选日期网格和月份前后导航；键盘支持方向键、Home/End、PageUp/PageDown、Ctrl+PageUp/PageDown、Enter/Space，并通过 ARIA grid、`aria-selected`、`aria-current` 与 roving tab stop 保持可访问性。
+- WinUI 借鉴常驻 Calendar 的月份导航、Today、日期边界、restricted dates、首周设置和桌面日历网格行为；Fluent UI v9 借鉴 value/focus/visible-month 分离、controlled/uncontrolled 状态、键盘模型、ARIA 与测试边界。
+- 没有复制 Fluent UI 或 WinUI 实际源码；样式只消费现有 `--rwu-*` token，未修改 `THIRD_PARTY_NOTICES.md`。
+- 新增 root/subpath exports、public `.d.ts`、Sass aggregate、`src/lib/dist` ESM/声明/CSS 产物、consumer root/subpath/typecheck、`docs/calendar.md`、v1.0.0/v1.1.0 docs Demo、README 和导航/路由/search entry。
+- 新增 `tests/calendar.test.tsx`（7 tests）以及 Calendar Playwright 交互与 Light/Dark 视觉回归（4/4），新增 `calendar-light` / `calendar-dark` 两张显式基线。
+- 验证通过：`pnpm lint`、`pnpm typecheck`、`pnpm test`（18 files / 189 tests）、`pnpm build`、`pnpm test:consumer`、`pnpm --filter @evanpatchouli/react-winui pack --dry-run`、完整 `pnpm test:browser`（114/114）。
+- `pnpm format:check` 仍被仓库既有 P1 文件和 `tests/browser/visual.spec.js` 的格式差异阻塞；Calendar 相关新增/修改文件已通过定向 Prettier 检查。当前任务已完成，P2 下一项为 `DataGrid`。

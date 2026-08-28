@@ -54,6 +54,8 @@ import "@evanpatchouli/react-winui/icons/winui-icons.min.css";
 
 样式 token 规范见 [`docs/design-system.md`](docs/design-system.md)。
 组件借鉴与迁移规范见 [`docs/component-migration-guidelines.md`](docs/component-migration-guidelines.md)。
+DatePicker API 与交互边界见 [`docs/date-picker.md`](docs/date-picker.md)。
+Calendar API 与交互边界见 [`docs/calendar.md`](docs/calendar.md)。
 
 # Usage
 
@@ -61,6 +63,7 @@ import "@evanpatchouli/react-winui/icons/winui-icons.min.css";
 import {
   AutoSuggestBox,
   Button,
+  Calendar,
   CommandBar,
   DatePicker,
   InputText,
@@ -80,6 +83,8 @@ const App = () => (
     <Button type="primary" value="Press Me" />
     <ButtonDirect type="subtle" value="Direct entry" />
     <InputText placeholder="Enter a text" />
+    <Calendar label="Release calendar" locale="en-US" defaultPickerDate={new Date(2024, 4, 15)} />
+    <DatePicker label="Release date" locale="en-US" defaultValue={new Date(2024, 4, 15)} />
     <SettingsCard title="Notifications" description="Allow desktop notifications">
       <Button value="Configure" />
     </SettingsCard>

@@ -32,6 +32,11 @@
       "import": "./dist/components/CommandBar/index.js",
       "default": "./dist/components/CommandBar/index.js"
     },
+    "./calendar": {
+      "types": "./dist/components/Calendar/index.d.ts",
+      "import": "./dist/components/Calendar/index.js",
+      "default": "./dist/components/Calendar/index.js"
+    },
     "./tooltip": {
       "types": "./dist/components/Tooltip/index.d.ts",
       "import": "./dist/components/Tooltip/index.js",

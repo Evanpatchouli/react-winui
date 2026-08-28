@@ -42,6 +42,15 @@ export { default as Button } from "./components/Button";
 export type { ButtonProps, ButtonType } from "./components/Button";
 export { default as ButtonGroup } from "./components/ButtonGroup";
 export type { ButtonGroupProps } from "./components/ButtonGroup";
+export { default as Calendar } from "./components/Calendar";
+export type {
+  CalendarFirstDayOfWeek,
+  CalendarInteractionEvent,
+  CalendarPickerDateChangeHandler,
+  CalendarProps,
+  CalendarValue,
+  CalendarValueChangeHandler
+} from "./components/Calendar";
 export { default as Checkbox } from "./components/Checkbox";
 export type { CheckboxProps } from "./components/Checkbox";
 export { default as ColorPickerItem } from "./components/ColorPicker/ColorPickerItem";

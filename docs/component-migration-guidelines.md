@@ -8,7 +8,7 @@
 
 ## 1. 适用范围
 
-本规范适用于阶段 6 之后新增或迁入的组件，包括 Tooltip、Popover / Flyout、Menu、Toast、InfoBar、ComboBox 等。
+本规范适用于阶段 6 之后新增或迁入的组件，包括 Tooltip、Popover / Flyout、Menu、Toast、InfoBar、ComboBox、DatePicker、Calendar 等。
 
 旧组件的兼容性修复仍应遵守现有 API 和视觉回归基线；不要借新组件开发之机集中重写旧组件。
 
