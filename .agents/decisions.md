@@ -355,3 +355,12 @@
 - 日期边界和 `restrictedDates` 同时约束导航可达性与选择动作；当前批不增加多选/范围选择、月份/年份选择器、周数、popup、文本输入、时区转换或异步日期源。
 - 使用 ARIA grid、每行 weekday header、每个日期的 `aria-selected` / `aria-current` 与单一 tab stop 表达桌面日历键盘模型；根节点保留 group 语义、可本地化 label 和 forwarded ref。
 - Calendar surface 复用现有 card shadow 与 control/text/background token，不新增颜色、圆角、阴影或 Fluent UI visual recipe；Calendar fixture 放在浏览器 gallery 末尾以保持既有全页基线取景稳定。
+
+## 2026-08-28：DataGrid API 与行为边界
+
+- `DataGrid` 作为新组件独立于旧 `TableView`，本批只覆盖本地数组、列定义、客户端排序、单/多行选择、固定 DOM grid 和基础无障碍，不引入编辑、虚拟化、分页、分组、列拖拽/缩放或服务端数据适配层。
+- 采用 `items` + `columns` + `getRowId` 的现代 API；排序与选择分别提供 controlled/uncontrolled 形态，保留稳定行 ID，允许 `renderCell` 与 `sortValue` 将显示内容和排序值解耦。
+- 原生 table 保留语义结构，同时以 `role="grid"`、`row`、`gridcell`、`columnheader` 表达键盘网格；通过单一 roving tab stop 管理焦点，跳过 disabled row，避免每个单元格都进入页面 Tab 序列。
+- selection control 的点击属于 interactive target，不触发行级 `onRowClick`；select-all 只处理当前可选行，disabled row 永远不被批量选中。
+- DataGrid 视觉只使用现有 `--rwu-*` token 和既有 WinUI 风格表面，不复制 Fluent UI/WinUI 实现代码，也不引入 Fluent visual token；因此不新增第三方源码声明。
+- 浏览器 fixture 放在 gallery 末尾，避免新增 panel 改变既有全页与浮层截图取景；Light/Dark DataGrid 基线独立显式维护。

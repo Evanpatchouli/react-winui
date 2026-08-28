@@ -233,3 +233,12 @@
 - 浏览器 fixture 新增 Calendar panel 时放在 gallery 末尾，可避免改变既有浮层、导航和全页截图的上下文；新增 Light/Dark 基线必须显式更新并用 `view_image` 检查视觉取景。
 - 对根节点上的键盘处理要保留原生 `onKeyDown` 属性转发能力，并通过 root handler 统一处理 grid 内 bubbling 事件；这样不会限制消费者把 handler 绑定到日期按钮之外的 Calendar surface。
 - 本批验证通过：Calendar 单元 7/7、定向 Playwright 4/4、完整 Playwright 114/114、lint、typecheck、build、consumer build 与 pack dry-run；全量格式检查仍受历史 P1 差异影响。
+
+# 2026-08-28：DataGrid 的网格交互与交付回归
+
+- 原生 table 与 ARIA grid 组合时，列标题中的排序 button 需要拥有独立可读名称；测试应分别限定 `columnheader`、排序 button、`row` 与 `gridcell`，避免页面级 locator 因语义嵌套产生歧义。
+- 行级点击选择必须排除 checkbox/radio、button、link 等 interactive target，否则选择控件会同时触发行级回调；select-all 也应基于可选行计算，而不是直接使用全部 items。
+- roving grid focus 的边界操作要在 disabled row 上继续寻找下一可达 cell；`requestAnimationFrame` 不存在时使用 `queueMicrotask`，这样 jsdom 单测与真实浏览器都能稳定运行。
+- 新增浏览器 gallery panel 应继续放在末尾，以免改变历史 Tooltip、浮层、导航和全页截图上下文；DataGrid Light/Dark 基线需用实际图片检查取景与 token 表面。
+- Windows 环境下 `pnpm build` 与 `pnpm test:consumer` 并行清理同一 `src/lib/dist` 可能产生临时 EPERM；涉及共享 dist 的验证应串行执行，串行复验通过后再判断结果。
+- 本批验证通过：DataGrid 单元 9/9、全量单测 19 files / 198 tests、定向 Playwright 5/5、完整 Playwright 119/119、lint、typecheck、build、consumer build、pack dry-run 与定向格式检查。

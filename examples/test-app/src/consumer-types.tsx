@@ -10,6 +10,7 @@ import {
   Dialog,
   DatePicker,
   Calendar,
+  DataGrid,
   Accordion,
   Expander,
   ColorPickerItem,
@@ -86,6 +87,14 @@ import type {
   CalendarProps,
   CalendarValue,
   CalendarValueChangeHandler,
+  DataGridColumn,
+  DataGridInteractionEvent,
+  DataGridProps,
+  DataGridRowId,
+  DataGridSelectionChangeHandler,
+  DataGridSelectionMode,
+  DataGridSortChangeHandler,
+  DataGridSortState,
   AccordionProps,
   AccordionSlotProps,
   ExpanderDirection,
@@ -228,6 +237,9 @@ import CalendarDirect, {
   type CalendarProps as CalendarDirectProps,
   type CalendarValue as CalendarDirectValue
 } from "@evanpatchouli/react-winui/calendar";
+import DataGridDirect, {
+  type DataGridProps as DataGridDirectProps
+} from "@evanpatchouli/react-winui/data-grid";
 import { Shadows } from "@evanpatchouli/react-winui/theme";
 import type { ShadowName, ShadowToken } from "@evanpatchouli/react-winui/theme";
 import TooltipDirect from "@evanpatchouli/react-winui/tooltip";
@@ -268,6 +280,68 @@ import TreeViewDirect, {
   type TreeViewProps as TreeViewDirectProps
 } from "@evanpatchouli/react-winui/tree-view";
 
+interface ConsumerDataGridRow {
+  count: number;
+  id: string;
+  name: string;
+  status: "Ready" | "Paused";
+}
+
+const consumerDataGridRows: ConsumerDataGridRow[] = [
+  { count: 12, id: "alpha", name: "Alpha", status: "Ready" },
+  { count: 4, id: "beta", name: "Beta", status: "Paused" }
+];
+
+const consumerDataGridColumns: DataGridColumn<ConsumerDataGridRow>[] = [
+  { accessor: "name", header: "Name", id: "name", sortable: true },
+  { accessor: "status", header: "Status", id: "status" },
+  {
+    accessor: "count",
+    header: "Count",
+    id: "count",
+    sortValue: (item) => item.count,
+    sortable: true
+  }
+];
+
+export const dataGridInteractionEventTypeCheck = (_event: DataGridInteractionEvent) => {};
+export const dataGridSortStateTypeCheck: DataGridSortState = {
+  columnId: "name",
+  direction: "ascending"
+};
+export const dataGridSelectionModeTypeCheck: DataGridSelectionMode = "multiple";
+export const dataGridRowIdTypeCheck: DataGridRowId = "alpha";
+export const dataGridSortChangeTypeCheck: DataGridSortChangeHandler = (nextState, event) => {
+  if (nextState) {
+    dataGridInteractionEventTypeCheck(event);
+  }
+};
+export const dataGridSelectionChangeTypeCheck: DataGridSelectionChangeHandler = (
+  selectedRowIds,
+  event
+) => {
+  selectedRowIds.forEach((rowId) => String(rowId));
+  dataGridInteractionEventTypeCheck(event);
+};
+export const dataGridPropsTypeCheck: DataGridProps<ConsumerDataGridRow> = {
+  columns: consumerDataGridColumns,
+  defaultSelectedRowIds: [dataGridRowIdTypeCheck],
+  defaultSortState: dataGridSortStateTypeCheck,
+  getRowId: (item) => item.id,
+  gridAriaLabel: "Consumer data grid",
+  items: consumerDataGridRows,
+  onSelectionChange: dataGridSelectionChangeTypeCheck,
+  onSortChange: dataGridSortChangeTypeCheck,
+  selectionMode: dataGridSelectionModeTypeCheck
+};
+export const dataGridDirectPropsTypeCheck: DataGridDirectProps<ConsumerDataGridRow> = {
+  columns: consumerDataGridColumns,
+  getRowId: (item) => item.id,
+  items: consumerDataGridRows,
+  label: "Direct DataGrid",
+  selectionMode: "single"
+};
+
 const typedProps: [
   ButtonProps,
   ButtonGroupProps,
@@ -279,6 +353,7 @@ const typedProps: [
   DialogProps,
   DatePickerProps,
   CalendarProps,
+  DataGridProps<ConsumerDataGridRow>,
   AccordionProps,
   ExpanderProps,
   ColorPickerItemProps,
@@ -326,6 +401,7 @@ const typedProps: [
   { backdropBlur: true, isVisible: true, style: { width: "320px" } },
   { defaultValue: new Date(2024, 0, 15), label: "Release date", locale: "en-US" },
   { defaultPickerDate: new Date(2024, 0, 15), label: "Release calendar", locale: "en-US" },
+  dataGridPropsTypeCheck,
   { headerTitle: "General", style: { gap: "8px" } },
   { header: "Advanced settings", direction: "down" },
   { color: "#ff0000", name: "accent" },
@@ -695,6 +771,7 @@ export const basicControls: ReactElement = (
     </Dialog>
     <DatePicker {...datePickerPropsTypeCheck} />
     <Calendar {...calendarPropsTypeCheck} />
+    <DataGrid {...dataGridPropsTypeCheck} />
     <Accordion headerTitle="General">
       <Accordion.Trigger>Options</Accordion.Trigger>
       <Accordion.Body>Content</Accordion.Body>
@@ -893,4 +970,7 @@ export const datePickerSubpathImport: ReactElement = (
 );
 export const calendarSubpathImport: ReactElement = (
   <CalendarDirect {...calendarDirectPropsTypeCheck} />
+);
+export const dataGridSubpathImport: ReactElement = (
+  <DataGridDirect {...dataGridDirectPropsTypeCheck} />
 );

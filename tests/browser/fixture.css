@@ -147,6 +147,12 @@ body {
   margin-top: 24px;
 }
 
+.visual-fixture-data-grids {
+  display: grid;
+  gap: 24px;
+  margin-top: 24px;
+}
+
 .visual-fixture-command-bars {
   display: grid;
   gap: 16px;

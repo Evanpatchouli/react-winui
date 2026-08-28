@@ -714,7 +714,9 @@ test.describe("Public component visual baselines", () => {
       );
     });
 
-    test("keeps the input stable and signals action hover without a hand cursor", async ({ page }) => {
+    test("keeps the input stable and signals action hover without a hand cursor", async ({
+      page
+    }) => {
       const autoSuggestBox = page.getByTestId("auto-suggest-box-interactive");
       const before = await autoSuggestBox.evaluate((element) => {
         const style = getComputedStyle(element);
@@ -1142,16 +1144,15 @@ test.describe("Public component visual baselines", () => {
       await expect(
         bounded.getByRole("gridcell", { name: "Wednesday, May 1, 2024" })
       ).toBeDisabled();
-      await expect(
-        bounded.getByRole("gridcell", { name: "Sunday, May 12, 2024" })
-      ).toBeDisabled();
+      await expect(bounded.getByRole("gridcell", { name: "Sunday, May 12, 2024" })).toBeDisabled();
       await expect(bounded.getByRole("button", { name: "Previous month" })).toBeDisabled();
       await expect(bounded.getByRole("button", { name: "Next month" })).toBeDisabled();
 
       await bounded.getByRole("button", { name: "Today" }).click();
-      await expect(
-        bounded.getByRole("gridcell", { name: "Monday, May 20, 2024" })
-      ).toHaveAttribute("aria-selected", "true");
+      await expect(bounded.getByRole("gridcell", { name: "Monday, May 20, 2024" })).toHaveAttribute(
+        "aria-selected",
+        "true"
+      );
 
       const disabled = page.getByTestId("calendar-disabled");
       await expect(disabled).toHaveAttribute("aria-disabled", "true");
@@ -1168,6 +1169,91 @@ test.describe("Public component visual baselines", () => {
       await page.getByTestId("theme-dark").click();
       await expect(panel(page, "calendar-panel")).toHaveScreenshot(
         "calendar-dark.png",
+        screenshotOptions
+      );
+    });
+  });
+
+  test.describe("DataGrid interaction and visual states", () => {
+    test("renders rows and cycles the sortable header state", async ({ page }) => {
+      const grid = page.getByTestId("data-grid-default").getByRole("grid");
+
+      await expect(grid.getByRole("columnheader")).toHaveCount(5);
+      await expect(grid.getByRole("row")).toHaveCount(5);
+      await expect(grid.locator("tbody tr").first()).toContainText("Alpha");
+
+      await grid.getByRole("button", { name: "Sort Name ascending" }).click();
+      await expect(grid.getByRole("columnheader", { name: "Name" })).toHaveAttribute(
+        "aria-sort",
+        "ascending"
+      );
+
+      await grid.getByRole("button", { name: "Sort Name descending" }).click();
+      await expect(grid.locator("tbody tr").first()).toContainText("Gamma");
+      await expect(grid.getByRole("button", { name: "Clear sort for Name" })).toBeVisible();
+    });
+
+    test("selects rows without including a disabled row", async ({ page }) => {
+      const gridRoot = page.getByTestId("data-grid-default");
+      const grid = gridRoot.getByRole("grid");
+
+      await expect(gridRoot.getByRole("checkbox", { name: "Select row: Alpha" })).toBeChecked();
+      await gridRoot.getByRole("checkbox", { name: "Select row: Gamma" }).click();
+      await expect(page.getByTestId("data-grid-result")).toHaveText("alpha, gamma");
+      await expect(gridRoot.getByRole("checkbox", { name: "Select row: Beta" })).toBeDisabled();
+
+      await grid.getByRole("checkbox", { name: "Select all rows" }).click();
+      await expect(page.getByTestId("data-grid-result")).toHaveText("alpha, gamma, delta");
+      await expect(gridRoot.getByRole("checkbox", { name: "Select row: Delta" })).toBeChecked();
+    });
+
+    test("supports two-dimensional keyboard navigation and grid edges", async ({ page }) => {
+      const grid = page.getByTestId("data-grid-default").getByRole("grid");
+      const alphaName = grid.locator(
+        '[data-rwu-grid-row-index="0"][data-rwu-grid-column-index="0"]'
+      );
+      const gammaName = grid.locator(
+        '[data-rwu-grid-row-index="2"][data-rwu-grid-column-index="0"]'
+      );
+      const gammaUpdated = grid.locator(
+        '[data-rwu-grid-row-index="2"][data-rwu-grid-column-index="3"]'
+      );
+      const deltaUpdated = grid.locator(
+        '[data-rwu-grid-row-index="3"][data-rwu-grid-column-index="3"]'
+      );
+
+      await alphaName.focus();
+      await page.keyboard.press("ArrowDown");
+      await expect(gammaName).toBeFocused();
+      await page.keyboard.press("End");
+      await expect(gammaUpdated).toBeFocused();
+      await page.keyboard.press("Control+Home");
+      await expect(alphaName).toBeFocused();
+      await page.keyboard.press("Control+End");
+      await expect(deltaUpdated).toBeFocused();
+    });
+
+    test("keeps disabled and empty states explicit", async ({ page }) => {
+      const disabled = page.getByTestId("data-grid-disabled");
+      const empty = page.getByTestId("data-grid-empty").getByRole("grid");
+
+      await expect(disabled).toHaveAttribute("aria-disabled", "true");
+      await expect(disabled.getByRole("button", { name: "Sort Name ascending" })).toBeDisabled();
+      await expect(disabled.getByRole("radio", { name: "Select row: Alpha" })).toBeDisabled();
+      await expect(
+        empty.getByRole("gridcell", { name: "No projects match this view" })
+      ).toBeVisible();
+    });
+
+    test("captures DataGrid light and dark visual states", async ({ page }) => {
+      await expect(panel(page, "data-grid-panel")).toHaveScreenshot(
+        "data-grid-light.png",
+        screenshotOptions
+      );
+
+      await page.getByTestId("theme-dark").click();
+      await expect(panel(page, "data-grid-panel")).toHaveScreenshot(
+        "data-grid-dark.png",
         screenshotOptions
       );
     });
@@ -1319,7 +1405,11 @@ test.describe("Public component visual baselines", () => {
         page.getByTestId("settings-expander-uncontrolled")
       ];
       const readShadows = () =>
-        Promise.all(surfaces.map((surface) => surface.evaluate((element) => getComputedStyle(element).boxShadow)));
+        Promise.all(
+          surfaces.map((surface) =>
+            surface.evaluate((element) => getComputedStyle(element).boxShadow)
+          )
+        );
 
       const lightShadows = await readShadows();
       expect(new Set(lightShadows).size).toBe(1);

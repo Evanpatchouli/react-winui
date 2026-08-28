@@ -51,6 +51,22 @@ export type {
   CalendarValue,
   CalendarValueChangeHandler
 } from "./components/Calendar";
+export { default as DataGrid } from "./components/DataGrid";
+export type {
+  DataGridCellAlign,
+  DataGridColumn,
+  DataGridComponent,
+  DataGridInteractionEvent,
+  DataGridProps,
+  DataGridRowClickHandler,
+  DataGridRowId,
+  DataGridSelectionChangeHandler,
+  DataGridSelectionMode,
+  DataGridSortChangeHandler,
+  DataGridSortDirection,
+  DataGridSortState,
+  DataGridSortValue
+} from "./components/DataGrid";
 export { default as Checkbox } from "./components/Checkbox";
 export type { CheckboxProps } from "./components/Checkbox";
 export { default as ColorPickerItem } from "./components/ColorPicker/ColorPickerItem";

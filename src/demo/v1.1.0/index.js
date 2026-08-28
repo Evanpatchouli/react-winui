@@ -27,6 +27,7 @@ import {
   ContextMenuDocs,
   CalendarDocs,
   DatePickerDocs,
+  DataGridDocs,
   DialogDocs,
   ExpanderDocs,
   Icons,
@@ -110,6 +111,7 @@ const AppFourTwoThree = () => {
             {text: "contextmenu", link: 'contextmenu'},
             {text: "calendar", link: 'calendar'},
             {text: "datepicker", link: 'datepicker'},
+            {text: "datagrid", link: 'datagrid'},
             {text: "dialogs", link: 'dialogs'},
             {text: "expander", link: 'expander'},
             {text: "icons", link: 'icons'},
@@ -211,6 +213,7 @@ const AppFourTwoThree = () => {
           <Route path="contextmenu" element={<ContextMenuDocs/>} />
           <Route path="calendar" element={<CalendarDocs/>} />
           <Route path="datepicker" element={<DatePickerDocs/>} />
+          <Route path="datagrid" element={<DataGridDocs/>} />
           <Route path="dialogs" element={<DialogDocs/>} />
           <Route path="expander" element={<ExpanderDocs/>} />
           <Route path="imageview" element={<ImageViewDocs/>} />

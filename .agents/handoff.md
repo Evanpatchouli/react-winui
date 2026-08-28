@@ -491,3 +491,13 @@
 - 新增 `tests/calendar.test.tsx`（7 tests）以及 Calendar Playwright 交互与 Light/Dark 视觉回归（4/4），新增 `calendar-light` / `calendar-dark` 两张显式基线。
 - 验证通过：`pnpm lint`、`pnpm typecheck`、`pnpm test`（18 files / 189 tests）、`pnpm build`、`pnpm test:consumer`、`pnpm --filter @evanpatchouli/react-winui pack --dry-run`、完整 `pnpm test:browser`（114/114）。
 - `pnpm format:check` 仍被仓库既有 P1 文件和 `tests/browser/visual.spec.js` 的格式差异阻塞；Calendar 相关新增/修改文件已通过定向 Prettier 检查。当前任务已完成，P2 下一项为 `DataGrid`。
+
+# 2026-08-28：阶段 7 P2 DataGrid
+
+- 新增独立 `DataGrid`，不重构既有 `TableView`；公开 API 覆盖 `items`、`columns`、`getRowId`、受控/非受控排序、单/多行选择、禁用行、空状态、密度、原生 div 属性与 forwarded ref。
+- 使用原生 table 结构表达 ARIA grid：单一 roving cell tab stop、二维方向键、Home/End、PageUp/PageDown、Ctrl/Cmd+Home/End、Enter/Space 选择和多选 Ctrl/Cmd+A；支持列级 accessor/renderCell/sortValue、稳定客户端排序与 select-all。
+- WinUI 借鉴 DataGrid 的表面层级、行列/选择/只读语义；Fluent UI v9 借鉴 items/columns/getRowId、受控状态、排序/选择分离和 grid focus 管理；WAI-ARIA APG 借鉴 grid 键盘与无障碍语义。没有复制实际第三方源码，因此无需新增 `THIRD_PARTY_NOTICES.md` 条目。
+- 样式只消费现有 `--rwu-*` token；新增独立 Sass、root/subpath exports、public `.d.ts`、`src/lib/dist` ESM/声明/CSS 产物、consumer root/subpath 类型与构建覆盖。
+- 新增 `docs/data-grid.md`、README 示例、v1.0.0/v1.1.0 docs Demo、路由/搜索/导航入口；新增 `tests/data-grid.test.tsx`（9 tests）及 DataGrid 浏览器交互和 Light/Dark 视觉基线。
+- 验证通过：`pnpm lint`、`pnpm typecheck`、`pnpm test`（19 files / 198 tests）、`pnpm build`、`pnpm test:consumer`、`pnpm --filter @evanpatchouli/react-winui pack --dry-run`、`pnpm format:check:data-grid`、定向 Playwright（5/5）和完整 Playwright（119/119）。docs build 仅保留既有大 chunk warning。
+- 当前任务已完成；P2 下一项为 `TeachingTip`，本批未提交 Git commit，等待后续任务指示。

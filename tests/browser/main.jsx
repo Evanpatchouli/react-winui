@@ -14,6 +14,7 @@ import ColorPickerPalette from "../../src/lib/src/components/ColorPicker/ColorPi
 import ComboBox from "../../src/lib/src/components/ComboBox/index.tsx";
 import CommandBar from "../../src/lib/src/components/CommandBar/index.tsx";
 import Calendar from "../../src/lib/src/components/Calendar/index.tsx";
+import DataGrid from "../../src/lib/src/components/DataGrid/index.tsx";
 import DatePicker from "../../src/lib/src/components/DatePicker/index.tsx";
 import Dialog from "../../src/lib/src/components/Dialog/index.tsx";
 import Expander from "../../src/lib/src/components/Expander/index.tsx";
@@ -86,6 +87,25 @@ const formatDatePickerFixtureDate = (date) =>
     date.getDate()
   ).padStart(2, "0")}`;
 
+const dataGridRows = [
+  { id: "alpha", name: "Alpha", owner: "Design", status: "Ready", updated: 12 },
+  { id: "beta", name: "Beta", owner: "Platform", status: "Paused", updated: 8 },
+  { id: "gamma", name: "Gamma", owner: "Research", status: "Ready", updated: 4 },
+  { id: "delta", name: "Delta", owner: "Support", status: "Review", updated: 2 }
+];
+
+const dataGridColumns = [
+  { accessor: "name", header: "Name", id: "name", sortable: true },
+  { accessor: "owner", header: "Owner", id: "owner" },
+  {
+    accessor: "status",
+    header: "Status",
+    id: "status",
+    renderCell: (item) => <strong>{item.status}</strong>
+  },
+  { accessor: "updated", header: "Updated", id: "updated", sortable: true }
+];
+
 const imageSrc =
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='96' viewBox='0 0 160 96'%3E%3Crect width='160' height='96' fill='%230078D7'/%3E%3Ccircle cx='80' cy='48' r='24' fill='%2360CDFF'/%3E%3C/svg%3E";
 
@@ -142,6 +162,8 @@ function VisualFixture() {
   const [expanderResult, setExpanderResult] = useState("none");
   const [selection, setSelection] = useState("windows");
   const [calendarResult, setCalendarResult] = useState("none");
+  const [dataGridSortState, setDataGridSortState] = useState(null);
+  const [dataGridSelectedRowIds, setDataGridSelectedRowIds] = useState(["alpha"]);
   const [datePickerResult, setDatePickerResult] = useState(
     formatDatePickerFixtureDate(datePickerDefaultDate)
   );
@@ -1423,6 +1445,52 @@ function VisualFixture() {
           </div>
           <p className="visual-fixture-status">
             Selected calendar date: <output data-testid="calendar-result">{calendarResult}</output>
+          </p>
+        </Section>
+
+        <Section
+          caption="sortable · multi-select · disabled rows · keyboard grid · light/dark"
+          eyebrow="data surface"
+          testId="data-grid-panel"
+          title="DataGrid"
+        >
+          <div className="visual-fixture-data-grids">
+            <DataGrid
+              columns={dataGridColumns}
+              data-testid="data-grid-default"
+              getRowDisabled={(item) => item.id === "beta"}
+              getRowId={(item) => item.id}
+              gridAriaLabel="Project data"
+              items={dataGridRows}
+              onSelectionChange={setDataGridSelectedRowIds}
+              onSortChange={setDataGridSortState}
+              selectedRowIds={dataGridSelectedRowIds}
+              selectionMode="multiple"
+              sortState={dataGridSortState}
+            />
+            <DataGrid
+              columns={dataGridColumns.slice(0, 2)}
+              data-testid="data-grid-disabled"
+              disabled
+              getRowId={(item) => item.id}
+              gridAriaLabel="Disabled project data"
+              items={dataGridRows.slice(0, 2)}
+              label="Disabled grid"
+              selectionMode="single"
+            />
+            <DataGrid
+              columns={dataGridColumns.slice(0, 2)}
+              data-testid="data-grid-empty"
+              gridAriaLabel="Empty project data"
+              items={[]}
+              noRowsMessage="No projects match this view"
+            />
+          </div>
+          <p className="visual-fixture-status">
+            Selected rows:{" "}
+            <output data-testid="data-grid-result">
+              {dataGridSelectedRowIds.join(", ") || "none"}
+            </output>
           </p>
         </Section>
       </main>

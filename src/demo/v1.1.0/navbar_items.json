@@ -77,6 +77,13 @@
     "showBadge": false
   },
   {
+    "to": "datagrid",
+    "exact": false,
+    "text": "DataGrid",
+    "icon": "icons10-grid-3",
+    "showBadge": false
+  },
+  {
     "to": "expander",
     "exact": false,
     "text": "Expander",

@@ -56,6 +56,7 @@ import "@evanpatchouli/react-winui/icons/winui-icons.min.css";
 组件借鉴与迁移规范见 [`docs/component-migration-guidelines.md`](docs/component-migration-guidelines.md)。
 DatePicker API 与交互边界见 [`docs/date-picker.md`](docs/date-picker.md)。
 Calendar API 与交互边界见 [`docs/calendar.md`](docs/calendar.md)。
+DataGrid API 与交互边界见 [`docs/data-grid.md`](docs/data-grid.md)。
 
 # Usage
 
@@ -65,6 +66,7 @@ import {
   Button,
   Calendar,
   CommandBar,
+  DataGrid,
   DatePicker,
   InputText,
   NavigationView,
@@ -85,6 +87,15 @@ const App = () => (
     <InputText placeholder="Enter a text" />
     <Calendar label="Release calendar" locale="en-US" defaultPickerDate={new Date(2024, 4, 15)} />
     <DatePicker label="Release date" locale="en-US" defaultValue={new Date(2024, 4, 15)} />
+    <DataGrid
+      columns={[
+        { id: "name", header: "Name", accessor: "name", sortable: true },
+        { id: "status", header: "Status", accessor: "status" }
+      ]}
+      getRowId={(item) => item.id}
+      items={[{ id: "alpha", name: "Alpha", status: "Ready" }]}
+      selectionMode="single"
+    />
     <SettingsCard title="Notifications" description="Allow desktop notifications">
       <Button value="Configure" />
     </SettingsCard>

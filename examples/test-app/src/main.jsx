@@ -8,6 +8,7 @@ import {
   ContextMenu,
   DatePicker,
   Calendar,
+  DataGrid,
   Expander,
   Flyout,
   InfoBar,
@@ -28,6 +29,7 @@ import CommandBarDirect from "@evanpatchouli/react-winui/command-bar";
 import ContextMenuDirect from "@evanpatchouli/react-winui/context-menu";
 import DatePickerDirect from "@evanpatchouli/react-winui/date-picker";
 import CalendarDirect from "@evanpatchouli/react-winui/calendar";
+import DataGridDirect from "@evanpatchouli/react-winui/data-grid";
 import ExpanderDirect from "@evanpatchouli/react-winui/expander";
 import FlyoutDirect from "@evanpatchouli/react-winui/flyout";
 import InfoBarDirect from "@evanpatchouli/react-winui/info-bar";
@@ -103,6 +105,25 @@ const ConsumerApp = () => {
         label="Calendar subpath"
         locale="en-US"
         today={new Date(2024, 0, 20)}
+      />
+      <DataGrid
+        aria-label="Root DataGrid"
+        columns={[
+          { accessor: "name", header: "Name", id: "name", sortable: true },
+          { accessor: "status", header: "Status", id: "status" }
+        ]}
+        getRowId={(item) => item.id}
+        items={[
+          { id: "root-alpha", name: "Alpha", status: "Ready" },
+          { id: "root-beta", name: "Beta", status: "Paused" }
+        ]}
+        selectionMode="single"
+      />
+      <DataGridDirect
+        aria-label="DataGrid subpath"
+        columns={[{ accessor: "name", header: "Name", id: "name" }]}
+        getRowId={(item) => item.id}
+        items={[{ id: "direct-alpha", name: "Direct Alpha" }]}
       />
       <Expander defaultExpanded header="Root Expander">
         Root content
