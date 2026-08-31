@@ -1,5 +1,6 @@
 import { createRef, type CSSProperties, type ReactElement } from "react";
 import {
+  Badge,
   Button,
   ButtonGroup,
   Breadcrumb,
@@ -57,6 +58,13 @@ import {
   TeachingTip
 } from "@evanpatchouli/react-winui";
 import type {
+  BadgeAppearance,
+  BadgeColor,
+  BadgeComponent,
+  BadgeIconPosition,
+  BadgeProps,
+  BadgeShape,
+  BadgeSize,
   ButtonProps,
   ButtonGroupProps,
   BreadcrumbComponent,
@@ -239,6 +247,7 @@ import type {
   TeachingTipProps
 } from "@evanpatchouli/react-winui";
 import ButtonDirect from "@evanpatchouli/react-winui/button";
+import BadgeDirect, { type BadgeProps as BadgeDirectProps } from "@evanpatchouli/react-winui/badge";
 import BreadcrumbDirect, {
   type BreadcrumbItem as BreadcrumbDirectItem,
   type BreadcrumbProps as BreadcrumbDirectProps
@@ -390,6 +399,26 @@ export const tagDirectPropsTypeCheck: TagDirectProps = {
   dismissible: true
 };
 
+export const badgeAppearanceTypeCheck: BadgeAppearance = "tint";
+export const badgeColorTypeCheck: BadgeColor = "warning";
+export const badgeIconPositionTypeCheck: BadgeIconPosition = "after";
+export const badgeShapeTypeCheck: BadgeShape = "rounded";
+export const badgeSizeTypeCheck: BadgeSize = "large";
+export const badgePropsTypeCheck: BadgeProps = {
+  appearance: badgeAppearanceTypeCheck,
+  children: "Review",
+  color: badgeColorTypeCheck,
+  icon: "!",
+  iconPosition: badgeIconPositionTypeCheck,
+  shape: badgeShapeTypeCheck,
+  size: badgeSizeTypeCheck
+};
+export const badgeComponentTypeCheck: BadgeComponent = Badge;
+export const badgeDirectPropsTypeCheck: BadgeDirectProps = {
+  "aria-label": "New notifications",
+  color: "danger"
+};
+
 export const dataGridInteractionEventTypeCheck = (_event: DataGridInteractionEvent) => {};
 export const dataGridSortStateTypeCheck: DataGridSortState = {
   columnId: "name",
@@ -429,6 +458,7 @@ export const dataGridDirectPropsTypeCheck: DataGridDirectProps<ConsumerDataGridR
 };
 
 const typedProps: [
+  BadgeProps,
   ButtonProps,
   ButtonGroupProps,
   BreadcrumbProps,
@@ -479,6 +509,7 @@ const typedProps: [
   ToastProps,
   ToasterProps
 ] = [
+  badgePropsTypeCheck,
   { value: "Button" },
   { "aria-label": "Actions" },
   breadcrumbPropsTypeCheck,
@@ -873,6 +904,7 @@ export const basicControls: ReactElement = (
     <ButtonGroup aria-label="Actions">
       <Button>Action</Button>
     </ButtonGroup>
+    <Badge {...badgePropsTypeCheck} />
     <Breadcrumb {...breadcrumbPropsTypeCheck} />
     <AppContainer>
       <span>Container</span>
@@ -1094,6 +1126,7 @@ export const breadcrumbSubpathImport: ReactElement = (
   <BreadcrumbDirect {...breadcrumbDirectPropsTypeCheck} />
 );
 export const tagSubpathImport: ReactElement = <TagDirect {...tagDirectPropsTypeCheck} />;
+export const badgeSubpathImport: ReactElement = <BadgeDirect {...badgeDirectPropsTypeCheck} />;
 export const teachingTipSubpathImport: ReactElement = (
   <TeachingTipDirect {...teachingTipDirectPropsTypeCheck} />
 );

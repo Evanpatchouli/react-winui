@@ -60,12 +60,14 @@ DataGrid API 与交互边界见 [`docs/data-grid.md`](docs/data-grid.md)。
 TeachingTip API 与交互边界见 [`docs/teaching-tip.md`](docs/teaching-tip.md)。
 Breadcrumb API 与交互边界见 [`docs/breadcrumb.md`](docs/breadcrumb.md)。
 Tag API 与交互边界见 [`docs/tag.md`](docs/tag.md)。
+Badge API 与交互边界见 [`docs/badge.md`](docs/badge.md)。
 
 # Usage
 
 ```js
 import {
   AutoSuggestBox,
+  Badge,
   Button,
   Breadcrumb,
   Calendar,
@@ -101,6 +103,7 @@ const App = () => (
     <Tag appearance="outline" dismissible onDismiss={() => {}}>
       Release
     </Tag>
+    <Badge color="success">Ready</Badge>
     <Calendar label="Release calendar" locale="en-US" defaultPickerDate={new Date(2024, 4, 15)} />
     <DatePicker label="Release date" locale="en-US" defaultValue={new Date(2024, 4, 15)} />
     <DataGrid

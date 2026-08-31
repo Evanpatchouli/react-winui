@@ -1,4 +1,4 @@
-.ui-navbar-wrap .ui-badge {
+.ui-navbar-wrap .ui-badge:not([data-rwu-component="badge"]) {
   position: relative;
   height: 16px;
   padding: 1px 5px;
@@ -13,7 +13,7 @@
   justify-content: center;
 }
 
-.ui-navbar-wrap.collapsed .ui-badge {
+.ui-navbar-wrap.collapsed .ui-badge:not([data-rwu-component="badge"]) {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;

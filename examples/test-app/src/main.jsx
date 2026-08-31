@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { createRoot } from "react-dom/client";
 import {
+  Badge,
   Button,
   Breadcrumb,
   AutoSuggestBox,
@@ -26,6 +27,7 @@ import {
   TeachingTip
 } from "@evanpatchouli/react-winui";
 import ButtonDirect from "@evanpatchouli/react-winui/button";
+import BadgeDirect from "@evanpatchouli/react-winui/badge";
 import BreadcrumbDirect from "@evanpatchouli/react-winui/breadcrumb";
 import TagDirect from "@evanpatchouli/react-winui/tag";
 import AutoSuggestBoxDirect from "@evanpatchouli/react-winui/auto-suggest-box";
@@ -59,6 +61,8 @@ const ConsumerApp = () => {
     <main style={{ display: "flex", gap: "8px", padding: "24px", boxShadow: Shadows.shadow8 }}>
       <Button type="primary" value="Root export" />
       <ButtonDirect type="subtle" value="Button subpath" />
+      <Badge color="success">Root Badge</Badge>
+      <BadgeDirect aria-label="Direct badge" color="danger" />
       <Breadcrumb
         items={[
           { href: "/", label: "Home" },

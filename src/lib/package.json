@@ -27,6 +27,11 @@
       "import": "./dist/components/Tag/index.js",
       "default": "./dist/components/Tag/index.js"
     },
+    "./badge": {
+      "types": "./dist/components/Badge/index.d.ts",
+      "import": "./dist/components/Badge/index.js",
+      "default": "./dist/components/Badge/index.js"
+    },
     "./auto-suggest-box": {
       "types": "./dist/components/AutoSuggestBox/index.d.ts",
       "import": "./dist/components/AutoSuggestBox/index.js",

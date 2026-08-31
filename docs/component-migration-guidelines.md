@@ -8,7 +8,7 @@
 
 ## 1. 适用范围
 
-本规范适用于阶段 6 之后新增或迁入的组件，包括 Tooltip、Popover / Flyout、Menu、Toast、InfoBar、ComboBox、DatePicker、Calendar、DataGrid、Breadcrumb、Tag 等。
+本规范适用于阶段 6 之后新增或迁入的组件，包括 Tooltip、Popover / Flyout、Menu、Toast、InfoBar、ComboBox、DatePicker、Calendar、DataGrid、Breadcrumb、Tag、Badge 等。
 
 旧组件的兼容性修复仍应遵守现有 API 和视觉回归基线；不要借新组件开发之机集中重写旧组件。
 
@@ -191,3 +191,12 @@ Tag 对应 WinUI / Fluent 的紧凑值标签，用于表达分类、筛选值或
 - 静态 Tag 使用非交互的 `<span>`；`dismissible` Tag 使用原生 `<button>`，点击、Delete 或 Backspace 触发 `onDismiss`，由父级负责从集合中移除标签。
 - `disabled` 仅使 dismissible Tag 的原生按钮不可用；静态 Tag 保留内容并通过 `aria-disabled` 表达不可用状态。图标和关闭 glyph 不进入 accessible name，文本仍是主要可访问内容。
 - 视觉只消费现有 `--rwu-*` token；未复制 Fluent UI 源码、Griffel 样式或 Fluent visual token。本阶段不扩展 TagGroup、TagPicker、overflow、selection 或独立 interaction action。
+
+## 16. Badge 模板
+
+Badge 对应 WinUI `InfoBadge` 和 Fluent UI 的非交互状态指示器，用于在关联内容附近表达短状态、数量、图标或提醒点；它不是 Tag，也不承担 dismiss、selection 或导航行为。
+
+- API 使用可选 `children` 表达短文本或数字；没有文本和 icon 时渲染 dot，只有 icon 时由消费者提供 `aria-label`。支持 `filled`、`ghost`、`outline`、`tint` 外观、语义颜色、`circular` / `rounded` / `square` 形状、六档尺寸和前后置 icon。
+- 根节点使用非交互 `<span>`，默认不进入焦点顺序，不自动添加 `role="status"`；Badge 关联的父组件应负责向辅助技术传达状态，额外上下文可配合 Tooltip。
+- 现有 NavBar 内部 `.ui-badge` 保持旧 class 和 DOM；公共 Badge 使用 `data-rwu-component="badge"`，由 NavBar selector 排除，避免公共组件嵌入导航时继承旧定位规则。
+- 颜色只通过 react-winui `--rwu-*` token 实现；新增 warning token 作为语义状态桥接，未复制 Fluent UI 源码、Griffel 样式或 Fluent visual token。本阶段不加入可交互 Badge、自动定位或 NavigationView 专属组合 API。

@@ -8,10 +8,12 @@
     --rwu-color-brand: var(--PrimaryColor);
     --rwu-color-danger: var(--color-danger-default);
     --rwu-color-success: var(--color-success-default);
+    --rwu-color-warning: var(--color-warning-default);
     --rwu-color-text-primary: var(--color-text-default);
     --rwu-color-text-secondary: var(--color-input-placeholder);
     --rwu-color-text-disabled: var(--color-input-placeholder);
     --rwu-color-text-on-accent: var(--color-scheme-absolute);
+    --rwu-color-text-on-warning: var(--color-warning-foreground);
     --rwu-color-surface-canvas: var(--color-background-default);
     --rwu-color-surface-control: var(--color-button-default);
     --rwu-color-surface-control-hover: var(--color-ui-hover-default);

@@ -28,6 +28,7 @@ import {
   CalendarDocs,
   BreadcrumbDocs,
   TagDocs,
+  BadgeDocs,
   DatePickerDocs,
   DataGridDocs,
   DialogDocs,
@@ -116,6 +117,7 @@ const AppFourTwoThree = () => {
             {text: "datepicker", link: 'datepicker'},
             {text: "datagrid", link: 'datagrid'},
             {text: "tag", link: 'tag'},
+            {text: "badge", link: 'badge'},
             {text: "dialogs", link: 'dialogs'},
             {text: "expander", link: 'expander'},
             {text: "icons", link: 'icons'},
@@ -219,6 +221,7 @@ const AppFourTwoThree = () => {
           <Route path="calendar" element={<CalendarDocs/>} />
           <Route path="breadcrumb" element={<BreadcrumbDocs/>} />
           <Route path="tag" element={<TagDocs/>} />
+          <Route path="badge" element={<BadgeDocs/>} />
           <Route path="datepicker" element={<DatePickerDocs/>} />
           <Route path="datagrid" element={<DataGridDocs/>} />
           <Route path="dialogs" element={<DialogDocs/>} />

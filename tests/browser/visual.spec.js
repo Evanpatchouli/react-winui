@@ -1429,6 +1429,34 @@ test.describe("Public component visual baselines", () => {
     });
   });
 
+  test.describe("Badge semantics and visual states", () => {
+    test("renders dot, icon, and text content without adding interaction semantics", async ({
+      page
+    }) => {
+      const badgePanel = panel(page, "badge-panel");
+      const textBadge = badgePanel.getByTestId("badge-brand");
+      const dotBadge = badgePanel.getByTestId("badge-dot");
+      const iconBadge = badgePanel.getByTestId("badge-icon");
+
+      await expect(textBadge).toHaveAttribute("data-badge-type", "content");
+      await expect(textBadge).not.toHaveAttribute("role");
+      await expect(textBadge).not.toHaveAttribute("tabindex");
+      await expect(dotBadge).toHaveAttribute("data-badge-type", "dot");
+      await expect(dotBadge).toHaveAttribute("aria-label", "New notifications");
+      await expect(iconBadge).toHaveAttribute("data-badge-type", "icon");
+      await expect(iconBadge).toHaveAttribute("aria-label", "Sync status");
+    });
+
+    test("captures light and dark semantic surfaces", async ({ page }) => {
+      const badgePanel = panel(page, "badge-panel");
+
+      await expect(badgePanel).toHaveScreenshot("badge-light.png", screenshotOptions);
+
+      await page.getByTestId("theme-dark").click();
+      await expect(badgePanel).toHaveScreenshot("badge-dark.png", screenshotOptions);
+    });
+  });
+
   test.describe("NumberBox interaction and visual states", () => {
     test("commits keyboard and direct text input while respecting bounds", async ({ page }) => {
       const numberBox = page.getByTestId("number-box-default");

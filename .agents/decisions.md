@@ -396,3 +396,10 @@
 - 静态 Tag 渲染为非交互 `<span>`；`dismissible` Tag 渲染为 `<button type="button">`，click、Delete 和 Backspace 触发 `onDismiss`，移除责任留给父级集合状态。disabled 同时使用原生 button disabled 和显式 handler guard，静态 Tag 使用 `aria-disabled`。
 - 图标与 dismiss glyph 标记为 decorative，标签文本保留为 accessible name；原生 HTML 属性、`data-*` 和 forwarded ref 继续可用。未暴露 `onClick` / `onKeyDown`，避免静态 Tag 被误用为交互控件。
 - 视觉只消费现有 `--rwu-*` Design Tokens；Tag fixture 追加在 gallery 末尾，维护 light/dark、hover/focus 基线。没有复制 Fluent UI / WinUI 源码、Griffel 样式或 Fluent visual token，因此不新增 `THIRD_PARTY_NOTICES.md` 条目。
+
+## 2026-08-31：Badge API 与内部导航 badge 隔离
+
+- `Badge` 采用 standalone 非交互 `<span>`：省略 children 与 icon 时为 dot，仅有 icon 时为 icon Badge，否则为 text/numeric Badge；不自动添加 `role`、focus、dismiss、selection 或交互行为，关联父组件负责传达状态。
+- API 借鉴 Fluent UI React Badge 的 `appearance`、`color`、`iconPosition`、`shape`、`size` 维度，并结合 WinUI `InfoBadge` 的 dot / icon / numeric 场景；视觉实现只消费现有 `--rwu-*` token。由于现有 token 层没有 warning 语义，新增 `--rwu-color-warning` 与 `--rwu-color-text-on-warning`，没有改变既有 token 值。
+- 旧 `NavBarLink` 内部 `.ui-badge` class 和 DOM 保持不变；公共 Badge 增加 `data-rwu-component="badge"`，公共样式与 NavBar 旧定位规则均显式隔离，避免 class 名冲突。
+- 本批没有复制 Fluent UI / WinUI 实际源码，不需要新增 `THIRD_PARTY_NOTICES.md` 条目；不实现自动定位、最大宽度截断或 NavigationView 专属组合 API。

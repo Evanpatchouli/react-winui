@@ -1,9 +1,11 @@
 @mixin colors-light() {
   :root {
     color-scheme: light;
-    
+
     --color-danger-default: #C50500;
     --color-success-default: #2C8B2C;
+    --color-warning-default: #F7630C;
+    --color-warning-foreground: #111111;
     --color-scheme-absolute: #FFF;
 
     --color-background-default: #FFF;

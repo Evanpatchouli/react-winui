@@ -1,5 +1,17 @@
 # 当前任务
 
+## 2026-08-31：阶段 7 P2 Badge
+
+目标：新增一个保持 react-winui Windows 风格的 `Badge`，完成 dot / icon / text 三种内容形态、语义颜色、外观、形状、尺寸、root/subpath exports、Sass、consumer、RTL、Playwright 视觉回归、docs Demo 和阶段交接记录。
+
+当前状态：`Badge` 已实现并完成交付验证；没有复制 Fluent UI / WinUI 源码，也没有引入 Fluent visual token。现有 `NavBarLink` 的 `.ui-badge` 继续保留，新公共 Badge 通过 `data-rwu-component` 标记与内部导航 badge 样式隔离。
+
+预定边界：支持 `filled` / `ghost` / `outline` / `tint` 外观、`brand` / `danger` / `important` / `informative` / `severe` / `subtle` / `success` / `warning` 颜色、`circular` / `rounded` / `square` 形状、六档尺寸、前后置 icon、原生属性和 forwarded ref；不加入交互、focus、dismiss、自动定位、队列或 NavigationView 专属组合 API。
+
+验证摘要：`pnpm lint`、`pnpm typecheck`、`pnpm test`（23 files / 215 tests）、`pnpm build`、`pnpm test:consumer`、`pnpm --filter @evanpatchouli/react-winui pack --dry-run`、Badge 专项格式检查、Badge Playwright（2/2）和 UTF-8 无 BOM / `git diff --check` 已通过。最终完整 Playwright 为 129/131，剩余 2 项为既有 TeachingTip Light/Dark 截图尺寸基线不匹配，未更新无关 snapshot；docs build 仅保留既有大 chunk warning。
+
+---
+
 ## 2026-08-31：阶段 7 P2 Tag
 
 目标：新增一个保持 react-winui Windows 风格的 `Tag`，完成 standalone static / dismissible API、键盘移除、无障碍语义、root/subpath exports、Sass、consumer、RTL、Playwright 交互与 Light/Dark 视觉回归、docs Demo 和阶段交接记录。

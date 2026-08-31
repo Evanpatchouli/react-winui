@@ -38,6 +38,16 @@ export type {
   AutoSuggestBoxTextChangeHandler,
   AutoSuggestBoxTextChangeReason
 } from "./components/AutoSuggestBox";
+export { default as Badge } from "./components/Badge";
+export type {
+  BadgeAppearance,
+  BadgeColor,
+  BadgeComponent,
+  BadgeIconPosition,
+  BadgeProps,
+  BadgeShape,
+  BadgeSize
+} from "./components/Badge";
 export { default as Button } from "./components/Button";
 export type { ButtonProps, ButtonType } from "./components/Button";
 export { default as ButtonGroup } from "./components/ButtonGroup";

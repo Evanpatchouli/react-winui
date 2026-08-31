@@ -540,3 +540,12 @@
 - 行为参考 WinUI / Windows 11 标签场景与 Fluent UI React Tag 的外观维度、button 语义和键盘移除边界；没有复制实际源码，不需要新增第三方声明。
 - 验证：`pnpm lint`、`pnpm typecheck`、`pnpm test`（22 files / 212 tests）、`pnpm build`、`pnpm test:consumer`、`pnpm --filter @evanpatchouli/react-winui pack --dry-run`、Tag Playwright 2/2、light/dark + hover/pressed/focus 视觉状态、定向格式检查和 diff/BOM 检查通过。完整 Playwright 127/129，既有 TeachingTip 两张尺寸基线仍失败。
 - 当前任务完成；P2 下一项为 `Badge`，等待用户指定后再实现。
+
+# 2026-08-31：阶段 7 P2 Badge
+
+- 新增 standalone `Badge`，支持 dot / icon / text-numeric 三种内容形态、`filled` / `ghost` / `outline` / `tint`、八种语义颜色、三种形状、六档尺寸、前后置 icon、原生 span 属性和 forwarded ref；`0` 等数字内容会被保留。
+- Badge 保持非交互 `<span>`，不自动添加 status role 或 focus；icon-only / dot 的可读状态由 `aria-label` 或关联父组件负责。现有 NavBar 内部 `.ui-badge` 保持原 API/DOM，通过 data marker 和 CSS 选择器隔离。
+- 新增 `src/lib/src/components/Badge`、Sass、root/subpath export、public `.d.ts`、`src/lib/dist` ESM/CSS/声明产物、warning theme tokens、consumer root/subpath 类型构建、root API 文档、v1.0.0/v1.1.0 docs Demo、导航/路由/search entry。
+- 新增 `tests/badge.test.tsx`（3 tests）以及 Badge Playwright 语义与 Light/Dark 视觉回归（2/2），新增 `badge-light` / `badge-dark` 两张显式基线；未复制 Fluent UI / WinUI 源码，不新增第三方声明。
+- 验证通过：`pnpm lint`、`pnpm typecheck`、`pnpm test`（23 files / 215 tests）、`pnpm build`、`pnpm test:consumer`、`pnpm --filter @evanpatchouli/react-winui pack --dry-run`、`pnpm run format:check:badge`、Badge Playwright（2/2）、UTF-8 无 BOM 和 `git diff --check`。最终完整 Playwright 为 129/131，剩余 2 项为既有 TeachingTip Light/Dark 截图尺寸基线失败；docs build 仅保留既有大 chunk warning。
+- 当前任务完成；P2 组件已推进至 Badge，下一项建议先审计 P3 `ColorPicker` 现有聚合能力，等待用户指定后再实现。

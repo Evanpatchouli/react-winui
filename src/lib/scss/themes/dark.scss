@@ -1,9 +1,11 @@
 @mixin colors-dark() {
   [data-theme="dark"] {
     color-scheme: dark;
-    
+
     --color-danger-default: #FF99A3;
     --color-success-default: #6ACB5D;
+    --color-warning-default: #FFB900;
+    --color-warning-foreground: #111111;
     --color-scheme-absolute: #000;
 
     --color-background-default: #111;

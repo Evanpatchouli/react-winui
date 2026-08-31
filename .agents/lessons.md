@@ -277,3 +277,11 @@
 - 现有内部 NavBar badge 与公共 Tag 的定位、尺寸和用途不同；独立公共组件不能复用 `.ui-badge` 或把旧 `showBadge` API 扩展成 Tag API。
 - Tag 的 visual fixture 追加到 gallery 末尾，静态/可关闭/disabled 变体集中在一个 panel，同时单独截取 hover/pressed/focus；这样新增 panel 不改变历史浮层和导航截图上下文。
 - 本批验证通过：Tag 单元 3/3、全量单测 212/212、Tag Playwright 2/2、lint、typecheck、library/docs build、consumer build；完整浏览器仅保留既有 TeachingTip 两张尺寸基线失败。
+
+# 2026-08-31：Badge 的内容语义与 class 隔离
+
+- Badge 的内容分类不能用 truthiness：`0` 是有效 numeric content；实现应显式区分 `undefined` / `null` 与其他 ReactNode，才能可靠保留计数值。
+- WinUI InfoBadge 与 Fluent Badge 都不要求公共 Badge 自动变成 interactive 或 status role；icon-only / dot 的可读名称和通知时机应由 `aria-label` 或父组件上下文承担，避免给静态装饰强加错误语义。
+- 旧组件若已经占用通用 `.ui-badge` class，新公共组件必须同时限定 `data-rwu-component`；只排除旧组件的定位规则仍可能让公共基础样式污染 legacy DOM。
+- 新增 Badge fixture 继续追加到浏览器 gallery 末尾，并单独维护 light/dark 基线；这样可以验证新组件而不改变既有浮层、导航和全页截图取景。
+- warning 是 Badge 的独立语义色，但 token 层此前没有 warning；新增 warning token 应保持既有颜色值不变，并让 light/dark override 继续沿用项目主题入口。

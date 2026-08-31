@@ -6,6 +6,7 @@ import Alert from "../../src/lib/src/components/Alert/index.tsx";
 import AutoSuggestBox from "../../src/lib/src/components/AutoSuggestBox/index.tsx";
 import AppContainer from "../../src/lib/src/components/AppContainer/index.tsx";
 import AppTheme from "../../src/lib/src/components/AppTheme/index.tsx";
+import Badge from "../../src/lib/src/components/Badge/index.tsx";
 import Button from "../../src/lib/src/components/Button/index.tsx";
 import ButtonGroup from "../../src/lib/src/components/ButtonGroup/index.tsx";
 import Breadcrumb from "../../src/lib/src/components/Breadcrumb/index.tsx";
@@ -1678,6 +1679,78 @@ function VisualFixture() {
           <p className="visual-fixture-status">
             Tag dismissal: <output data-testid="tag-result">{tagResult}</output>
           </p>
+        </Section>
+
+        <Section
+          caption="dot · icon · text · appearance · light/dark"
+          eyebrow="status surface"
+          testId="badge-panel"
+          title="Badge"
+        >
+          <div className="visual-fixture-badge-grid">
+            <div className="visual-fixture-badge-group">
+              <span className="visual-fixture-label">Status and content</span>
+              <div className="visual-fixture-badge-row">
+                <Badge data-testid="badge-brand">Ready</Badge>
+                <Badge color="success" data-testid="badge-success">
+                  Synced
+                </Badge>
+                <Badge color="warning" data-testid="badge-warning">
+                  Review
+                </Badge>
+                <Badge aria-label="Three unread messages" color="danger" data-testid="badge-count">
+                  3
+                </Badge>
+                <Badge aria-label="New notifications" color="danger" data-testid="badge-dot" />
+                <Badge
+                  aria-label="Sync status"
+                  data-testid="badge-icon"
+                  icon={
+                    <svg aria-hidden="true" focusable="false" viewBox="0 0 16 16">
+                      <path
+                        d="M3 8a5 5 0 0 1 8.4-3.7L13 6m0-3v3h-3"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M13 8a5 5 0 0 1-8.4 3.7L3 10m0 3v-3h3"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  }
+                />
+              </div>
+            </div>
+            <div className="visual-fixture-badge-group">
+              <span className="visual-fixture-label">Appearance and shape</span>
+              <div className="visual-fixture-badge-row">
+                <Badge appearance="filled">Filled</Badge>
+                <Badge appearance="outline" color="informative">
+                  Outline
+                </Badge>
+                <Badge appearance="ghost" color="success">
+                  Ghost
+                </Badge>
+                <Badge appearance="tint" color="warning">
+                  Tint
+                </Badge>
+                <Badge shape="rounded" color="subtle">
+                  Rounded
+                </Badge>
+                <Badge size="small" color="danger">
+                  Small
+                </Badge>
+                <Badge size="large" color="brand">
+                  Large
+                </Badge>
+              </div>
+            </div>
+          </div>
         </Section>
       </main>
     </MemoryRouter>
