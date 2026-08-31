@@ -237,6 +237,16 @@ export type {
   TableViewProps,
   TableViewRow
 } from "./components/TableView";
+export { default as Tag } from "./components/Tag";
+export type {
+  TagAppearance,
+  TagComponent,
+  TagDismissEvent,
+  TagDismissHandler,
+  TagProps,
+  TagShape,
+  TagSize
+} from "./components/Tag";
 export {
   default as NavigationView,
   NavigationViewItem,

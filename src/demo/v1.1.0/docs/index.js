@@ -16,6 +16,7 @@ export { default as CommandBarDocs } from "./CommandBar_docs";
 export { default as ContextMenuDocs } from "./ContextMenu_docs";
 export { default as CalendarDocs } from "./Calendar_docs";
 export { default as BreadcrumbDocs } from "./Breadcrumb_docs";
+export { default as TagDocs } from "./Tag_docs";
 export { default as DialogDocs } from "./Dialog_docs";
 export { default as DatePickerDocs } from "./DatePicker_docs";
 export { default as DataGridDocs } from "./DataGrid_docs";

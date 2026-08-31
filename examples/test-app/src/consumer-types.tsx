@@ -45,6 +45,7 @@ import {
   SelectNative,
   Switch,
   TableView,
+  Tag,
   TreeItem,
   TreeView,
   TextArea,
@@ -195,6 +196,13 @@ import type {
   TableViewColumn,
   TableViewProps,
   TableViewRow,
+  TagAppearance,
+  TagComponent,
+  TagDismissEvent,
+  TagDismissHandler,
+  TagProps,
+  TagShape,
+  TagSize,
   TreeItemComponent,
   TreeItemProps,
   TreeItemValue,
@@ -235,6 +243,7 @@ import BreadcrumbDirect, {
   type BreadcrumbItem as BreadcrumbDirectItem,
   type BreadcrumbProps as BreadcrumbDirectProps
 } from "@evanpatchouli/react-winui/breadcrumb";
+import TagDirect, { type TagProps as TagDirectProps } from "@evanpatchouli/react-winui/tag";
 import AutoSuggestBoxDirect, {
   type AutoSuggestBoxProps as AutoSuggestBoxDirectProps,
   type AutoSuggestBoxSuggestion as AutoSuggestBoxDirectSuggestion
@@ -359,6 +368,28 @@ export const breadcrumbDirectPropsTypeCheck: BreadcrumbDirectProps = {
   items: [breadcrumbDirectItemTypeCheck]
 };
 
+export const tagAppearanceTypeCheck: TagAppearance = "outline";
+export const tagShapeTypeCheck: TagShape = "circular";
+export const tagSizeTypeCheck: TagSize = "small";
+export const tagDismissEventTypeCheck = (_event: TagDismissEvent) => {};
+export const tagDismissHandlerTypeCheck: TagDismissHandler = (event) => {
+  tagDismissEventTypeCheck(event);
+};
+export const tagPropsTypeCheck: TagProps = {
+  appearance: tagAppearanceTypeCheck,
+  children: "Design",
+  dismissible: true,
+  onDismiss: tagDismissHandlerTypeCheck,
+  shape: tagShapeTypeCheck,
+  size: tagSizeTypeCheck
+};
+export const tagComponentTypeCheck: TagComponent = Tag;
+export const tagDirectPropsTypeCheck: TagDirectProps = {
+  appearance: "brand",
+  children: "Direct Tag",
+  dismissible: true
+};
+
 export const dataGridInteractionEventTypeCheck = (_event: DataGridInteractionEvent) => {};
 export const dataGridSortStateTypeCheck: DataGridSortState = {
   columnId: "name",
@@ -441,6 +472,7 @@ const typedProps: [
   SelectProps,
   SwitchProps,
   TableViewProps,
+  TagProps,
   TreeViewProps,
   TextAreaProps,
   TooltipProps,
@@ -496,6 +528,7 @@ const typedProps: [
     columns: [{ title: "Name" }],
     rows: [["Apple", 1]]
   },
+  tagPropsTypeCheck,
   { "aria-label": "Files", defaultExpandedItems: ["documents"] },
   { placeholder: "Text" },
   { content: "More information", children: <button type="button">Action</button> },
@@ -853,6 +886,7 @@ export const basicControls: ReactElement = (
     <DatePicker {...datePickerPropsTypeCheck} />
     <Calendar {...calendarPropsTypeCheck} />
     <DataGrid {...dataGridPropsTypeCheck} />
+    <Tag {...tagPropsTypeCheck} />
     <Accordion headerTitle="General">
       <Accordion.Trigger>Options</Accordion.Trigger>
       <Accordion.Body>Content</Accordion.Body>
@@ -1059,6 +1093,7 @@ export const dataGridSubpathImport: ReactElement = (
 export const breadcrumbSubpathImport: ReactElement = (
   <BreadcrumbDirect {...breadcrumbDirectPropsTypeCheck} />
 );
+export const tagSubpathImport: ReactElement = <TagDirect {...tagDirectPropsTypeCheck} />;
 export const teachingTipSubpathImport: ReactElement = (
   <TeachingTipDirect {...teachingTipDirectPropsTypeCheck} />
 );

@@ -531,3 +531,12 @@
 - 新增 `tests/breadcrumb.test.tsx`（5 tests）和 4 个 Breadcrumb Playwright 场景，包含语义层级、祖先激活、overflow 菜单、Escape focus restore、Light/Dark 视觉基线；已用 `view_image` 检查三张新增截图。
 - 行为参考 WinUI BreadcrumbBar 和 Fluent UI Breadcrumb guidance；只借鉴路径/overflow/ARIA 边界，没有复制实际源码，也不需要新增 `THIRD_PARTY_NOTICES.md` 条目。
 - 本批专项检查通过：lint、typecheck、全量单测、library/docs build、consumer build、pack dry-run、格式检查、Breadcrumb 浏览器用例；全量 Playwright 仅保留既有 TeachingTip 两张尺寸基线失败。P2 下一项等待明确指定 `Tag` 或 `Badge`。
+
+# 2026-08-31：阶段 7 P2 Tag
+
+- 新增 `Tag`，支持静态 / 可关闭两种语义、`filled` / `outline` / `brand` 外观、`rounded` / `circular` 形状、三档尺寸、装饰 icon、disabled、原生 HTML 属性和 forwarded ref。
+- 静态 Tag 使用 `<span>`；dismissible Tag 使用原生 button，并由 click、Delete、Backspace 触发 `onDismiss`。回调只报告移除请求，父组件负责更新标签集合；disabled handler 额外短路 jsdom 等程序化事件。
+- 新增 Sass、root export、`@evanpatchouli/react-winui/tag` 子路径、声明、consumer root/subpath/typecheck/build、README/API 文档、v1.0.0/v1.1.0 docs Demo、导航/路由/search entry、Vitest/RTL 和 Playwright visual fixture。
+- 行为参考 WinUI / Windows 11 标签场景与 Fluent UI React Tag 的外观维度、button 语义和键盘移除边界；没有复制实际源码，不需要新增第三方声明。
+- 验证：`pnpm lint`、`pnpm typecheck`、`pnpm test`（22 files / 212 tests）、`pnpm build`、`pnpm test:consumer`、`pnpm --filter @evanpatchouli/react-winui pack --dry-run`、Tag Playwright 2/2、light/dark + hover/pressed/focus 视觉状态、定向格式检查和 diff/BOM 检查通过。完整 Playwright 127/129，既有 TeachingTip 两张尺寸基线仍失败。
+- 当前任务完成；P2 下一项为 `Badge`，等待用户指定后再实现。

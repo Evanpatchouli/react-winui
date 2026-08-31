@@ -59,6 +59,7 @@ Calendar API 与交互边界见 [`docs/calendar.md`](docs/calendar.md)。
 DataGrid API 与交互边界见 [`docs/data-grid.md`](docs/data-grid.md)。
 TeachingTip API 与交互边界见 [`docs/teaching-tip.md`](docs/teaching-tip.md)。
 Breadcrumb API 与交互边界见 [`docs/breadcrumb.md`](docs/breadcrumb.md)。
+Tag API 与交互边界见 [`docs/tag.md`](docs/tag.md)。
 
 # Usage
 
@@ -76,6 +77,7 @@ import {
   Popover,
   SettingsCard,
   SettingsExpander,
+  Tag,
   TeachingTip,
   Tooltip
 } from "@evanpatchouli/react-winui";
@@ -96,6 +98,9 @@ const App = () => (
         { label: "Release" }
       ]}
     />
+    <Tag appearance="outline" dismissible onDismiss={() => {}}>
+      Release
+    </Tag>
     <Calendar label="Release calendar" locale="en-US" defaultPickerDate={new Date(2024, 4, 15)} />
     <DatePicker label="Release date" locale="en-US" defaultValue={new Date(2024, 4, 15)} />
     <DataGrid

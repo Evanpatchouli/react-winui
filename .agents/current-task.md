@@ -1,5 +1,17 @@
 # 当前任务
 
+## 2026-08-31：阶段 7 P2 Tag
+
+目标：新增一个保持 react-winui Windows 风格的 `Tag`，完成 standalone static / dismissible API、键盘移除、无障碍语义、root/subpath exports、Sass、consumer、RTL、Playwright 交互与 Light/Dark 视觉回归、docs Demo 和阶段交接记录。
+
+当前状态：`Tag` 已实现并完成交付验证；本批没有复制 Fluent UI / WinUI 源码，也没有引入 Fluent visual token。静态 Tag 使用非交互 `<span>`，dismissible Tag 使用原生 `<button>`，`onDismiss` 只报告请求，由父组件管理集合移除。
+
+预定边界：支持 `filled` / `outline` / `brand` 外观、`rounded` / `circular` 形状、三档尺寸、装饰 icon、disabled、click/Delete/Backspace dismissal、原生属性和 forwarded ref；不加入 TagGroup、TagPicker、overflow、selection state、secondary text 或独立 interaction action。
+
+验证摘要：`pnpm lint`、`pnpm typecheck`、`pnpm test`（22 files / 212 tests）、`pnpm build`、`pnpm test:consumer`、`pnpm --filter @evanpatchouli/react-winui pack --dry-run`、Tag 专项格式检查、`git diff --check`、UTF-8 无 BOM 检查和 Tag Playwright 2/2 均通过；视觉状态覆盖 light/dark、hover、pressed 和 focus。完整 Playwright 127/129 通过，剩余 2 项为既有 TeachingTip Light/Dark 截图尺寸基线不匹配，未将无关基线更新混入本批。docs build 仅保留既有大 chunk warning。
+
+---
+
 ## 2026-08-31：阶段 7 P2 Breadcrumb
 
 目标：新增一个保持 react-winui Windows 风格的 `Breadcrumb`，完成路径模型、overflow、无障碍语义、root/subpath exports、Sass、consumer、RTL、Playwright 交互与 Light/Dark 视觉回归、docs Demo 和阶段交接记录。

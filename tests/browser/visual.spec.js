@@ -1381,6 +1381,54 @@ test.describe("Public component visual baselines", () => {
     });
   });
 
+  test.describe("Tag interaction and visual states", () => {
+    test("renders static and dismissible semantics", async ({ page }) => {
+      const tagPanel = panel(page, "tag-panel");
+      const staticTag = tagPanel.getByTestId("tag-filled");
+      const dismissibleTag = tagPanel.getByTestId("tag-dismissible");
+
+      await expect(staticTag).toHaveAttribute("data-dismissible", "false");
+      await expect(staticTag).toHaveText("Filled");
+      await expect(tagPanel.getByTestId("tag-icon").locator(".ui-tag-icon")).toHaveAttribute(
+        "aria-hidden",
+        "true"
+      );
+      await expect(dismissibleTag).toHaveRole("button", { name: "Design" });
+      await expect(dismissibleTag).toHaveAttribute("data-dismissible", "true");
+      await expect(tagPanel.getByTestId("tag-dismissible-disabled")).toBeDisabled();
+
+      await dismissibleTag.click();
+      await expect(page.getByTestId("tag-result")).toHaveText("Design dismissed");
+
+      await dismissibleTag.press("Delete");
+      await expect(page.getByTestId("tag-result")).toHaveText("Design dismissed");
+    });
+
+    test("captures light, dark, hover, and focus states", async ({ page }) => {
+      const tagPanel = panel(page, "tag-panel");
+      const dismissibleTag = tagPanel.getByTestId("tag-dismissible");
+
+      await expect(tagPanel).toHaveScreenshot("tag-light.png", screenshotOptions);
+
+      await dismissibleTag.hover();
+      await expect(dismissibleTag).toHaveScreenshot("tag-hover-light.png", screenshotOptions);
+
+      const bounds = await dismissibleTag.boundingBox();
+      expect(bounds).not.toBeNull();
+      await page.mouse.move(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2);
+      await page.mouse.down();
+      await expect(dismissibleTag).toHaveScreenshot("tag-pressed-light.png", screenshotOptions);
+      await page.mouse.up();
+
+      await dismissibleTag.focus();
+      await expect(dismissibleTag).toBeFocused();
+      await expect(dismissibleTag).toHaveScreenshot("tag-focus-light.png", screenshotOptions);
+
+      await page.getByTestId("theme-dark").click();
+      await expect(tagPanel).toHaveScreenshot("tag-dark.png", screenshotOptions);
+    });
+  });
+
   test.describe("NumberBox interaction and visual states", () => {
     test("commits keyboard and direct text input while respecting bounds", async ({ page }) => {
       const numberBox = page.getByTestId("number-box-default");

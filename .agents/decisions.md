@@ -389,3 +389,10 @@
 - 根节点使用带 accessible name 的 `nav`，路径使用 `ol`；分隔符为 presentation-only，最后一项始终是 `aria-current="page"` 的非交互当前节点，即使调用方同时提供 `href` 或 `onClick` 也不执行导航。
 - `maxVisibleItems` 是显式且确定性的可见条目上限，折叠从第二项开始，保留首项和当前项；overflow 通过现有 `Popover` 复用 portal、定位、菜单键盘、outside pointer、Escape 和 focus restore，不引入 ResizeObserver 或额外运行时依赖。
 - 没有设置 `maxVisibleItems` 时不测量实时宽度，路径保持单行并使用横向滚动；这让异步字体、缩放和不同容器宽度不会改变组件的结构判断。视觉只使用现有 `--rwu-*` token，没有复制 Fluent UI / WinUI 源码。
+
+## 2026-08-31：Tag API 与 standalone 边界
+
+- `Tag` 采用 standalone API：`children` 表达值内容，`appearance` 支持 `filled` / `outline` / `brand`，`shape` 支持 `rounded` / `circular`，`size` 支持 `extra-small` / `small` / `medium`；不与现有内部 NavBar badge 混用，也不改旧 `Badge` 语义。
+- 静态 Tag 渲染为非交互 `<span>`；`dismissible` Tag 渲染为 `<button type="button">`，click、Delete 和 Backspace 触发 `onDismiss`，移除责任留给父级集合状态。disabled 同时使用原生 button disabled 和显式 handler guard，静态 Tag 使用 `aria-disabled`。
+- 图标与 dismiss glyph 标记为 decorative，标签文本保留为 accessible name；原生 HTML 属性、`data-*` 和 forwarded ref 继续可用。未暴露 `onClick` / `onKeyDown`，避免静态 Tag 被误用为交互控件。
+- 视觉只消费现有 `--rwu-*` Design Tokens；Tag fixture 追加在 gallery 末尾，维护 light/dark、hover/focus 基线。没有复制 Fluent UI / WinUI 源码、Griffel 样式或 Fluent visual token，因此不新增 `THIRD_PARTY_NOTICES.md` 条目。

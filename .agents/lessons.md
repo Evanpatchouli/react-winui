@@ -268,3 +268,12 @@
 - 复用 Popover 能一次获得 portal、viewport 定位、菜单焦点、outside pointer、Escape 与恢复触发器焦点；Breadcrumb 只负责路径数据和菜单关闭状态，避免复制浮层基础设施。
 - 视觉 fixture 追加到 gallery 末尾，Breadcrumb 自己维护 light/dark 与 overflow surface 基线；overflow surface 直接截图可避免 viewport clipping 把上方无关 fixture 内容带入图片。
 - 全量浏览器回归再次提醒：既有浮层基线若尺寸与当前实际 surface 不一致，应记录为既有失败并隔离，不应为了让新组件通过而更新无关 TeachingTip snapshot。
+
+# 2026-08-31：Tag 的交互语义与视觉边界
+
+- static / dismissible Tag 必须先在 DOM 语义上分开：前者用 `<span>` 保持信息展示，后者用原生 `<button>` 承担 Tab、disabled 和 accessible name；不要给静态内容补一个伪按钮 role。
+- 对可关闭标签，父组件拥有集合状态，Tag 只发出 `onDismiss` 请求；click、Delete 和 Backspace 应走同一个回调边界，disabled handler guard 可以补足 jsdom 对 disabled button 键盘事件的非真实派发。
+- 图标和关闭 glyph 应从 accessible name 中移除，让 children 成为稳定的可读标签；装饰 icon 仍可以通过 wrapper 保留布局，不必复制 Fluent slot 体系。
+- 现有内部 NavBar badge 与公共 Tag 的定位、尺寸和用途不同；独立公共组件不能复用 `.ui-badge` 或把旧 `showBadge` API 扩展成 Tag API。
+- Tag 的 visual fixture 追加到 gallery 末尾，静态/可关闭/disabled 变体集中在一个 panel，同时单独截取 hover/pressed/focus；这样新增 panel 不改变历史浮层和导航截图上下文。
+- 本批验证通过：Tag 单元 3/3、全量单测 212/212、Tag Playwright 2/2、lint、typecheck、library/docs build、consumer build；完整浏览器仅保留既有 TeachingTip 两张尺寸基线失败。

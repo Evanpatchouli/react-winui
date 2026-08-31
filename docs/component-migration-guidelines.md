@@ -8,7 +8,7 @@
 
 ## 1. 适用范围
 
-本规范适用于阶段 6 之后新增或迁入的组件，包括 Tooltip、Popover / Flyout、Menu、Toast、InfoBar、ComboBox、DatePicker、Calendar、DataGrid、Breadcrumb 等。
+本规范适用于阶段 6 之后新增或迁入的组件，包括 Tooltip、Popover / Flyout、Menu、Toast、InfoBar、ComboBox、DatePicker、Calendar、DataGrid、Breadcrumb、Tag 等。
 
 旧组件的兼容性修复仍应遵守现有 API 和视觉回归基线；不要借新组件开发之机集中重写旧组件。
 
@@ -182,3 +182,12 @@ TeachingTip 复用 Popover 的 portal、定位、箭头、焦点陷阱和 Escape
 - 默认显式关闭模式保留 close button，并忽略 outside pointer；`isLightDismiss` 隐藏 close button，仅启用 outside pointer 关闭。
 - 目标与浮层通过 `aria-controls`、`aria-expanded`、`aria-haspopup`、`aria-labelledby` 和 `aria-describedby` 连接；action 的 `preventDefault()` 可以保留提示打开。
 - 视觉只消费现有 `--rwu-*` token；当前不扩展 WinUI 完整 placement 矩阵、持久化提示队列、轮播内容或非目标根边缘定位。
+
+## 15. Tag 模板
+
+Tag 对应 WinUI / Fluent 的紧凑值标签，用于表达分类、筛选值或其他短内容；它不是导航、按钮组或独立的状态通知组件。
+
+- API 使用 `children` 表达标签内容，支持 `filled`、`outline`、`brand` 三种外观、`rounded` / `circular` 形状、三档尺寸和可选装饰 `icon`。
+- 静态 Tag 使用非交互的 `<span>`；`dismissible` Tag 使用原生 `<button>`，点击、Delete 或 Backspace 触发 `onDismiss`，由父级负责从集合中移除标签。
+- `disabled` 仅使 dismissible Tag 的原生按钮不可用；静态 Tag 保留内容并通过 `aria-disabled` 表达不可用状态。图标和关闭 glyph 不进入 accessible name，文本仍是主要可访问内容。
+- 视觉只消费现有 `--rwu-*` token；未复制 Fluent UI 源码、Griffel 样式或 Fluent visual token。本阶段不扩展 TagGroup、TagPicker、overflow、selection 或独立 interaction action。

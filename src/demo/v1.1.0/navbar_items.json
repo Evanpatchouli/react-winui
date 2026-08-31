@@ -91,6 +91,13 @@
     "showBadge": false
   },
   {
+    "to": "tag",
+    "exact": false,
+    "text": "Tag",
+    "icon": "icons10-tag",
+    "showBadge": false
+  },
+  {
     "to": "expander",
     "exact": false,
     "text": "Expander",

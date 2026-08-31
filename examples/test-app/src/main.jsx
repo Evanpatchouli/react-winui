@@ -18,6 +18,7 @@ import {
   Popover,
   SettingsCard,
   SettingsExpander,
+  Tag,
   TreeItem,
   TreeView,
   Toast,
@@ -26,6 +27,7 @@ import {
 } from "@evanpatchouli/react-winui";
 import ButtonDirect from "@evanpatchouli/react-winui/button";
 import BreadcrumbDirect from "@evanpatchouli/react-winui/breadcrumb";
+import TagDirect from "@evanpatchouli/react-winui/tag";
 import AutoSuggestBoxDirect from "@evanpatchouli/react-winui/auto-suggest-box";
 import ComboBoxDirect from "@evanpatchouli/react-winui/combo-box";
 import CommandBarDirect from "@evanpatchouli/react-winui/command-bar";
@@ -65,6 +67,12 @@ const ConsumerApp = () => {
         ]}
       />
       <BreadcrumbDirect items={[{ href: "/direct", label: "Direct" }, { label: "Breadcrumb" }]} />
+      <Tag appearance="outline" dismissible onDismiss={() => {}}>
+        Root Tag
+      </Tag>
+      <TagDirect appearance="brand" dismissible onDismiss={() => {}}>
+        Direct Tag
+      </TagDirect>
       <AutoSuggestBox
         aria-label="Root AutoSuggestBox"
         defaultText="Win"

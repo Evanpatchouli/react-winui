@@ -47,6 +47,7 @@ import SettingsExpander from "../../src/lib/src/components/SettingsExpander/inde
 import SliderBar from "../../src/lib/src/components/SliderBar/index.tsx";
 import SplashScreen from "../../src/lib/src/components/SplashScreen/index.tsx";
 import Switch from "../../src/lib/src/components/Switch/index.tsx";
+import Tag from "../../src/lib/src/components/Tag/index.tsx";
 import TableView from "../../src/lib/src/components/TableView/index.tsx";
 import TextArea from "../../src/lib/src/components/TextArea/index.tsx";
 import Tooltip from "../../src/lib/src/components/Tooltip/index.tsx";
@@ -167,6 +168,7 @@ function VisualFixture() {
   const [dataGridSortState, setDataGridSortState] = useState(null);
   const [dataGridSelectedRowIds, setDataGridSelectedRowIds] = useState(["alpha"]);
   const [breadcrumbResult, setBreadcrumbResult] = useState("none");
+  const [tagResult, setTagResult] = useState("none");
   const [teachingTipOpen, setTeachingTipOpen] = useState(false);
   const [teachingTipLightDismissOpen, setTeachingTipLightDismissOpen] = useState(false);
   const [teachingTipResult, setTeachingTipResult] = useState("none");
@@ -1603,6 +1605,78 @@ function VisualFixture() {
           <p className="visual-fixture-status">
             Breadcrumb selection:{" "}
             <output data-testid="breadcrumb-result">{breadcrumbResult}</output>
+          </p>
+        </Section>
+
+        <Section
+          caption="static · dismissible · keyboard · light/dark"
+          eyebrow="value surface"
+          testId="tag-panel"
+          title="Tag"
+        >
+          <div className="visual-fixture-tag-grid">
+            <div className="visual-fixture-tag-group">
+              <span className="visual-fixture-label">Static appearances</span>
+              <div className="visual-fixture-tag-row">
+                <Tag data-testid="tag-filled">Filled</Tag>
+                <Tag appearance="outline" data-testid="tag-outline">
+                  Outline
+                </Tag>
+                <Tag appearance="brand" data-testid="tag-brand">
+                  Brand
+                </Tag>
+                <Tag
+                  appearance="outline"
+                  data-testid="tag-icon"
+                  icon={
+                    <svg aria-hidden="true" focusable="false" viewBox="0 0 16 16">
+                      <path
+                        d="M2.5 3.5h6l5 5-4 4-5-5v-4Z"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinejoin="round"
+                      />
+                      <circle cx="5.25" cy="6.75" fill="currentColor" r=".8" />
+                    </svg>
+                  }
+                >
+                  With icon
+                </Tag>
+                <Tag data-testid="tag-circular" shape="circular" size="extra-small">
+                  Compact
+                </Tag>
+                <Tag data-testid="tag-disabled" disabled>
+                  Disabled
+                </Tag>
+              </div>
+            </div>
+            <div className="visual-fixture-tag-group">
+              <span className="visual-fixture-label">Dismissible values</span>
+              <div className="visual-fixture-tag-row">
+                <Tag
+                  appearance="outline"
+                  data-testid="tag-dismissible"
+                  dismissible
+                  onDismiss={() => setTagResult("Design dismissed")}
+                >
+                  Design
+                </Tag>
+                <Tag
+                  appearance="brand"
+                  data-testid="tag-dismissible-brand"
+                  dismissible
+                  onDismiss={() => setTagResult("Windows dismissed")}
+                >
+                  Windows
+                </Tag>
+                <Tag data-testid="tag-dismissible-disabled" disabled dismissible>
+                  Unavailable
+                </Tag>
+              </div>
+            </div>
+          </div>
+          <p className="visual-fixture-status">
+            Tag dismissal: <output data-testid="tag-result">{tagResult}</output>
           </p>
         </Section>
       </main>

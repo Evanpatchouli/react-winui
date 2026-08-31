@@ -487,6 +487,28 @@ body {
   margin-bottom: 0;
 }
 
+.visual-fixture-tag-grid {
+  display: grid;
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.visual-fixture-tag-group {
+  display: grid;
+  gap: 8px;
+}
+
+.visual-fixture-tag-group .visual-fixture-label {
+  margin-bottom: 0;
+}
+
+.visual-fixture-tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
 @media only screen and (max-width: 760px) {
   body {
     padding: 16px;
