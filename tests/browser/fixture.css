@@ -471,6 +471,22 @@ body {
   border-top: 1px solid var(--rwu-color-border-divider);
 }
 
+.visual-fixture-breadcrumb-stack {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.visual-fixture-breadcrumb-example {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.visual-fixture-breadcrumb-example .visual-fixture-label {
+  margin-bottom: 0;
+}
+
 @media only screen and (max-width: 760px) {
   body {
     padding: 16px;

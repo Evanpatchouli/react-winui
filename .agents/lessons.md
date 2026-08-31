@@ -260,3 +260,11 @@
 - `Button` 保留 legacy Props 但不透传未知 DOM 属性；浏览器 fixture 应用 panel `data-testid` 限定范围，再按可访问名称定位 Button，不能假设 `data-testid` 会到达原生按钮。
 - TeachingTip 视觉基线需分别检查 light/dark surface、hero、arrow、close/action 状态；新增 fixture 放在 gallery 末尾，避免改动历史截图取景。
 - 本批验证通过：TeachingTip 单元 5/5（全量 20 files / 204 tests）、定向 Playwright 4/4、焦点场景重复 20/20、完整 Playwright 123/123、lint、typecheck、build、consumer build、pack dry-run、format check 与无 BOM 检查。
+
+# 2026-08-31：Breadcrumb 的确定性 overflow 与路径语义
+
+- Breadcrumb 的路径关系应直接由 `nav` + `ol` + `aria-current="page"` 表达；分隔符必须从可访问阅读顺序中移除，当前项即使带有 href 也应保持非交互。
+- overflow 需要定义清楚上限的计数方式；本实现将 overflow trigger 计入 `maxVisibleItems`，从第二项开始折叠，并保留首项与最后一项，回调仍使用原始 item index。
+- 复用 Popover 能一次获得 portal、viewport 定位、菜单焦点、outside pointer、Escape 与恢复触发器焦点；Breadcrumb 只负责路径数据和菜单关闭状态，避免复制浮层基础设施。
+- 视觉 fixture 追加到 gallery 末尾，Breadcrumb 自己维护 light/dark 与 overflow surface 基线；overflow surface 直接截图可避免 viewport clipping 把上方无关 fixture 内容带入图片。
+- 全量浏览器回归再次提醒：既有浮层基线若尺寸与当前实际 surface 不一致，应记录为既有失败并隔离，不应为了让新组件通过而更新无关 TeachingTip snapshot。

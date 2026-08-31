@@ -1,5 +1,17 @@
 # 当前任务
 
+## 2026-08-31：阶段 7 P2 Breadcrumb
+
+目标：新增一个保持 react-winui Windows 风格的 `Breadcrumb`，完成路径模型、overflow、无障碍语义、root/subpath exports、Sass、consumer、RTL、Playwright 交互与 Light/Dark 视觉回归、docs Demo 和阶段交接记录。
+
+当前状态：`Breadcrumb` 已实现并完成交付验证；本批没有复制 Fluent UI / WinUI 源码，也没有引入 Fluent visual token。组件使用 `items` 数据模型，最后一项固定为当前页面；`maxVisibleItems` 提供确定性中间路径折叠，并复用现有 `Popover` 处理菜单、outside pointer、Escape 和焦点恢复。
+
+预定边界：支持原生链接、无 href 的按钮项、disabled 项、图标、分隔符、自定义 accessible name、原生 nav 属性和 forwarded ref；不加入 ResizeObserver 自动测量、路由历史推导、文件路径专用模式或完整 Fluent compound component API。未设置上限时保持单行并允许横向滚动。
+
+验证摘要：`pnpm lint`、`pnpm typecheck`、`pnpm test`（21 files / 209 tests）、`pnpm build`、`pnpm test:consumer`、`pnpm --filter @evanpatchouli/react-winui pack --dry-run`、Breadcrumb 专项格式检查、Breadcrumb Playwright 4/4 均通过；全量 Playwright 125/127 通过，剩余 2 项为既有 TeachingTip Light/Dark 截图尺寸基线不匹配，未将无关基线更新混入本批。docs build 仅保留既有大 chunk warning。
+
+---
+
 ## 2026-08-28：阶段 7 P2 TeachingTip
 
 目标：新增一个面向功能发现与上下文指导的 Windows 风格 `TeachingTip`，完成 Popover 复用、TypeScript 公共类型、root/subpath exports、Sass、consumer、RTL、Playwright 交互与 Light/Dark 视觉回归、docs Demo 和阶段交接记录。

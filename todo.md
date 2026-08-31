@@ -33,7 +33,7 @@
 - [x] `Calendar`
 - [x] `DataGrid`：先审计现有 `TableView`
 - [x] `TeachingTip`：优先复用 `Popover` / `Flyout` 的定位与焦点能力
-- [ ] `Breadcrumb`
+- [x] `Breadcrumb`：使用 `items` 路径模型并复用 `Popover` 实现确定性 overflow
 - [ ] `Tag`
 - [ ] `Badge`：现有 `NavBarLink` 只有内部 badge 能力，需评估独立公共组件 API
 
@@ -66,7 +66,7 @@
 
 ## 推荐的下一步顺序
 
-1. P1 八个组件与 P2 DatePicker、Calendar、DataGrid、TeachingTip 已完成并归档
-2. 下一项等待明确指定 P2 `Breadcrumb`、`Tag` 或 `Badge`
+1. P1 八个组件与 P2 DatePicker、Calendar、DataGrid、TeachingTip、Breadcrumb 已完成并归档
+2. 下一项等待明确指定 P2 `Tag` 或 `Badge`
 
 一次只处理一个组件；完成并提交后再进入下一项。

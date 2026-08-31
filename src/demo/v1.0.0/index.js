@@ -26,6 +26,7 @@ import {
   ColorPickerDocs,
   ContextMenuDocs,
   CalendarDocs,
+  BreadcrumbDocs,
   DatePickerDocs,
   DataGridDocs,
   DialogDocs,
@@ -214,6 +215,7 @@ const AppFourTwoThree = () => {
           <Route path="colorpicker" element={<ColorPickerDocs/>} />
           <Route path="contextmenu" element={<ContextMenuDocs/>} />
           <Route path="calendar" element={<CalendarDocs/>} />
+          <Route path="breadcrumb" element={<BreadcrumbDocs/>} />
           <Route path="datepicker" element={<DatePickerDocs/>} />
           <Route path="datagrid" element={<DataGridDocs/>} />
           <Route path="dialogs" element={<DialogDocs/>} />

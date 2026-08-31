@@ -382,3 +382,10 @@
 - 目标使用 `aria-controls`、`aria-expanded`、`aria-haspopup="dialog"`，浮层使用自动标题/副标题关系；interactive content 由 Popover trap focus 处理，TeachingTip 在显式模式补充 controlled click 后的 close-button focus 和 close 后 target restore。
 - WinUI 参考目标定位、显式/light-dismiss、title/subtitle/action/hero/icon；Fluent UI React v9 仅参考 TeachingPopover 对 Popover、箭头默认值、focus trap 和受控状态的组合方式；没有复制源码、Griffel 或 Fluent token。
 - 视觉 fixture 继续追加到 gallery 末尾，TeachingTip Light/Dark 基线独立维护；视觉样式只消费现有 `--rwu-*` token。
+
+## 2026-08-31：Breadcrumb API 与 overflow 边界
+
+- `Breadcrumb` 采用 `items` 路径模型而不是强制 compound component；每项支持 `label`、`href`、`onClick`、`icon`、`disabled`、`ariaLabel`、`target`、`rel` 与稳定 `id`，从而覆盖链接、按钮和纯层级节点，同时保留原始索引回调。
+- 根节点使用带 accessible name 的 `nav`，路径使用 `ol`；分隔符为 presentation-only，最后一项始终是 `aria-current="page"` 的非交互当前节点，即使调用方同时提供 `href` 或 `onClick` 也不执行导航。
+- `maxVisibleItems` 是显式且确定性的可见条目上限，折叠从第二项开始，保留首项和当前项；overflow 通过现有 `Popover` 复用 portal、定位、菜单键盘、outside pointer、Escape 和 focus restore，不引入 ResizeObserver 或额外运行时依赖。
+- 没有设置 `maxVisibleItems` 时不测量实时宽度，路径保持单行并使用横向滚动；这让异步字体、缩放和不同容器宽度不会改变组件的结构判断。视觉只使用现有 `--rwu-*` token，没有复制 Fluent UI / WinUI 源码。

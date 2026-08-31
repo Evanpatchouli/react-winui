@@ -42,6 +42,15 @@ export { default as Button } from "./components/Button";
 export type { ButtonProps, ButtonType } from "./components/Button";
 export { default as ButtonGroup } from "./components/ButtonGroup";
 export type { ButtonGroupProps } from "./components/ButtonGroup";
+export { default as Breadcrumb } from "./components/Breadcrumb";
+export type {
+  BreadcrumbComponent,
+  BreadcrumbItem,
+  BreadcrumbItemActivateHandler,
+  BreadcrumbItemClickEvent,
+  BreadcrumbItemClickHandler,
+  BreadcrumbProps
+} from "./components/Breadcrumb";
 export { default as Calendar } from "./components/Calendar";
 export type {
   CalendarFirstDayOfWeek,

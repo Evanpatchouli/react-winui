@@ -1317,6 +1317,70 @@ test.describe("Public component visual baselines", () => {
     });
   });
 
+  test.describe("Breadcrumb interaction and visual states", () => {
+    test("renders semantic hierarchy and activates an ancestor", async ({ page }) => {
+      const breadcrumb = panel(page, "breadcrumb-panel").getByTestId("breadcrumb-default");
+
+      await expect(breadcrumb).toHaveRole("navigation", { name: "Project path" });
+      await expect(breadcrumb.locator("ol > li")).toHaveCount(7);
+      await expect(breadcrumb.getByRole("link", { name: "Projects" })).toHaveAttribute(
+        "href",
+        "/projects"
+      );
+      await expect(breadcrumb.locator(".ui-breadcrumb-item-current")).toHaveAttribute(
+        "aria-current",
+        "page"
+      );
+
+      await breadcrumb.getByRole("link", { name: "Projects" }).click();
+      await expect(page.getByTestId("breadcrumb-result")).toHaveText("1: Projects");
+    });
+
+    test("opens the overflow menu and activates a collapsed ancestor", async ({ page }) => {
+      const breadcrumb = panel(page, "breadcrumb-panel").getByTestId("breadcrumb-overflow");
+      const overflowButton = breadcrumb.getByRole("button", {
+        name: "Show more breadcrumb items"
+      });
+
+      await overflowButton.click();
+      const surface = page.locator(".ui-popover-open.ui-breadcrumb-overflow-surface");
+      await expect(surface).toBeVisible();
+      await expect(surface.getByRole("menuitem", { name: "Workspace" })).toBeVisible();
+      await expect(surface.getByRole("menuitem", { name: "Design" })).toBeVisible();
+      await expect(surface).toHaveScreenshot("breadcrumb-overflow-light.png", screenshotOptions);
+
+      await surface.getByRole("menuitem", { name: "Design" }).click();
+      await expect(page.getByTestId("breadcrumb-result")).toHaveText("2: Design");
+      await expect(surface).toHaveCount(0);
+    });
+
+    test("captures Breadcrumb light and dark visual states", async ({ page }) => {
+      await expect(panel(page, "breadcrumb-panel")).toHaveScreenshot(
+        "breadcrumb-light.png",
+        screenshotOptions
+      );
+
+      await page.getByTestId("theme-dark").click();
+      await expect(panel(page, "breadcrumb-panel")).toHaveScreenshot(
+        "breadcrumb-dark.png",
+        screenshotOptions
+      );
+    });
+
+    test("restores focus to the overflow trigger after Escape", async ({ page }) => {
+      const overflowButton = panel(page, "breadcrumb-panel")
+        .getByTestId("breadcrumb-overflow")
+        .getByRole("button", { name: "Show more breadcrumb items" });
+
+      await overflowButton.click();
+      await expect(page.locator(".ui-popover-open.ui-breadcrumb-overflow-surface")).toBeVisible();
+      await page.keyboard.press("Escape");
+
+      await expect(page.locator(".ui-popover-open.ui-breadcrumb-overflow-surface")).toHaveCount(0);
+      await expect(overflowButton).toBeFocused();
+    });
+  });
+
   test.describe("NumberBox interaction and visual states", () => {
     test("commits keyboard and direct text input while respecting bounds", async ({ page }) => {
       const numberBox = page.getByTestId("number-box-default");

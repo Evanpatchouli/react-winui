@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { createRoot } from "react-dom/client";
 import {
   Button,
+  Breadcrumb,
   AutoSuggestBox,
   ComboBox,
   CommandBar,
@@ -24,6 +25,7 @@ import {
   TeachingTip
 } from "@evanpatchouli/react-winui";
 import ButtonDirect from "@evanpatchouli/react-winui/button";
+import BreadcrumbDirect from "@evanpatchouli/react-winui/breadcrumb";
 import AutoSuggestBoxDirect from "@evanpatchouli/react-winui/auto-suggest-box";
 import ComboBoxDirect from "@evanpatchouli/react-winui/combo-box";
 import CommandBarDirect from "@evanpatchouli/react-winui/command-bar";
@@ -55,6 +57,14 @@ const ConsumerApp = () => {
     <main style={{ display: "flex", gap: "8px", padding: "24px", boxShadow: Shadows.shadow8 }}>
       <Button type="primary" value="Root export" />
       <ButtonDirect type="subtle" value="Button subpath" />
+      <Breadcrumb
+        items={[
+          { href: "/", label: "Home" },
+          { href: "/projects", label: "Projects" },
+          { label: "Root Breadcrumb" }
+        ]}
+      />
+      <BreadcrumbDirect items={[{ href: "/direct", label: "Direct" }, { label: "Breadcrumb" }]} />
       <AutoSuggestBox
         aria-label="Root AutoSuggestBox"
         defaultText="Win"

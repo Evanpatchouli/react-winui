@@ -58,6 +58,7 @@ DatePicker API 与交互边界见 [`docs/date-picker.md`](docs/date-picker.md)�
 Calendar API 与交互边界见 [`docs/calendar.md`](docs/calendar.md)。
 DataGrid API 与交互边界见 [`docs/data-grid.md`](docs/data-grid.md)。
 TeachingTip API 与交互边界见 [`docs/teaching-tip.md`](docs/teaching-tip.md)。
+Breadcrumb API 与交互边界见 [`docs/breadcrumb.md`](docs/breadcrumb.md)。
 
 # Usage
 
@@ -65,6 +66,7 @@ TeachingTip API 与交互边界见 [`docs/teaching-tip.md`](docs/teaching-tip.md
 import {
   AutoSuggestBox,
   Button,
+  Breadcrumb,
   Calendar,
   CommandBar,
   DataGrid,
@@ -87,6 +89,13 @@ const App = () => (
     <Button type="primary" value="Press Me" />
     <ButtonDirect type="subtle" value="Direct entry" />
     <InputText placeholder="Enter a text" />
+    <Breadcrumb
+      items={[
+        { href: "/", label: "Home" },
+        { href: "/projects", label: "Projects" },
+        { label: "Release" }
+      ]}
+    />
     <Calendar label="Release calendar" locale="en-US" defaultPickerDate={new Date(2024, 4, 15)} />
     <DatePicker label="Release date" locale="en-US" defaultValue={new Date(2024, 4, 15)} />
     <DataGrid

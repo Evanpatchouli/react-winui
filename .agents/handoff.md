@@ -522,3 +522,12 @@
 - 新增 `tests/teaching-tip.test.tsx`（5 tests），Playwright 新增 4 个交互/Light-Dark 场景与 `teaching-tip-light/dark` 两张显式基线；已使用 `view_image` 检查基线取景与主题表面。
 - 验证：`pnpm lint`、`pnpm typecheck`、`pnpm test`（20 files / 204 tests）、`pnpm build`、`pnpm test:consumer`、`pnpm --filter @evanpatchouli/react-winui pack --dry-run`、`pnpm format:check`、定向焦点回归（20/20）与完整 Playwright（123/123）。
 - 当前任务已完成；P2 下一项等待明确指定 `Breadcrumb`、`Tag` 或 `Badge`，本批不继续扩展组件。
+
+# 2026-08-31：阶段 7 P2 Breadcrumb
+
+- 新增 `Breadcrumb`，公开 `items`、`separator`、`maxVisibleItems`、`overflowAriaLabel`、`onItemClick` 与原生 nav 属性；`BreadcrumbItem` 支持链接/按钮/纯文本、disabled、icon、accessible name、target/rel 和稳定 id。
+- 语义固定为 labelled `nav` + ordered `ol`；分隔符不进入辅助技术阅读顺序，最后项使用 `aria-current="page"` 且不交互。显式 max 下首项和当前项保留，中间路径通过现有 `Popover` 菜单折叠；无 max 时单行横向滚动。
+- 新增 `src/lib/src/components/Breadcrumb`、Sass、root/subpath export、生成的 `src/lib/dist` 产物、consumer root/subpath 类型/构建覆盖、root API 文档、迁移规范、v1.0.0/v1.1.0 docs Demo、路由/导航入口。
+- 新增 `tests/breadcrumb.test.tsx`（5 tests）和 4 个 Breadcrumb Playwright 场景，包含语义层级、祖先激活、overflow 菜单、Escape focus restore、Light/Dark 视觉基线；已用 `view_image` 检查三张新增截图。
+- 行为参考 WinUI BreadcrumbBar 和 Fluent UI Breadcrumb guidance；只借鉴路径/overflow/ARIA 边界，没有复制实际源码，也不需要新增 `THIRD_PARTY_NOTICES.md` 条目。
+- 本批专项检查通过：lint、typecheck、全量单测、library/docs build、consumer build、pack dry-run、格式检查、Breadcrumb 浏览器用例；全量 Playwright 仅保留既有 TeachingTip 两张尺寸基线失败。P2 下一项等待明确指定 `Tag` 或 `Badge`。

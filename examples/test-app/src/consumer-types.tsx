@@ -2,6 +2,7 @@ import { createRef, type CSSProperties, type ReactElement } from "react";
 import {
   Button,
   ButtonGroup,
+  Breadcrumb,
   Checkbox,
   AppContainer,
   AppTheme,
@@ -57,6 +58,12 @@ import {
 import type {
   ButtonProps,
   ButtonGroupProps,
+  BreadcrumbComponent,
+  BreadcrumbItem,
+  BreadcrumbItemActivateHandler,
+  BreadcrumbItemClickEvent,
+  BreadcrumbItemClickHandler,
+  BreadcrumbProps,
   CheckboxProps,
   AppContainerProps,
   AppThemeProps,
@@ -224,6 +231,10 @@ import type {
   TeachingTipProps
 } from "@evanpatchouli/react-winui";
 import ButtonDirect from "@evanpatchouli/react-winui/button";
+import BreadcrumbDirect, {
+  type BreadcrumbItem as BreadcrumbDirectItem,
+  type BreadcrumbProps as BreadcrumbDirectProps
+} from "@evanpatchouli/react-winui/breadcrumb";
 import AutoSuggestBoxDirect, {
   type AutoSuggestBoxProps as AutoSuggestBoxDirectProps,
   type AutoSuggestBoxSuggestion as AutoSuggestBoxDirectSuggestion
@@ -314,6 +325,40 @@ const consumerDataGridColumns: DataGridColumn<ConsumerDataGridRow>[] = [
   }
 ];
 
+const consumerBreadcrumbItems: BreadcrumbItem[] = [
+  { href: "/", id: "home", label: "Home" },
+  { href: "/projects", id: "projects", label: "Projects" },
+  { id: "current", label: "Current" }
+];
+
+export const breadcrumbItemTypeCheck: BreadcrumbItem = consumerBreadcrumbItems[0];
+export const breadcrumbDirectItemTypeCheck: BreadcrumbDirectItem = {
+  href: "/direct",
+  label: "Direct"
+};
+export const breadcrumbItemClickEventTypeCheck = (_event: BreadcrumbItemClickEvent) => {};
+export const breadcrumbItemClickHandlerTypeCheck: BreadcrumbItemClickHandler = (event) => {
+  event.preventDefault();
+};
+export const breadcrumbItemActivateHandlerTypeCheck: BreadcrumbItemActivateHandler = (
+  item,
+  index,
+  event
+) => {
+  String(item.label);
+  String(index);
+  breadcrumbItemClickEventTypeCheck(event);
+};
+export const breadcrumbPropsTypeCheck: BreadcrumbProps = {
+  items: consumerBreadcrumbItems,
+  maxVisibleItems: 4,
+  onItemClick: breadcrumbItemActivateHandlerTypeCheck
+};
+export const breadcrumbDirectPropsTypeCheck: BreadcrumbDirectProps = {
+  "aria-label": "Direct Breadcrumb",
+  items: [breadcrumbDirectItemTypeCheck]
+};
+
 export const dataGridInteractionEventTypeCheck = (_event: DataGridInteractionEvent) => {};
 export const dataGridSortStateTypeCheck: DataGridSortState = {
   columnId: "name",
@@ -355,6 +400,7 @@ export const dataGridDirectPropsTypeCheck: DataGridDirectProps<ConsumerDataGridR
 const typedProps: [
   ButtonProps,
   ButtonGroupProps,
+  BreadcrumbProps,
   CheckboxProps,
   AppContainerProps,
   AppThemeProps,
@@ -403,6 +449,7 @@ const typedProps: [
 ] = [
   { value: "Button" },
   { "aria-label": "Actions" },
+  breadcrumbPropsTypeCheck,
   { label: "Checkbox" },
   { style: { gap: "8px" } },
   { color: "#123456", colorDarkMode: "#abcdef", scheme: "dark" },
@@ -458,6 +505,7 @@ const typedProps: [
 
 export const rootImport: ReactElement = <Button value="Root export" />;
 export const subpathImport: ReactElement = <ButtonDirect value="Button subpath" />;
+export const breadcrumbComponentTypeCheck: BreadcrumbComponent | undefined = undefined;
 export const tooltipSubpathImport: ReactElement = (
   <TooltipDirect content="Tooltip subpath" showDelay={0}>
     <button type="button">Tooltip trigger</button>
@@ -792,6 +840,7 @@ export const basicControls: ReactElement = (
     <ButtonGroup aria-label="Actions">
       <Button>Action</Button>
     </ButtonGroup>
+    <Breadcrumb {...breadcrumbPropsTypeCheck} />
     <AppContainer>
       <span>Container</span>
     </AppContainer>
@@ -1006,6 +1055,9 @@ export const calendarSubpathImport: ReactElement = (
 );
 export const dataGridSubpathImport: ReactElement = (
   <DataGridDirect {...dataGridDirectPropsTypeCheck} />
+);
+export const breadcrumbSubpathImport: ReactElement = (
+  <BreadcrumbDirect {...breadcrumbDirectPropsTypeCheck} />
 );
 export const teachingTipSubpathImport: ReactElement = (
   <TeachingTipDirect {...teachingTipDirectPropsTypeCheck} />

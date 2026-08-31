@@ -17,6 +17,11 @@
       "import": "./dist/components/Button/index.js",
       "default": "./dist/components/Button/index.js"
     },
+    "./breadcrumb": {
+      "types": "./dist/components/Breadcrumb/index.d.ts",
+      "import": "./dist/components/Breadcrumb/index.js",
+      "default": "./dist/components/Breadcrumb/index.js"
+    },
     "./auto-suggest-box": {
       "types": "./dist/components/AutoSuggestBox/index.d.ts",
       "import": "./dist/components/AutoSuggestBox/index.js",

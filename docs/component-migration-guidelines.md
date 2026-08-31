@@ -8,7 +8,7 @@
 
 ## 1. 适用范围
 
-本规范适用于阶段 6 之后新增或迁入的组件，包括 Tooltip、Popover / Flyout、Menu、Toast、InfoBar、ComboBox、DatePicker、Calendar、DataGrid 等。
+本规范适用于阶段 6 之后新增或迁入的组件，包括 Tooltip、Popover / Flyout、Menu、Toast、InfoBar、ComboBox、DatePicker、Calendar、DataGrid、Breadcrumb 等。
 
 旧组件的兼容性修复仍应遵守现有 API 和视觉回归基线；不要借新组件开发之机集中重写旧组件。
 
@@ -164,6 +164,15 @@ Popover / Flyout 是阶段 7 的首个组件组，当前约定如下：
 - 已覆盖 unit、RTL、controlled/uncontrolled、hover delay、outside click、Escape、focus trap、consumer、docs 和 light / dark visual regression。
 
 后续组件应沿用本规范，但只实现当前组件实际需要的能力，不提前扩展通用抽象。
+
+## 14. Breadcrumb 模板
+
+Breadcrumb 对应 WinUI 的 BreadcrumbBar，是一个持久可见的层级导航组件，而不是导航历史记录或普通返回按钮。
+
+- API 使用 `items` 数据数组；每项支持 `label`、`href`、`icon`、`disabled`、`onClick`、`ariaLabel`、`target` 和 `rel`，最后一项自动作为当前项。
+- 根节点使用 `<nav>` + `<ol>`，当前项设置 `aria-current="page"`，分隔符使用 presentation / `aria-hidden`，不进入焦点顺序。
+- `maxVisibleItems` 提供确定性的中间项折叠；overflow 菜单复用现有 Popover 的 portal、outside pointer、Escape、Tab focus trap 和 restore focus。未设置上限时使用单行横向滚动，不引入 ResizeObserver。
+- 视觉只消费现有 `--rwu-*` token；不复制 Fluent UI / WinUI 源码、Griffel 样式或 Fluent visual token。
 
 ## 13. TeachingTip 模板
 

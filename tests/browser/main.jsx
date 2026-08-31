@@ -8,6 +8,7 @@ import AppContainer from "../../src/lib/src/components/AppContainer/index.tsx";
 import AppTheme from "../../src/lib/src/components/AppTheme/index.tsx";
 import Button from "../../src/lib/src/components/Button/index.tsx";
 import ButtonGroup from "../../src/lib/src/components/ButtonGroup/index.tsx";
+import Breadcrumb from "../../src/lib/src/components/Breadcrumb/index.tsx";
 import Checkbox from "../../src/lib/src/components/Checkbox/index.tsx";
 import ColorPickerItem from "../../src/lib/src/components/ColorPicker/ColorPickerItem/index.tsx";
 import ColorPickerPalette from "../../src/lib/src/components/ColorPicker/ColorPickerPalette/index.tsx";
@@ -165,6 +166,7 @@ function VisualFixture() {
   const [calendarResult, setCalendarResult] = useState("none");
   const [dataGridSortState, setDataGridSortState] = useState(null);
   const [dataGridSelectedRowIds, setDataGridSelectedRowIds] = useState(["alpha"]);
+  const [breadcrumbResult, setBreadcrumbResult] = useState("none");
   const [teachingTipOpen, setTeachingTipOpen] = useState(false);
   const [teachingTipLightDismissOpen, setTeachingTipLightDismissOpen] = useState(false);
   const [teachingTipResult, setTeachingTipResult] = useState("none");
@@ -1550,6 +1552,57 @@ function VisualFixture() {
           <p className="visual-fixture-status">
             TeachingTip lifecycle:{" "}
             <output data-testid="teaching-tip-result">{teachingTipResult}</output>
+          </p>
+        </Section>
+
+        <Section
+          caption="hierarchy · overflow · ARIA · light/dark"
+          eyebrow="navigation"
+          testId="breadcrumb-panel"
+          title="Breadcrumb"
+        >
+          <div className="visual-fixture-breadcrumb-stack">
+            <div className="visual-fixture-breadcrumb-example">
+              <span className="visual-fixture-label">Project path</span>
+              <Breadcrumb
+                aria-label="Project path"
+                data-testid="breadcrumb-default"
+                items={[
+                  { href: "/", label: "Home" },
+                  { href: "/projects", label: "Projects" },
+                  { href: "/projects/winui", label: "WinUI" },
+                  { label: "Breadcrumb" }
+                ]}
+                onItemClick={(item, index, event) => {
+                  event.preventDefault();
+                  setBreadcrumbResult(`${index}: ${item.label}`);
+                }}
+              />
+            </div>
+            <div className="visual-fixture-breadcrumb-example">
+              <span className="visual-fixture-label">Workspace path with overflow</span>
+              <Breadcrumb
+                aria-label="Workspace path"
+                data-testid="breadcrumb-overflow"
+                items={[
+                  { href: "/", label: "Home" },
+                  { href: "/workspace", label: "Workspace" },
+                  { href: "/workspace/design", label: "Design" },
+                  { href: "/workspace/design/components", label: "Components" },
+                  { href: "/workspace/design/components/navigation", label: "Navigation" },
+                  { label: "Breadcrumb" }
+                ]}
+                maxVisibleItems={4}
+                onItemClick={(item, index, event) => {
+                  event.preventDefault();
+                  setBreadcrumbResult(`${index}: ${item.label}`);
+                }}
+              />
+            </div>
+          </div>
+          <p className="visual-fixture-status">
+            Breadcrumb selection:{" "}
+            <output data-testid="breadcrumb-result">{breadcrumbResult}</output>
           </p>
         </Section>
       </main>

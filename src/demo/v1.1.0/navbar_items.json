@@ -84,6 +84,13 @@
     "showBadge": false
   },
   {
+    "to": "breadcrumb",
+    "exact": false,
+    "text": "Breadcrumb",
+    "icon": "icons10-link",
+    "showBadge": false
+  },
+  {
     "to": "expander",
     "exact": false,
     "text": "Expander",
