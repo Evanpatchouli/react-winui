@@ -556,3 +556,17 @@
 - 仅更新 `tests/browser/snapshots/visual.spec.js-snapshots/teaching-tip-light-chromium-win32.png` 与 `teaching-tip-dark-chromium-win32.png`，没有更新其他 snapshot、修改组件 CSS 或调整全局差异阈值。
 - 验证通过：TeachingTip 定向 Playwright 4/4、完整 Playwright 131/131、`pnpm lint`、`pnpm typecheck`、`pnpm test`（23 files / 215 tests）、`pnpm build`、`pnpm test:consumer`、TeachingTip 专项格式检查。
 - 本次记录完成后提交独立修复 commit；阶段 7 P2 已完成，后续按用户指示进入下一项。
+
+# 2026-08-31：v1.2.0 文档版本
+
+- 新增完整 `src/demo/v1.2.0` 文档快照，包含现有组件页面及 TeachingTip、Breadcrumb、Tag、Badge 最新 Demo。
+- `src/demo/App.js` 默认跳转与 current docs 已切换到 `v1.2.0`，同时保留 `v1.1.0` 和 `v1.0.0` 历史路由；根 README 与 `src/lib/README.md` 深链已更新。
+- v1.2 首页版本选择器列出 `1.0.0`、`1.1.0`、`1.2.0`；版本文案来自 `src/demo/v1.2.0/values.js`。
+- 验证通过：docs Prettier、`pnpm lint`、`pnpm typecheck`、`pnpm test`（23 files / 215 tests）、`pnpm build`、`pnpm test:consumer`，以及 docs 默认入口、TeachingTip 页面和 v1.1 历史入口的 Playwright 冒烟。
+- 当前工作树仍未提交；如需提交，请先按用户指示暂存相关文件。
+
+# 2026-08-31：发布版本更新至 1.2.0
+
+- 已将 `package.json`、`apps/docs/package.json`、`src/lib/package.json` 从 `1.1.0` 更新到 `1.2.0`；`examples/test-app/package.json` 仍为私有 `0.0.0`，`pnpm-lock.yaml` 无变化。
+- `@evanpatchouli/react-winui` 的 pack dry-run 已输出 `@evanpatchouli/react-winui@1.2.0`；lint、typecheck、215 个单测、library/docs build、consumer build、格式和 diff 检查均通过。
+- 本次只完成版本元数据更新，未执行 `git add` 或 `git commit`；如需版本提交，按 `staged-version-commit` 的固定标题 `chore: 更新项目版本标识` 单独处理。

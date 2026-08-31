@@ -1,0 +1,31 @@
+const NavBarImportCode =
+`import { NavBar } from "@evanpatchouli/react-winui";`;
+
+const NavBarUsageCode =
+`<NavBar 
+  title="NavBar"
+  shadowOnScroll={true}
+  titleBarMobile={<>{/* render a layout for small devices */}</>}>
+  ....
+  <NavBarLink to="/somelink" />
+  ....
+</NavBar>`;
+
+const NavBarExampleUsageCode =
+`<NavBar 
+  title="NavBar"
+  shadowOnScroll={true}
+  titleBarMobile={
+    <div>
+      <span className="ui-navbar-name">react-winui</span>
+    </div>
+  }>
+  ....
+</NavBar>`;
+
+
+export {
+  NavBarImportCode,
+  NavBarUsageCode,
+  NavBarExampleUsageCode
+}

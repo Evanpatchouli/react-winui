@@ -1,5 +1,25 @@
 # 当前任务
 
+## 2026-08-31：新增 v1.2.0 文档版本
+
+目标：为发布版本 `1.2.0` 增加独立可访问的版本化 docs，并保留 `v1.0.0` / `v1.1.0` 历史入口。
+
+当前状态：已将完整的 `src/demo/v1.1.0` 文档快照复制为 `src/demo/v1.2.0`，其中包含现有 TeachingTip、Breadcrumb、Tag、Badge 等组件页面；docs 默认路由与根 README 已切换到 `v1.2.0`，版本选择器包含三个已发布文档版本。
+
+验证摘要：v1.2.0 docs Prettier 检查、`pnpm lint`、`pnpm typecheck`、`pnpm test`（23 files / 215 tests）、`pnpm build`、`pnpm test:consumer` 均通过；Playwright docs 冒烟确认默认入口为 `#/v1.2.0/home`、首页显示 `Search Docs v1.2.0`、TeachingTip 页面可加载，`v1.1.0` 历史入口仍可访问。未执行 `git add` 或 `git commit`，等待明确提交指示。
+
+---
+
+## 2026-08-31：发布版本更新至 1.2.0
+
+目标：将当前 workspace 的发布版本从 `1.1.0` 提升到 `1.2.0`，保持包、docs 应用和既有 monorepo 发布约定一致。
+
+当前状态：已更新根 `react-winui-workspace`、`@react-winui/docs` 和可发布包 `@evanpatchouli/react-winui` 的 `package.json` 版本；私有 `@react-winui/test-app` 继续保持 `0.0.0`，`pnpm-lock.yaml` 无需变更。没有修改组件源码、历史 `v1.1.0` 文档目录或发布 exports。
+
+验证摘要：版本一致性检查、`pnpm lint`、`pnpm typecheck`、`pnpm test`（23 files / 215 tests）、`pnpm build`、`pnpm test:consumer`、package manifest 格式检查、`pnpm --filter @evanpatchouli/react-winui pack --dry-run` 和 `git diff --check` 均通过；发布 tarball 已识别为 `@evanpatchouli/react-winui@1.2.0`。按版本提交技能约束，本次未执行 `git add` 或 `git commit`，等待明确提交指示。
+
+---
+
 ## 2026-08-31：TeachingTip 截图尺寸基线修复
 
 目标：解决阶段 7 P2 TeachingTip Light/Dark 视觉回归中旧基线 `404 × 278` 与当前实际截图 `412 × 286` 的尺寸不匹配。

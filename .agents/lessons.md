@@ -1,5 +1,15 @@
 # 技术经验
 
+## 2026-08-31：版本化 docs 快照
+
+- 新增版本文档时应先对照上一版本目录的完整文件集合，再整体复制并只调整入口版本值；这样可以确保新增版本覆盖所有现有页面，也能保留历史版本可回访。
+- 路由升级必须同时检查默认重定向、current/previous/legacy lazy import、版本选择器、README 深链接和实际浏览器入口；仅更新 package manifest 不等于 docs 版本已经发布。
+
+## 2026-08-31：版本号升级
+
+- Monorepo 版本升级前应枚举所有 `package.json` 并区分可发布包、私有应用和历史版本目录；不能对仓库内所有 `1.1.0` 文本做机械替换。
+- 修改 manifest 后用 pnpm lockfile-only、JSON 解析和 package pack dry-run 三层确认，既能验证 workspace 关系未漂移，也能确认最终 tarball 的实际版本。
+
 - Vite 8/Rolldown 默认按文件扩展名解析 JSX，历史 `.js` + JSX 源码需要在构建解析层映射为虚拟 `.jsx`，无需批量重命名源码。
 - Vite 8 dev dependency scan 不能理解上述虚拟文件时，应使用 `optimizeDeps.noDiscovery` 配合显式依赖列表。
 - Dart Sass 可以直接替换 node-sass 编译当前 SCSS；本次 CSS 选择器、变量数量保持一致，未改动视觉规则。

@@ -1,5 +1,16 @@
 # 架构决策
 
+## 2026-08-31：v1.2.0 文档版本快照
+
+- 版本化 docs 沿用历史发布约定，将完整 `src/demo/v1.1.0` 快照复制到 `src/demo/v1.2.0`，避免新版本文档依赖旧版本目录或在历史页面上做破坏性替换。
+- `src/demo/App.js` 现在将 `v1.2.0` 作为默认/current，将 `v1.1.0` 作为 previous，并继续保留 `v1.0.0` legacy 路由；v1.2 首页版本选择器列出三个文档版本。
+- 文档版本与包版本保持一致，但只更新 docs 入口、版本文案和 README 链接；不复制或改动组件源码、公共 API 和视觉基线。
+
+## 2026-08-31：1.2.0 版本同步边界
+
+- 发布版本沿用历史约定，同步根 workspace、docs 应用和可发布组件包三个 manifest；私有 `examples/test-app` 保持 `0.0.0`，不伪装成发布包。
+- `pnpm-lock.yaml` 的 workspace importer 使用 `workspace:*` 链接且不记录这些 manifest 版本，因此通过 `pnpm install --lockfile-only` 确认后不修改 lockfile；历史 `v1.1.0` docs 路径不随元数据版本替换。
+
 ## 2026-08-20：渐进式 workspace 迁移
 
 - workspace 包暂使用现有 `src/lib`，Demo 使用新建的 `apps/docs`，不强制搬迁历史 Demo 和组件源码。
