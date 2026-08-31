@@ -32,7 +32,7 @@
 - [x] `DatePicker`：先审计现有 date input 样式与 Demo
 - [x] `Calendar`
 - [x] `DataGrid`：先审计现有 `TableView`
-- [x] `TeachingTip`：优先复用 `Popover` / `Flyout` 的定位与焦点能力
+- [x] `TeachingTip`：优先复用 `Popover` / `Flyout` 的定位与焦点能力；截图尺寸基线已同步
 - [x] `Breadcrumb`：使用 `items` 路径模型并复用 `Popover` 实现确定性 overflow
 - [x] `Tag`：新增 standalone static / dismissible Tag，支持键盘移除、ARIA、light/dark 与独立入口
 - [x] `Badge`：已新增独立公共 Badge，支持 dot / icon / text-numeric、语义颜色、appearance、shape、size、root/subpath exports、测试、docs 与 Light/Dark 视觉回归；保留并隔离现有 NavBar 内部 badge

@@ -1,5 +1,15 @@
 # 当前任务
 
+## 2026-08-31：TeachingTip 截图尺寸基线修复
+
+目标：解决阶段 7 P2 TeachingTip Light/Dark 视觉回归中旧基线 `404 × 278` 与当前实际截图 `412 × 286` 的尺寸不匹配。
+
+当前状态：已确认 TeachingTip 浮层几何稳定为约 `380px × 254.78px`；旧基线使用了较小的截图外扩留白，当前 `expectFloatingSurfaceScreenshot` 的 `16px` 留白规则才是有效取景范围。仅重生成 `teaching-tip-light.png` 和 `teaching-tip-dark.png` 两张基线，没有修改组件 CSS、公共 API、全局截图辅助函数或其他 snapshot。
+
+验证摘要：TeachingTip 定向 Playwright 4/4、完整 Playwright 131/131；`pnpm lint`、`pnpm typecheck`、`pnpm test`（23 files / 215 tests）、`pnpm build`、`pnpm test:consumer` 和 TeachingTip 专项格式检查均通过。docs build 仍仅保留既有大 chunk warning。
+
+---
+
 ## 2026-08-31：阶段 7 P2 Badge
 
 目标：新增一个保持 react-winui Windows 风格的 `Badge`，完成 dot / icon / text 三种内容形态、语义颜色、外观、形状、尺寸、root/subpath exports、Sass、consumer、RTL、Playwright 视觉回归、docs Demo 和阶段交接记录。

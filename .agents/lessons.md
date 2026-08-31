@@ -285,3 +285,8 @@
 - 旧组件若已经占用通用 `.ui-badge` class，新公共组件必须同时限定 `data-rwu-component`；只排除旧组件的定位规则仍可能让公共基础样式污染 legacy DOM。
 - 新增 Badge fixture 继续追加到浏览器 gallery 末尾，并单独维护 light/dark 基线；这样可以验证新组件而不改变既有浮层、导航和全页截图取景。
 - warning 是 Badge 的独立语义色，但 token 层此前没有 warning；新增 warning token 应保持既有颜色值不变，并让 light/dark override 继续沿用项目主题入口。
+
+# 2026-08-31：TeachingTip 截图尺寸基线
+
+- 遇到视觉快照尺寸不一致时，先比较 locator 的 bounding box、截图 helper 的外扩留白和当前 PNG 尺寸；本次浮层几何未变，真正漂移的是旧基线裁剪范围。
+- 只更新发生不匹配的组件明暗基线，并用一次无 `--update-snapshots` 的定向回归和完整浏览器回归确认；不要通过修改全局 helper 或放宽差异比例掩盖取景问题。

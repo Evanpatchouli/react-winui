@@ -403,3 +403,8 @@
 - API 借鉴 Fluent UI React Badge 的 `appearance`、`color`、`iconPosition`、`shape`、`size` 维度，并结合 WinUI `InfoBadge` 的 dot / icon / numeric 场景；视觉实现只消费现有 `--rwu-*` token。由于现有 token 层没有 warning 语义，新增 `--rwu-color-warning` 与 `--rwu-color-text-on-warning`，没有改变既有 token 值。
 - 旧 `NavBarLink` 内部 `.ui-badge` class 和 DOM 保持不变；公共 Badge 增加 `data-rwu-component="badge"`，公共样式与 NavBar 旧定位规则均显式隔离，避免 class 名冲突。
 - 本批没有复制 Fluent UI / WinUI 实际源码，不需要新增 `THIRD_PARTY_NOTICES.md` 条目；不实现自动定位、最大宽度截断或 NavigationView 专属组合 API。
+
+## 2026-08-31：TeachingTip 截图尺寸基线
+
+- TeachingTip 当前浮层实际边界约为 `380px × 254.78px`；`expectFloatingSurfaceScreenshot` 使用 `16px` 外扩后，稳定截图尺寸为 `412 × 286`。旧的 `404 × 278` 基线是较小截图留白规则生成的过期产物。
+- 这次只更新 `teaching-tip-light-chromium-win32.png` 与 `teaching-tip-dark-chromium-win32.png`，不修改 TeachingTip/Popover 样式，也不放宽全局视觉差异阈值；这样能修复尺寸基线同时保持组件视觉回归敏感度。

@@ -549,3 +549,10 @@
 - 新增 `tests/badge.test.tsx`（3 tests）以及 Badge Playwright 语义与 Light/Dark 视觉回归（2/2），新增 `badge-light` / `badge-dark` 两张显式基线；未复制 Fluent UI / WinUI 源码，不新增第三方声明。
 - 验证通过：`pnpm lint`、`pnpm typecheck`、`pnpm test`（23 files / 215 tests）、`pnpm build`、`pnpm test:consumer`、`pnpm --filter @evanpatchouli/react-winui pack --dry-run`、`pnpm run format:check:badge`、Badge Playwright（2/2）、UTF-8 无 BOM 和 `git diff --check`。最终完整 Playwright 为 129/131，剩余 2 项为既有 TeachingTip Light/Dark 截图尺寸基线失败；docs build 仅保留既有大 chunk warning。
 - 当前任务完成；P2 组件已推进至 Badge，下一项建议先审计 P3 `ColorPicker` 现有聚合能力，等待用户指定后再实现。
+
+# 2026-08-31：TeachingTip 截图尺寸基线修复
+
+- 根因是旧 TeachingTip Light/Dark 基线仍为 `404 × 278`，而当前浮层约 `380px × 254.78px` 配合 `16px` 外扩截图规则稳定产出 `412 × 286`；组件实现和视觉 token 未发生需要修复的变化。
+- 仅更新 `tests/browser/snapshots/visual.spec.js-snapshots/teaching-tip-light-chromium-win32.png` 与 `teaching-tip-dark-chromium-win32.png`，没有更新其他 snapshot、修改组件 CSS 或调整全局差异阈值。
+- 验证通过：TeachingTip 定向 Playwright 4/4、完整 Playwright 131/131、`pnpm lint`、`pnpm typecheck`、`pnpm test`（23 files / 215 tests）、`pnpm build`、`pnpm test:consumer`、TeachingTip 专项格式检查。
+- 本次记录完成后提交独立修复 commit；阶段 7 P2 已完成，后续按用户指示进入下一项。
