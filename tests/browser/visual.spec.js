@@ -65,6 +65,24 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe("Public component visual baselines", () => {
+  test("ColorPicker synchronizes keyboard and custom selection in both themes", async ({ page }) => {
+    const picker = panel(page, "color-picker-panel");
+    const blue = picker.getByRole("radio", { name: "Blue" });
+    const green = picker.getByRole("radio", { name: "Green" });
+    const custom = picker.getByLabel("Custom color");
+    await expect(blue).toBeChecked();
+    await blue.focus();
+    await page.keyboard.press("ArrowRight");
+    await expect(green).toBeFocused();
+    await expect(green).toBeChecked();
+    await expect(custom).toHaveValue("#107c10");
+    await expect(picker).toHaveScreenshot("color-picker-light.png", screenshotOptions);
+    await custom.fill("#123456");
+    await expect(green).not.toBeChecked();
+    await page.getByTestId("theme-dark").click();
+    await expect(picker).toHaveScreenshot("color-picker-dark.png", screenshotOptions);
+  });
+
   test("captures layout primitives in the light theme", async ({ page }) => {
     await expect(panel(page, "layout-panel")).toHaveScreenshot(
       "layout-light.png",

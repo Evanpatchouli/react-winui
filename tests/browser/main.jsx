@@ -12,6 +12,7 @@ import ButtonGroup from "../../src/lib/src/components/ButtonGroup/index.tsx";
 import Breadcrumb from "../../src/lib/src/components/Breadcrumb/index.tsx";
 import Checkbox from "../../src/lib/src/components/Checkbox/index.tsx";
 import ColorPickerItem from "../../src/lib/src/components/ColorPicker/ColorPickerItem/index.tsx";
+import ColorPicker from "../../src/lib/src/components/ColorPicker/index.tsx";
 import ColorPickerPalette from "../../src/lib/src/components/ColorPicker/ColorPickerPalette/index.tsx";
 import ComboBox from "../../src/lib/src/components/ComboBox/index.tsx";
 import CommandBar from "../../src/lib/src/components/CommandBar/index.tsx";
@@ -1751,6 +1752,16 @@ function VisualFixture() {
               </div>
             </div>
           </div>
+        </Section>
+        <Section testId="color-picker-panel" title="ColorPicker" eyebrow="color selection">
+          <ColorPicker
+            aria-label="Accent color"
+            defaultValue="#0078d7"
+            presets={[
+              { value: "#0078d7", label: "Blue" },
+              { value: "#107c10", label: "Green" }
+            ]}
+          />
         </Section>
       </main>
     </MemoryRouter>

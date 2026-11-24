@@ -16,6 +16,7 @@ import {
   Accordion,
   Expander,
   ColorPickerItem,
+  ColorPicker,
   ColorPickerPalette,
   ComboBox,
   CommandBar,
@@ -119,6 +120,7 @@ import type {
   ExpanderExpandedChangeHandler,
   ExpanderProps,
   ColorPickerItemProps,
+  ColorPickerProps,
   ColorPickerPaletteProps,
   ComboBoxOpenChangeEvent,
   ComboBoxOpenChangeHandler,
@@ -248,6 +250,7 @@ import type {
 } from "@evanpatchouli/react-winui";
 import ButtonDirect from "@evanpatchouli/react-winui/button";
 import BadgeDirect, { type BadgeProps as BadgeDirectProps } from "@evanpatchouli/react-winui/badge";
+import ColorPickerDirect from "@evanpatchouli/react-winui/color-picker";
 import BreadcrumbDirect, {
   type BreadcrumbItem as BreadcrumbDirectItem,
   type BreadcrumbProps as BreadcrumbDirectProps
@@ -1127,6 +1130,13 @@ export const breadcrumbSubpathImport: ReactElement = (
 );
 export const tagSubpathImport: ReactElement = <TagDirect {...tagDirectPropsTypeCheck} />;
 export const badgeSubpathImport: ReactElement = <BadgeDirect {...badgeDirectPropsTypeCheck} />;
+const pickerProps: ColorPickerProps = {
+  defaultValue: "#0078d7",
+  presets: [{ value: "#0078d7", label: "Blue" }],
+  onValueChange: (hex) => hex.toUpperCase()
+};
+export const pickerRootImport = <ColorPicker {...pickerProps} />;
+export const pickerSubpathImport = <ColorPickerDirect {...pickerProps} />;
 export const teachingTipSubpathImport: ReactElement = (
   <TeachingTipDirect {...teachingTipDirectPropsTypeCheck} />
 );

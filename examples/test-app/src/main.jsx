@@ -6,6 +6,7 @@ import {
   Breadcrumb,
   AutoSuggestBox,
   ComboBox,
+  ColorPicker,
   CommandBar,
   ContextMenu,
   DatePicker,
@@ -32,6 +33,7 @@ import BreadcrumbDirect from "@evanpatchouli/react-winui/breadcrumb";
 import TagDirect from "@evanpatchouli/react-winui/tag";
 import AutoSuggestBoxDirect from "@evanpatchouli/react-winui/auto-suggest-box";
 import ComboBoxDirect from "@evanpatchouli/react-winui/combo-box";
+import ColorPickerDirect from "@evanpatchouli/react-winui/color-picker";
 import CommandBarDirect from "@evanpatchouli/react-winui/command-bar";
 import ContextMenuDirect from "@evanpatchouli/react-winui/context-menu";
 import DatePickerDirect from "@evanpatchouli/react-winui/date-picker";
@@ -63,6 +65,8 @@ const ConsumerApp = () => {
       <ButtonDirect type="subtle" value="Button subpath" />
       <Badge color="success">Root Badge</Badge>
       <BadgeDirect aria-label="Direct badge" color="danger" />
+      <ColorPicker aria-label="Root color" defaultValue="#107c10" />
+      <ColorPickerDirect aria-label="Subpath color" disabled />
       <Breadcrumb
         items={[
           { href: "/", label: "Home" },

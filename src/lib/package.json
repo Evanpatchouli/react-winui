@@ -37,6 +37,11 @@
       "import": "./dist/components/AutoSuggestBox/index.js",
       "default": "./dist/components/AutoSuggestBox/index.js"
     },
+    "./color-picker": {
+      "types": "./dist/components/ColorPicker/index.d.ts",
+      "import": "./dist/components/ColorPicker/index.js",
+      "default": "./dist/components/ColorPicker/index.js"
+    },
     "./combo-box": {
       "types": "./dist/components/ComboBox/index.d.ts",
       "import": "./dist/components/ComboBox/index.js",

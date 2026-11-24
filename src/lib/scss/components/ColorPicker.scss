@@ -64,3 +64,48 @@
     }
   }
 }
+
+.ui-color-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--rwu-spacing-xs);
+
+  .ui-color-picker-item {
+    position: relative;
+
+    .item,
+    input[type="color"] {
+      display: block;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      opacity: 0;
+      cursor: inherit;
+      margin: 0;
+
+      &:enabled:hover + div {
+        border-color: var(--rwu-color-text-primary);
+      }
+
+      &:enabled:active + div {
+        filter: brightness(0.6);
+      }
+
+      &:focus-visible + div {
+        outline: 2px solid var(--rwu-color-border-input-focus);
+        outline-offset: 2px;
+      }
+
+      &:disabled {
+        cursor: default;
+      }
+
+      &:disabled + div {
+        border-color: var(--rwu-color-text-disabled);
+        opacity: 0.6;
+      }
+    }
+  }
+}

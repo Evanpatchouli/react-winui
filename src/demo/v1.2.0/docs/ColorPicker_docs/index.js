@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavPageContainer, ColorPickerItem, ColorPickerPalette } from "@evanpatchouli/react-winui"
+import { NavPageContainer, ColorPicker, ColorPickerItem, ColorPickerPalette } from "@evanpatchouli/react-winui"
 import { Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { ColorPickerItemImportCode, ColorPickerItemUsageCode, ColorPickerPaletteImportCode, ColorPickerPaletteUsageCode } from './codes'
@@ -22,7 +22,20 @@ class ColorPickerDocs extends React.Component {
       hasPadding
       animateTransition={false}>
       <h1 style={{color: this.state.app_color}}>ColorPicker</h1>
+      <p>Choose an accent from the presets or open the custom color dialog.</p>
+      <ColorPicker
+        aria-label="Accent color"
+        value={this.state.app_color}
+        onValueChange={(app_color) => this.setState({ app_color })}
+        presets={[
+          { value: "#6632a8", label: "Violet" },
+          { value: "#038387", label: "Teal" },
+          { value: "#69797e", label: "Slate" }
+        ]}
+      />
+      <p>Selected color: <code>{this.state.app_color}</code></p>
 
+      <h2>Individual swatches and palette</h2>
       <div style={{display:"flex", gap: 5}}>
         <ColorPickerItem
           defaultChecked

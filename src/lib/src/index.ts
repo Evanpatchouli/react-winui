@@ -88,6 +88,8 @@ export type {
 } from "./components/DataGrid";
 export { default as Checkbox } from "./components/Checkbox";
 export type { CheckboxProps } from "./components/Checkbox";
+export { default as ColorPicker } from "./components/ColorPicker";
+export type { ColorPickerPreset, ColorPickerProps } from "./components/ColorPicker";
 export { default as ColorPickerItem } from "./components/ColorPicker/ColorPickerItem";
 export type { ColorPickerItemProps } from "./components/ColorPicker/ColorPickerItem";
 export { default as ColorPickerPalette } from "./components/ColorPicker/ColorPickerPalette";

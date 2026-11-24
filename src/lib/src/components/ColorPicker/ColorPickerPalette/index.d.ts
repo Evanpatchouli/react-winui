@@ -6,6 +6,8 @@ export interface ColorPickerPaletteProps extends Omit<
   "type" | "value" | "onChange" | "onChangeCapture"
 > {
   color?: string;
+  /** Controlled six-digit hex value. The legacy color prop sets the initial color. */
+  value?: string;
   width?: CSSProperties["width"];
   height?: CSSProperties["height"];
   onChange?: ChangeEventHandler<HTMLInputElement>;

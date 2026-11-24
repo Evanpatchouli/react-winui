@@ -41,7 +41,7 @@
 
 ## P3
 
-- [ ] `ColorPicker`：已有 `ColorPickerItem` / `ColorPickerPalette`，先审计是否还需要新的聚合公共组件
+- [x] `ColorPicker`：复用现有色块与原生调色盘，统一预设色与自定义色的选择状态，支持受控值和键盘操作
 - [ ] `Rating`
 - [ ] `Pagination`
 - [ ] 其他组件：仅在明确指定后加入，不提前扩展
@@ -69,6 +69,6 @@
 ## 推荐的下一步顺序
 
 1. P1 八个组件与 P2 DatePicker、Calendar、DataGrid、TeachingTip、Breadcrumb、Tag、Badge 已完成并归档
-2. 下一项等待明确指定 P3 `ColorPicker`，先审计现有 `ColorPickerItem` / `ColorPickerPalette` 是否已覆盖聚合能力
+2. 下一项为 P3 `Rating`
 
 一次只处理一个组件；完成并提交后再进入下一项。

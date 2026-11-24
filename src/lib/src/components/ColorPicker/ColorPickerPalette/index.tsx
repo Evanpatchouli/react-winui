@@ -7,6 +7,8 @@ export interface ColorPickerPaletteProps extends Omit<
   "type" | "value" | "onChange" | "onChangeCapture"
 > {
   color?: string;
+  /** Controlled six-digit hex value. The legacy color prop sets the initial color. */
+  value?: string;
   width?: CSSProperties["width"];
   height?: CSSProperties["height"];
   onChange?: ChangeEventHandler<HTMLInputElement>;
@@ -15,8 +17,9 @@ export interface ColorPickerPaletteProps extends Omit<
 const noop: ChangeEventHandler<HTMLInputElement> = () => {};
 
 const ColorPickerPalette: FC<ColorPickerPaletteProps> = (props) => {
-  const { color = "#eee", width, height, onChange = noop, ...otherProps } = props;
-  const [icolor, setColor] = useState(color);
+  const { color = "#eee", value, width, height, onChange = noop, ...otherProps } = props;
+  const [internalColor, setColor] = useState(color);
+  const icolor = value ?? internalColor;
 
   return (
     <label className="ui-color-picker-item palette">
@@ -26,7 +29,9 @@ const ColorPickerPalette: FC<ColorPickerPaletteProps> = (props) => {
         {...otherProps}
         disabled={props.disabled}
         onChange={onChange}
-        onChangeCapture={(event) => setColor(event.currentTarget.value)}
+        onChangeCapture={(event) => {
+          if (value === undefined) setColor(event.currentTarget.value);
+        }}
       />
       <div
         style={{

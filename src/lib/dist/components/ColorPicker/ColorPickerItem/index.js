@@ -7,6 +7,8 @@ var n = (n) => {
 		children: [/* @__PURE__ */ e("input", {
 			type: "radio",
 			className: "item",
+			"aria-label": n["aria-label"],
+			checked: n.checked,
 			name: n.name,
 			value: r,
 			disabled: n.disabled,

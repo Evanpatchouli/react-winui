@@ -2,6 +2,10 @@ import type { ChangeEventHandler, CSSProperties, FC, InputHTMLAttributes } from 
 
 /** Props for an individual radio-style color swatch. */
 export interface ColorPickerItemProps {
+  /** Controls this swatch's selection when supplied. */
+  checked?: boolean;
+  /** Accessible name for the color swatch. */
+  "aria-label"?: string;
   name?: InputHTMLAttributes<HTMLInputElement>["name"];
   color?: string;
   disabled?: InputHTMLAttributes<HTMLInputElement>["disabled"];
@@ -19,6 +23,8 @@ const ColorPickerItem: FC<ColorPickerItemProps> = (props) => {
       <input
         type="radio"
         className="item"
+        aria-label={props["aria-label"]}
+        checked={props.checked}
         name={props.name}
         value={color}
         disabled={props.disabled}
