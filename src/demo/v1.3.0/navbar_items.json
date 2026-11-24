@@ -1,0 +1,289 @@
+[
+  {
+    "to": "accordion",
+    "exact": false,
+    "text": "Accordion",
+    "icon": "icons10-down-squared",
+    "showBadge": false
+  },
+  {
+    "to": "alerts",
+    "exact": false,
+    "text": "Alerts",
+    "icon": "icons10-advertising",
+    "showBadge": false
+  },
+  {
+    "to": "autosuggestbox",
+    "exact": false,
+    "text": "AutoSuggestBox",
+    "icon": "icons10-search",
+    "showBadge": false
+  },
+  {
+    "to": "buttons",
+    "exact": false,
+    "text": "Buttons",
+    "icon": "icons10-controller",
+    "showBadge": 7
+  },
+  {
+    "to": "checkbox",
+    "exact": false,
+    "text": "Checkbox",
+    "icon": "icons10-checked-2",
+    "showBadge": false
+  },
+  {
+    "to": "colorpicker",
+    "exact": false,
+    "text": "ColorPicker",
+    "icon": "icons10-color-palette",
+    "showBadge": false
+  },
+  {
+    "to": "combobox",
+    "exact": false,
+    "text": "ComboBox",
+    "icon": "icons10-database",
+    "showBadge": false
+  },
+  {
+    "to": "commandbar",
+    "exact": false,
+    "text": "CommandBar",
+    "icon": "icons10-tasks",
+    "showBadge": false
+  },
+  {
+    "to": "dialogs",
+    "exact": false,
+    "text": "Dialogs",
+    "icon": "icons10-notification",
+    "showBadge": false
+  },
+  {
+    "to": "calendar",
+    "exact": false,
+    "text": "Calendar",
+    "icon": "icons10-calendar",
+    "showBadge": false
+  },
+  {
+    "to": "datepicker",
+    "exact": false,
+    "text": "DatePicker",
+    "icon": "icons10-calendar",
+    "showBadge": false
+  },
+  {
+    "to": "datagrid",
+    "exact": false,
+    "text": "DataGrid",
+    "icon": "icons10-grid-3",
+    "showBadge": false
+  },
+  {
+    "to": "breadcrumb",
+    "exact": false,
+    "text": "Breadcrumb",
+    "icon": "icons10-link",
+    "showBadge": false
+  },
+  {
+    "to": "tag",
+    "exact": false,
+    "text": "Tag",
+    "icon": "icons10-tag",
+    "showBadge": false
+  },
+  {
+    "to": "badge",
+    "exact": false,
+    "text": "Badge",
+    "icon": "icons10-tag",
+    "showBadge": false
+  },
+  {
+    "to": "expander",
+    "exact": false,
+    "text": "Expander",
+    "icon": "icons10-down-squared",
+    "showBadge": false
+  },
+  {
+    "to": "icons",
+    "exact": false,
+    "text": "Icons",
+    "icon": "icons10-collection",
+    "showBadge": false
+  },
+  {
+    "to": "imageview",
+    "exact": false,
+    "text": "ImageView",
+    "icon": "icons10-image",
+    "showBadge": false
+  },
+  {
+    "to": "infobar",
+    "exact": false,
+    "text": "InfoBar",
+    "icon": "icons10-notification",
+    "showBadge": false
+  },
+  {
+    "to": "input_group",
+    "exact": false,
+    "text": "InputText",
+    "icon": "icons10-keyboard",
+    "showBadge": false
+  },
+  {
+    "to": "links",
+    "exact": false,
+    "text": "Link",
+    "icon": "icons10-link",
+    "showBadge": false
+  },
+  {
+    "to": "loaders",
+    "exact": false,
+    "text": "Loaders",
+    "icon": "icons10-tasks",
+    "showBadge": false
+  },
+  {
+    "to": "menubar",
+    "exact": false,
+    "text": "MenuBar",
+    "icon": "icons10-indent",
+    "showBadge": false
+  },
+  {
+    "to": "contextmenu",
+    "exact": false,
+    "text": "ContextMenu",
+    "icon": "icons10-list",
+    "showBadge": false
+  },
+  {
+    "to": "numberbox",
+    "exact": false,
+    "text": "NumberBox",
+    "icon": "icons10-unfold",
+    "showBadge": false
+  },
+  {
+    "to": "navigationview",
+    "exact": false,
+    "text": "NavigationView",
+    "icon": "icons10-navigation",
+    "showBadge": false
+  },
+  {
+    "to": "progressbar",
+    "exact": false,
+    "text": "ProgressBar",
+    "icon": "icons10-bar-chart",
+    "showBadge": false
+  },
+  {
+    "to": "rating",
+    "exact": false,
+    "text": "Rating",
+    "icon": "icons10-star",
+    "showBadge": false
+  },
+  {
+    "to": "pagination",
+    "exact": false,
+    "text": "Pagination",
+    "icon": "icons10-list",
+    "showBadge": false
+  },
+  {
+    "to": "radio_button",
+    "exact": false,
+    "text": "RadioButton",
+    "icon": "icons10-checked",
+    "showBadge": false
+  },
+  {
+    "to": "selectbox",
+    "exact": false,
+    "text": "Select",
+    "icon": "icons10-database",
+    "showBadge": false
+  },
+  {
+    "to": "settingscard",
+    "exact": false,
+    "text": "SettingsCard",
+    "icon": "icons10-settings",
+    "showBadge": false
+  },
+  {
+    "to": "settingsexpander",
+    "exact": false,
+    "text": "SettingsExpander",
+    "icon": "icons10-settings",
+    "showBadge": false
+  },
+  {
+    "to": "sliderbar",
+    "exact": false,
+    "text": "SliderBar",
+    "icon": "icons10-timeline",
+    "showBadge": false
+  },
+  {
+    "to": "switch",
+    "exact": false,
+    "text": "Switch",
+    "icon": "icons10-toggle",
+    "showBadge": false
+  },
+  {
+    "to": "tableview",
+    "exact": false,
+    "text": "TableView",
+    "icon": "icons10-grid-3",
+    "showBadge": false
+  },
+  {
+    "to": "popover",
+    "exact": false,
+    "text": "Popover / Flyout",
+    "icon": "icons10-chat",
+    "showBadge": false
+  },
+  {
+    "to": "tooltip",
+    "exact": false,
+    "text": "Tooltip",
+    "icon": "icons10-info",
+    "showBadge": false
+  },
+  {
+    "to": "toast",
+    "exact": false,
+    "text": "Toast",
+    "icon": "icons10-bell",
+    "showBadge": false
+  },
+  {
+    "to": "treeview",
+    "exact": false,
+    "text": "TreeView",
+    "icon": "icons10-indent",
+    "showBadge": false
+  },
+  {
+    "to": "teachingtip",
+    "exact": false,
+    "text": "TeachingTip",
+    "icon": "icons10-idea",
+    "showBadge": false
+  }
+]

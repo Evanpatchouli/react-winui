@@ -1,0 +1,263 @@
+import React, { useState, useEffect } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { AppContainer, SplashScreen, NavBar, NavBarLink,
+        NavBarSubMenu, NavBarThemeSwitch, InputSearchBox } from "@evanpatchouli/react-winui";
+import Home from "./home";
+import {
+  GettingStarted,
+
+  AppThemeDocs,
+  AppearanceDocs,
+  ColorsDocs,
+
+  NavBarDocs,
+  NavBarLinkDocs,
+  NavBarSubMenuDocs,
+  NavPageContainerDocs,
+  SplashScreenDocs,
+
+  AccordionDocs,
+  AlertDocs,
+  AutoSuggestBoxDocs,
+  ButtonsDocs,
+  CheckboxDocs,
+  ComboBoxDocs,
+  CommandBarDocs,
+  ColorPickerDocs,
+  ContextMenuDocs,
+  CalendarDocs,
+  BreadcrumbDocs,
+  TagDocs,
+  BadgeDocs,
+  PaginationDocs,
+  RatingDocs,
+  DatePickerDocs,
+  DataGridDocs,
+  DialogDocs,
+  ExpanderDocs,
+  Icons,
+  ImageViewDocs,
+  InfoBarDocs,
+  InputGroupDocs,
+  LinkDocs,
+  LoadersDocs,
+  MenuBarDocs,
+  NavigationViewDocs,
+  NumberBoxDocs,
+  ProgressBarDocs,
+  RadioButtonDocs,
+  SelectBoxDocs,
+  SettingsCardDocs,
+  SettingsExpanderDocs,
+  SliderBarDocs,
+  SwitchDocs,
+  TableViewDocs,
+  TooltipDocs,
+  PopoverDocs,
+  ToastDocs,
+  TreeViewDocs,
+  TeachingTipDocs
+} from "./docs";
+
+import { lib_version } from "./values";
+import NavBarItem from "./navbar_items.json";
+import Img2 from "../assets/illustration/mountain.jpg";
+import GithubIcon from "../assets/static/GithubIcon";
+
+import "@evanpatchouli/react-winui/config/app-config.css";
+import "@evanpatchouli/react-winui/styles.css";
+import "@evanpatchouli/react-winui/icons/winui-icons.min.css";
+
+const AppFourTwoThree = () => {
+
+  const navigate = useNavigate();
+  const [route, setRoute] = useState("home");
+  const [showSplash, setSplash] = useState(true);
+
+  useEffect(() => setSplash(false), []);
+
+  const _navigate = (route) => {
+    navigate(route);
+    setRoute(route);
+  }
+
+  return (
+    <AppContainer>
+      <SplashScreen
+        isVisible={showSplash}
+        title={"react-winui"}
+      />
+
+      <NavBar
+        // collapsed
+        title={"React Win UI"}
+        shadowOnScroll={true}
+        titleBarMobile={
+          <div style={{display: "flex", justifyContent: "space-between", width: "calc(100% - 60px)", alignItems: "center"}}>
+            <span className="ui-navbar-name">react-winui</span>
+            <span className="ui-navbar-name">
+              <a className="ui-link" target="_blank" rel="noopener noreferrer" href="https://github.com/evanpatchouli/react-winui/">
+                <GithubIcon width={25} height={25}/>
+              </a>
+            </span>
+          </div>}>
+
+        <InputSearchBox
+          placeholder={`Search Docs v${lib_version}`}
+          suggest={[
+            {text: "home", onClick: () => alert("Hi"), icon: <i className="icons10-home"></i>},
+            {text: "alert", link: 'alerts'},
+            {text: "accordion", link: 'accordion'},
+            {text: "apperarance", link: 'appearance'},
+            {text: "avatarview", link: 'avatarview'},
+            {text: "buttons", link: 'buttons'},
+            {text: "checkbox", link: 'checkbox'},
+            {text: "combobox", link: 'combobox'},
+            {text: "commandbar", link: 'commandbar'},
+            {text: "contextmenu", link: 'contextmenu'},
+            {text: "calendar", link: 'calendar'},
+            {text: "datepicker", link: 'datepicker'},
+            {text: "datagrid", link: 'datagrid'},
+            {text: "tag", link: 'tag'},
+            {text: "badge", link: 'badge'},
+            {text: "pagination", link: 'pagination'},
+            {text: "rating", link: 'rating'},
+            {text: "dialogs", link: 'dialogs'},
+            {text: "expander", link: 'expander'},
+            {text: "icons", link: 'icons'},
+            {text: "imageview", link: 'imageview'},
+            {text: "infobar", link: 'infobar'},
+            {text: "inputtext", link: 'input_group'},
+            {text: "menubar", link: 'menubar'},
+            {text: "numberbox", link: 'numberbox'},
+            {text: "navigationview", link: 'navigationview'},
+            {text: "popover", link: 'popover'},
+            {text: "flyout", link: 'popover'},
+            {text: "select", link: 'selectbox'},
+            {text: "settingscard", link: 'settingscard'},
+            {text: "settingsexpander", link: 'settingsexpander'},
+            {text: "tooltip", link: 'tooltip'},
+            {text: "treeview", link: 'treeview'}
+            ,{text: "teachingtip", link: 'teachingtip'}
+          ]}
+        />
+
+        <NavBarThemeSwitch />
+
+        <NavBarLink
+          text="Home"
+          imgSrc={Img2}
+          active={route === "home" ?? true}
+          onClick={() => _navigate("home")}
+        />
+        <NavBarLink
+          text="Getting Started"
+          active={route === "getting_started" ?? true}
+          onClick={() => _navigate("getting_started")}
+          icon={<i className="icons10-navigation"></i>}
+        />
+
+        <NavBarSubMenu title="Utilities">
+          <NavBarLink
+            text="AppTheme"
+            active={route === "apptheme" ?? true}
+            onClick={() => _navigate("apptheme")}
+            icon={<i className="icons10-fantasy"></i>}
+          />
+          <NavBarLink
+            text="Appearance"
+            active={route === "appearance" ?? true}
+            onClick={() => _navigate("appearance")}
+            icon={<i className="icons10-sun"></i>}
+          />
+          <NavBarLink
+            text="Colors"
+            active={route === "colors" ?? true}
+            onClick={() => _navigate("colors")}
+            icon={<i className="icons10-color-palette"></i>}
+          />
+        </NavBarSubMenu>        
+
+        <h1>Components</h1>
+        <div className="ui-hr"></div>
+
+        {
+        NavBarItem.map((item, key) => {
+        return <NavBarLink
+                  key={key}
+                  text={item.text}
+                  exact={item.exact}
+                  showBadge={item.showBadge}
+                  active={route === item.to ?? true}
+                  onClick={() => _navigate(item.to)}
+                  icon={<i className={item.icon}></i>}
+                />
+              })
+        }
+            
+        </NavBar>
+
+        <Routes>
+          <Route path="home" element={<Home/>}  exact />
+          <Route path="getting_started" element={<GettingStarted/>} />
+
+          {/* Utilities */}
+          <Route path="colors" element={<ColorsDocs/>} />
+
+          <Route path="navbar" element={<NavBarDocs/>} />
+          <Route path="navbarlink" element={<NavBarLinkDocs/>} />
+          <Route path="navbarsubmenu" element={<NavBarSubMenuDocs/>} />
+          <Route path="navpagecontainer" element={<NavPageContainerDocs/>} />
+          <Route path="splashscreen" element={<SplashScreenDocs/>} />
+
+          {/* Components */}
+          <Route path="accordion" element={<AccordionDocs/>} />
+          <Route path="alerts" element={<AlertDocs/>} />
+          <Route path="autosuggestbox" element={<AutoSuggestBoxDocs/>} />
+          <Route path="apptheme" element={<AppThemeDocs/>} />
+          <Route path="appearance" element={<AppearanceDocs/>} />
+          <Route path="buttons" element={<ButtonsDocs/>} />
+          <Route path="checkbox" element={<CheckboxDocs/>} />
+          <Route path="combobox" element={<ComboBoxDocs/>} />
+          <Route path="commandbar" element={<CommandBarDocs/>} />
+          <Route path="colorpicker" element={<ColorPickerDocs/>} />
+          <Route path="contextmenu" element={<ContextMenuDocs/>} />
+          <Route path="calendar" element={<CalendarDocs/>} />
+          <Route path="breadcrumb" element={<BreadcrumbDocs/>} />
+          <Route path="tag" element={<TagDocs/>} />
+          <Route path="badge" element={<BadgeDocs/>} />
+          <Route path="pagination" element={<PaginationDocs/>} />
+          <Route path="rating" element={<RatingDocs/>} />
+          <Route path="datepicker" element={<DatePickerDocs/>} />
+          <Route path="datagrid" element={<DataGridDocs/>} />
+          <Route path="dialogs" element={<DialogDocs/>} />
+          <Route path="expander" element={<ExpanderDocs/>} />
+          <Route path="imageview" element={<ImageViewDocs/>} />
+          <Route path="infobar" element={<InfoBarDocs/>} />
+          <Route path="input_group" element={<InputGroupDocs/>} />
+          <Route path="links" element={<LinkDocs/>} />
+          <Route path="loaders" element={<LoadersDocs/>} />
+          <Route path="menubar" element={<MenuBarDocs/>} />
+          <Route path="numberbox" element={<NumberBoxDocs/>} />
+          <Route path="navigationview" element={<NavigationViewDocs/>} />
+          <Route path="progressbar" element={<ProgressBarDocs/>} />
+          <Route path="radio_button" element={<RadioButtonDocs/>} />
+          <Route path="selectbox" element={<SelectBoxDocs/>} />
+          <Route path="settingscard" element={<SettingsCardDocs/>} />
+          <Route path="settingsexpander" element={<SettingsExpanderDocs/>} />
+          <Route path="sliderbar" element={<SliderBarDocs/>} />
+          <Route path="switch" element={<SwitchDocs/>} />
+          <Route path="tableview" element={<TableViewDocs/>} />
+          <Route path="popover" element={<PopoverDocs/>} />
+          <Route path="tooltip" element={<TooltipDocs/>} />
+          <Route path="toast" element={<ToastDocs/>} />
+          <Route path="treeview" element={<TreeViewDocs/>} />
+          <Route path="teachingtip" element={<TeachingTipDocs/>} />
+
+          <Route path="icons" element={<Icons/>} />
+        </Routes>
+    </AppContainer>
+  )
+}
+
+export default AppFourTwoThree;

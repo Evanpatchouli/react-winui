@@ -1,9 +1,10 @@
 import React from "react";
 import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 
-const DOCS_VERSION = "1.2.0";
+const DOCS_VERSION = "1.3.0";
 const DOCS_PATH = `/v${DOCS_VERSION}`;
-const AppCurrent = React.lazy(() => import("./v1.2.0"));
+const AppCurrent = React.lazy(() => import("./v1.3.0"));
+const AppV12 = React.lazy(() => import("./v1.2.0"));
 const AppPrevious = React.lazy(() => import("./v1.1.0"));
 const AppLegacy = React.lazy(() => import("./v1.0.0"));
 
@@ -29,6 +30,10 @@ class App extends React.Component {
         <Route
           path={`${DOCS_PATH}/*`}
           element={<React.Suspense fallback={<Splash/>}><AppCurrent/></React.Suspense>}
+        />
+        <Route
+          path="/v1.2.0/*"
+          element={<React.Suspense fallback={<Splash/>}><AppV12/></React.Suspense>}
         />
         <Route
           path="/v1.1.0/*"

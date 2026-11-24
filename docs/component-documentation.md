@@ -1,6 +1,6 @@
 # 组件文档页编写规范
 
-以 v1.2.0 的 [Checkbox 页](../src/demo/v1.2.0/docs/Checkbox_docs/index.js) 为版式参考。运行 `pnpm dev` 后打开 `/#/v1.2.0/checkbox`。当前版本的页面放在 `src/demo/v1.2.0/docs/<Component>_docs/`，页面文案与同版本文档保持英文。
+以 v1.3.0 的 [Checkbox 页](../src/demo/v1.3.0/docs/Checkbox_docs/index.js) 为版式参考。运行 `pnpm dev` 后打开 `/#/v1.3.0/checkbox`。当前版本的页面放在 `src/demo/v1.3.0/docs/<Component>_docs/`，页面文案与同版本文档保持英文。
 
 ## 页面顺序
 
@@ -21,4 +21,4 @@
 
 ## 接入与验收
 
-在当前版本的 `docs/index.js` 导出页面，在版本入口注册路由和搜索项，并在 `navbar_items.json` 增加导航项。运行文档站，通过导航和直接 URL 进入页面，操作主示例，核对可见结果、Usage 代码和 Props 表；最后运行 `pnpm build` 验证生产文档。完整示例见 [Rating](../src/demo/v1.2.0/docs/Rating_docs/index.js) 和 [Pagination](../src/demo/v1.2.0/docs/Pagination_docs/index.js)。
+在当前版本的 `docs/index.js` 导出页面，在版本入口注册路由和搜索项，并在 `navbar_items.json` 增加导航项。运行文档站，通过导航和直接 URL 进入页面，操作主示例，核对可见结果、Usage 代码和 Props 表；最后运行 `pnpm build` 验证生产文档。完整示例见 [Rating](../src/demo/v1.3.0/docs/Rating_docs/index.js) 和 [Pagination](../src/demo/v1.3.0/docs/Pagination_docs/index.js)。
