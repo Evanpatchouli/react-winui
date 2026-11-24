@@ -7,7 +7,7 @@ import { Rating } from "@evanpatchouli/react-winui";
 import "@evanpatchouli/react-winui/styles.css";
 
 <Rating aria-label="服务评分" defaultValue={3} name="serviceScore" />;
-<Rating readOnly aria-label="平均评分" value={4.5} />;
+<Rating readOnly aria-label="平均评分" value={4.5} starColor="#d97706" />;
 ```
 
 也可以从 `@evanpatchouli/react-winui/rating` 默认导入。
@@ -18,6 +18,7 @@ import "@evanpatchouli/react-winui/styles.css";
 | `onValueChange(value)`           | 用户选择新分数时调用，传入数值。                                  |
 | `max`                            | 星数，默认 5。有效范围 1 至 100，小数向下取整。                   |
 | `readOnly`                       | 使用只读仪表语义，并按实际比例填充小数星。                        |
+| `starColor`                      | 指定选中、悬停预览及小数星的填充色，支持 CSS 颜色或 `var(...)`。默认使用主题强调色，禁用时采用主题禁用色。 |
 | `disabled`                       | 禁用输入并显示禁用态。                                            |
 | `name`                           | 原生表单字段名，省略时各实例自行分组。                            |
 | `getItemLabel(value, max)`       | 生成选项或只读分数的无障碍文本，默认形如 `3 of 5`。               |

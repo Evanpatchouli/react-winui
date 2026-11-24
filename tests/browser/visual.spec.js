@@ -90,6 +90,12 @@ test.describe("Public component visual baselines", () => {
   test("Rating previews on hover and selects by keyboard in both themes", async ({ page }) => {
     const ratings = panel(page, "rating-panel");
     const group = ratings.getByRole("radiogroup", { name: "Your rating" });
+    const average = ratings.getByRole("meter");
+    await expect(average.locator(".ui-rating-fill svg").nth(3)).toHaveCSS("fill", "rgb(217, 119, 6)");
+    const disabled = ratings.getByRole("radiogroup", { name: "Unavailable rating" });
+    await expect(disabled.locator(".ui-rating-fill svg").first()).toHaveCSS(
+      "fill", await disabled.evaluate((element) => getComputedStyle(element).color)
+    );
     const stars = group.getByRole("radio");
     await expect(stars.nth(1)).toBeChecked();
     await stars.nth(1).focus();

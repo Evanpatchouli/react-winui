@@ -1772,11 +1772,11 @@ function VisualFixture() {
           </div>
           <div>
             <span className="visual-fixture-label">Average</span>{" "}
-            <Rating aria-label="Average rating" readOnly value={3.5} />
+            <Rating aria-label="Average rating" readOnly value={3.5} starColor="#d97706" />
           </div>
           <div>
             <span className="visual-fixture-label">Disabled</span>{" "}
-            <Rating aria-label="Unavailable rating" disabled defaultValue={4} />
+            <Rating aria-label="Unavailable rating" disabled defaultValue={4} starColor="#d97706" />
           </div>
         </Section>
         <Section testId="pagination-panel" title="Pagination" eyebrow="navigation">

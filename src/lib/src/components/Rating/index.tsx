@@ -1,5 +1,5 @@
 import { forwardRef, useId, useState } from "react";
-import type { HTMLAttributes } from "react";
+import type { CSSProperties, HTMLAttributes } from "react";
 
 /** Properties for an editable star rating or read-only average. */
 export interface RatingProps extends Omit<
@@ -14,6 +14,8 @@ export interface RatingProps extends Omit<
   onValueChange?: (value: number) => void;
   /** Number of stars, from 1 to 100. Defaults to five. */
   max?: number;
+  /** Fill color for selected and preview stars. Defaults to the theme accent. */
+  starColor?: CSSProperties["color"];
   /** Displays a non-interactive score and preserves fractional values. */
   readOnly?: boolean;
   /** Disables all rating inputs. */
@@ -49,12 +51,14 @@ const Rating = forwardRef<HTMLDivElement, RatingProps>(function Rating(
     value,
     defaultValue = 0,
     max = 5,
+    starColor,
     readOnly = false,
     disabled = false,
     name,
     onValueChange,
     getItemLabel = defaultLabel,
     className,
+    style,
     "aria-label": label = "Rating",
     ...rootProps
   },
@@ -68,11 +72,13 @@ const Rating = forwardRef<HTMLDivElement, RatingProps>(function Rating(
   const bounded = Number.isFinite(rawScore) ? Math.max(0, Math.min(count, rawScore)) : 0;
   const score = readOnly ? bounded : Math.round(bounded);
   const preview = !disabled && !readOnly && hovered > 0 ? hovered : score;
+  const rootStyle = starColor ? { ...style, "--rwu-rating-star-color": starColor } : style;
 
   return (
     <div
       {...rootProps}
       ref={ref}
+      style={rootStyle}
       className={["ui-rating", className].filter(Boolean).join(" ")}
       role={readOnly ? "meter" : "radiogroup"}
       aria-label={label}

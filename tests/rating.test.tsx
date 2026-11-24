@@ -3,6 +3,18 @@ import { describe, expect, it, vi } from "vitest";
 import Rating from "../src/lib/src/components/Rating";
 
 describe("Rating", () => {
+  it("updates the star color independently of root styles", () => {
+    const style = { marginTop: 12 };
+    const { rerender } = render(<Rating style={style} starColor="var(--brand-gold)" />);
+    const root = screen.getByRole("radiogroup");
+    expect(root.style.getPropertyValue("--rwu-rating-star-color")).toBe("var(--brand-gold)");
+    rerender(<Rating style={style} starColor="tomato" />);
+    expect(root.style.getPropertyValue("--rwu-rating-star-color")).toBe("tomato");
+    rerender(<Rating style={style} />);
+    expect(root.style.getPropertyValue("--rwu-rating-star-color")).toBe("");
+    expect(root).toHaveStyle({ marginTop: "12px" });
+  });
+
   it("submits a selected score and leaves other groups independent", () => {
     const change = vi.fn();
     render(

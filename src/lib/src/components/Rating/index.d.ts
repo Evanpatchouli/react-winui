@@ -1,4 +1,4 @@
-import type { ForwardRefExoticComponent, HTMLAttributes, RefAttributes } from "react";
+import type { CSSProperties, ForwardRefExoticComponent, HTMLAttributes, RefAttributes } from "react";
 
 /** Properties for an editable star rating or read-only average. */
 export interface RatingProps extends Omit<
@@ -13,6 +13,8 @@ export interface RatingProps extends Omit<
   onValueChange?: (value: number) => void;
   /** Number of stars, from 1 to 100. Defaults to five. */
   max?: number;
+  /** Fill color for selected and preview stars. Defaults to the theme accent. */
+  starColor?: CSSProperties["color"];
   /** Displays a non-interactive score and preserves fractional values. */
   readOnly?: boolean;
   /** Disables all rating inputs. */

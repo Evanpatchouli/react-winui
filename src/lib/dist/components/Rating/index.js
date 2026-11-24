@@ -21,40 +21,44 @@ function s({ fill: e }) {
 		})]
 	});
 }
-var c = e(function({ value: e, defaultValue: o = 0, max: c = 5, readOnly: l = !1, disabled: u = !1, name: d, onValueChange: f, getItemLabel: p = a, className: m, "aria-label": h = "Rating", ...g }, _) {
-	let v = t(), [y, b] = n(o), [x, S] = n(0), C = Number.isFinite(c) ? Math.min(100, Math.max(1, Math.floor(c))) : 5, w = e ?? y, T = Number.isFinite(w) ? Math.max(0, Math.min(C, w)) : 0, E = l ? T : Math.round(T), D = !u && !l && x > 0 ? x : E;
-	return /* @__PURE__ */ r("div", {
+var c = e(function({ value: e, defaultValue: o = 0, max: c = 5, starColor: l, readOnly: u = !1, disabled: d = !1, name: f, onValueChange: p, getItemLabel: m = a, className: h, style: g, "aria-label": _ = "Rating", ...v }, y) {
+	let b = t(), [x, S] = n(o), [C, w] = n(0), T = Number.isFinite(c) ? Math.min(100, Math.max(1, Math.floor(c))) : 5, E = e ?? x, D = Number.isFinite(E) ? Math.max(0, Math.min(T, E)) : 0, O = u ? D : Math.round(D), k = !d && !u && C > 0 ? C : O, A = l ? {
 		...g,
-		ref: _,
-		className: ["ui-rating", m].filter(Boolean).join(" "),
-		role: l ? "meter" : "radiogroup",
-		"aria-label": h,
-		"aria-disabled": u || void 0,
-		"aria-valuemin": l ? 0 : void 0,
-		"aria-valuemax": l ? C : void 0,
-		"aria-valuenow": l ? E : void 0,
-		"aria-valuetext": l ? p(E, C) : void 0,
-		children: Array.from({ length: C }, (t, n) => {
-			let a = n + 1, o = /* @__PURE__ */ r(s, { fill: Math.min(1, Math.max(0, D - n)) });
-			return l ? /* @__PURE__ */ r("span", {
+		"--rwu-rating-star-color": l
+	} : g;
+	return /* @__PURE__ */ r("div", {
+		...v,
+		ref: y,
+		style: A,
+		className: ["ui-rating", h].filter(Boolean).join(" "),
+		role: u ? "meter" : "radiogroup",
+		"aria-label": _,
+		"aria-disabled": d || void 0,
+		"aria-valuemin": u ? 0 : void 0,
+		"aria-valuemax": u ? T : void 0,
+		"aria-valuenow": u ? O : void 0,
+		"aria-valuetext": u ? m(O, T) : void 0,
+		children: Array.from({ length: T }, (t, n) => {
+			let a = n + 1, o = /* @__PURE__ */ r(s, { fill: Math.min(1, Math.max(0, k - n)) });
+			return u ? /* @__PURE__ */ r("span", {
 				className: "ui-rating-item",
 				children: o
 			}, a) : /* @__PURE__ */ i("label", {
 				className: "ui-rating-item",
 				onMouseEnter: () => {
-					u || S(a);
+					d || w(a);
 				},
-				onMouseLeave: () => S(0),
+				onMouseLeave: () => w(0),
 				children: [/* @__PURE__ */ r("input", {
 					type: "radio",
-					name: d ?? v,
+					name: f ?? b,
 					value: a,
-					checked: E === a,
-					disabled: u,
-					"aria-label": p(a, C),
-					onKeyDown: () => S(0),
+					checked: O === a,
+					disabled: d,
+					"aria-label": m(a, T),
+					onKeyDown: () => w(0),
 					onChange: () => {
-						e === void 0 && b(a), f?.(a);
+						e === void 0 && S(a), p?.(a);
 					}
 				}), o]
 			}, a);

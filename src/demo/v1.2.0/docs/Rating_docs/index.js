@@ -34,10 +34,10 @@ export default function RatingDocs() {
         {usageCode.trim()}
       </SyntaxHighlighter>
 
-      <h3>Read-only average</h3>
-      <Rating aria-label="Average rating" value={3.5} readOnly />
+      <h3>Read-only average with a custom star color</h3>
+      <Rating aria-label="Average rating" value={3.5} starColor="#d97706" readOnly />
       <SyntaxHighlighter language="jsx" style={vscDarkPlus} className="code code-container">
-        {'<Rating aria-label="Average rating" value={3.5} readOnly />'}
+        {'<Rating aria-label="Average rating" value={3.5} starColor="#d97706" readOnly />'}
       </SyntaxHighlighter>
 
       <h2>Props</h2>

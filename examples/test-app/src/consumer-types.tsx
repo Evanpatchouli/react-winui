@@ -1150,7 +1150,11 @@ const paginationProps: PaginationProps = {
 };
 export const paginationRootImport = <Pagination {...paginationProps} />;
 export const paginationSubpathImport = <PaginationDirect {...paginationProps} />;
-const ratingProps: RatingProps = { defaultValue: 2, onValueChange: (score) => score.toFixed(0) };
+const ratingProps: RatingProps = {
+  defaultValue: 2,
+  starColor: "#d97706",
+  onValueChange: (score) => score.toFixed(0)
+};
 export const ratingRootImport = <Rating {...ratingProps} />;
 export const ratingSubpathImport = <RatingDirect {...ratingProps} />;
 export const teachingTipSubpathImport: ReactElement = (
