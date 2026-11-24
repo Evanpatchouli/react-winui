@@ -189,6 +189,13 @@
     "showBadge": false
   },
   {
+    "to": "rating",
+    "exact": false,
+    "text": "Rating",
+    "icon": "icons10-star",
+    "showBadge": false
+  },
+  {
     "to": "radio_button",
     "exact": false,
     "text": "RadioButton",

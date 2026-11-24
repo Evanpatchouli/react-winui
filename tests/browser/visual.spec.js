@@ -65,6 +65,22 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe("Public component visual baselines", () => {
+  test("Rating previews on hover and selects by keyboard in both themes", async ({ page }) => {
+    const ratings = panel(page, "rating-panel");
+    const group = ratings.getByRole("radiogroup", { name: "Your rating" });
+    const stars = group.getByRole("radio");
+    await expect(stars.nth(1)).toBeChecked();
+    await stars.nth(1).focus();
+    await page.keyboard.press("ArrowRight");
+    await expect(stars.nth(2)).toBeFocused();
+    await expect(stars.nth(2)).toBeChecked();
+    await expect(ratings).toHaveScreenshot("rating-light.png", screenshotOptions);
+    await page.getByTestId("theme-dark").click();
+    await stars.nth(4).locator("..").hover();
+    await expect(stars.nth(2)).toBeChecked();
+    await expect(ratings).toHaveScreenshot("rating-dark.png", screenshotOptions);
+  });
+
   test("ColorPicker synchronizes keyboard and custom selection in both themes", async ({ page }) => {
     const picker = panel(page, "color-picker-panel");
     const blue = picker.getByRole("radio", { name: "Blue" });

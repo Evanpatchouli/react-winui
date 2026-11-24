@@ -1,6 +1,7 @@
 import { createRef, type CSSProperties, type ReactElement } from "react";
 import {
   Badge,
+  Rating,
   Button,
   ButtonGroup,
   Breadcrumb,
@@ -60,6 +61,7 @@ import {
 } from "@evanpatchouli/react-winui";
 import type {
   BadgeAppearance,
+  RatingProps,
   BadgeColor,
   BadgeComponent,
   BadgeIconPosition,
@@ -250,6 +252,7 @@ import type {
 } from "@evanpatchouli/react-winui";
 import ButtonDirect from "@evanpatchouli/react-winui/button";
 import BadgeDirect, { type BadgeProps as BadgeDirectProps } from "@evanpatchouli/react-winui/badge";
+import RatingDirect from "@evanpatchouli/react-winui/rating";
 import ColorPickerDirect from "@evanpatchouli/react-winui/color-picker";
 import BreadcrumbDirect, {
   type BreadcrumbItem as BreadcrumbDirectItem,
@@ -1137,6 +1140,9 @@ const pickerProps: ColorPickerProps = {
 };
 export const pickerRootImport = <ColorPicker {...pickerProps} />;
 export const pickerSubpathImport = <ColorPickerDirect {...pickerProps} />;
+const ratingProps: RatingProps = { defaultValue: 2, onValueChange: (score) => score.toFixed(0) };
+export const ratingRootImport = <Rating {...ratingProps} />;
+export const ratingSubpathImport = <RatingDirect {...ratingProps} />;
 export const teachingTipSubpathImport: ReactElement = (
   <TeachingTipDirect {...teachingTipDirectPropsTypeCheck} />
 );

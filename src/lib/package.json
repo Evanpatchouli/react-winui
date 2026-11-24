@@ -37,6 +37,11 @@
       "import": "./dist/components/AutoSuggestBox/index.js",
       "default": "./dist/components/AutoSuggestBox/index.js"
     },
+    "./rating": {
+      "types": "./dist/components/Rating/index.d.ts",
+      "import": "./dist/components/Rating/index.js",
+      "default": "./dist/components/Rating/index.js"
+    },
     "./color-picker": {
       "types": "./dist/components/ColorPicker/index.d.ts",
       "import": "./dist/components/ColorPicker/index.js",

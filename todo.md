@@ -42,7 +42,7 @@
 ## P3
 
 - [x] `ColorPicker`：复用现有色块与原生调色盘，统一预设色与自定义色的选择状态，支持受控值和键盘操作
-- [ ] `Rating`
+- [x] `Rating`：支持交互评分、悬停预览、键盘选择与只读平均分
 - [ ] `Pagination`
 - [ ] 其他组件：仅在明确指定后加入，不提前扩展
 
@@ -69,6 +69,6 @@
 ## 推荐的下一步顺序
 
 1. P1 八个组件与 P2 DatePicker、Calendar、DataGrid、TeachingTip、Breadcrumb、Tag、Badge 已完成并归档
-2. 下一项为 P3 `Rating`
+2. 下一项为 P3 `Pagination`
 
 一次只处理一个组件；完成并提交后再进入下一项。

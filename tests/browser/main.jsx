@@ -7,6 +7,7 @@ import AutoSuggestBox from "../../src/lib/src/components/AutoSuggestBox/index.ts
 import AppContainer from "../../src/lib/src/components/AppContainer/index.tsx";
 import AppTheme from "../../src/lib/src/components/AppTheme/index.tsx";
 import Badge from "../../src/lib/src/components/Badge/index.tsx";
+import Rating from "../../src/lib/src/components/Rating/index.tsx";
 import Button from "../../src/lib/src/components/Button/index.tsx";
 import ButtonGroup from "../../src/lib/src/components/ButtonGroup/index.tsx";
 import Breadcrumb from "../../src/lib/src/components/Breadcrumb/index.tsx";
@@ -1762,6 +1763,20 @@ function VisualFixture() {
               { value: "#107c10", label: "Green" }
             ]}
           />
+        </Section>
+        <Section testId="rating-panel" title="Rating" eyebrow="feedback">
+          <div>
+            <span className="visual-fixture-label">Your rating</span>{" "}
+            <Rating aria-label="Your rating" defaultValue={2} />
+          </div>
+          <div>
+            <span className="visual-fixture-label">Average</span>{" "}
+            <Rating aria-label="Average rating" readOnly value={3.5} />
+          </div>
+          <div>
+            <span className="visual-fixture-label">Disabled</span>{" "}
+            <Rating aria-label="Unavailable rating" disabled defaultValue={4} />
+          </div>
         </Section>
       </main>
     </MemoryRouter>
