@@ -196,6 +196,13 @@
     "showBadge": false
   },
   {
+    "to": "pagination",
+    "exact": false,
+    "text": "Pagination",
+    "icon": "icons10-list",
+    "showBadge": false
+  },
+  {
     "to": "radio_button",
     "exact": false,
     "text": "RadioButton",

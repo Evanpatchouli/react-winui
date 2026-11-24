@@ -90,6 +90,8 @@ export { default as Checkbox } from "./components/Checkbox";
 export type { CheckboxProps } from "./components/Checkbox";
 export { default as Rating } from "./components/Rating";
 export type { RatingProps } from "./components/Rating";
+export { default as Pagination } from "./components/Pagination";
+export type { PaginationProps } from "./components/Pagination";
 export { default as ColorPicker } from "./components/ColorPicker";
 export type { ColorPickerPreset, ColorPickerProps } from "./components/ColorPicker";
 export { default as ColorPickerItem } from "./components/ColorPicker/ColorPickerItem";

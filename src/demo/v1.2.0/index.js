@@ -29,6 +29,7 @@ import {
   BreadcrumbDocs,
   TagDocs,
   BadgeDocs,
+  PaginationDocs,
   RatingDocs,
   DatePickerDocs,
   DataGridDocs,
@@ -119,6 +120,7 @@ const AppFourTwoThree = () => {
             {text: "datagrid", link: 'datagrid'},
             {text: "tag", link: 'tag'},
             {text: "badge", link: 'badge'},
+            {text: "pagination", link: 'pagination'},
             {text: "rating", link: 'rating'},
             {text: "dialogs", link: 'dialogs'},
             {text: "expander", link: 'expander'},
@@ -224,6 +226,7 @@ const AppFourTwoThree = () => {
           <Route path="breadcrumb" element={<BreadcrumbDocs/>} />
           <Route path="tag" element={<TagDocs/>} />
           <Route path="badge" element={<BadgeDocs/>} />
+          <Route path="pagination" element={<PaginationDocs/>} />
           <Route path="rating" element={<RatingDocs/>} />
           <Route path="datepicker" element={<DatePickerDocs/>} />
           <Route path="datagrid" element={<DataGridDocs/>} />

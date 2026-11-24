@@ -1,6 +1,7 @@
 import { createRef, type CSSProperties, type ReactElement } from "react";
 import {
   Badge,
+  Pagination,
   Rating,
   Button,
   ButtonGroup,
@@ -61,6 +62,7 @@ import {
 } from "@evanpatchouli/react-winui";
 import type {
   BadgeAppearance,
+  PaginationProps,
   RatingProps,
   BadgeColor,
   BadgeComponent,
@@ -252,6 +254,7 @@ import type {
 } from "@evanpatchouli/react-winui";
 import ButtonDirect from "@evanpatchouli/react-winui/button";
 import BadgeDirect, { type BadgeProps as BadgeDirectProps } from "@evanpatchouli/react-winui/badge";
+import PaginationDirect from "@evanpatchouli/react-winui/pagination";
 import RatingDirect from "@evanpatchouli/react-winui/rating";
 import ColorPickerDirect from "@evanpatchouli/react-winui/color-picker";
 import BreadcrumbDirect, {
@@ -1140,6 +1143,13 @@ const pickerProps: ColorPickerProps = {
 };
 export const pickerRootImport = <ColorPicker {...pickerProps} />;
 export const pickerSubpathImport = <ColorPickerDirect {...pickerProps} />;
+const paginationProps: PaginationProps = {
+  pageCount: 20,
+  defaultPage: 3,
+  onPageChange: (nextPage) => nextPage.toFixed(0)
+};
+export const paginationRootImport = <Pagination {...paginationProps} />;
+export const paginationSubpathImport = <PaginationDirect {...paginationProps} />;
 const ratingProps: RatingProps = { defaultValue: 2, onValueChange: (score) => score.toFixed(0) };
 export const ratingRootImport = <Rating {...ratingProps} />;
 export const ratingSubpathImport = <RatingDirect {...ratingProps} />;

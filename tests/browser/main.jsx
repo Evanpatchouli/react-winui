@@ -7,6 +7,7 @@ import AutoSuggestBox from "../../src/lib/src/components/AutoSuggestBox/index.ts
 import AppContainer from "../../src/lib/src/components/AppContainer/index.tsx";
 import AppTheme from "../../src/lib/src/components/AppTheme/index.tsx";
 import Badge from "../../src/lib/src/components/Badge/index.tsx";
+import Pagination from "../../src/lib/src/components/Pagination/index.tsx";
 import Rating from "../../src/lib/src/components/Rating/index.tsx";
 import Button from "../../src/lib/src/components/Button/index.tsx";
 import ButtonGroup from "../../src/lib/src/components/ButtonGroup/index.tsx";
@@ -1777,6 +1778,9 @@ function VisualFixture() {
             <span className="visual-fixture-label">Disabled</span>{" "}
             <Rating aria-label="Unavailable rating" disabled defaultValue={4} />
           </div>
+        </Section>
+        <Section testId="pagination-panel" title="Pagination" eyebrow="navigation">
+          <Pagination aria-label="Gallery pages" pageCount={100} defaultPage={50} />
         </Section>
       </main>
     </MemoryRouter>

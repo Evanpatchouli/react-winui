@@ -37,6 +37,11 @@
       "import": "./dist/components/AutoSuggestBox/index.js",
       "default": "./dist/components/AutoSuggestBox/index.js"
     },
+    "./pagination": {
+      "types": "./dist/components/Pagination/index.d.ts",
+      "import": "./dist/components/Pagination/index.js",
+      "default": "./dist/components/Pagination/index.js"
+    },
     "./rating": {
       "types": "./dist/components/Rating/index.d.ts",
       "import": "./dist/components/Rating/index.js",

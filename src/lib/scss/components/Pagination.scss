@@ -1,0 +1,44 @@
+.ui-pagination {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--rwu-spacing-xs);
+  color: var(--rwu-color-text-secondary);
+
+  button {
+    font: inherit;
+    color: var(--rwu-color-text-primary);
+    padding: 0 var(--rwu-spacing-sm);
+    min-inline-size: var(--rwu-control-height);
+    min-block-size: var(--rwu-control-height);
+    background: transparent;
+    border: 0;
+    border-radius: var(--rwu-radius-control);
+    cursor: pointer;
+
+    &:enabled:hover {
+      background: var(--rwu-color-surface-control-hover);
+    }
+    &:enabled:active {
+      background: var(--rwu-color-surface-control-pressed);
+    }
+    &:focus-visible {
+      outline: 2px solid var(--rwu-color-border-input-focus);
+    }
+    &[aria-current="page"] {
+      background: var(--rwu-color-surface-control-hover);
+      box-shadow: inset 0 -2px var(--rwu-color-accent);
+      font-weight: 600;
+    }
+    &:disabled {
+      color: var(--rwu-color-text-disabled);
+      cursor: default;
+      box-shadow: none;
+    }
+  }
+
+  &:dir(rtl) .ui-pagination-arrow {
+    display: inline-block;
+    transform: scaleX(-1);
+  }
+}

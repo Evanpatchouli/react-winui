@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { createRoot } from "react-dom/client";
 import {
   Badge,
+  Pagination,
   Rating,
   Button,
   Breadcrumb,
@@ -30,6 +31,7 @@ import {
 } from "@evanpatchouli/react-winui";
 import ButtonDirect from "@evanpatchouli/react-winui/button";
 import BadgeDirect from "@evanpatchouli/react-winui/badge";
+import PaginationDirect from "@evanpatchouli/react-winui/pagination";
 import RatingDirect from "@evanpatchouli/react-winui/rating";
 import BreadcrumbDirect from "@evanpatchouli/react-winui/breadcrumb";
 import TagDirect from "@evanpatchouli/react-winui/tag";
@@ -67,6 +69,8 @@ const ConsumerApp = () => {
       <ButtonDirect type="subtle" value="Button subpath" />
       <Badge color="success">Root Badge</Badge>
       <BadgeDirect aria-label="Direct badge" color="danger" />
+      <Pagination aria-label="Root pages" pageCount={8} />
+      <PaginationDirect aria-label="Subpath pages" pageCount={2} />
       <Rating aria-label="Root rating" defaultValue={2} />
       <RatingDirect aria-label="Average" value={3.5} readOnly />
       <ColorPicker aria-label="Root color" defaultValue="#107c10" />

@@ -65,6 +65,28 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe("Public component visual baselines", () => {
+  test("Pagination retains focus across the page window and respects boundaries", async ({ page }) => {
+    const pages = panel(page, "pagination-panel");
+    const button = (name) => pages.getByRole("button", { name, exact: true });
+    await expect(button("Page 50")).toHaveAttribute("aria-current", "page");
+    await button("Page 49").focus();
+    await page.keyboard.press("ArrowRight");
+    await expect(button("Page 50")).toBeFocused();
+    await page.keyboard.press("ArrowRight");
+    await expect(button("Page 51")).toBeFocused();
+    await expect(button("Page 51")).toHaveAttribute("aria-current", "page");
+    await expect(pages).toHaveScreenshot("pagination-light.png", screenshotOptions);
+    await page.keyboard.press("Home");
+    await expect(button("Previous page")).toBeDisabled();
+    await expect(button("Page 1")).toBeFocused();
+    await page.keyboard.press("End");
+    await expect(button("Page 100")).toBeFocused();
+    await expect(button("Page 100")).toHaveAttribute("aria-current", "page");
+    await expect(button("Next page")).toBeDisabled();
+    await page.getByTestId("theme-dark").click();
+    await expect(pages).toHaveScreenshot("pagination-dark.png", screenshotOptions);
+  });
+
   test("Rating previews on hover and selects by keyboard in both themes", async ({ page }) => {
     const ratings = panel(page, "rating-panel");
     const group = ratings.getByRole("radiogroup", { name: "Your rating" });
