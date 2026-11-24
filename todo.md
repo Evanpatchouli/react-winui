@@ -57,7 +57,7 @@
 - [ ] 补齐 Vitest / React Testing Library 测试
 - [ ] 补齐 Playwright 交互与必要的 light / dark 视觉基线
 - [ ] 更新 root export、必要的 package subpath export 和 consumer 验证
-- [ ] 更新 docs Demo 与轻量 API 文档
+- [ ] 按[组件文档页编写规范](docs/component-documentation.md)更新 docs Demo 与轻量 API 文档
 - [ ] 运行 `pnpm lint`
 - [ ] 运行 `pnpm typecheck`
 - [ ] 运行 `pnpm test`

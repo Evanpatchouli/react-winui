@@ -2,6 +2,8 @@
 
 本文档规定 react-winui 新组件如何参考 WinUI 3、Windows 11 和 Fluent UI React v9。
 
+新增组件的 docs Demo 按[组件文档页编写规范](./component-documentation.md)编写并验收。
+
 核心目标是：
 
 > 借 Fluent UI 的脑子，不借 Fluent UI 的脸。
